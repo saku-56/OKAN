@@ -1,2 +1,46 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "mytheme";
+  default: true; /* set as default */
+  prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
+  color-scheme: light;
+
+  --color-base-100: #F9E9D8; /* ページ背景 */
+  --color-base-200: #FDEDE9;  /* カード・フォーム */
+  --color-base-300: #E0D8CF; /* 枠線、区切り */
+  --color-base-content: #3D3A38;
+  --color-primary: #E56A54;  /* ヘッダー・メインボタン */
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #7DB8DA;  /* アクセント、サブボタン */
+  --color-secondary-content: #FFFFFF;
+  --color-accent: #F4B79F; /* アイコン、リンク、タグなど細かい装飾 */
+  --color-accent-content: oklch(98% 0.01 160);
+  --color-neutral: #3D3A38;
+  --color-neutral-content: oklch(98% 0.01 240);
+  --color-info: #66A6FF; /* お知らせ */
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: #8BC48A;
+  --color-success-content: oklch(98% 0.01 140);
+  --color-warning: #F7D070;
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: #E65F5C;
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+  }
+
