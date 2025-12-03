@@ -18,9 +18,22 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="bg-base-100 min-h-screen font-mplus">
+    <!-- ドロワー全体を囲む -->
+    <div class="drawer">
+      <!-- チェックボックス（非表示） -->
+      <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
+      <!-- メインコンテンツエリア -->
+      <div class="drawer-content">
+        <!-- ヘッダーの出し分け -->
+        <%= render 'shared/before_login_header' %>
+        <!-- 各ページの内容 -->
+        <main class="container mx-auto px-4 py-8">
+          <%= yield %>
+        </main>
+      </div>
+      <!-- ドロワーメニューの出し分け -->
+      <%= render 'shared/before_login_drawer_menu' %>
+    </div>
   </body>
 </html>
