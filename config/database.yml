@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: okan_production
-  username: okan
-  password: <%= ENV["OKAN_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
