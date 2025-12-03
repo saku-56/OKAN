@@ -4,11 +4,11 @@
 
     <!-- Body -->
     <main class="flex flex-col items-center justify-center mt-40 px-6 space-y-5">
-      <%= link_to "新規登録", "#",
+      <%= link_to "新規登録", new_user_registration_path,
           class: "btn btn-primary w-full max-w-xs" %>
-      <%= link_to "ログイン","#",
+      <%= link_to "ログイン", new_user_session_path,
           class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] w-full max-w-xs" %>
-      <%= link_to "ログアウト","#", data: { turbo_method: :delete } %>
+      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
     </main>
   </div>
 </div>
