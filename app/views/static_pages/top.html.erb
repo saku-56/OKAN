@@ -1,0 +1,14 @@
+<div class="drawer">
+  <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content">
+
+    <!-- Body -->
+    <main class="flex flex-col items-center justify-center mt-40 px-6 space-y-5">
+      <%= link_to "新規登録", "#",
+          class: "btn btn-primary w-full max-w-xs" %>
+      <%= link_to "ログイン","#",
+          class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] w-full max-w-xs" %>
+      <%= link_to "ログアウト","#", data: { turbo_method: :delete } %>
+    </main>
+  </div>
+</div>
