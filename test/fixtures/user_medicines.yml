@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_name: MyString
+  dosage_per_time: 1
+  prescribed_amount: 1
+  current_stock: 1
+  date_of_prescription: 2025-12-05
+  user: one
+
+two:
+  medicine_name: MyString
+  dosage_per_time: 1
+  prescribed_amount: 1
+  current_stock: 1
+  date_of_prescription: 2025-12-05
+  user: two
