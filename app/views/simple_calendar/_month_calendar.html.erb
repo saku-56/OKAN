@@ -1,0 +1,64 @@
+<div class="simple-calendar max-w-4xl mx-auto">
+  <!-- ヘッダー部分（前月・次月ボタン） -->
+  <div class="calendar-heading flex justify-between items-center mb-6 px-4">
+    <%= link_to calendar.url_for_previous_view, 
+        class: 'px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-700 font-medium transition' do %>
+      ← 前月
+    <% end %>
+    
+    <h3 class="calendar-title text-2xl font-bold text-gray-800">
+      <%= l(calendar.start_date, format: "%Y年%B") %>
+    </h3>
+    
+    <%= link_to calendar.url_for_next_view, 
+        class: 'px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-700 font-medium transition' do %>
+      次月 →
+    <% end %>
+  </div>
+
+  <!-- カレンダー本体 -->
+  <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+    <!-- 曜日ヘッダー -->
+    <thead>
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <!-- カレンダーの日付部分 -->
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <%= content_tag :td, class: "border p-2 h-24 align-top #{calendar.td_classes_for(day)}" do %>
+              <!-- 日付の表示 -->
+              <div class="flex justify-between items-start mb-1">
+                <% if day == Date.today %>
+                  <!-- 今日の日付は特別表示 -->
+                  <span class="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">
+                    <%= day.day %>
+                  </span>
+                <% else %>
+                  <span class="text-gray-700 font-medium">
+                    <%= day.day %>
+                  </span>
+                <% end %>
+              </div>
+              
+              <!-- ブロックで渡されたコンテンツを表示 -->
+              <div class="calendar-content">
+                <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                  <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
+                <% else %>
+                  <% passed_block.call(day, sorted_events.fetch(day, [])) if passed_block %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
