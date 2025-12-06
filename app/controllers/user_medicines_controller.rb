@@ -3,7 +3,7 @@ class UserMedicinesController < ApplicationController
 
   # GET /user_medicines or /user_medicines.json
   def index
-    @user_medicines = UserMedicine.all
+    @user_medicines = current_user.user_medicines
   end
 
   # GET /user_medicines/1 or /user_medicines/1.json
@@ -21,7 +21,7 @@ class UserMedicinesController < ApplicationController
 
   # POST /user_medicines or /user_medicines.json
   def create
-    @user_medicine = UserMedicine.new(user_medicine_params)
+    @user_medicine = current_user.user_medicines.build(user_medicine_params)
 
     respond_to do |format|
       if @user_medicine.save
@@ -60,11 +60,11 @@ class UserMedicinesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_medicine
-      @user_medicine = UserMedicine.find(params[:id])
+      @user_medicine = current_user.user_medicines.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_medicine_params
-      params.require(:user_medicine).permit(:medicine_name, :dosage_per_time, :prescribed_amount, :current_stock, :date_of_prescription, :user_id)
+      params.require(:user_medicine).permit(:medicine_name, :dosage_per_time, :prescribed_amount, :current_stock, :date_of_prescription)
     end
 end
