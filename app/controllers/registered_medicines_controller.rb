@@ -1,5 +1,6 @@
-class UserMedicinesController < ApplicationController
+class RegisteredMedicinesController < ApplicationController
   before_action :set_user_medicine, only: %i[ show edit update destroy ]
+  before_action :set_user_medicine, only: %i[show edit update destroy]
 
   # GET /user_medicines or /user_medicines.json
   def index
@@ -22,39 +23,26 @@ class UserMedicinesController < ApplicationController
   # POST /user_medicines or /user_medicines.json
   def create
     @user_medicine = current_user.user_medicines.build(user_medicine_params)
-
-    respond_to do |format|
       if @user_medicine.save
-        format.html { redirect_to @user_medicine, notice: "User medicine was successfully created." }
-        format.json { render :show, status: :created, location: @user_medicine }
+        redirect_to registered_medicines_path, notice: "薬を登録しました"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user_medicine.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
-    end
   end
 
   # PATCH/PUT /user_medicines/1 or /user_medicines/1.json
   def update
-    respond_to do |format|
-      if @user_medicine.update(user_medicine_params)
-        format.html { redirect_to @user_medicine, notice: "User medicine was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @user_medicine }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user_medicine.errors, status: :unprocessable_entity }
-      end
+    if @user_medicine.update(user_medicine_params)
+      redirect_to registered_medicine_path(@user_medicine), notice: "薬情報を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /user_medicines/1 or /user_medicines/1.json
   def destroy
     @user_medicine.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to user_medicines_path, notice: "User medicine was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to registered_medicines_path, notice: "薬を削除しました"
   end
 
   private

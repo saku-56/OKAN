@@ -1,4 +1,9 @@
-<%= form_with(model: user_medicine, class: "contents") do |form| %>
+<%
+  form_url = user_medicine.persisted? ? registered_medicine_path(user_medicine) : registered_medicines_path
+%>
+
+
+<%= form_with(model: user_medicine, url: form_url, class: "contents") do |form| %>
   <% if user_medicine.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
       <h2><%= pluralize(user_medicine.errors.count, "error") %> prohibited this user_medicine from being saved:</h2>

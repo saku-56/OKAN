@@ -1,0 +1,33 @@
+<div class="container">
+  <!-- 残薬一覧エリア -->
+  <div class="leftover-medicines-section">
+    <h2>現在の残薬</h2>
+    <% if @leftover_medicines.any? %>
+      <table class="table">
+        <tbody>
+          <% @leftover_medicines.each do |medicine| %>
+            <tr>
+              <td><%= medicine.medicine_name %></td>
+              <td><%="残り"%><%= medicine.current_stock %><%="錠"%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>現在、残薬はありません。</p>
+    <% end %>
+  </div>
+
+  <!-- カレンダー表示エリア -->
+  <div class="calendar-section">
+    <%= month_calendar do |date| %>
+      <%= date.day %>
+      <!-- 後で服薬予定などを表示 -->
+    <% end %>
+  </div>
+  
+  <!-- 登録薬管理へのリンク（後で追加） -->
+  <div class="actions">
+    <%= link_to "登録薬の管理", user_medicines_path, class: "btn btn-primary" %>
+  </div>
+</div>
