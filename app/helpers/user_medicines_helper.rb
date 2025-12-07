@@ -1,0 +1,2 @@
+module UserMedicinesHelper
+end

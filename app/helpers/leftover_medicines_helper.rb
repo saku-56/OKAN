@@ -1,0 +1,2 @@
+module LeftoverMedicinesHelper
+end

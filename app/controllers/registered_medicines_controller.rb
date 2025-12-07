@@ -1,0 +1,58 @@
+class RegisteredMedicinesController < ApplicationController
+  before_action :set_user_medicine, only: %i[ show edit update destroy ]
+  before_action :set_user_medicine, only: %i[show edit update destroy]
+
+  # GET /user_medicines or /user_medicines.json
+  def index
+    @user_medicines = current_user.user_medicines
+  end
+
+  # GET /user_medicines/1 or /user_medicines/1.json
+  def show
+  end
+
+  # GET /user_medicines/new
+  def new
+    @user_medicine = UserMedicine.new
+  end
+
+  # GET /user_medicines/1/edit
+  def edit
+  end
+
+  # POST /user_medicines or /user_medicines.json
+  def create
+    @user_medicine = current_user.user_medicines.build(user_medicine_params)
+      if @user_medicine.save
+        redirect_to registered_medicines_path, notice: "薬を登録しました"
+      else
+        render :new, status: :unprocessable_entity
+      end
+  end
+
+  # PATCH/PUT /user_medicines/1 or /user_medicines/1.json
+  def update
+    if @user_medicine.update(user_medicine_params)
+      redirect_to registered_medicine_path(@user_medicine), notice: "薬情報を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /user_medicines/1 or /user_medicines/1.json
+  def destroy
+    @user_medicine.destroy!
+    redirect_to registered_medicines_path, notice: "薬を削除しました"
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user_medicine
+      @user_medicine = current_user.user_medicines.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def user_medicine_params
+      params.require(:user_medicine).permit(:medicine_name, :dosage_per_time, :prescribed_amount, :current_stock, :date_of_prescription)
+    end
+end

@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>登録薬一覧</h1>
+  
+  <%= link_to "新しい薬を登録", new_registered_medicine_path, class: "btn btn-primary mb-3" %>
+  
+  <% if @user_medicines.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>薬名</th>
+          <th>1回の服用量</th>
+          <th>処方量</th>
+          <th>残数</th>
+          <th>処方日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_medicines.each do |medicine| %>
+          <tr>
+            <td><%= medicine.medicine_name %></td>
+            <td><%= medicine.dosage_per_time %></td>
+            <td><%= medicine.prescribed_amount %></td>
+            <td><%= medicine.current_stock %></td>
+            <td><%= medicine.date_of_prescription %></td>
+            <td>
+              <%= link_to "詳細", registered_medicine_path(medicine), class: "btn btn-sm btn-info" %>
+              <%= link_to "編集", edit_registered_medicine_path(medicine), class: "btn btn-sm btn-warning" %>
+              <%= link_to "削除", registered_medicine_path(medicine), 
+                  method: :delete, 
+                  data: { confirm: "本当に削除しますか？" }, 
+                  class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>まだ薬が登録されていません。</p>
+  <% end %>
+</div>
