@@ -6,12 +6,12 @@ class UserMedicinesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit user_medicines_url
+    visit user_medicines_path
     assert_selector "h1", text: "User medicines"
   end
 
   test "should create user medicine" do
-    visit user_medicines_url
+    visit user_medicines_path
     click_on "New user medicine"
 
     fill_in "Current stock", with: @user_medicine.current_stock
@@ -27,7 +27,7 @@ class UserMedicinesTest < ApplicationSystemTestCase
   end
 
   test "should update User medicine" do
-    visit user_medicine_url(@user_medicine)
+    visit user_medicine_path(@user_medicine)
     click_on "Edit this user medicine", match: :first
 
     fill_in "Current stock", with: @user_medicine.current_stock
@@ -43,7 +43,7 @@ class UserMedicinesTest < ApplicationSystemTestCase
   end
 
   test "should destroy User medicine" do
-    visit user_medicine_url(@user_medicine)
+    visit user_medicine_path(@user_medicine)
     accept_confirm { click_on "Destroy this user medicine", match: :first }
 
     assert_text "User medicine was successfully destroyed"

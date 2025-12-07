@@ -10,20 +10,20 @@ class RegisteredMedicinesControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     sign_in users(:one)
     user_medicine = user_medicines(:one)
-    get registered_medicine_url(user_medicine)
+    get registered_medicine_path(user_medicine)
     assert_response :success
   end
 
   test "should get new" do
     sign_in users(:one)
-    get new_registered_medicine_url
+    get new_registered_medicine_path
     assert_response :success
   end
 
   test "should get edit" do
     sign_in users(:one)
     user_medicine = user_medicines(:one)
-    get edit_registered_medicine_url(user_medicine)
+    get edit_registered_medicine_path(user_medicine)
     assert_response :success
   end
 end
