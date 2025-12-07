@@ -2,22 +2,28 @@ require "test_helper"
 
 class RegisteredMedicinesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get registered_medicines_index_url
+    sign_in users(:one)
+    get registered_medicines_url
     assert_response :success
   end
 
   test "should get show" do
-    get registered_medicines_show_url
+    sign_in users(:one)
+    user_medicine = user_medicines(:one)
+    get registered_medicine_url(user_medicine)
     assert_response :success
   end
 
   test "should get new" do
-    get registered_medicines_new_url
+    sign_in users(:one)
+    get new_registered_medicine_url
     assert_response :success
   end
 
   test "should get edit" do
-    get registered_medicines_edit_url
+    sign_in users(:one)
+    user_medicine = user_medicines(:one)
+    get edit_registered_medicine_url(user_medicine)
     assert_response :success
   end
 end

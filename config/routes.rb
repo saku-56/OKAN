@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :leftover_medicines, only: [ :index ]
-  resources :registered_medicines, only: %i[ index new create show edit destroy update ]
+  resources :leftover_medicines
+  resources :registered_medicines
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
