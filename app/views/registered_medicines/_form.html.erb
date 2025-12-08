@@ -17,31 +17,32 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :medicine_name %>
+    <%= form.label :薬名 %>
     <%= form.text_field :medicine_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:medicine_name].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:medicine_name].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :dosage_per_time %>
-    <%= form.number_field :dosage_per_time, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:dosage_per_time].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:dosage_per_time].any?}] %>
+    <%= form.label :一回の服薬量 %>
+    <div class="flex items-center gap-4 mt-2">
+      <%= form.number_field :dosage_per_time, class: ["shadow-sm rounded-md border px-3 py-2 w-24", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:dosage_per_time].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:dosage_per_time].any?}] %>
+    <span class="text-gray-700">錠</span>
+    </div>
   </div>
 
   <div class="my-5">
-    <%= form.label :prescribed_amount %>
-    <%= form.number_field :prescribed_amount, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:prescribed_amount].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:prescribed_amount].any?}] %>
+    <%= form.label :処方量 %>
+    <div class="flex items-center gap-4 mt-2">
+      <%= form.number_field :prescribed_amount, class: ["shadow-sm rounded-md border px-3 py-2 w-24", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:prescribed_amount].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:prescribed_amount].any?}] %>
+      <span class="text-gray-700">錠</span>
+    </div>
   </div>
 
   <div class="my-5">
-    <%= form.label :current_stock %>
-    <%= form.number_field :current_stock, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:current_stock].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:current_stock].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :date_of_prescription %>
+    <%= form.label :服薬開始日 %>
     <%= form.date_field :date_of_prescription, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": user_medicine.errors[:date_of_prescription].none?, "border-red-400 focus:outline-red-600": user_medicine.errors[:date_of_prescription].any?}] %>
   </div>
-  
+
   <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit "この内容で追加", class: "btn btn-primary w-full" %>
   </div>
 <% end %>
