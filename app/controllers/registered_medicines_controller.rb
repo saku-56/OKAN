@@ -23,6 +23,9 @@ class RegisteredMedicinesController < ApplicationController
   # POST /user_medicines or /user_medicines.json
   def create
     @user_medicine = current_user.user_medicines.build(user_medicine_params)
+
+    # 処方量を在庫として設定(手元に在庫がない初回登録時用)
+    @user_medicine.current_stock = @user_medicine.prescribed_amount
       if @user_medicine.save
         redirect_to registered_medicines_path, notice: "薬を登録しました"
       else
