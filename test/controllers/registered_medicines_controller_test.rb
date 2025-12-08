@@ -1,6 +1,8 @@
 require "test_helper"
 
 class RegisteredMedicinesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   test "should get index" do
     sign_in users(:one)
     get registered_medicines_url
