@@ -4,7 +4,7 @@ class RegisteredMedicinesController < ApplicationController
 
   # GET /user_medicines or /user_medicines.json
   def index
-    @user_medicines = current_user.user_medicines
+    @user_medicines = current_user.user_medicines.page(params[:page]).per(8)
   end
 
   # GET /user_medicines/1 or /user_medicines/1.json

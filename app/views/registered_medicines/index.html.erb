@@ -22,6 +22,11 @@
         <% end %>
       </tbody>
     </table>
+
+    <div class="flex justify-center mt-4">
+      <%= paginate @user_medicines %>
+    </div>
+
   <% else %>
     <p>まだ薬が登録されていません。</p>
   <% end %>
