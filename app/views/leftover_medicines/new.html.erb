@@ -1,0 +1,44 @@
+<div class="container mx-auto px-4 py-8">   
+  <h1 class="font-bold text-4xl flex justify-center">処方薬を追加</h1>
+  <%= form_with url: leftover_medicines_path, method: :post, class: "contents" do |form| %>
+    <%= hidden_field_tag :user_medicine_id, @user_medicine.id %>
+
+    <div class="my-5">
+      <%= label_tag :medicine_name, "薬名", class: "block font-medium text-gray-700" %>
+      <p class="mt-2 text-gray-900 text-lg">
+        <%= @user_medicine.medicine_name %>
+      </p>
+    </div>
+
+    <div class="my-5">
+      <%= label_tag :dosage_per_time, "一回の服薬量", class: "block font-medium text-gray-700" %>
+      <div class="flex items-center gap-2 mt-2">
+        <p class="text-gray-900 text-lg">
+          <%= @user_medicine.dosage_per_time %>
+        </p>
+        <span class="text-gray-700">錠</span>
+      </div>
+    </div>
+
+    <div class="my-5">
+      <%= label_tag :prescribed_amount, "処方量", class: "block font-medium text-gray-700" %>
+      <div class="flex items-center gap-4 mt-2">
+        <%= number_field_tag :prescribed_amount, nil, 
+            class: "shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 w-24",
+            required: true %>
+        <span class="text-gray-700">錠</span>
+      </div>
+    </div>
+
+    <div class="my-5">
+      <%= label_tag :date_of_prescription, "処方日", class: "block font-medium text-gray-700" %>
+      <%= date_field_tag :date_of_prescription, Date.today, 
+          class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full",
+          required: true %>
+    </div>
+
+    <div class="flex gap-4 mt-8">
+      <%= submit_tag "この内容で追加", class: "btn btn-primary flex-1" %>
+    </div>
+  <% end %>
+</div>
