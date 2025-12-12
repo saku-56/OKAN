@@ -1,0 +1,32 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="font-bold text-4xl flex justify-center">いつもの薬リスト</h1>
+  <p class="text-gray-600 mb-4 text-center">登録済みの薬から処方薬を追加できます</p>
+  
+  <% if @user_medicines.any? %>
+   <div class="space-y-4">
+     <% @user_medicines.each do |medicine| %>
+       <div class="border rounded-lg p-4 bg-white shadow-sm">
+         <div class="flex justify-between">
+           <div>
+             <h3 class="font-bold text-lg text-gray-900"><%= medicine.medicine_name %></h3>
+             <p class="text-sm text-gray-600 mt-1">1回の服用量: <%= medicine.dosage_per_time %></p>
+           </div>
+           <div class="ml-4">
+             <%= link_to "選択", new_leftover_medicine_path(user_medicine_id: medicine.id), class: "btn btn-primary" %>
+           </div>
+         </div>
+       </div>
+  <% end %>
+  </div>
+  <div class="flex justify-center mt-4">
+    <%= paginate @user_medicines %>
+  </div>
+
+  <% else %>
+    <p class="text-center text-gray-500">まだ薬が登録されていません。</p>
+  <% end %>
+
+  <div class="flex justify-center mt-4">
+    <%= link_to "新しい薬を登録", new_registered_medicine_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] max-w-xs" %>
+  </div>
+</div>
