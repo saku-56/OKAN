@@ -1,33 +1,32 @@
 <div class="container mx-auto px-4 py-8">
-   <h1 class="font-bold text-4xl flex justify-center mb-4">登録薬一覧</h1>
-   <% if @medicines.any? %>
-     <div class="space-y-4 mb-8">
-       <% @medicines.each do |medicine| %>
-         <div class="border rounded-lg p-4 bg-white shadow-sm">
-           <div class="flex justify-between items-start">
-             <div class="flex-1 min-w-0 overflow-hidden">
-               <h3 class="font-bold text-lg text-gray-900"><%= medicine.name %></h3>
-                 <div class="mt-2 space-y-1">
-                   <p class="text-sm text-gray-600">
-                   <span class="font-medium">一回の服薬量:</span> <%= medicine.dosage_per_time %>錠
-                   </p>
-                 </div>
-             </div>
-      
-           <div class="flex gap-2 ml-4 flex-shrink-0">
-             <%= link_to "詳細", medicine_path(medicine), class: "btn btn-sm btn-success" %>
-           </div>
-         </div>
+  <h1 class="font-bold text-4xl flex justify-center mb-4">登録薬一覧</h1>
+  <% if @medicines.any? %>
+  <div class="space-y-4 mb-8">
+    <% @medicines.each do |medicine| %>
+    <div class="border rounded-lg p-4 bg-white shadow-sm">
+      <div class="flex justify-between items-start">
+        <div class="flex-1 min-w-0 overflow-hidden">
+          <h3 class="font-bold text-lg text-gray-900"><%= medicine.name %></h3>
+          <div class="mt-2 space-y-1">
+            <p class="text-sm text-gray-600">
+              <span class="font-medium">一回の服薬量:</span> <%= medicine.dosage_per_time %>錠
+            </p>
+          </div>
         </div>
-        <% end %>
+        <div class="flex gap-2 ml-4 flex-shrink-0">
+          <%= link_to "詳細", medicine_path(medicine), class: "btn btn-sm btn-success" %>
+        </div>
+      </div>
     </div>
-    <% else %>
-    <div class="text-center py-12">
-      <p class="text-gray-500 mb-4">登録されている薬がありません</p>
-      <%= link_to "最初の薬を登録する", new_medicine_path, class: "btn btn-primary" %>
-    </div>
+    <% end %>
+  </div>
+  <% else %>
+  <div class="text-center py-12">
+    <p class="text-gray-500 mb-4">登録されている薬がありません</p>
+    <%= link_to "最初の薬を登録する", new_medicine_path, class: "btn btn-primary" %>
+  </div>
   <% end %>
   <div class="actions text-center">
-    <%= link_to "新しい薬を登録", new_medicine_path, class: "btn btn-primary" %> 
+    <%= link_to "新しい薬を登録", new_medicine_path, class: "btn btn-primary" %>
   </div>
 </div>

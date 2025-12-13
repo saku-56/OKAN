@@ -50,6 +50,7 @@ group :development do
   gem "web-console"
   gem "pry-rails"
   gem "pry-byebug"
+  gem "htmlbeautifier"
 end
 
 group :test do
