@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :medicines
   resources :leftover_medicines
   resources :registered_medicines do
     collection do
