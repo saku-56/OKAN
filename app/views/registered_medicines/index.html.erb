@@ -12,23 +12,12 @@
           <p class="text-sm text-gray-600">
             <span class="font-medium">一回の服薬量:</span> <%= medicine.dosage_per_time %>錠
           </p>
-          <p class="text-sm text-gray-600">
-            <span class="font-medium">現在の在庫:</span> <%= medicine.current_stock %>錠
-          </p>
-          <p class="text-sm text-gray-600 whitespace-nowrap overflow-visible">
-            <span class="font-medium">最新の処方日:</span> <%= medicine.date_of_prescription&.strftime('%Y年%m月%d日') %>
-          </p>
         </div>
       </div>
       
       <div class="flex gap-2 ml-4 flex-shrink-0">
-        <%= link_to "編集", edit_registered_medicine_path(medicine), class: "btn btn-sm btn-success" %>
-        <%= link_to "削除", registered_medicine_path(medicine), 
-            data: { 
-              turbo_method: :delete, 
-              turbo_confirm: "「#{medicine.medicine_name}」を削除してもよろしいですか?\n在庫データも削除されます。" 
-            }, 
-            class: "btn btn-sm btn-error" %>
+        <%= link_to "詳細", registered_medicine_path(medicine), class: "btn btn-sm btn-success" %>
+        
       </div>
     </div>
   </div>
