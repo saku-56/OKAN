@@ -1,10 +1,12 @@
-<% content_for :title, "Editing user medicine" %>
+<div class="container mx-auto px-4 py-8">
+   <h1 class="font-bold text-4xl flex justify-center mb-4">登録薬編集</h1>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing user medicine</h1>
+   <%= render "form", user_medicine: @user_medicine do |form| %>
+     <div class="inline">
+       <%= form.submit "変更を保存", class: "btn btn-primary w-full" %>
+     </div>
+   <% end %>
 
-  <%= render "form", user_medicine: @user_medicine %>
-
-  <%= link_to "Show this user medicine", registered_medicine_path(@user_medicine), class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to user medicines", registered_medicines_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-</div>
+   <div class="flex justify-center mt-4">
+     <%= link_to "登録薬一覧", registered_medicines_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] max-w-xs" %>
+   </div>

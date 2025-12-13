@@ -2,8 +2,13 @@ class RegisteredMedicinesController < ApplicationController
   before_action :set_user_medicine, only: %i[ show edit update destroy ]
   before_action :set_user_medicine, only: %i[show edit update destroy]
 
-  # GET /user_medicines or /user_medicines.json
+  # 登録薬管理用一覧（編集・削除）
   def index
+    @user_medicines = current_user.user_medicines.page(params[:page]).per(8)
+  end
+
+  # 処方箋追加用一覧（選択）
+  def select
     @user_medicines = current_user.user_medicines.page(params[:page]).per(8)
   end
 
