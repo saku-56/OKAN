@@ -5,7 +5,7 @@
     <h2 class="text-2xl font-bold text-center mb-6">
       <%= l(Date.today, format: :long) %>
     </h2>
-    
+
     <% if @leftover_medicines.any? %>
       <table class="table w-full bg-white shadow-md rounded-lg overflow-hidden">
         <tbody>
@@ -29,7 +29,7 @@
     <% end %>
       <!-- 後で服薬予定などを表示 -->
   </div>
-  
+
   <!-- 登録薬管理へのリンク -->
   <div class="actions text-center">
     <%= link_to "薬の追加", select_registered_medicines_path, class: "btn btn-primary" %>

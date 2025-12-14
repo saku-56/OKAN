@@ -1,0 +1,29 @@
+<%= form_with(model: medicine, class: "contents") do |form| %>
+  <% if medicine.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(medicine.errors.count, "error") %> prohibited this user_medicine from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% medicine.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :薬名 %>
+    <%= form.text_field :name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": medicine.errors[:name].none?, "border-red-400 focus:outline-red-600": medicine.errors[:name].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :一回の服薬量 %>
+    <div class="flex items-center gap-4 mt-2">
+      <%= form.number_field :dosage_per_time, class: ["shadow-sm rounded-md border px-3 py-2 w-24", {"border-gray-400 focus:outline-blue-600": medicine.errors[:dosage_per_time].none?, "border-red-400 focus:outline-red-600": medicine.errors[:dosage_per_time].any?}] %>
+    <span class="text-gray-700">錠</span>
+    </div>
+  </div>
+
+  <%= yield form %>
+
+<% end %>

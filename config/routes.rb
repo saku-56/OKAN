@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
+  resources :medicines
   resources :leftover_medicines
-  resources :registered_medicines do
-    collection do
-      get :select  # 処方箋追加用の選択画面
-  end
-  end
+
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
