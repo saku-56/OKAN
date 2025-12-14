@@ -41,10 +41,9 @@ class MedicinesController < ApplicationController
     end
   end
 
-  # DELETE /user_medicines/1 or /user_medicines/1.json
   def destroy
-    @user_medicine.destroy!
-    redirect_to registered_medicines_path, notice: "薬を削除しました"
+    @medicine.destroy!
+    redirect_to medicines_path, notice: "薬を削除しました"
   end
 
   private
