@@ -34,8 +34,8 @@ class MedicinesController < ApplicationController
 
   # PATCH/PUT /user_medicines/1 or /user_medicines/1.json
   def update
-    if @user_medicine.update(user_medicine_params)
-      redirect_to registered_medicine_path(@user_medicine), notice: "薬情報を更新しました"
+    if @medicine.update(medicine_params)
+      redirect_to medicines_path(@medicine), notice: "薬情報を更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
