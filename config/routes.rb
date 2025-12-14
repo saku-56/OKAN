@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :medicines
   resources :leftover_medicines
 
-  end
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
