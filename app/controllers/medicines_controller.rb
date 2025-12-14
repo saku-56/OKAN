@@ -6,12 +6,6 @@ class MedicinesController < ApplicationController
    @medicines = current_user.medicines.page(params[:page]).per(8)
   end
 
-  # 処方箋追加用一覧（選択）
-  def select
-    @user_medicines = current_user.user_medicines.page(params[:page]).per(8)
-  end
-
-  # GET /user_medicines/1 or /user_medicines/1.json
   def show
   end
 
