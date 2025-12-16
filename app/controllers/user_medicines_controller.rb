@@ -3,7 +3,7 @@ class UserMedicinesController < ApplicationController
     @user_medicines = current_user.user_medicines.where("current_stock > 0").order(date_of_prescription: :desc)
   end
 
-# 薬選択画面
+  # 薬選択画面
   def select_medicine
     @medicines = Medicine.all
   end
@@ -36,13 +36,13 @@ class UserMedicinesController < ApplicationController
       @user_medicine.medicine = medicine
 
     else
-      flash.now[:error] = '薬を選択するか、新しい薬の情報を入力してください'
+      flash.now[:error] = "薬を選択するか、新しい薬の情報を入力してください"
       render :new, status: :unprocessable_entity
       return
     end
 
     if @user_medicine.save
-      redirect_to user_medicines_path, notice: '服薬情報を登録しました'
+      redirect_to user_medicines_path, notice: "服薬情報を登録しました"
     else
       render :new, status: :unprocessable_entity
     end
