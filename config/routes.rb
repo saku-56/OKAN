@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :medicines
-  resources :leftover_medicines
+  resources :user_medicines do
+    collection do
+      get :select_medicine
+    end
+  end
 
   devise_for :users, controllers: {
     registrations: "users/registrations"
