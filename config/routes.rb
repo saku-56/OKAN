@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :medicines
   resources :user_medicines do
     collection do
       get :select_medicine
