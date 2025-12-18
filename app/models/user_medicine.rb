@@ -1,6 +1,5 @@
 class UserMedicine < ApplicationRecord
   belongs_to :user
-  belongs_to :medicine, optional: true
 
   validates :prescribed_amount, presence: true, numericality: { greater_than: 0 }
 

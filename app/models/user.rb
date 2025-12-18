@@ -5,5 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :user_medicines, dependent: :destroy
-  has_many :medicines
 end
