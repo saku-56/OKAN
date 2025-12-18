@@ -25,6 +25,23 @@ class UserMedicinesController < ApplicationController
       end
   end
 
+  def add_stock
+    @user_medicine = current_user.user_medicines.find(params[:id])
+  end
+
+  def update_stock
+     @user_medicine = current_user.user_medicines.find(params[:id])
+     
+     additional_amount = user_medicine_params[:prescribed_amount].to_i
+     @user_medicine.current_stock += additional_amount
+
+     if @user_medicine.save
+        redirect_to user_medicines_path, notice: "薬を追加しました"
+      else
+        render :new, status: :unprocessable_entity
+      end
+  end
+
   private
 
   def user_medicine_params
