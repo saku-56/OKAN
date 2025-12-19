@@ -8,4 +8,11 @@ class UserMedicine < ApplicationRecord
 
   # 単発の薬を取得(本リリースで使用予定)
   scope :temporary_medicines, -> { where(is_regular: false) }
+
+  # カレンダーの日付を押した時の予想在庫数計算
+  def stock_on(date)
+    days_diff = (date - Date.current).to_i
+    estimated = current_stock - days_diff * dosage_per_time
+    [ estimated, 0 ].max
+  end
 end
