@@ -25,10 +25,17 @@
   <!-- カレンダー表示エリア -->
   <div class="calendar-section max-w-4xl mx-auto mb-8">
     <%= month_calendar do |date| %>
-      <%= date.day %>
+      <%= link_to date.day, user_medicines_path(date: date) %>
     <% end %>
       <!-- 後で服薬予定などを表示 -->
-  </div>
+    <h2><%= @date %> の在庫予定</h2>
+    <% @user_medicines.each do |medicine| %>
+    <p>
+      <%= medicine.medicine_name %>：
+      <%= medicine.stock_on(@date) %> 錠
+    </p>
+    </div>
+    <% end %>
 
   <!-- 登録薬管理へのリンク -->
   <div class="actions text-center">
