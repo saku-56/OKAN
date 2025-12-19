@@ -1,27 +1,22 @@
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold mb-6">いつもの薬リスト</h1>
-
-  <div class="bg-white rounded-lg shadow">
-    <% @medicines.each do |medicine| %>
-      <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50">
+  <h1 class="text-2xl font-bold mb-6">薬選択画面</h1>
+  <div class="bg-white rounded-lg shadow mb-6">
+    <% @user_medicines.each do |user_medicine| %>
+      <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
         <div>
-          <h3 class="font-semibold text-lg"><%= medicine.name %></h3>
-          <p class="text-gray-600">1回の服薬量: <%= medicine.dosage_per_time %>錠</p>
+          <h3 class="font-semibold text-lg"><%= user_medicine.medicine_name %></h3>
+          <p class="text-gray-600">1回の服薬量: <%= user_medicine.dosage_per_time %>錠</p>
         </div>
-        <%= link_to '選択',
-            new_user_medicine_path(medicine_id: medicine.id),
-            class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600' %>
+        <%= link_to '選択(これ押したらadd_stock)',
+            add_stock_user_medicine_path(user_medicine),
+            class: 'px-4 py-2 btn btn-primary' %>
       </div>
     <% end %>
   </div>
 
-  <div class="mt-6">
-    <%= link_to 'いつもの薬リスト以外から登録する',
+  <div class="actions text-center">
+    <%= link_to '新規登録',
         new_user_medicine_path,
-        class: 'block w-full text-center px-4 py-3 bg-green-500 text-white rounded hover:bg-green-600' %>
-  </div>
-
-  <div class="mt-4">
-    <%= link_to '戻る', user_medicines_path, class: 'text-blue-500 hover:underline' %>
+        class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
   </div>
 </div>

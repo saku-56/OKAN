@@ -5,7 +5,7 @@ class UserMedicinesController < ApplicationController
 
   # 薬選択画面
   def select_medicine
-    @medicines = Medicine.all
+    @user_medicines = current_user.user_medicines.where("current_stock > 0")
   end
 
   def new
@@ -23,6 +23,27 @@ class UserMedicinesController < ApplicationController
       else
         render :new, status: :unprocessable_entity
       end
+  end
+
+  def add_stock
+    @user_medicine = current_user.user_medicines.find(params[:id])
+  end
+
+  def update_stock
+     @user_medicine = current_user.user_medicines.find(params[:id])
+
+     # 処方量を在庫量に加算
+     additional_amount = user_medicine_params[:prescribed_amount].to_i
+     @user_medicine.current_stock += additional_amount
+
+     # 処方日を更新
+     @user_medicine.date_of_prescription = user_medicine_params[:date_of_prescription]
+
+     if @user_medicine.save
+        redirect_to user_medicines_path, notice: "薬を追加しました"
+     else
+        render :new, status: :unprocessable_entity
+     end
   end
 
   private

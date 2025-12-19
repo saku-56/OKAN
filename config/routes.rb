@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     collection do
       get :select_medicine
     end
+    member do
+      get :add_stock
+      patch :update_stock
+    end
   end
 
   devise_for :users, controllers: {
