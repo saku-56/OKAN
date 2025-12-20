@@ -1,4 +1,4 @@
-<div class="modal modal-open fixed inset-0 z-50">
+<div class="modal modal-open">
   <div class="modal-box">
     <h3 class="font-bold text-lg">
       <%= @date %> の在庫予定
@@ -7,7 +7,7 @@
     <% @user_medicines.each do |medicine| %>
       <p>
         <%= medicine.medicine_name %>：
-        <%= medicine.stock_on(@date) %> 錠
+        残り<%= medicine.stock_on(@date) %> 錠
       </p>
     <% end %>
 
