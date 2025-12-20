@@ -1,0 +1,20 @@
+<div class="modal modal-open fixed inset-0 z-50">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">
+      <%= @date %> の在庫予定
+    </h3>
+
+    <% @user_medicines.each do |medicine| %>
+      <p>
+        <%= medicine.medicine_name %>：
+        <%= medicine.stock_on(@date) %> 錠
+      </p>
+    <% end %>
+
+    <div class="modal-action">
+      <%= link_to "閉じる",
+            user_medicines_path,
+            class: "btn" %>
+    </div>
+  </div>
+</div>

@@ -25,20 +25,22 @@
   <!-- カレンダー表示エリア -->
   <div class="calendar-section max-w-4xl mx-auto mb-8">
     <%= month_calendar do |date| %>
-      <%= link_to date.day, user_medicines_path(date: date) %>
+      <%= link_to date.day,
+        user_medicines_path(date: date),
+        data: { turbo_frame: "stock_modal" } %>
     <% end %>
-      <!-- 後で服薬予定などを表示 -->
-    <h2><%= @date %> の在庫予定</h2>
-    <% @user_medicines.each do |medicine| %>
-    <p>
-      <%= medicine.medicine_name %>：
-      <%= medicine.stock_on(@date) %> 錠
-    </p>
-    </div>
-    <% end %>
+  </div>
 
   <!-- 登録薬管理へのリンク -->
   <div class="actions text-center">
     <%= link_to "薬の追加", select_medicine_user_medicines_path, class: "btn btn-primary" %>
   </div>
+
+  <!-- モーダル枠 -->
+  <turbo-frame id="stock_modal">
+    <% if params[:date].present? %>
+      <%= render "stock_modal" %>
+    <% end %>
+  </turbo-frame>
+
 </div>
