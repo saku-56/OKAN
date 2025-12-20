@@ -1,6 +1,7 @@
 class UserMedicinesController < ApplicationController
   def index
     @user_medicines = current_user.user_medicines.where("current_stock > 0").order(date_of_prescription: :desc)
+    @date = params[:date]&.to_date || Date.current
   end
 
   # 薬選択画面
