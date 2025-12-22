@@ -1,9 +1,60 @@
 <div class="container mx-auto px-4 py-8">
   <div class="registered-medicines-section max-w-4xl mx-auto mb-8">
-
     <div class="md:w-2/3 w-full">
-      <h1 class="font-bold text-4xl">新規作成画面</h1>
+      <h1 class="font-bold text-4xl text-center mb-6">新規登録</h1>
 
-      <%= render "form", user_medicine: @user_medicine %>
+      <div class="bg-white rounded-lg shadow p-6">
+        <%= form_with(model: @user_medicine, class: "contents") do |f| %>
+
+          <!-- 薬名(表示のみ) -->
+          <div class="mb-4">
+            <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
+            <div class="flex items-center">
+              <%= f.text_field :medicine_name, class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
+            </div>
+          </div>
+
+          <!-- 1回の服薬量(表示のみ) -->
+          <div class="mb-4">
+            <%= f.label :dosage_per_time, "1回の服薬量", class: "block text-sm font-bold mb-2" %>
+            <div class="flex items-center">
+              <%= f.number_field :dosage_per_time,
+                  class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
+              <span class="ml-2 text-gray-700">錠</span>
+            </div>
+
+          <!-- 処方量(入力) -->
+          <div class="mb-4">
+            <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mt-2" %>
+            <div class="flex items-center">
+              <%= f.number_field :prescribed_amount,
+                  placeholder: "追加する数量を入力",
+                  min: 1,
+                  class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
+              <span class="ml-2 text-gray-700">錠</span>
+            </div>
+            <% if @user_medicine.errors[:prescribed_amount].any? %>
+              <p class="text-red-500 text-sm mt-1">
+                <%= @user_medicine.errors[:prescribed_amount].first %>
+              </p>
+            <% end %>
+          </div>
+
+          <!-- 処方日(入力) -->
+          <div class="mb-4">
+            <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
+            <%= f.date_field :date_of_prescription,
+                value: Date.today,
+                class: "w-full border border-gray-300 rounded px-3 py-2" %>
+          </div>
+
+          <!-- 送信ボタン -->
+          <div class="text-center gap-4">
+            <%= f.submit "在庫を追加",
+                class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
