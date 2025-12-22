@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold mb-6">薬選択画面</h1>
+  <h1 class="font-bold text-4xl text-center mb-6">薬選択画面</h1>
   <div class="bg-white rounded-lg shadow mb-6">
     <% @user_medicines.each do |user_medicine| %>
       <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
@@ -7,15 +7,15 @@
           <h3 class="font-semibold text-lg"><%= user_medicine.medicine_name %></h3>
           <p class="text-gray-600">1回の服薬量: <%= user_medicine.dosage_per_time %>錠</p>
         </div>
-        <%= link_to '選択(これ押したらadd_stock)',
+        <%= link_to "選択",
             add_stock_user_medicine_path(user_medicine),
-            class: 'px-4 py-2 btn btn-primary' %>
+            class: "px-4 py-2 btn btn-primary" %>
       </div>
     <% end %>
   </div>
 
   <div class="actions text-center">
-    <%= link_to '新規登録',
+    <%= link_to "新規登録",
         new_user_medicine_path,
         class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
   </div>
