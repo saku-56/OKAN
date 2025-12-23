@@ -5,6 +5,7 @@
 
       <div class="bg-white rounded-lg shadow p-6">
         <%= form_with(model: @user_medicine, class: "contents") do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
 
           <!-- 薬名(表示のみ) -->
           <div class="mb-4">
@@ -33,11 +34,6 @@
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
-            <% if @user_medicine.errors[:prescribed_amount].any? %>
-              <p class="text-red-500 text-sm mt-1">
-                <%= @user_medicine.errors[:prescribed_amount].first %>
-              </p>
-            <% end %>
           </div>
 
           <!-- 処方日(入力) -->
