@@ -1,7 +1,11 @@
 class UserMedicine < ApplicationRecord
   belongs_to :user
 
-  validates :prescribed_amount, presence: true, numericality: { greater_than: 0 }
+  validates :medicine_name, presence: true
+
+  validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
+
+  validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
 
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }
