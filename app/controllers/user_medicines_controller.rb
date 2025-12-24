@@ -31,20 +31,24 @@ Rails.logger.debug "params[:user_medicine][:dosage_per_time] = #{params[:user_me
   end
 
   def update_stock
-     @user_medicine = current_user.user_medicines.find(params[:id])
+    @user_medicine = current_user.user_medicines.find(params[:id])
 
-     # 処方量を在庫量に加算
-     additional_amount = user_medicine_params[:prescribed_amount].to_i
-     @user_medicine.current_stock += additional_amount
+    # 元の在庫量を保存
+    original_stock = @user_medicine.current_stock
 
-     # 処方日を更新
-     @user_medicine.date_of_prescription = user_medicine_params[:date_of_prescription]
+    # フォームから送信された値をモデルに代入
+    @user_medicine.assign_attributes(user_medicine_params)
 
-     if @user_medicine.save
-        redirect_to user_medicines_path, notice: "薬を追加しました"
-     else
-        render :new, status: :unprocessable_entity
-     end
+    # バリデーションチェック
+    if @user_medicine.valid?
+      # フォームに入力した処方量を在庫量に加算
+      @user_medicine.current_stock = original_stock + @user_medicine.prescribed_amount
+
+      @user_medicine.save
+      redirect_to user_medicines_path, notice: "薬を追加しました"
+    else
+      render :add_stock, status: :unprocessable_entity
+    end
   end
 
   private
@@ -54,7 +58,7 @@ Rails.logger.debug "params[:user_medicine][:dosage_per_time] = #{params[:user_me
       :medicine_name,
       :dosage_per_time,
       :prescribed_amount,
-      :date_of_prescription
+      :date_of_prescription,
     )
   end
 end
