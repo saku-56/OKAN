@@ -4,9 +4,10 @@
       <h1 class="font-bold text-4xl text-center mb-6">在庫追加</h1>
 
       <div class="bg-white rounded-lg shadow p-6">
-        <%= form_with model: @user_medicine,
+        <%= form_with(model: @user_medicine,
                       url: update_stock_user_medicine_path(@user_medicine),
-                      method: :patch do |f| %>
+                      method: :patch) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
 
           <!-- 薬名(表示のみ) -->
           <div class="mb-4">
@@ -36,17 +37,12 @@
           <div class="mb-4">
             <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mb-2" %>
             <div class="flex items-center">
-              <%= f.number_field :prescribed_amount,
+              <%= f.text_field :prescribed_amount,
                   placeholder: "追加する数量を入力",
-                  min: 1,
+                  type: "number",
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
-            <% if @user_medicine.errors[:prescribed_amount].any? %>
-              <p class="text-red-500 text-sm mt-1">
-                <%= @user_medicine.errors[:prescribed_amount].first %>
-              </p>
-            <% end %>
           </div>
 
           <!-- 処方日(入力) -->

@@ -1,4 +1,16 @@
 ja:
+  activerecord:
+    attributes:
+      user_medicine:
+        medicine_name: "薬名"
+        dosage_per_time: "1回の服薬量"
+        prescribed_amount: "処方量"
+    errors:
+      models:
+        medicine:
+          attributes:
+            medicine_name:
+              blank: "を入力してください"
   date:
     formats:
       default: "%Y/%m/%d"
