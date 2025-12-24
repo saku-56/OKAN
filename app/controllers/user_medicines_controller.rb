@@ -58,7 +58,7 @@ class UserMedicinesController < ApplicationController
       :medicine_name,
       :dosage_per_time,
       :prescribed_amount,
-      :date_of_prescription,
+      :date_of_prescription
     )
   end
 end
