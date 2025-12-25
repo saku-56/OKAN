@@ -15,6 +15,9 @@ class UserMedicine < ApplicationRecord
 
   # カレンダーの日付を押した時の予想在庫数計算
   def stock_on(date)
+    # 処方日より前の日付の場合は計算しない
+    return 0 if date < date_of_prescription
+
     days_diff = (date - Date.current).to_i
     estimated = current_stock - days_diff * dosage_per_time
     [ estimated, 0 ].max
