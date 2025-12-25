@@ -31,7 +31,7 @@
       <!-- カレンダー上の残り10錠表示 -->
       <% @user_medicines.each do |medicine| %>
         <% stock = medicine.stock_on(date) %>
-        <% if medicine.current_stock > 10 && stock == 10 %>
+        <% if stock == 10 %>
           <span class="block text-xs text-error">
             <%= medicine.medicine_name %>：残り10錠
           </span>
