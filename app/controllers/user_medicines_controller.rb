@@ -2,6 +2,11 @@ class UserMedicinesController < ApplicationController
   def index
     @user_medicines = current_user.user_medicines.where("current_stock > 0").order(date_of_prescription: :desc)
     @date = params[:date]&.to_date || Date.current
+
+    # 在庫がある薬だけに絞り込む
+    @medicines_with_stock = @user_medicines.select do |medicine|
+      medicine.stock_on(@date) > 0
+    end
   end
 
   # 薬選択画面

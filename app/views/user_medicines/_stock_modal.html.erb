@@ -4,7 +4,7 @@
       <%= @date %> の在庫予定
     </h3>
 
-    <% @user_medicines.each do |medicine| %>
+    <% @medicines_with_stock.each do |medicine| %>
       <p>
         <%= medicine.medicine_name %>：
         残り<%= medicine.stock_on(@date) %> 錠
