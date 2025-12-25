@@ -4,10 +4,16 @@
       <%= @date %> の在庫予定
     </h3>
 
-    <% @user_medicines.each do |medicine| %>
-      <p>
-        <%= medicine.medicine_name %>：
-        残り<%= medicine.stock_on(@date) %> 錠
+    <% if @medicines_with_stock.any? %>
+      <% @medicines_with_stock.each do |medicine| %>
+        <p>
+          <%= medicine.medicine_name %>：
+          残り<%= medicine.stock_on(@date) %> 錠
+        </p>
+      <% end %>
+    <% else %>
+      <p class="text-gray-500">
+        この日は在庫がありません
       </p>
     <% end %>
 
