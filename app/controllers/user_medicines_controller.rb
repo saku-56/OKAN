@@ -27,7 +27,7 @@ class UserMedicinesController < ApplicationController
       if @user_medicine.save
         redirect_to user_medicines_path, notice: "薬を登録しました"
       else
-        render :new, status: :unprocessable_content
+        render :new, status: :unprocessable_entiry
       end
   end
 
@@ -52,7 +52,7 @@ class UserMedicinesController < ApplicationController
       @user_medicine.save
       redirect_to user_medicines_path, notice: "薬を追加しました"
     else
-      render :add_stock, status: :unprocessable_content
+      render :add_stock, status: :unprocessable_entity
     end
   end
 
