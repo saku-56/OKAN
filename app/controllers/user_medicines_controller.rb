@@ -27,7 +27,7 @@ class UserMedicinesController < ApplicationController
       if @user_medicine.save
         redirect_to user_medicines_path, notice: "薬を登録しました"
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_entiry
       end
   end
 
