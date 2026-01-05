@@ -7,6 +7,8 @@ class UserMedicine < ApplicationRecord
 
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
 
+  validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
+
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }
 
