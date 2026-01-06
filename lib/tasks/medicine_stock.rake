@@ -10,7 +10,7 @@ namespace :medicine_stock do
       before_stock = user_medicine.current_stock
       new_stock = user_medicine.current_stock - user_medicine.dosage_per_time
 
-      if user_medicine.update(current_stock: [new_stock, 0].max)
+      if user_medicine.update(current_stock: [ new_stock, 0 ].max)
         success_count += 1
         puts "✓ ID:#{user_medicine.id} #{before_stock} → #{user_medicine.current_stock}"
       else
@@ -18,7 +18,7 @@ namespace :medicine_stock do
         puts "✗ ID:#{user_medicine.id} 更新失敗: #{user_medicine.errors.full_messages.join(', ')}"
       end
     end
-    
+
     puts "=== 処理完了: 成功 #{success_count}件, 失敗 #{error_count}件 ==="
   end
 end

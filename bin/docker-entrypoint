@@ -10,4 +10,10 @@ if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   ./bin/rails db:prepare
 fi
 
+# cronデーモンを起動
+service cron start
+
+# wheneverでcrontabに登録
+bundle exec whenever --update-crontab
+
 exec "${@}"
