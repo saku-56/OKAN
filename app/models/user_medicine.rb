@@ -9,6 +9,8 @@ class UserMedicine < ApplicationRecord
 
   validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
 
+  validate :date_of_prescription_cannot_be_in_future
+
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }
 
@@ -23,5 +25,21 @@ class UserMedicine < ApplicationRecord
     estimated = current_stock - days_diff * dosage_per_time
     # 在庫量がマイナス表示されないようにする
     [ estimated, 0 ].max
+  end
+
+  def initial_stock_on_create
+    return prescribed_amount if date_of_prescription == Date.current
+
+    days_passed = (Date.current - date_of_prescription).to_i
+    consumed = days_passed * dosage_per_time
+    [ prescribed_amount - consumed, 0 ].max
+  end
+end
+
+private
+
+def date_of_prescription_cannot_be_in_future
+  if date_of_prescription.present? && date_of_prescription > Date.current
+    errors.add(:date_of_prescription, "は今日以前の日付を指定してください")
   end
 end
