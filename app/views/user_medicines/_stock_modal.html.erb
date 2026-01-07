@@ -3,8 +3,11 @@
     <h3 class="font-bold text-lg">
       <%= @date %> の在庫予定
     </h3>
-
-    <% if @medicines_with_stock.any? %>
+    <% if @date < Date.current %>
+      <p class="text-gray-500">
+        今日より前の日付の在庫は表示できません。
+      </p>
+    <% elsif @medicines_with_stock.any? %>
       <% @medicines_with_stock.each do |medicine| %>
         <p>
           <%= medicine.medicine_name %>：
