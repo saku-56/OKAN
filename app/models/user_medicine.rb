@@ -27,6 +27,7 @@ class UserMedicine < ApplicationRecord
     [ estimated, 0 ].max
   end
 
+  # 初回登録時、処方日と登録日が異なる場合の在庫量の計算
   def initial_stock_on_create
     return prescribed_amount if date_of_prescription == Date.current
 

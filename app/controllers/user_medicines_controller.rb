@@ -17,9 +17,7 @@ class UserMedicinesController < ApplicationController
 
   def create
     @user_medicine = current_user.user_medicines.build(user_medicine_params)
-
-    # 処方量を在庫として設定(手元に在庫がない初回登録時用)
-    @user_medicine.current_stock = @user_medicine.prescribed_amount
+    @user_medicine.current_stock = @user_medicine.initial_stock_on_create
 
       if @user_medicine.save
         redirect_to user_medicines_path, notice: "薬を登録しました"
