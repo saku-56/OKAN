@@ -6,7 +6,7 @@ class UserMedicinesController < ApplicationController
 
   # 薬選択画面
   def select_medicine
-    @user_medicines = current_user.user_medicines.where("current_stock > 0")
+    @medicines_with_stock = current_user.user_medicines.with_current_stock
   end
 
   def new
