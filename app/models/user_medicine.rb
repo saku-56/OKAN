@@ -7,7 +7,7 @@ class UserMedicine < ApplicationRecord
 
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
 
-  validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
+  # validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
 
   validate :date_of_prescription_cannot_be_in_future
 
