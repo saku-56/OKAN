@@ -15,7 +15,7 @@ class UserMedicine < ApplicationRecord
   # 単発の薬を取得(本リリースで使用予定)
   scope :temporary_medicines, -> { where(is_regular: false) }
 
-  scope :with_current_stock, -> { where("current_stock > 0") }
+  scope :with_current_stock, -> { where("current_stock > 0").order(created_at: :desc) }
 
   # カレンダーの日付を押した時の予想在庫数計算
   def stock_on(date)
