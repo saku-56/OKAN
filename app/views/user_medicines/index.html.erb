@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4 py-8">
-  <!-- 残薬一覧エリア -->
-  <div class="leftover-medicines-section max-w-4xl mx-auto mb-8">
-    <!-- ✅ 今日の日付を表示 -->
+  <!-- 服薬中の薬一覧 -->
+  <div class="medicines-section max-w-4xl mx-auto mb-8">
+    <!-- 今日の日付を表示 -->
     <h2 class="text-2xl font-bold text-center mb-6">
       <%= l(Date.today, format: :long) %>
     </h2>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <!-- カレンダー表示エリア -->
+  <!-- カレンダー表示 -->
   <div class="calendar-section max-w-4xl mx-auto mb-8">
     <%= month_calendar do |date| %>
       <%= link_to date.day,
@@ -30,7 +30,7 @@
         data: { turbo_frame: "stock_modal" } %>
 
       <!-- カレンダー上の残り10錠表示 -->
-      <% @user_medicines.each do |medicine| %>
+      <% @medicines_with_stock.each do |medicine| %>
         <% stock = medicine.stock_on(date) %>
         <% if stock == 10 %>
           <span class="block text-xs text-error">
@@ -41,7 +41,6 @@
     <% end %>
   </div>
 
-  <!-- 登録薬管理へのリンク -->
   <div class="actions text-center">
     <%= link_to "薬の追加", select_medicine_user_medicines_path, class: "btn btn-primary" %>
   </div>
@@ -52,5 +51,4 @@
       <%= render "stock_modal" %>
     <% end %>
   </turbo-frame>
-
 </div>

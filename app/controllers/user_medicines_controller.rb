@@ -1,14 +1,12 @@
 class UserMedicinesController < ApplicationController
   def index
-    @user_medicines = current_user.user_medicines.where("current_stock > 0").order(date_of_prescription: :desc)
-    @date = params[:date]&.to_date || Date.current
-
     @medicines_with_stock = current_user.user_medicines.with_current_stock
+    @date = params[:date]&.to_date
   end
 
   # 薬選択画面
   def select_medicine
-    @user_medicines = current_user.user_medicines.where("current_stock > 0")
+    @medicines_with_stock = current_user.user_medicines.with_current_stock
   end
 
   def new
@@ -22,7 +20,7 @@ class UserMedicinesController < ApplicationController
       if @user_medicine.save
         redirect_to user_medicines_path, notice: "薬を登録しました"
       else
-        render :new, status: :unprocessable_entiry
+        render :new, status: :unprocessable_entity
       end
   end
 

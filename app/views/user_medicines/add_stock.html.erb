@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 py-8">
-  <div class="registered-medicines-section max-w-4xl mx-auto mb-8">
+  <div class="medicines-section max-w-4xl mx-auto mb-8">
     <div class="md:w-2/3 w-full">
       <h1 class="font-bold text-4xl text-center mb-6">在庫追加</h1>
 
@@ -9,7 +9,6 @@
                       method: :patch) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
 
-          <!-- 薬名(表示のみ) -->
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2">薬名</label>
             <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
@@ -17,7 +16,6 @@
             </div>
           </div>
 
-          <!-- 1回の服薬量(表示のみ) -->
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2">1回の服薬量</label>
             <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
@@ -25,7 +23,6 @@
             </div>
           </div>
 
-          <!-- 現在の在庫(参考表示) -->
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2">現在の在庫</label>
             <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
@@ -33,19 +30,16 @@
             </div>
           </div>
 
-          <!-- 処方量(入力) -->
           <div class="mb-4">
             <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mb-2" %>
             <div class="flex items-center">
               <%= f.text_field :prescribed_amount,
-                  placeholder: "追加する数量を入力",
                   type: "number",
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
           </div>
 
-          <!-- 処方日(入力) -->
           <div class="mb-4">
             <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
             <%= f.date_field :date_of_prescription,
@@ -54,7 +48,6 @@
                 class: "w-full border border-gray-300 rounded px-3 py-2" %>
           </div>
 
-          <!-- 送信ボタン -->
           <div class="text-center gap-4">
             <%= f.submit "在庫を追加",
                 class: "btn btn-primary" %>
