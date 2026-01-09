@@ -11,6 +11,8 @@ class UserMedicine < ApplicationRecord
 
   validate :date_of_prescription_cannot_be_in_future
 
+  validates :uuid, uniqueness: true
+
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }
 
@@ -35,12 +37,16 @@ class UserMedicine < ApplicationRecord
     consumed = days_passed * dosage_per_time
     [ prescribed_amount - consumed, 0 ].max
   end
-end
 
-private
+  def to_param
+    uuid
+  end
 
-def date_of_prescription_cannot_be_in_future
-  if date_of_prescription.present? && date_of_prescription > Date.current
-    errors.add(:date_of_prescription, "は今日以前の日付を指定してください")
+  private
+
+  def date_of_prescription_cannot_be_in_future
+    if date_of_prescription.present? && date_of_prescription > Date.current
+      errors.add(:date_of_prescription, "は今日以前の日付を指定してください")
+    end
   end
 end
