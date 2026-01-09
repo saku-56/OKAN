@@ -76,6 +76,8 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Entrypoint prepares the database.
+COPY docker/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
