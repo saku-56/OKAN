@@ -25,11 +25,11 @@ class UserMedicinesController < ApplicationController
   end
 
   def add_stock
-    @user_medicine = current_user.user_medicines.find(params[:id])
+    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
   end
 
   def update_stock
-    @user_medicine = current_user.user_medicines.find(params[:id])
+    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
 
     # 元の在庫量を保存
     original_stock = @user_medicine.current_stock

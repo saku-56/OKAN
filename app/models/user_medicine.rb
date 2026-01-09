@@ -37,16 +37,16 @@ class UserMedicine < ApplicationRecord
     consumed = days_passed * dosage_per_time
     [ prescribed_amount - consumed, 0 ].max
   end
-end
 
   def to_param
     uuid
   end
 
-private
+  private
 
-def date_of_prescription_cannot_be_in_future
-  if date_of_prescription.present? && date_of_prescription > Date.current
-    errors.add(:date_of_prescription, "は今日以前の日付を指定してください")
+  def date_of_prescription_cannot_be_in_future
+    if date_of_prescription.present? && date_of_prescription > Date.current
+      errors.add(:date_of_prescription, "は今日以前の日付を指定してください")
+    end
   end
 end
