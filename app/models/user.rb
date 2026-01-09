@@ -4,5 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :uuid, presence: true, uniqueness: true
+
   has_many :user_medicines, dependent: :destroy
+
+  # URLでuuidを使用するための設定
+  def to_param
+    uuid
+  end
 end

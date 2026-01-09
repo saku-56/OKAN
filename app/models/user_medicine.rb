@@ -11,6 +11,8 @@ class UserMedicine < ApplicationRecord
 
   validate :date_of_prescription_cannot_be_in_future
 
+  validates :uuid, presence: true, uniqueness: true
+
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }
 
@@ -36,6 +38,10 @@ class UserMedicine < ApplicationRecord
     [ prescribed_amount - consumed, 0 ].max
   end
 end
+
+  def to_param
+    uuid
+  end
 
 private
 
