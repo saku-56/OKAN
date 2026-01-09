@@ -11,7 +11,7 @@ class UserMedicine < ApplicationRecord
 
   validate :date_of_prescription_cannot_be_in_future
 
-  validates :uuid, presence: true, uniqueness: true
+  validates :uuid, uniqueness: true
 
   # いつもの薬リストに表示する薬を取得
   scope :regular_medicines, -> { where(is_regular: true) }

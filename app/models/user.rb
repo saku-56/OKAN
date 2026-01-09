@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :uuid, presence: true, uniqueness: true
+  validates :uuid, uniqueness: true
 
   has_many :user_medicines, dependent: :destroy
 
