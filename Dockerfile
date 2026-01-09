@@ -9,7 +9,7 @@ ARG RUBY_VERSION=3.3.10
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
-WORKDIR /rails
+WORKDIR /okan
 
 # Install base packages
 RUN apt-get update -qq && \
@@ -65,9 +65,14 @@ RUN rm -rf node_modules
 # Final stage for app image
 FROM base
 
+# cronをインストール（
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y cron && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
+COPY --from=build /okan /okan
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
@@ -75,8 +80,9 @@ RUN groupadd --system --gid 1000 rails && \
     chown -R rails:rails db log storage tmp
 USER 1000:1000
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# docker-entrypointに実行権限を付与
+RUN chmod +x /okan/bin/docker-entrypoint
+ENTRYPOINT ["/okan/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
