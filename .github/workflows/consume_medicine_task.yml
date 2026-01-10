@@ -5,10 +5,10 @@ on:
     # 毎日 UTC 15:00 = 日本時間 0:00 に実行
     - cron: '0 15 * * *'
   workflow_dispatch: # 手動実行も可能にする
-  push:
-    branches:
-      - bugfix/cron_for_render  # 現在の作業ブランチ
-      - main  # main ブランチでも動作確認
+  # push:
+  #   branches:
+  #     - bugfix/cron_for_render  # 現在の作業ブランチ
+  #     - main  # main ブランチでも動作確認
 
 jobs:
   run-task:
