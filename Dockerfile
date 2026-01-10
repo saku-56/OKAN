@@ -27,7 +27,7 @@ FROM base AS build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev node-gyp pkg-config python-is-python3 cron && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev node-gyp pkg-config python-is-python3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install JavaScript dependencies
@@ -65,11 +65,6 @@ RUN rm -rf node_modules
 # Final stage for app image
 FROM base
 
-# cronをインストール（
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y cron && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /okan /okan
@@ -80,9 +75,8 @@ RUN groupadd --system --gid 1000 rails && \
     chown -R rails:rails db log storage tmp
 USER 1000:1000
 
-# docker-entrypointに実行権限を付与
-RUN chmod +x /okan/bin/docker-entrypoint
-ENTRYPOINT ["/okan/bin/docker-entrypoint"]
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
