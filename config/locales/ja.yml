@@ -1,6 +1,8 @@
 ja:
   activerecord:
     attributes:
+      user:
+        name: "名前"
       user_medicine:
         medicine_name: "薬名"
         dosage_per_time: "1回の服薬量"
