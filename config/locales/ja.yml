@@ -3,6 +3,8 @@ ja:
     attributes:
       user:
         name: "名前"
+        email: "メールアドレス"
+        password_confirmation: "パスワード確認"
       user_medicine:
         medicine_name: "薬名"
         dosage_per_time: "1回の服薬量"

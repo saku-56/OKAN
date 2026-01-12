@@ -39,6 +39,24 @@ RSpec.describe User, type: :model do
       expect(user2).to be_valid
     end
 
+    it 'パスワードが未入力の場合はvalidになるか' do
+      user = build(:user, password: '')
+      expect(user).to be_invalid
+      expect(user.errors[:password]).to include('を入力してください')
+    end
+
+    it 'パスワードが6文字未満の場合はinvalidになるか' do
+      user = build(:user, password: 'aaa', password_confirmation: 'aaa')
+      expect(user).to be_invalid
+      expect(user.errors[:password]).to include('は6文字以上で入力してください')
+    end
+
+    it 'パスワードとパスワード確認が一致しない場合はinvalidになるか' do
+      user = build(:user, password: 'password123', password_confirmation: 'different')
+      expect(user).to be_invalid
+      expect(user.errors[:password_confirmation]).to include('とパスワードの入力が一致しません')
+    end
+
     it 'uuidが自動生成されること' do
       user = create(:user)
       expect(user.uuid).to be_present
