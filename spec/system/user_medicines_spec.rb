@@ -5,13 +5,11 @@ RSpec.describe "UserMedicines", type: :system do
   let(:user_medicine) { create(:user_medicine) }
 
   describe 'ログイン前' do
-    describe 'ページ遷移確認' do
-      context 'タスクの新規登録ページにアクセス' do
-        it '新規登録ページへのアクセスが失敗する' do
-          visit new_task_path
-          expect(page).to have_content('Login required')
-          expect(current_path).to eq login_path
-        end
+    context '薬一覧ページへのアクセス' do
+      it 'ログインページにリダイレクトされる' do
+        visit user_medicines_path
+        expect(page).to have_content 'ログインしてください'
+        expect(current_path).to eq new_user_session_path
       end
     end
   end
