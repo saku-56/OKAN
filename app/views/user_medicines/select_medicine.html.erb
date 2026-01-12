@@ -5,7 +5,7 @@
       <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
         <div>
           <h3 class="font-semibold text-lg"><%= user_medicine.medicine_name %></h3>
-          <p class="text-gray-600">1回の服薬量: <%= user_medicine.dosage_per_time %>錠</p>
+          <p class="text-gray-600">1回の服薬量：<%= user_medicine.dosage_per_time %>錠</p>
         </div>
         <%= link_to "選択",
             add_stock_user_medicine_path(user_medicine),
