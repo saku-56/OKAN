@@ -50,6 +50,13 @@ RSpec.describe "UserMedicines", type: :system do
           expect(page).to have_content '選択'
           expect(page).to have_content '新規登録'
         end
+
+        it '選択ボタンを押すと薬名、1回の服薬量、現在の在庫が表示されている' do
+          visit add_stock_user_medicine_path(user_medicine)
+          expect(page).to have_content 'aaa'
+          expect(page).to have_content '1 錠'
+          expect(page).to have_content '5 錠'
+        end
       end
     end
 
