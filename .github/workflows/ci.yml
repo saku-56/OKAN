@@ -60,7 +60,7 @@ jobs:
           --health-retries 5
 
       chrome:
-        image: selenium/standalone-chrome:115
+        image: selenium/standalone-chrome:latest
         ports:
           - 4444:4444
         options: >-
