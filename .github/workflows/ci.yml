@@ -49,8 +49,8 @@ jobs:
         image: postgres:18 # Docker Hubから公式のPostgreSQLイメージ（バージョン18）を取得、GitHub Actionsの仮想マシン内でPostgreSQLコンテナを起動、テスト実行時に使用する一時的なデータベース環境
         env:
           POSTGRES_USER: postgres # DATABASE_URLで接続する際に必要な初期設定
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: okan_test
         ports:
           - 5432:5432
         options: >- # 下のコマンドの説明→ PostgreSQLが起動して接続可能か確認、10秒ごとにヘルスチェック実行、チェックが5秒以内に完了しなければタイムアウト、5回まで失敗を許容
@@ -71,7 +71,7 @@ jobs:
 
     env:
       RAILS_ENV: test # config/environments/test.rbの設定が使われる
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/okan_test
 
     steps:
       - name: Checkout code
