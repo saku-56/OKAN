@@ -79,7 +79,7 @@ RSpec.configure do |config|
     driven_by :remote_chrome
 
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 3001
+    Capybara.server_port = 4444
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
     # 非表示の要素も検索対象に含める
     Capybara.ignore_hidden_elements = false
