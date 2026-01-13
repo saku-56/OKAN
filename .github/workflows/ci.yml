@@ -59,6 +59,16 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+      chrome:
+        image: selenium/standalone-chrome:115
+        ports:
+          - 4444:4444
+        options: >-
+          --health-cmd "curl -f http://localhost:4444/status || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       RAILS_ENV: test # config/environments/test.rbの設定が使われる
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
