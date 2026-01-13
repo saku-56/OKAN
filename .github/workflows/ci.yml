@@ -71,7 +71,7 @@ jobs:
 
     env:
       RAILS_ENV: test # config/environments/test.rbの設定が使われる
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/okan_test
+      DATABASE_URL: postgres://postgres:password@localhost:5432/okan_test
 
     steps:
       - name: Checkout code
