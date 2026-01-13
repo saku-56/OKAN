@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="medicines-section max-w-4xl mx-auto mb-8">
+    <div class="md:w-2/3 w-full">
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-2">薬名</label>
+          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
+            <%= @user_medicine.medicine_name %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-2">1回の服薬量</label>
+          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
+            <%= @user_medicine.dosage_per_time %> 錠
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-2">現在の在庫</label>
+          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+            <%= @user_medicine.current_stock %> 錠
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-2">処方量</label>
+          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+            <%= @user_medicine.prescribed_amount %> 錠
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-2">最新の処方日</label>
+          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+            <%= @user_medicine.date_of_prescription %>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <%= link_to "在庫を追加", add_stock_user_medicine_path(@user_medicine), class: "btn btn-primary flex-1" %>
+            <%= link_to "飲み忘れ", "#", class: "btn btn-secondary flex-1" %>
+          </div>
+
+          <div class="flex gap-4">
+            <%= link_to "編集", "#", class: "btn btn-outline btn-sm flex-1" %>
+            <%= link_to "削除", "#", class: "btn btn-error btn-sm flex-1" %>
+            <%= link_to "戻る", user_medicines_path, class: "btn btn-neutral btn-sm flex-1" %>
+          </div>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>

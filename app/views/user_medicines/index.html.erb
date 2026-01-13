@@ -6,8 +6,8 @@
           <h3 class="font-semibold text-lg"><%= user_medicine.medicine_name %></h3>
           <p class="text-gray-600">1回の服薬量：<%= user_medicine.dosage_per_time %>錠</p>
         </div>
-        <%= link_to "選択",
-            add_stock_user_medicine_path(user_medicine),
+        <%= link_to "詳細",
+            user_medicine_path(user_medicine),
             class: "px-4 py-2 btn btn-primary" %>
       </div>
     <% end %>
