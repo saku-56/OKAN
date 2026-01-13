@@ -76,12 +76,18 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include LoginMacros
   config.before(:each, type: :system) do
-    driven_by :remote_chrome
+    if ENV['CI']
+      # GitHub Actions環境
+      driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
+    else
+      # ローカルDocker環境
+      driven_by :remote_chrome
+      Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+      Capybara.server_port = 4444
+      Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    end
 
-    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 4445
-    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
-    # 非表示の要素も検索対象に含める
+    # 共通設定
     Capybara.ignore_hidden_elements = false
   end
 end
