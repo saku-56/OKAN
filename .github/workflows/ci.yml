@@ -1,29 +1,32 @@
-name: CI
+name: CI # このワークフローの表示名
 
 on:
-  pull_request:
+  pull_request: # 全てのブランチへのPRで実行
   push:
-    branches: [ main ]
+    branches: [ main ] # mainブランチへのpushで実行
 
 jobs:
-  scan_ruby:
-    runs-on: ubuntu-latest
+  # セキュリティチェック
+  scan_ruby: # ジョブの識別名（任意の名前)
+    runs-on: ubuntu-latest # このジョブを実行する仮想環境
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout code # GitHubリポジトリのコードを仮想マシン上にコピー（クローン）する
+        uses: actions/checkout@v4 #「GitHubが提供する「コードをチェックアウトする処理」のバージョン4を使う
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Ruby # 仮想マシンにRuby環境をインストール(Gemのインストールやbundlerの準備を行う)
+        uses: ruby/setup-ruby@v1 # Ruby公式が提供するRubyセットアップアクション
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: .ruby-version # ファイルに書かれているバージョンを自動で読み取る
+          bundler-cache: true # 2回目以降の実行が高速化される
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+      - name: Scan for security vulnerabilities
+        run: bundle exec brakeman --no-pager
 
+  # Lintチェック
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,31 +38,42 @@ jobs:
           bundler-cache: true
 
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        run: bundle exec rubocop
 
+  # テスト実行
   test:
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres
+        image: postgres:18 # Docker Hubから公式のPostgreSQLイメージ（バージョン18）を取得、GitHub Actionsの仮想マシン内でPostgreSQLコンテナを起動、テスト実行時に使用する一時的なデータベース環境
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres # DATABASE_URLで接続する際に必要な初期設定
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: okan_test
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: >- # 下のコマンドの説明→ PostgreSQLが起動して接続可能か確認、10秒ごとにヘルスチェック実行、チェックが5秒以内に完了しなければタイムアウト、5回まで失敗を許容
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-      # redis:
-      #   image: redis
-      #   ports:
-      #     - 6379:6379
-      #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+      chrome:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: >-
+          --health-cmd "curl -f http://localhost:4444/status || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test # config/environments/test.rbの設定が使われる
+      DATABASE_URL: postgres://postgres:password@localhost:5432/okan_test
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -68,16 +82,40 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      # Node.jsのセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'yarn'
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+      # Yarnの依存関係をインストール
+      - name: Install JavaScript dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install dependencies
+        run: | # 下のコマンドの説明→　System Specで使用、PostgreSQLに接続するためのクライアントツール、pg gemのビルドに必要、画像処理ライブラリ
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            google-chrome-stable \
+            postgresql-client \
+            libpq-dev \
+            libvips
+
+      # Tailwind CSSのビルド
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+
+      - name: Set up Database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+
+      - name: Run RSpec
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4 # ファイルをGitHub Actions上に保存
         if: failure()
         with:
           name: screenshots

@@ -14,7 +14,7 @@ RSpec.describe "Users", type: :system do
           fill_in 'パスワード確認', with: "example"
           click_button '登録する'
           expect(page).to have_content("アカウント登録が完了しました。")
-          expect(current_path).to eq user_medicines_path
+          expect(current_path).to eq home_path
         end
       end
 
