@@ -34,7 +34,7 @@ RSpec.describe "UserMedicines", type: :system do
           visit user_medicines_path
           expect(page).to have_content 'aaa'
           expect(page).to have_content '1回の服薬量：1錠'
-          expect(page).to have_content '選択'
+          expect(page).to have_content '詳細'
         end
       end
     end
@@ -86,6 +86,21 @@ RSpec.describe "UserMedicines", type: :system do
           expect(page).to have_content '薬を追加しました'
           expect(current_path).to eq user_medicines_path
         end
+      end
+    end
+
+    describe '薬の詳細表示' do
+      let(:user_medicine) { create(:user_medicine, user: user) }
+      before do
+        user_medicine
+        visit user_medicine_path(user_medicine)
+      end
+
+      it '登録した全ての項目が表示されること' do
+        expect(page).to have_content(user_medicine.medicine_name)
+        expect(page).to have_content(user_medicine.dosage_per_time)
+        expect(page).to have_content(user_medicine.prescribed_amount)
+        expect(page).to have_content(user_medicine.date_of_prescription)
       end
     end
   end

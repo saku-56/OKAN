@@ -16,7 +16,7 @@
   --color-secondary-content: #FFFFFF;
   --color-accent: #F4B79F; /* アイコン、リンク、タグなど細かい装飾 */
   --color-accent-content: oklch(98% 0.01 160);
-  --color-neutral: #3D3A38;
+  --color-neutral: #C0C0C0;
   --color-neutral-content: oklch(98% 0.01 240);
   --color-info: #66A6FF; /* お知らせ */
   --color-info-content: oklch(98% 0.01 220);
