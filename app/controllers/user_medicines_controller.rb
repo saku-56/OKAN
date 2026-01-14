@@ -1,8 +1,6 @@
 class UserMedicinesController < ApplicationController
   def index
     @user_medicine = current_user.user_medicines
-    @medicines_with_stock = current_user.user_medicines.with_current_stock
-    @date = params[:date]&.to_date
   end
 
   def show

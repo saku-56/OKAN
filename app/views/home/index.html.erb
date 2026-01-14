@@ -26,7 +26,7 @@
   <div class="calendar-section max-w-4xl mx-auto mb-8">
     <%= month_calendar do |date| %>
       <%= link_to date.day,
-        user_medicines_path(date: date),
+        home_path(date: date),
         data: { turbo_frame: "stock_modal" } %>
 
       <!-- カレンダー上の残り10錠表示 -->
