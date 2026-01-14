@@ -103,5 +103,20 @@ RSpec.describe "UserMedicines", type: :system do
         expect(page).to have_content(user_medicine.date_of_prescription)
       end
     end
+
+    describe '薬の削除' do
+      let(:user_medicine) { create(:user_medicine, user: user) }
+      before do
+        user_medicine
+        visit user_medicine_path(user_medicine)
+      end
+
+      it '薬が削除できること' do
+        expect(page).to have_link '削除'
+        page.accept_confirm { click_link '削除' }
+        expect(page).to have_content('薬を削除しました。'), 'フラッシュメッセージが表示されていません'
+        expect(current_path).to eq user_medicines_path
+      end
+    end
   end
 end
