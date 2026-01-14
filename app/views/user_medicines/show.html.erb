@@ -44,10 +44,9 @@
             <%= link_to "飲み忘れ", "#", class: "btn btn-secondary flex-1" %>
           </div>
 
-          <div class="flex gap-4">
-            <%= link_to "編集", "#", class: "btn btn-outline btn-sm flex-1" %>
-            <%= link_to "削除", "#", class: "btn btn-error btn-sm flex-1" %>
-            <%= link_to "戻る", user_medicines_path, class: "btn btn-neutral btn-sm flex-1" %>
+          <div class="flex gap-10 mt-10">
+            <%= link_to "削除", user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?" }, class: "btn btn-error flex-1 ml-10" %>
+            <%= link_to "戻る", user_medicines_path, class: "btn btn-neutral flex-1 mr-10" %>
           </div>
         </div>
        </div>

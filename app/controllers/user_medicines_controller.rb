@@ -52,6 +52,12 @@ class UserMedicinesController < ApplicationController
     end
   end
 
+  def destroy
+    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
+    @user_medicine.destroy
+    redirect_to user_medicines_path, notice: "薬を削除しました。"
+  end
+
   private
 
   def user_medicine_params
