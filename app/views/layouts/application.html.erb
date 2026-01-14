@@ -45,5 +45,8 @@
         <%= render 'shared/before_login_drawer_menu' %>
       <% end %>
     </div>
-  </body>
+    <% if user_signed_in? %>
+      <%= render 'shared/footer' %>
+    <% end %>
+</body>
 </html>
