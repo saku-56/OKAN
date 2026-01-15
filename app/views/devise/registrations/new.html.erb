@@ -3,30 +3,48 @@
     <h2 class="text-center text-2xl font-bold text-primary mb-6">新規登録</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <br>
 
       <div class="form-control mb-4">
-        <%= f.label :name, "名前", class: "label-text mb-1" %>
+        <%= f.label :name, class: "label-text mb-1" %>
         <%= f.text_field :name, class: "input input-bordered bg-white" %>
+        <% if resource.errors[:name].any? %>
+          <% resource.errors[:name]&.each do |message| %>
+            <p class="text-red-600 text-xs mt-1 ml-1"><%= t('.name') %><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
 
       <div class="form-control mb-4">
-        <%= f.label :email, "メールアドレス", class: "label-text mb-1" %>
+        <%= f.label :email, class: "label-text mb-1" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
+        <% if resource.errors[:email].any? %>
+          <% resource.errors[:email]&.each do |message| %>
+            <p class="text-red-600 text-xs mt-1 ml-1"><%= t('.email') %><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
 
       <div class="form-control mb-4">
-        <%= f.label :password, "パスワード", class: "label-text mb-1" %>
+        <%= f.label :password, class: "label-text mb-1" %>
         <% if @minimum_password_length %>
-          <span class="text-xs text-neutral mb-1">(<%= @minimum_password_length %> 文字以上)</span>
+          <span class="text-xs mb-1">(<%= @minimum_password_length %> 文字以上)</span>
         <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white" %>
+        <% if resource.errors[:password].any? %>
+          <% resource.errors[:password]&.each do |message| %>
+            <p class="text-red-600 text-xs mt-1 ml-1"><%= t('.password') %><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
 
       <div class="form-control mb-6">
-        <%= f.label :password_confirmation, "パスワード確認", class: "label-text mb-1" %>
+        <%= f.label :password_confirmation, class: "label-text mb-1" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered bg-white" %>
+        <% if resource.errors[:password_confirmation].any? %>
+          <% resource.errors[:password_confirmation]&.each do |message| %>
+            <p class="text-red-600 text-xs mt-1 ml-1"><%= t('.password_confirmation') %><%= message %></p>
+          <% end %>
+        <% end %>
       </div>
       <br>
 
