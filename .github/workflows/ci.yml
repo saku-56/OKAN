@@ -107,7 +107,7 @@ jobs:
         run: bundle exec rails assets:precompile
 
       - name: Set up Database
-        run:
+        run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load
 
