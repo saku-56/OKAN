@@ -39,8 +39,15 @@ RSpec.describe 'UserProfiles', type: :system do
         fill_in '現在のパスワード', with: 'password'
         click_button '変更する'
 
-        expect(page).to have_content('アカウント情報を変更しました。')
-      end
+        # Turboの処理完了を待つ
+        expect(page).to have_no_css('.turbo-progress-bar', wait: 10)
+
+        # ページ遷移の完了を確認
+        expect(page).to have_current_path(edit_user_registration_path, wait: 10)
+
+        # フラッシュメッセージの表示を確認
+        expect(page).to have_content('アカウント情報を変更しました。', wait: 10)
+        end
 
       it '変更が反映されている' do
         fill_in '名前', with: '変更後の名前'
