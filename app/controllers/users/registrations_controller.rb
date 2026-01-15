@@ -37,6 +37,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
 
   protected
 
