@@ -65,12 +65,9 @@
         <%= f.submit "変更する", class: "btn btn-secondary flex-1" %>
         <%= link_to "戻る", home_path, class: "btn btn-neutral flex-1" %>
       </div>
-      <div class="text-center gap-4 mt-10">
-        <%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: t('.cancel_confirmation'), turbo_confirm: t('.cancel_confirmation') }, method: :delete, class: "btn btn-error text-black" %>
-      </div>
     <% end %>
     <div class="text-center gap-4 mt-10">
-      <%= button_to "アカウント削除", registration_path(resource_name), method: :delete, data: { confirm: t('.cancel_confirmation'), turbo_confirm: t('.cancel_confirmation') }, class: "btn btn-error text-black" %>
+      <%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: t('.cancel_confirmation'), turbo_confirm: t('.cancel_confirmation') }, method: :delete, class: "btn btn-error text-black" %>
     </div>
     <br>
   </div>
