@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'UserProfiles', type: :system do
+RSpec.describe 'UserEditResistrations', type: :system do
   let(:user) { create(:user, name: '元の名前', email: 'original@example.com', password: 'password') }
   let(:other_user) { create(:user) }
 
