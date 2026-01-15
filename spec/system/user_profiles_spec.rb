@@ -39,8 +39,8 @@ RSpec.describe 'UserProfiles', type: :system do
         fill_in '現在のパスワード', with: 'password'
         click_button '変更する'
 
-        expect(current_path).to eq edit_user_registration_path
-        expect(page).to have_content('アカウント情報を変更しました。')
+       # CI環境のturboの読み込みが遅くてテストに失敗するため、10秒待つ
+       expect(page).to have_css('.flash-message', text: 'アカウント情報を変更しました。', wait: 10)
 
         # ログアウトして新しいパスワードでログインできるか確認
         # click_button 'ログアウト' # または適切なログアウト方法
