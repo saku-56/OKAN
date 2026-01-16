@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UserSessions", type: :system do
+RSpec.describe 'UserSessions', type: :system do
   let(:user) { create(:user) }
 
   describe 'ログイン前' do
@@ -10,7 +10,7 @@ RSpec.describe "UserSessions", type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: 'password'
         click_button 'ログイン'
-        expect(page).to have_content 'ログインしました。'
+        expect(page).to have_content ('ログインしました。')
         expect(current_path).to eq home_path
       end
     end
