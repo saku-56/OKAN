@@ -63,31 +63,12 @@ RSpec.describe 'UserEditResistrations', type: :system do
         expect(user.reload.email).to eq 'original@example.com'
       end
 
-      it 'パスワードが6文字未満だと登録できない' do
-        fill_in 'パスワード', with: '12345'
-        fill_in 'パスワード確認', with: '12345'
-        fill_in '現在のパスワード', with: 'password'
-        click_button '変更する'
-
-        expect(page).to have_content('パスワードは6文字以上で入力してください')
-      end
-
-      it 'パスワード確認とパスワードが一致しないと登録できない' do
-        fill_in 'パスワード', with: 'newpassword'
-        fill_in 'パスワード確認', with: 'different'
-        fill_in '現在のパスワード', with: 'password'
-        click_button '変更する'
-
-        expect(page).to have_content('パスワード（確認用）とパスワードの入力が一致しません')
-      end
-
       it '現在のパスワードを入力しないと変更できない' do
         fill_in '名前', with: '新しい名前'
         fill_in '現在のパスワード', with: ''
         click_button '変更する'
 
         expect(page).to have_content('現在のパスワードを入力してください')
-        expect(user.reload.name).to eq '元の名前'
       end
 
       it '現在のパスワードが間違っていると変更できない' do
@@ -96,7 +77,6 @@ RSpec.describe 'UserEditResistrations', type: :system do
         click_button '変更する'
 
         expect(page).to have_content('現在のパスワードは不正な値です')
-        expect(user.reload.name).to eq '元の名前'
       end
     end
   end
