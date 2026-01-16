@@ -25,7 +25,11 @@ RSpec.describe 'UserSessions', type: :system do
     context 'ログアウトボタンをクリック' do
       it 'ログアウト処理が成功する' do
         visit edit_user_registration_path
-        click_link 'ログアウト'
+
+        accept_confirm do
+          click_link 'ログアウト'
+        end
+
         expect(page).to have_content('ログアウトしました。')
         expect(current_path).to eq root_path
       end
