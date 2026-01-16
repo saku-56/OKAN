@@ -78,7 +78,7 @@ RSpec.describe 'UserEditRegistrations', type: :system do
     it 'アカウント削除が成功する', js: true do
         # 確認ダイアログを自動的にOKにする
         accept_confirm do
-        click_button 'アカウント削除'
+          click_link 'アカウント削除'
         end
 
         expect(page).to have_content('アカウントを削除しました。またのご利用をお待ちしております。')
@@ -90,7 +90,7 @@ RSpec.describe 'UserEditRegistrations', type: :system do
         deleted_password = 'password'
 
         accept_confirm do
-        click_button 'アカウント削除'
+        click_link 'アカウント削除'
         end
 
         # 削除されたユーザーでログインを試みる

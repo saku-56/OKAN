@@ -51,6 +51,7 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         current_password: "現在のパスワード"
+        logout_confirmation: "ログアウトしますか？"
         cancel_confirmation: 'アカウントを本当に削除しますか？'
     sessions:
       signed_in: 'ログインしました。'
