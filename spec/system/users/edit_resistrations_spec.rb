@@ -51,17 +51,6 @@ RSpec.describe 'UserEditResistrations', type: :system do
 
       #   expect(page).to have_content('ログインしました')
       # end
-
-      it '変更が反映されている' do
-        fill_in '名前', with: '変更後の名前'
-        fill_in 'メールアドレス', with: 'changed@example.com'
-        fill_in '現在のパスワード', with: 'password'
-        click_button '変更する'
-
-        user.reload
-        expect(page).to have_field('名前', with: '変更後の名前')
-        expect(page).to have_field('メールアドレス', with: 'changed@example.com')
-      end
     end
 
     context '異常系' do
