@@ -116,8 +116,9 @@ jobs:
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4 # ファイルをGitHub Actions上に保存
-        if: failure()
+        if: always()
         with:
           name: screenshots
           path: tmp/capybara
           if-no-files-found: ignore
+          retention-days: 7 # 保存期間を7日間に設定
