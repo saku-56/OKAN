@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :user_medicines do
     collection do
       get :select_medicine
+      get :autocomplete
     end
     member do
       get :add_stock
