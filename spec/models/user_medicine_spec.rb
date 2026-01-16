@@ -14,13 +14,13 @@ RSpec.describe UserMedicine, type: :model do
       it 'medicine_nameがない場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, medicine_name: nil)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:medicine_name]).to include("を入力してください")
+        expect(user_medicine.errors[:medicine_name]).to include('を入力してください')
       end
 
       it 'medicine_nameが空文字の場合にバリデーションが機能してinvalidになるか' do
-        user_medicine = build(:user_medicine, user: user, medicine_name: "")
+        user_medicine = build(:user_medicine, user: user, medicine_name: '')
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:medicine_name]).to include("を入力してください")
+        expect(user_medicine.errors[:medicine_name]).to include('を入力してください')
       end
     end
 
@@ -28,25 +28,25 @@ RSpec.describe UserMedicine, type: :model do
       it 'dosage_per_timeがない場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, dosage_per_time: nil)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:dosage_per_time]).to include("を入力してください")
+        expect(user_medicine.errors[:dosage_per_time]).to include('を入力してください')
       end
 
       it 'dosage_per_timeが整数でない場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, dosage_per_time: 1.5)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:dosage_per_time]).to include("は整数で入力してください")
+        expect(user_medicine.errors[:dosage_per_time]).to include('は整数で入力してください')
       end
 
       it 'dosage_per_timeが0の場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, dosage_per_time: 0)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:dosage_per_time]).to include("は1以上の値にしてください")
+        expect(user_medicine.errors[:dosage_per_time]).to include('は1以上の値にしてください')
       end
 
       it 'dosage_per_timeが負の数の場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, dosage_per_time: -1)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:dosage_per_time]).to include("は1以上の値にしてください")
+        expect(user_medicine.errors[:dosage_per_time]).to include('は1以上の値にしてください')
       end
 
       it 'dosage_per_timeが1の場合にvalidになるか' do
@@ -59,25 +59,25 @@ RSpec.describe UserMedicine, type: :model do
       it 'prescribed_amountがない場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, prescribed_amount: nil)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:prescribed_amount]).to include("を入力してください")
+        expect(user_medicine.errors[:prescribed_amount]).to include('を入力してください')
       end
 
       it 'prescribed_amountが整数でない場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, prescribed_amount: 10.5)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:prescribed_amount]).to include("は整数で入力してください")
+        expect(user_medicine.errors[:prescribed_amount]).to include('は整数で入力してください')
       end
 
       it 'prescribed_amountが0の場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, prescribed_amount: 0)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:prescribed_amount]).to include("は1以上の値にしてください")
+        expect(user_medicine.errors[:prescribed_amount]).to include('は1以上の値にしてください')
       end
 
       it 'prescribed_amountが負の数の場合にバリデーションが機能してinvalidになるか' do
         user_medicine = build(:user_medicine, user: user, prescribed_amount: -10)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:prescribed_amount]).to include("は1以上の値にしてください")
+        expect(user_medicine.errors[:prescribed_amount]).to include('は1以上の値にしてください')
       end
 
       it 'prescribed_amountが1の場合にvalidになるか' do
@@ -92,7 +92,7 @@ RSpec.describe UserMedicine, type: :model do
         create(:user_medicine, user: user, uuid: uuid)
         user_medicine = build(:user_medicine, user: user, uuid: uuid)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:uuid]).to include("はすでに存在します")
+        expect(user_medicine.errors[:uuid]).to include('はすでに存在します')
       end
 
       it 'uuidが被らない場合はvalidになるか' do
