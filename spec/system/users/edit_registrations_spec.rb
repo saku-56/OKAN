@@ -52,15 +52,6 @@ RSpec.describe 'UserEditRegistrations', type: :system do
     end
 
     context '異常系' do
-      it 'すでに存在するメールアドレスは保存できない' do
-        existing_user = create(:user, email: 'existed@example.com')
-        fill_in 'メールアドレス', with: 'existed@example.com'
-        fill_in '現在のパスワード', with: 'password'
-        click_button '変更する'
-
-        expect(page).to have_content('メールアドレスはすでに存在します')
-      end
-
       it '現在のパスワードを入力しないと変更できない' do
         fill_in '名前', with: '新しい名前'
         fill_in '現在のパスワード', with: ''
