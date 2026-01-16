@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'UserEditResistrations', type: :system do
   let(:user) { create(:user, name: '元の名前', email: 'original@example.com', password: 'password') }
-  let(:other_user) { create(:user) }
+  let!(:other_user) { create(:user) }
 
   before do
     # ログインヘルパーを使用（login_asメソッドがあると仮定）
