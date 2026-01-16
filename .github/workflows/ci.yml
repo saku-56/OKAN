@@ -113,7 +113,6 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec
-        continue-on-error: true # エラーになっても処理を継続
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4 # ファイルをGitHub Actions上に保存
