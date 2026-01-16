@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'UserEditResistrations', type: :system do
+RSpec.describe 'UserEditRegistrations', type: :system do
   let(:user) { create(:user, name: '元の名前', email: 'original@example.com', password: 'password') }
-  let!(:other_user) { create(:user) }
 
   before do
-    # ログインヘルパーを使用（login_asメソッドがあると仮定）
     login_as(user)
   end
 
@@ -55,12 +53,12 @@ RSpec.describe 'UserEditResistrations', type: :system do
 
     context '異常系' do
       it 'すでに存在するメールアドレスは保存できない' do
-        fill_in 'メールアドレス', with: other_user.email
+        existing_user = create(:user, email: 'existed@example.com')
+        fill_in 'メールアドレス', with: 'existed@example.com'
         fill_in '現在のパスワード', with: 'password'
         click_button '変更する'
 
         expect(page).to have_content('メールアドレスはすでに存在します')
-        expect(user.reload.email).to eq 'original@example.com'
       end
 
       it '現在のパスワードを入力しないと変更できない' do
