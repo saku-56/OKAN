@@ -34,28 +34,7 @@ RSpec.describe "UserMedicines", type: :system do
           visit user_medicines_path
           expect(page).to have_content 'aaa'
           expect(page).to have_content '1回の服薬量：1錠'
-          expect(page).to have_content '詳細'
-        end
-      end
-    end
-
-    describe '薬選択画面表示' do
-      context '登録が登録されている場合' do
-        let!(:user_medicine) { create(:user_medicine, user: user, medicine_name: 'aaa', current_stock: 5, dosage_per_time: 1) }
-
-        it '登録した薬が表示される' do
-          visit select_medicine_user_medicines_path
-          expect(page).to have_content 'aaa'
-          expect(page).to have_content '1回の服薬量：1錠'
           expect(page).to have_content '選択'
-          expect(page).to have_content '新規登録'
-        end
-
-        it '選択ボタンを押すと薬名、1回の服薬量、現在の在庫が表示されている' do
-          visit add_stock_user_medicine_path(user_medicine)
-          expect(page).to have_content 'aaa'
-          expect(page).to have_content '1 錠'
-          expect(page).to have_content '5 錠'
         end
       end
     end

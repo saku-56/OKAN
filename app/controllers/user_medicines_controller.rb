@@ -20,11 +20,6 @@ class UserMedicinesController < ApplicationController
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
   end
 
-  # 薬選択画面
-  def select_medicine
-    @user_medicine = current_user.user_medicines
-  end
-
   def new
     @user_medicine = UserMedicine.new
   end
