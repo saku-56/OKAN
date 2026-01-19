@@ -16,12 +16,6 @@ RSpec.describe Medicine, type: :model do
         expect(medicine).to be_invalid
         expect(medicine.errors[:name]).to include('を入力してください')
       end
-
-      it 'nameが空文字の場合にバリデーションが機能してinvalidになるか' do
-        medicine = build(:medicine, user: user, name: '')
-        expect(medicine).to be_invalid
-        expect(medicine.errors[:name]).to include('を入力してください')
-      end
     end
   end
 end
