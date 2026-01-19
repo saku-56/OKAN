@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_09_031434) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_18_235423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "medicines", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "name"], name: "index_medicines_on_user_id_and_name", unique: true
+    t.index ["user_id"], name: "index_medicines_on_user_id"
+  end
 
   create_table "user_medicines", force: :cascade do |t|
     t.integer "prescribed_amount", null: false
@@ -21,10 +30,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_09_031434) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_regular", default: true
-    t.string "medicine_name", null: false
     t.integer "dosage_per_time", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.bigint "medicine_id", null: false
+    t.index ["medicine_id"], name: "index_user_medicines_on_medicine_id"
+    t.index ["user_id", "medicine_id"], name: "index_user_medicines_on_user_id_and_medicine_id", unique: true
     t.index ["user_id"], name: "index_user_medicines_on_user_id"
     t.index ["uuid"], name: "index_user_medicines_on_uuid", unique: true
   end
@@ -44,5 +54,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_09_031434) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
+  add_foreign_key "medicines", "users"
+  add_foreign_key "user_medicines", "medicines"
   add_foreign_key "user_medicines", "users"
 end
