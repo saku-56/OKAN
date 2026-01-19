@@ -7,10 +7,21 @@
         <%= form_with model: @form, url: user_medicines_path do |f| %>
           <%= render 'shared/error_messages', object: @form %>
 
-          <div class="mb-4">
+          <div class="mb-4" data-controller="autocomplete">
             <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
-            <div class="flex items-center">
-              <%= f.text_field :medicine_name, class: "form-control flex-1 border border-gray-300 rounded px-3 py-2" %>
+            <div class="relative">
+            <!-- input ターゲット -->
+              <%= f.text_field :medicine_name,
+                  class: "form-control flex-1 border border-gray-300 rounded px-3 py-2 w-full",
+                  autocomplete: "off",
+                  data: {
+                    autocomplete_target: "input",
+                    action: "input->autocomplete#search"
+                  } %>
+              <!-- results ターゲット -->
+              <div data-autocomplete-target="results"
+                  class="absolute z-10 w-full bg-white border border-gray-300 rounded mt-1">
+              </div>
             </div>
           </div>
 

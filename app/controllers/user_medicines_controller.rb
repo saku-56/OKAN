@@ -7,10 +7,10 @@ class UserMedicinesController < ApplicationController
     query = params[:query]
 
     # 自分が過去に入力した薬名のみを取得
-    suggestions = current_user.user_medicines
-                               .where("medicine_name LIKE ?", "#{query}%")
+    suggestions = current_user.medicines
+                               .where("name LIKE ?", "#{query}%")
                                .distinct
-                               .pluck(:medicine_name)
+                               .pluck(:name)
                                .first(10)
     # 配列をJSON形式に変換してブラウザに返す
     render json: suggestions
