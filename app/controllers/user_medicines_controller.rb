@@ -21,18 +21,19 @@ class UserMedicinesController < ApplicationController
   end
 
   def new
-    @user_medicine = UserMedicine.new
+    @form = UserMedicineForm.new
   end
 
   def create
-    @user_medicine = current_user.user_medicines.build(user_medicine_params)
-    @user_medicine.current_stock = @user_medicine.initial_stock_on_create
+    @form = UserMedicineForm.new(
+      user_medicine_form_params.merge(user: current_user)
+    )
 
-      if @user_medicine.save
-        redirect_to user_medicines_path, notice: "薬を登録しました"
-      else
-        render :new, status: :unprocessable_entity
-      end
+    if @form.save
+      redirect_to user_medicines_path, notice: "薬を登録しました"
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def add_stock
@@ -45,7 +46,7 @@ class UserMedicinesController < ApplicationController
     # 元の在庫量を保存
     original_stock = @user_medicine.current_stock
 
-    # フォームから送信された値をモデルに代入
+    # フォームから送信された値をモデルに代入(空で入力するとバリデーションエラーに引っ掛けるため)
     @user_medicine.assign_attributes(user_medicine_params)
 
     # バリデーションチェック
@@ -68,10 +69,17 @@ class UserMedicinesController < ApplicationController
 
   private
 
-  def user_medicine_params
-    params.require(:user_medicine).permit(
+  def user_medicine_form_params
+    params.require(:user_medicine_form).permit(
       :medicine_name,
       :dosage_per_time,
+      :prescribed_amount,
+      :date_of_prescription
+    )
+  end
+
+  def user_medicine_params
+    params.require(:user_medicine).permit(
       :prescribed_amount,
       :date_of_prescription
     )
