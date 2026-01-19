@@ -11,7 +11,7 @@
         <tbody>
           <% @medicines_with_stock.each do |user_medicine| %>
             <tr class="border-b">
-              <td class="px-6 py-4"><%= user_medicine.medicine_name %></td>
+              <td class="px-6 py-4"><%= user_medicine.medicine.name %></td>
               <td class="px-6 py-4 text-right">残り<%= user_medicine.current_stock %>錠</td>
             </tr>
           <% end %>
@@ -34,7 +34,7 @@
         <% stock = medicine.stock_on(date) %>
         <% if stock == 10 %>
           <span class="block text-xs text-error">
-            <%= medicine.medicine_name %>：残り10錠
+            <%= medicine.medicine.name %>：残り10錠
           </span>
         <% end %>
       <% end %>
