@@ -1,7 +1,9 @@
 class UserMedicine < ApplicationRecord
   belongs_to :user
+  # UserMedicineはMedicineに属している
+  belongs_to :medicine
 
-  validates :medicine_name, presence: true
+  validates :medicine_id, uniqueness: { scope: :user_id }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   # validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
