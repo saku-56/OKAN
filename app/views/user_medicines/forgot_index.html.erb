@@ -10,10 +10,13 @@
             </div>
             <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
           </div>
-            <%= link_to "飲み忘れ",
-                confirm_increment_user_medicine_path(user_medicine),
-                data: { turbo_frame: "modal" },
-                class: "btn btn-primary" %>
+            <%= button_to "飲み忘れ",
+                increment_stock_user_medicine_path(user_medicine),
+                method: :patch,
+                data: {
+                  turbo_confirm: "#{user_medicine.medicine.name}は現在残り#{user_medicine.current_stock}錠です。1回分増やしますか？"
+                },
+                class: "btn btn-secondary" %>
         </div>
       <% end %>
     <% else %>
@@ -21,4 +24,3 @@
     <% end %>
   </div>
 </div>
-
