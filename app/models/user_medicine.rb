@@ -1,7 +1,9 @@
 class UserMedicine < ApplicationRecord
   belongs_to :user
+  # UserMedicineはMedicineに属している
+  belongs_to :medicine
 
-  validates :medicine_name, presence: true
+  validates :medicine_id, uniqueness: { scope: :user_id }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   # validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
@@ -9,10 +11,6 @@ class UserMedicine < ApplicationRecord
   validate :date_of_prescription_cannot_be_in_future
   validates :uuid, uniqueness: true
 
-  # いつもの薬リストに表示する薬を取得
-  scope :regular_medicines, -> { where(is_regular: true) }
-  # 単発の薬を取得(本リリースで使用予定)
-  scope :temporary_medicines, -> { where(is_regular: false) }
   scope :with_current_stock, -> { where("current_stock > 0").order(created_at: :asc) }
 
   # カレンダーの日付を押した時の予想在庫数計算

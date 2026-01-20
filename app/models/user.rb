@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :uuid, uniqueness: true
 
   has_many :user_medicines, dependent: :destroy
+  has_many :medicines, dependent: :destroy
 
   # URLでuuidを使用するための設定
   def to_param

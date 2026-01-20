@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe UserMedicine, type: :model do
   describe 'バリデーションチェック' do
     let(:user) { create(:user) }
+    let(:medicine) { create(:medicine) }
 
     it '設定したすべてのバリデーションが機能しているか' do
       user_medicine = build(:user_medicine, user: user)
@@ -10,17 +11,11 @@ RSpec.describe UserMedicine, type: :model do
       expect(user_medicine.errors).to be_empty
     end
 
-    describe 'medicine_name' do
-      it 'medicine_nameがない場合にバリデーションが機能してinvalidになるか' do
-        user_medicine = build(:user_medicine, user: user, medicine_name: nil)
+    describe 'medicine_id' do
+      it 'medicine_idがない場合にバリデーションが機能してinvalidになるか' do
+        user_medicine = build(:user_medicine, user: user, medicine: nil)
         expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:medicine_name]).to include('を入力してください')
-      end
-
-      it 'medicine_nameが空文字の場合にバリデーションが機能してinvalidになるか' do
-        user_medicine = build(:user_medicine, user: user, medicine_name: '')
-        expect(user_medicine).to be_invalid
-        expect(user_medicine.errors[:medicine_name]).to include('を入力してください')
+        expect(user_medicine.errors[:medicine]).to include('を入力してください')
       end
     end
 
@@ -89,15 +84,17 @@ RSpec.describe UserMedicine, type: :model do
     describe 'uuid' do
       it 'uuidが被った場合にuniqueのバリデーションが機能してinvalidになるか' do
         uuid = SecureRandom.uuid
-        create(:user_medicine, user: user, uuid: uuid)
-        user_medicine = build(:user_medicine, user: user, uuid: uuid)
+        create(:user_medicine, user: user, medicine: medicine, uuid: uuid)
+        user_medicine = build(:user_medicine, user: user, medicine: medicine, uuid: uuid)
         expect(user_medicine).to be_invalid
         expect(user_medicine.errors[:uuid]).to include('はすでに存在します')
       end
 
       it 'uuidが被らない場合はvalidになるか' do
-        create(:user_medicine, user: user)
-        user_medicine = build(:user_medicine, user: user)
+        medicine1 = create(:medicine, user: user)
+        medicine2 = create(:medicine, user: user)
+        create(:user_medicine, user: user, medicine: medicine1)
+        user_medicine = build(:user_medicine, user: user, medicine: medicine2)
         expect(user_medicine).to be_valid
       end
     end
@@ -129,19 +126,15 @@ RSpec.describe UserMedicine, type: :model do
 
   describe 'カラムのデフォルト値' do
     let(:user) { create(:user) }
+    let(:medicine) { create(:medicine) }
 
     it 'current_stockのデフォルト値が0であること' do
       user_medicine = UserMedicine.new(user: user)
       expect(user_medicine.current_stock).to eq(0)
     end
 
-    it 'is_regularのデフォルト値がtrueであること' do
-      user_medicine = UserMedicine.new(user: user)
-      expect(user_medicine.is_regular).to eq(true)
-    end
-
     it 'uuidが自動生成されること' do
-      user_medicine = create(:user_medicine, user: user)
+      user_medicine = create(:user_medicine, user: user, medicine: medicine)
       expect(user_medicine.uuid).to be_present
     end
   end
@@ -150,6 +143,11 @@ RSpec.describe UserMedicine, type: :model do
     it 'userに属していること' do
       association = described_class.reflect_on_association(:user)
       expect(association.macro).to eq(:belongs_to)
+    end
+
+    it 'Medicineと関連していること' do
+      association = described_class.reflect_on_association(:medicine)
+      expect(association.macro).to eq :belongs_to
     end
   end
 end

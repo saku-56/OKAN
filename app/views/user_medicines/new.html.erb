@@ -4,15 +4,15 @@
       <h1 class="font-bold text-4xl text-center mb-6">新規登録</h1>
 
       <div class="bg-white rounded-lg shadow p-6">
-        <%= form_with(model: @user_medicine) do |f| %>
-          <%= render 'shared/error_messages', object: f.object %>
+        <%= form_with model: @form, url: user_medicines_path do |f| %>
+          <%= render 'shared/error_messages', object: @form %>
 
           <div class="mb-4" data-controller="autocomplete">
             <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
             <div class="relative">
-              <!-- input ターゲット -->
+            <!-- input ターゲット -->
               <%= f.text_field :medicine_name,
-                  class: "flex-1 border border-gray-300 rounded px-3 py-2 w-full",
+                  class: "form-control flex-1 border border-gray-300 rounded px-3 py-2 w-full",
                   autocomplete: "off",
                   data: {
                     autocomplete_target: "input",
