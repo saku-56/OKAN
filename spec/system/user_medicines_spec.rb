@@ -28,11 +28,17 @@ RSpec.describe "UserMedicines", type: :system do
       end
 
       context '薬が登録されている場合' do
-        let!(:user_medicine) { create(:user_medicine, user: user, medicine_name: 'aaa', current_stock: 5, dosage_per_time: 1) }
+        let!(:medicine) { create(:medicine, name: 'テスト薬A') }
+        let!(:user_medicine) do
+         create(:user_medicine,
+                 user: user,
+                 medicine: medicine,
+                dosage_per_time: 1)
+        end
 
         it '登録した薬が表示される' do
           visit user_medicines_path
-          expect(page).to have_content 'aaa'
+          expect(page).to have_content 'テスト薬A'
           expect(page).to have_content '1回の服薬量：1錠'
           expect(page).to have_content '選択'
         end
@@ -43,19 +49,21 @@ RSpec.describe "UserMedicines", type: :system do
       context 'フォームの入力値が正常' do
         it '薬の新規作成が成功する' do
           visit new_user_medicine_path
-          fill_in '薬名', with: 'aaa'
+          fill_in '薬名', with: '新しい薬'
           fill_in '1回の服薬量', with: '1'
           fill_in '処方量', with: '30'
           fill_in '処方日', with: Date.current
           click_button '薬を追加'
           expect(page).to have_content '薬を登録しました'
           expect(current_path).to eq user_medicines_path
+          expect(page).to have_content '新しい薬'
         end
       end
     end
 
     describe '薬の在庫追加' do
-      let!(:user_medicine) { create(:user_medicine, user: user, medicine_name: '風邪薬', current_stock: 5, dosage_per_time: 1) }
+       let!(:medicine) { create(:medicine) }
+      let!(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 5, dosage_per_time: 1) }
       context 'フォームの入力値が正常' do
         it '薬の在庫追加が成功する' do
           visit add_stock_user_medicine_path(user_medicine)
@@ -76,7 +84,7 @@ RSpec.describe "UserMedicines", type: :system do
       end
 
       it '登録した全ての項目が表示されること' do
-        expect(page).to have_content(user_medicine.medicine_name)
+        expect(page).to have_content(user_medicine.medicine.name)
         expect(page).to have_content(user_medicine.dosage_per_time)
         expect(page).to have_content(user_medicine.prescribed_amount)
         expect(page).to have_content(user_medicine.date_of_prescription)
