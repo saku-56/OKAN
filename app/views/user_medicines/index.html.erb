@@ -1,28 +1,27 @@
 <div class="container mx-auto px-4 py-8">
   <h1 class="font-bold text-4xl text-center mb-6">薬一覧</h1>
-    <div class="bg-white rounded-lg shadow mb-6">
-      <%if @user_medicine.any? %>
-        <% @user_medicine.each do |user_medicine| %>
-          <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-semibold text-lg"><%= user_medicine.medicine.name %></h3>
-                <% if user_medicine.current_stock > 0 %>
-                  <span class="bg-red-100 text-red-600 text-xs font-medium px-2 py-0.5 rounded">服薬中</span>
-                <% end %>
-              </div>
-              <p class="text-gray-600">1回の服薬量：<%= user_medicine.dosage_per_time %>錠</p>
+  <div class="bg-white rounded-lg shadow mb-6">
+    <%if @user_medicine.any? %>
+      <% @user_medicine.each do |user_medicine| %>
+        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold text-lg"><%= user_medicine.medicine.name %></h3>
+              <% if user_medicine.current_stock > 0 %>
+                <span class="bg-red-100 text-red-600 text-xs font-medium px-2 py-0.5 rounded">服薬中</span>
+              <% end %>
             </div>
-            <%= link_to "選択", user_medicine_path(user_medicine), class: "px-4 py-2 btn btn-primary" %>
+            <p class="text-gray-600">1回の服薬量：<%= user_medicine.dosage_per_time %>錠</p>
           </div>
-        <% end %>
-      <% else %>
-        <p class="text-center py-8">現在、薬はありません</p>
+          <%= link_to "選択", user_medicine_path(user_medicine), class: "px-4 py-2 btn btn-primary" %>
+        </div>
       <% end %>
-    </div>
+    <% else %>
+      <p class="text-center py-8">現在、薬はありません</p>
+    <% end %>
+   </div>
 
-    <div class="actions text-center">
-        <%= link_to "新規登録", new_user_medicine_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
-    </div>
+  <div class="actions text-center">
+    <%= link_to "新規登録", new_user_medicine_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
   </div>
 </div>
