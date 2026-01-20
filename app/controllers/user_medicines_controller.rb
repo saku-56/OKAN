@@ -65,16 +65,12 @@ class UserMedicinesController < ApplicationController
     @medicines_with_stock = current_user.user_medicines.with_current_stock
   end
 
-  def confirm_increment
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
-    render partial: "confirm_increment", locals: { user_medicine: @user_medicine }
-  end
 
   def increment_stock
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
 
     if @user_medicine.increment_stock
-      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回の服薬量分増やしました"
+      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回の服薬量分増やしました。"
     else
       render :forgot_index, status: :unprocessable_entity
     end
