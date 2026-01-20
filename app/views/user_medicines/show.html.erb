@@ -42,19 +42,20 @@
           <div class="flex gap-10">
             <%= button_to "在庫を追加",
                 add_stock_user_medicine_path(@user_medicine),
-                method: :get,  # ← GETリクエスト
+                method: :get,
                 form: { class: "flex-1" },
                 class: "btn btn-primary w-full" %>
-
-            <%= button_to "飲み忘れ",
-                increment_stock_user_medicine_path(@user_medicine),
-                method: :patch,
-                data: {
+            <% if @user_medicine.current_stock > 0 %>
+              <%= button_to "飲み忘れ",
+                  increment_stock_user_medicine_path(@user_medicine),
+                  method: :patch,
+                  data: {
                     turbo_confirm: "#{@user_medicine.medicine.name}は現在残り#{@user_medicine.current_stock}錠です。1回分増やしますか？"
-                },
-                form: { class: "flex-1" },
-                class: "btn btn-secondary w-full" %>
-            </div>
+                  },
+                  form: { class: "flex-1" },
+                  class: "btn btn-secondary w-full" %>
+            <% end %>
+          </div>
 
           <div class="flex gap-10 mt-10">
             <%= link_to "削除", user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?" }, class: "btn btn-error flex-1 ml-10" %>
