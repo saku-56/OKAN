@@ -61,6 +61,13 @@ class UserMedicinesController < ApplicationController
     end
   end
 
+  def forgot_index
+    @medicines_with_stock = current_user.user_medicines.with_current_stock
+  end
+
+  def increment_stock
+  end
+
   def destroy
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
     @user_medicine.destroy

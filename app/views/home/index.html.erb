@@ -41,8 +41,9 @@
     <% end %>
   </div>
 
-  <div class="actions text-center">
-    <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary" %>
+  <div class="flex gap-4">
+    <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
+    <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
   </div>
 
   <!-- モーダル枠 -->
