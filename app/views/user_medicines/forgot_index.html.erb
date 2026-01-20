@@ -8,9 +8,12 @@
             <div class="flex items-center gap-2">
               <h3 class="font-semibold text-lg"><%= user_medicine.medicine.name %></h3>
             </div>
-            <p class="text-gray-600">1残り<%= user_medicine.current_stock %>錠</p>
+            <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
           </div>
-          <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "px-4 py-2 btn btn-primary" %>
+            <%= link_to "飲み忘れ",
+                confirm_increment_user_medicine_path(user_medicine),
+                data: { turbo_frame: "modal" },
+                class: "btn btn-primary" %>
         </div>
       <% end %>
     <% else %>
@@ -18,3 +21,4 @@
     <% end %>
   </div>
 </div>
+

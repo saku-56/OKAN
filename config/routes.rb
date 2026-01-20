@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     member do
       get :add_stock
       patch :update_stock
+      get :confirm_increment
+      patch :increment_stock
     end
   end
 

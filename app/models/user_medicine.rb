@@ -34,6 +34,11 @@ class UserMedicine < ApplicationRecord
     uuid
   end
 
+
+  def increment_stock
+    update!(current_stock: current_stock + dosage_per_time)
+  end
+
   private
 
   def date_of_prescription_cannot_be_in_future
