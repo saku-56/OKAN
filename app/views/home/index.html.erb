@@ -45,3 +45,11 @@
     <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
     <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
   </div>
+
+<!-- モーダル枠 -->
+  <turbo-frame id="stock_modal">
+    <% if params[:date].present? %>
+      <%= render "stock_modal" %>
+    <% end %>
+  </turbo-frame>
+</div>
