@@ -61,6 +61,20 @@ class UserMedicinesController < ApplicationController
     end
   end
 
+  def forgot_index
+    @medicines_with_stock = current_user.user_medicines.has_stock
+  end
+
+  def increment_stock
+    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
+
+    if @user_medicine.increment_stock
+      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回の服薬量分増やしました。"
+    else
+      render :forgot_index, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
     @user_medicine.destroy

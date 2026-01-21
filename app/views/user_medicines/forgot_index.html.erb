@@ -1,0 +1,26 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="font-bold text-4xl text-center mb-6">飲み忘れ</h1>
+  <div class="bg-white rounded-lg shadow mb-6">
+    <%if @medicines_with_stock.any? %>
+      <% @medicines_with_stock.each do |user_medicine| %>
+        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold text-lg"><%= user_medicine.medicine.name %></h3>
+            </div>
+            <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
+          </div>
+            <%= button_to "飲み忘れ",
+                increment_stock_user_medicine_path(user_medicine),
+                method: :patch,
+                data: {
+                  turbo_confirm: "#{user_medicine.medicine.name}は現在残り#{user_medicine.current_stock}錠です。1回分増やしますか？"
+                },
+                class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center py-8">現在、薬はありません</p>
+    <% end %>
+  </div>
+</div>

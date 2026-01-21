@@ -6,7 +6,7 @@ namespace :medicine_stock do
     success_count = 0
     error_count = 0
 
-    UserMedicine.with_current_stock.find_each do |user_medicine|
+    UserMedicine.has_stock.find_each do |user_medicine|
       before_stock = user_medicine.current_stock
       new_stock = user_medicine.current_stock - user_medicine.dosage_per_time
 

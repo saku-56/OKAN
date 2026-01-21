@@ -1,6 +1,6 @@
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4">
   <div class="medicines-section max-w-4xl mx-auto mb-8">
-    <div class="md:w-2/3 w-full">
+    <div class="w-full">
 
       <div class="bg-white rounded-lg shadow p-6">
         <div class="mb-4">
@@ -39,9 +39,22 @@
         </div>
 
         <div class="space-y-4">
-          <div class="flex gap-4">
-            <%= link_to "在庫を追加", add_stock_user_medicine_path(@user_medicine), class: "btn btn-primary flex-1" %>
-            <%= link_to "飲み忘れ", "#", class: "btn btn-secondary flex-1" %>
+          <div class="flex gap-10">
+            <%= button_to "在庫を追加",
+                add_stock_user_medicine_path(@user_medicine),
+                method: :get,
+                form: { class: "flex-1" },
+                class: "btn btn-primary w-full" %>
+            <% if @user_medicine.has_stock? %>
+              <%= button_to "飲み忘れ",
+                  increment_stock_user_medicine_path(@user_medicine),
+                  method: :patch,
+                  data: {
+                    turbo_confirm: "#{@user_medicine.medicine.name}は現在残り#{@user_medicine.current_stock}錠です。1回分増やしますか？"
+                  },
+                  form: { class: "flex-1" },
+                  class: "btn btn-secondary w-full" %>
+            <% end %>
           </div>
 
           <div class="flex gap-10 mt-10">

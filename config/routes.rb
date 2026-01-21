@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   resources :user_medicines do
     collection do
       get :autocomplete
+      get :forgot_index
     end
     member do
       get :add_stock
       patch :update_stock
+      patch :increment_stock
     end
   end
 
