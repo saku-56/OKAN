@@ -11,7 +11,19 @@ class UserMedicine < ApplicationRecord
   validate :date_of_prescription_cannot_be_in_future
   validates :uuid, uniqueness: true
 
+  # 複数のレコードを絞り込む
+  scope :has_stock, -> { where("current_stock > ?", 0) }
   scope :with_current_stock, -> { where("current_stock > 0").order(created_at: :asc) }
+
+  # 1つのレコードの在庫があるか
+  def has_stock?
+    current_stock > 0
+  end
+
+  # 1つのレコードの在庫がない
+  def out_of_stock?
+    current_stock <= 0
+  end
 
   # カレンダーの日付を押した時の予想在庫数計算
   def stock_on(date)

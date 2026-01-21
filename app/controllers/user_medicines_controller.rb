@@ -62,7 +62,7 @@ class UserMedicinesController < ApplicationController
   end
 
   def forgot_index
-    @medicines_with_stock = current_user.user_medicines.with_current_stock
+    @medicines_with_stock = current_user.user_medicines.has_stock
   end
 
 

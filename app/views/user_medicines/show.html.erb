@@ -45,7 +45,7 @@
                 method: :get,
                 form: { class: "flex-1" },
                 class: "btn btn-primary w-full" %>
-            <% if @user_medicine.current_stock > 0 %>
+            <% if @user_medicine.has_stock? %>
               <%= button_to "飲み忘れ",
                   increment_stock_user_medicine_path(@user_medicine),
                   method: :patch,
