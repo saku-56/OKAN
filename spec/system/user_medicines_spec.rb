@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "UserMedicines", type: :system do
   let(:user) { create(:user) }
+  let(:medicine) { create(:medicine) }
   let(:user_medicine) { create(:user_medicine) }
 
   describe 'ログイン前' do
@@ -90,6 +91,55 @@ RSpec.describe "UserMedicines", type: :system do
         expect(page).to have_content(user_medicine.date_of_prescription)
       end
     end
+
+    describe '薬の飲み忘れ調整機能' do
+      before do
+          visit user_medicine_path(user_medicine)
+      end
+      context '飲み忘れボタンの表示' do
+        context '在庫がある場合' do
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10, dosage_per_time: 2) }
+          it '飲み忘れボタンが表示される' do
+            expect(page).to have_button('飲み忘れ'), '在庫がある場合、飲み忘れボタンが表示されていません'
+          end
+        end
+
+        context '在庫がない場合' do
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0, dosage_per_time: 2) }
+          it '飲み忘れボタンが表示されない' do
+            expect(page).not_to have_button('飲み忘れ'), '在庫がない場合、飲み忘れボタンが表示されています'
+          end
+        end
+      end
+
+      context '飲み忘れボタンを押した場合' do
+        let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10, dosage_per_time: 2) }
+        before do
+          visit user_medicine_path(user_medicine)
+        end
+
+          it '確認ダイアログが表示され、はいを押すと在庫量が1回の服薬量分増える' do
+            accept_confirm do
+              click_button '飲み忘れ'
+            end
+
+            expect(page).to have_content('在庫を1回分増やしました'), 'フラッシュメッセージが表示されていません'
+            expect(page).to have_content('現在の在庫')
+            expect(page).to have_content('12 錠'), '在庫量の表示が正しく増えていません（期待値: 12 錠）'
+            expect(user_medicine.reload.current_stock).to eq(12), 'データベースの在庫量が正しく更新されていません（期待値: 12錠）'
+          end
+
+          it '確認ダイアログでいいえを押すと在庫量が変わらない' do
+            dismiss_confirm do
+              click_button '飲み忘れ'
+            end
+
+            expect(page).to have_content('現在の在庫')
+            expect(page).to have_content('10 錠'), '在庫量の表示が変わってしまっています（期待値: 10 錠）'
+            expect(user_medicine.reload.current_stock).to eq(10), 'データベースの在庫量が変わってしまっています（期待値: 10錠）'
+          end
+        end
+      end
 
     describe '薬の削除' do
       let(:user_medicine) { create(:user_medicine, user: user) }
