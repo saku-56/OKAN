@@ -65,7 +65,6 @@ class UserMedicinesController < ApplicationController
     @medicines_with_stock = current_user.user_medicines.has_stock
   end
 
-
   def increment_stock
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
 

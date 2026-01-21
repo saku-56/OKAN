@@ -13,7 +13,6 @@ class UserMedicine < ApplicationRecord
 
   # 複数のレコードを絞り込む
   scope :has_stock, -> { where("current_stock > ?", 0) }
-  scope :with_current_stock, -> { where("current_stock > 0").order(created_at: :asc) }
 
   # 1つのレコードの在庫があるか
   def has_stock?
