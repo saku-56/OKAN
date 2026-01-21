@@ -19,11 +19,6 @@ class UserMedicine < ApplicationRecord
     current_stock > 0
   end
 
-  # 1つのレコードの在庫がない
-  def out_of_stock?
-    current_stock <= 0
-  end
-
   # カレンダーの日付を押した時の予想在庫数計算
   def stock_on(date)
     days_diff = (date - Date.current).to_i
