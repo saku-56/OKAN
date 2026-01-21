@@ -7,7 +7,7 @@ class UserMedicineForm
   attribute :prescribed_amount, :integer
   attribute :date_of_prescription, :date
 
-  validates :medicine_name, presence: true
+  validates :medicine_name, presence: true, length: { maximum: 20 }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   validates :date_of_prescription, presence: true
