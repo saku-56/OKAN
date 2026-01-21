@@ -14,6 +14,12 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).to include('を入力してください')
     end
 
+    it 'nameが21文字以上の場合にバリデーションが機能してinvalidになるか' do
+        user = build(:user, name: 'a' * 21)
+        expect(user).to be_invalid
+        expect(user.errors[:name]).to include('は20文字以内で入力してください')
+      end
+
     it 'emailがない場合にバリデーションが機能してinvalidになるか' do
       user = build(:user, email: nil)
       expect(user).to be_invalid

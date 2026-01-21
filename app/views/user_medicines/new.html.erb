@@ -28,7 +28,7 @@
           <div class="mb-4">
             <%= f.label :dosage_per_time, "1回の服薬量", class: "block text-sm font-bold mb-2" %>
             <div class="flex items-center">
-              <%= f.number_field :dosage_per_time,
+              <%= f.number_field :dosage_per_time, min: 1,
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
