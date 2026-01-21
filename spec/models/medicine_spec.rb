@@ -16,6 +16,12 @@ RSpec.describe Medicine, type: :model do
         expect(medicine).to be_invalid
         expect(medicine.errors[:name]).to include('を入力してください')
       end
+
+      it 'nameが21文字以上の場合にバリデーションが機能してinvalidになるか' do
+        medicine = build(:medicine, user: user, name: 'a' * 21)
+        expect(medicine).to be_invalid
+        expect(medicine.errors[:name]).to include('は20文字以内で入力してください')
+      end
     end
   end
 end
