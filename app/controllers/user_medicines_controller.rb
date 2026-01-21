@@ -69,7 +69,7 @@ class UserMedicinesController < ApplicationController
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
 
     if @user_medicine.increment_stock
-      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回の服薬量分増やしました。"
+      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回分増やしました。"
     else
       render :forgot_index, status: :unprocessable_entity
     end
