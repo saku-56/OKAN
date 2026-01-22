@@ -10,8 +10,7 @@
     <% elsif @medicines_with_stock.any? %>
       <% @medicines_with_stock.each do |medicine| %>
         <p>
-          <%= medicine.medicine.name %>：
-          残り<%= medicine.stock_on(@date) %> 錠
+          <%= medicine.medicine.name %>：残り<%= medicine.stock_on(@date) %>錠
         </p>
       <% end %>
     <% else %>
