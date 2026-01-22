@@ -31,7 +31,6 @@ RSpec.describe 'カレンダー表示', type: :system do
       before do
         create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user)
       end
-
       context '今日の日付をクリックすると' do
         it '今日の在庫が表示される' do
           click_link href: home_path(date: Date.today)
@@ -58,6 +57,17 @@ RSpec.describe 'カレンダー表示', type: :system do
           expect(page).to have_content('テスト薬A：残り0錠')
         end
       end
+    end
+
+    context 'カレンダー上の警告表示' do
+      before do
+        create(:user_medicine, medicine: medicine2, prescribed_amount: 12, date_of_prescription: Date.yesterday, dosage_per_time: 1, current_stock: 11, user: user)
+	    page.driver.browser.manage.window.resize_to(1200, 1000)
+        visit home_path
+      end
+      it '残り10錠の表示がある' do
+        expect(page).to have_content('テスト薬B10錠')
+       end
     end
   end
 end
