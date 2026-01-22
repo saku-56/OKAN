@@ -11,9 +11,25 @@ RSpec.describe 'カレンダー表示', type: :system do
       visit home_path
     end
 
-    context 'モーダルの表示と操作' do
+    context 'モーダルの表示' do
+      it '薬がない場合、この日は在庫がありませんと表示される' do
+        click_link href: home_path(date: Date.today)
+
+        expect(page).to have_content('この日は在庫がありません。')
+      end
+
+      it 'モーダルの閉じるボタンで元のページに戻る' do
+        click_link href: home_path(date: Date.today)
+
+        click_link '閉じる'
+
+        expect(current_path).to eq(home_path)
+      end
+    end
+
+    context 'モーダルの挙動' do
       before do
-        create(:user_medicine, medicine: medicine1, current_stock: 5, user: user)
+        create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 5, user: user)
         create(:user_medicine, medicine: medicine2, current_stock: 0, user: user)
       end
 
@@ -33,14 +49,15 @@ RSpec.describe 'カレンダー表示', type: :system do
           expect(page).to have_content("#{ Date.yesterday} の在庫予定")
           expect(page).to have_content('今日より前の日付の在庫は表示できません')
         end
-    end
+      end
 
-      it 'モーダルの閉じるボタンで元のページに戻る' do
-        click_link href: home_path(date: Date.today)
+      context '未来の日付をクリックすると' do
+        it 'クリックした日の在予想庫が表示される' do
+          click_link href: home_path(date: Date.tomorrow)
 
-        click_link '閉じる'
-
-        expect(current_path).to eq(home_path)
+          expect(page).to have_content("#{Date.tomorrow} の在庫予定")
+          expect(page).to have_content('テスト薬A：残り4錠')
+        end
       end
     end
   end
