@@ -62,7 +62,7 @@ RSpec.describe 'カレンダー表示', type: :system do
     context 'カレンダー上の警告表示' do
       before do
         create(:user_medicine, medicine: medicine2, prescribed_amount: 12, date_of_prescription: Date.yesterday, dosage_per_time: 1, current_stock: 11, user: user)
-	    page.driver.browser.manage.window.resize_to(1200, 1000)
+        page.driver.browser.manage.window.resize_to(1200, 1000)
         visit home_path
       end
       it '残り10錠の表示がある' do
