@@ -41,7 +41,7 @@
         <% display_stock = medicine.display_stock_on(date) %>
         <% if display_stock.present? %>
           <span class="block text-xs text-error leading-tight">
-        <%= medicine.medicine.name %><%= display_stock %>錠
+            <%= medicine.medicine.name %><%= display_stock %>錠
           </span>
         <% end %>
       <% end %>
