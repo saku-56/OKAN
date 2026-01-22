@@ -31,12 +31,12 @@
 
       <!-- カレンダー上の残り10錠表示 -->
       <% @medicines_with_stock.each do |medicine| %>
-       <% display_stock = medicine.display_stock_on(date) %>
-         <% if display_stock.present? %>
-           <span class="block text-xs text-error">
-             <%= medicine.medicine.name %>：残り<%= display_stock %>錠
-            </span>
-          <% end %>
+        <% display_stock = medicine.display_stock_on(date) %>
+        <% if display_stock.present? %>
+          <span class="block text-xs text-error">
+            <%= medicine.medicine.name %>：残り<%= display_stock %>錠
+          </span>
+        <% end %>
       <% end %>
     <% end %>
   </div>

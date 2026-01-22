@@ -28,17 +28,22 @@ class UserMedicine < ApplicationRecord
   end
 
   def display_stock_on(date)
-    return nil if date < Date.current
-
     stock = self.stock_on(date)
 
-    if date > Date.current
-      return stock if [ 10, 5 ].include?(stock)
-    else
-      return stock if stock.between?(1, 4)
+    # 過去は表示しない
+    return nil if date < Date.current
+
+    # 今日
+    if date == Date.current && stock.between?(1, 9)
+      return stock
     end
 
-    nil
+    # 未来
+    if date >= Date.current
+      if stock == 10
+        10
+      end
+    end
   end
 
 
