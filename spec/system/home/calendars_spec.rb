@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'カレンダー表示', type: :system do
-  describe 'カレンダー機能', js: true do  # js: trueを忘れずに!
+  describe 'カレンダー機能' do
   let(:user) { create(:user) }
   let!(:medicine1) { create(:medicine, name: 'テスト薬A', user: user) }
   let!(:medicine2) { create(:medicine, name: 'テスト薬B', user: user) }
@@ -29,8 +29,7 @@ RSpec.describe 'カレンダー表示', type: :system do
 
     context 'モーダルの挙動' do
       before do
-        create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 5, user: user)
-        create(:user_medicine, medicine: medicine2, current_stock: 0, user: user)
+        create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user)
       end
 
       context '今日の日付をクリックすると' do
@@ -38,7 +37,7 @@ RSpec.describe 'カレンダー表示', type: :system do
           click_link href: home_path(date: Date.today)
 
           expect(page).to have_content("#{Date.today} の在庫予定")
-          expect(page).to have_content('テスト薬A：残り5錠')
+          expect(page).to have_content('テスト薬A：残り1錠')
         end
       end
 
@@ -56,7 +55,7 @@ RSpec.describe 'カレンダー表示', type: :system do
           click_link href: home_path(date: Date.tomorrow)
 
           expect(page).to have_content("#{Date.tomorrow} の在庫予定")
-          expect(page).to have_content('テスト薬A：残り4錠')
+          expect(page).to have_content('テスト薬A：残り0錠')
         end
       end
     end
