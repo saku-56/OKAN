@@ -17,12 +17,23 @@ RSpec.describe 'カレンダー表示', type: :system do
         create(:user_medicine, medicine: medicine2, current_stock: 0, user: user)
       end
 
-      it '今日の日付をクリックするとモーダルが表示される' do
-        click_link href: home_path(date: Date.today)
+      context '今日の日付をクリックすると' do
+        it '今日の在庫が表示される' do
+          click_link href: home_path(date: Date.today)
 
-        expect(page).to have_content('2026-01-22 の在庫予定')
-        expect(page).to have_content('テスト薬A：残り5錠')
+          expect(page).to have_content("#{Date.today} の在庫予定")
+          expect(page).to have_content('テスト薬A：残り5錠')
+        end
       end
+
+      context '過去の日付をクリックすると' do
+        it '今日より前の日付の在庫は表示できません。と表示される' do
+          click_link href: home_path(date: Date.yesterday)
+
+          expect(page).to have_content("#{ Date.yesterday} の在庫予定")
+          expect(page).to have_content('今日より前の日付の在庫は表示できません')
+        end
+    end
 
       it 'モーダルの閉じるボタンで元のページに戻る' do
         click_link href: home_path(date: Date.today)
