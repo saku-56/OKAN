@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-8">
   <h1 class="font-bold text-4xl text-center mb-6">飲み忘れ</h1>
-  <div class="bg-white rounded-lg shadow mb-6">
+  <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
     <%if @medicines_with_stock.any? %>
       <% @medicines_with_stock.each do |user_medicine| %>
         <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">

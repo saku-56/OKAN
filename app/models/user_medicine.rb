@@ -27,6 +27,26 @@ class UserMedicine < ApplicationRecord
     [ estimated, 0 ].max
   end
 
+  def display_stock_on(date)
+    stock = self.stock_on(date)
+
+    # 過去は表示しない
+    return nil if date < Date.current
+
+    # 今日
+    if date == Date.current && stock.between?(1, 9)
+      return stock
+    end
+
+    # 未来
+    if date >= Date.current
+      if stock == 10
+        10
+      end
+    end
+  end
+
+
   # 初回登録時、処方日と登録日が異なる場合の在庫量の計算
   def initial_stock_on_create
     return prescribed_amount if date_of_prescription == Date.current
