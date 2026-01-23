@@ -25,6 +25,7 @@
       <%= f.submit "ログイン", class: "btn btn-primary w-full" %>
     <% end %>
     <br>
+    <%= button_to "グーグルでのログイン", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>
 
     <p class="text-center text-sm mt-4 text-neutral">
       <%= link_to "新規登録", new_user_registration_path,
