@@ -16,20 +16,40 @@
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="field">
+        <div class="field mb-4">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me %>
         </div>
       <% end %>
 
-      <%= f.submit "ログイン", class: "btn btn-primary w-full" %>
+      <%= f.submit "ログイン", class: "btn btn-primary w-full mb-6" %>
     <% end %>
-    <br>
 
-    <p class="text-center text-sm mt-4 text-neutral">
-      <%= link_to "新規登録", new_user_registration_path,
-          class: "btn hover:bg-[#FFE4DF]" %>
-    </p>
+    <div class="flex items-center gap-4 opacity-70 mb-6">
+      <div class="flex-1 h-px bg-base-300"></div>
+      <span class="text-xs">または</span>
+      <div class="flex-1 h-px bg-base-300"></div>
+    </div>
+
+    <%= button_to user_google_oauth2_omniauth_authorize_path,
+                method: :post,
+                data: { turbo: false },
+                class: "btn w-full bg-white text-center text-black border-[#e5e5e5] mb-6" do %>
+      <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <g>
+          <path d="m0 0H512V512H0" fill="#fff"></path>
+          <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
+          <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path>
+          <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path>
+          <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
+        </g>
+      </svg>
+      Googleログイン
+    <% end %>
+
+    <p class="text-center text-xs text-base-content/70">
+        <%= link_to "新規登録はこちら", new_user_registration_path, class: "link link-primary" %>
+      </p>
 
   </div>
 </div>
