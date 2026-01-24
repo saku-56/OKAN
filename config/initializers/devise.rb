@@ -298,8 +298,10 @@ Devise.setup do |config|
 
   unless Rails.env.test?
     config.omniauth :google_oauth2,
-                 Rails.application.credentials.google[:google_client_id],
-                 Rails.application.credentials.google[:google_client_secret]
+      Rails.application.credentials.dig(:google, :google_client_id),
+      Rails.application.credentials.dig(:google, :google_client_secret),
+      scope: "email,profile,openid",
+      name: :google_oauth2
   end
 
   # ==> Hotwire/Turbo configuration

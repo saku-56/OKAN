@@ -17,6 +17,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     # 認証失敗時
-    redirect_to root_path
+    redirect_to root_path, alert: "Google認証に失敗しました"
   end
 end
