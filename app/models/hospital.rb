@@ -3,6 +3,6 @@ class Hospital < ApplicationRecord
   has_one :hospital_schedule, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 20 }
-  validates :description, length: { maximum: 50 }
+  validates :description, length: { maximum: 100 }
   validates :uuid, uniqueness: true
 end
