@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :user_medicines do
+  resources :user_medicines, only: %i[index show new create destroy] do
     collection do
       get :autocomplete
       get :forgot_index
