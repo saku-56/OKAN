@@ -1,0 +1,22 @@
+<div class="container mx-auto px-4 mb-20">
+  <h1 class="font-bold text-4xl text-center mb-6">病院一覧</h1>
+  <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
+    <%if @hospital.any? %>
+      <% @hospital.each do |hospital| %>
+        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold text-lg"><%= hospital.name %></h3>
+            </div>
+          <%= link_to "選択", "#", class: "px-4 py-2 btn btn-primary" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center py-8">現在、病院情報はありません</p>
+    <% end %>
+   </div>
+
+  <div class="actions text-center">
+    <%= link_to "新規登録", "#", class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
+  </div>
+</div>
