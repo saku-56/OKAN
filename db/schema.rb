@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_23_000248) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_26_003922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hospital_schedules", force: :cascade do |t|
+    t.integer "day_of_week", null: false
+    t.integer "period", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.bigint "hospital_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hospital_id"], name: "index_hospital_schedules_on_hospital_id"
+  end
+
+  create_table "hospitals", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_hospitals_on_user_id"
+    t.index ["uuid"], name: "index_hospitals_on_uuid", unique: true
+  end
 
   create_table "medicines", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +78,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_23_000248) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
+  add_foreign_key "hospital_schedules", "hospitals"
+  add_foreign_key "hospitals", "users"
   add_foreign_key "medicines", "users"
   add_foreign_key "user_medicines", "medicines"
   add_foreign_key "user_medicines", "users"
