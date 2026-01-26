@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :user_medicines do
+  resources :user_medicines, only: %i[index show new create destroy] do
     collection do
       get :autocomplete
       get :forgot_index
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       patch :increment_stock
     end
   end
+
+  resources :hospital, only: %i[index]
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
