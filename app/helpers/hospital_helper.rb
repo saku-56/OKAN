@@ -1,22 +1,16 @@
 module HospitalHelper
-  def time_select_15min(form, field, start_hour, end_hour)
-    select_tag(
-      "#{form.object_name}[#{field}]",
-      options_for_select(
-        time_options(start_hour, end_hour),
-        form.object.send(field)&.strftime("%H:%M")
-      ),
-      include_blank: true,
-      class: "w-full px-1 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-blue-500"
-    )
-  end
+   def schedule_symbol(hospital, day, period)
+    schedule = hospital.hospital_schedules.find do |s|
+      s.day_of_week == day.to_s && s.period == period.to_s
+    end
 
-  def time_options(start_hour, end_hour)
-    (start_hour...end_hour).flat_map do |hour|
-      [ 0, 15, 30, 45 ].map do |min|
-        time = format("%02d:%02d", hour, min)
-        [ time, time ]
-      end
+    return "×" unless schedule&.start_time && schedule&.end_time
+
+    # 土曜午前だけなどは △
+    if day.to_s == "saturday" && period.to_s == "morning"
+      "△"
+    else
+      "○"
     end
   end
 end
