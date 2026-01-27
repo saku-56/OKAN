@@ -10,6 +10,7 @@ class HospitalController < ApplicationController
   def new
     @hospital = current_user.hospitals.build
 
+   # 全曜日×全時間帯の組み合わせを事前に作成
    HospitalSchedule.day_of_weeks.keys.each do |day|
       HospitalSchedule.periods.keys.each do |period|
         @hospital.hospital_schedules.build(
