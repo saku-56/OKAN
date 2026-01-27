@@ -45,22 +45,20 @@
               <%= f.fields_for :hospital_schedules, morning do |sf| %>
                 <%= sf.hidden_field :day_of_week %>
                 <%= sf.hidden_field :period %>
+
                 <div class="flex items-center gap-1 text-xs">
                   <!-- 午前開始時間 -->
-                  <%= sf.time_select :start_time,
-                          { include_blank: '休診',
-                            minute_step: 15,
-                            start_hour: 6,
-                            end_hour: 23 },
-                        class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
+                  <%= sf.text_field :start_time,
+                          placeholder: '例: 9:00',
+                          class: 'w-24 border border-gray-300 rounded px-2 py-1',
+                          data: { action: 'input->time-format#format' } %>
+
                   <span class="text-gray-500">〜</span>
-                  <!-- 午前終了時間 -->
-                  <%= sf.time_select :end_time,
-                          { include_blank: '休診',
-                            minute_step: 15,
-                            start_hour: 6,
-                            end_hour: 23 },
-                        class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
+
+                  <%= sf.text_field :end_time,
+                          placeholder: '例: 12:00',
+                          class: 'w-24 border border-gray-300 rounded px-2 py-1',
+                          data: { action: 'input->time-format#format' } %>
                   <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
                 </div>
               <% end %>
@@ -74,20 +72,17 @@
                 <%= sf.hidden_field :period %>
                 <div class="flex items-center gap-1 text-xs">
                   <!-- 午後開始時間 -->
-                  <%= sf.time_select :end_time,
-                          { include_blank: '休診',
-                            minute_step: 15,
-                            start_hour: 6,
-                            end_hour: 23 },
-                        class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
+                  <%= sf.text_field :start_time,
+                          placeholder: '例: 9:00',
+                          class: 'w-24 border border-gray-300 rounded px-2 py-1',
+                          data: { action: 'input->time-format#format' } %>
+
                   <span class="text-gray-500">〜</span>
-                  <!-- 午後終了時間 -->
-                  <%= sf.time_select :start_time,
-                          { include_blank: '休診',
-                            minute_step: 15,
-                            start_hour: 6,
-                            end_hour: 23 },
-                        class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
+
+                  <%= sf.text_field :end_time,
+                          placeholder: '例: 12:00',
+                          class: 'w-24 border border-gray-300 rounded px-2 py-1',
+                          data: { action: 'input->time-format#format' } %>
                   <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
                 </div>
               <% end %>
