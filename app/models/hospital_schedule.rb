@@ -7,9 +7,17 @@ class HospitalSchedule < ApplicationRecord
   validates :day_of_week, presence: true, if: :has_time?
   validates :period, presence: true, if: :has_time?
 
+  validate :start_time_before_end_time, if: -> { start_time.present? && end_time.present? }
+
   private
 
   def has_time?
     start_time.present? || end_time.present?
+  end
+
+  def start_time_before_end_time
+    if start_time >= end_time
+      errors.add(:end_time, "は開始時間より後に設定してください")
+    end
   end
 end
