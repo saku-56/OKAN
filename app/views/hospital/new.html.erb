@@ -48,11 +48,13 @@
                 <div class="flex items-center gap-1 text-xs">
                   <!-- 開始時間 -->
                   <%= sf.time_field :start_time,
+                        step: 900,
                         include_blank: true,
                         class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
                   <span class="text-gray-500">〜</span>
                   <!-- 終了時間 -->
                   <%= sf.time_field :end_time,
+                        step: 900,
                         include_blank: true,
                         class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
                   <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
@@ -69,11 +71,13 @@
                 <div class="flex items-center gap-1 text-xs">
                   <!-- 開始時間 -->
                   <%= sf.time_field :start_time,
+                        step: 900,
                         include_blank: true,
                         class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
                   <span class="text-gray-500">〜</span>
                   <!-- 終了時間 -->
                   <%= sf.time_field :end_time,
+                        step: 900,
                         include_blank: true,
                         class: 'w-20 border border-gray-300 rounded px-2 py-1' %>
                   <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
