@@ -3,6 +3,10 @@ class HospitalController < ApplicationController
     @hospital = current_user.hospitals
   end
 
+  def show
+    @hospital = current_user.hospitals.find(params[:id])
+  end
+
   def new
     @hospital = current_user.hospitals.build
 

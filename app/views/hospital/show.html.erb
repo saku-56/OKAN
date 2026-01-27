@@ -1,0 +1,7 @@
+<h1 class="text-lg font-bold mb-2"><%= @hospital.name %></h1>
+
+<p class="text-sm text-gray-600 mb-3">
+  <%= @hospital.description %>
+</p>
+
+<%= render "schedule_table", hospital: @hospital %>
