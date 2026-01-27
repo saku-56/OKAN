@@ -7,9 +7,9 @@ class HospitalSchedule < ApplicationRecord
   validates :day_of_week, presence: true, if: :has_time?
   validates :period, presence: true, if: :has_time?
 
+  before_validation :parse_time_strings
+
   validate :validate_time_range
-  validate :validate_time_format
-  before_validation :normalize_time_format
 
   private
 
@@ -17,40 +17,28 @@ class HospitalSchedule < ApplicationRecord
     start_time.present? || end_time.present?
   end
 
-  def normalize_time_format
-    self.start_time = format_time_string(start_time) if start_time.is_a?(String)
-    self.end_time = format_time_string(end_time) if end_time.is_a?(String)
-  end
-
-  def format_time_string(value)
-    return nil if value.blank?
-
-    # "9:00" -> "09:00" に正規化
-    if value.match(/^(\d{1,2}):(\d{1,2})$/)
-      hour = $1.to_i
-      minute = $2.to_i
-      return nil if hour > 23 || minute > 59
-      format("%02d:%02d", hour, minute)
+  def parse_time_strings
+    # start_time が文字列（"09:00"）で来た場合、Time型に変換
+    if start_time.is_a?(String) && start_time.present?
+      hour, minute = start_time.split(":").map(&:to_i)
+      self.start_time = Time.zone.parse("2000-01-01 #{hour}:#{minute}")
+    elsif start_time.blank?
+      self.start_time = nil
     end
 
-    value
-  end
-
-  def validate_time_format
-    validate_single_time_format(:start_time)
-    validate_single_time_format(:end_time)
-  end
-
-  def validate_single_time_format(field)
-    value = send(field)
-    return if value.blank?
-
-    unless value.to_s.match?(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/)
-      errors.add(field, "は時刻形式で入力してください（例: 9:00, 09:00）")
+    # end_time も同様
+    if end_time.is_a?(String) && end_time.present?
+      hour, minute = end_time.split(":").map(&:to_i)
+      self.end_time = Time.zone.parse("2000-01-01 #{hour}:#{minute}")
+    elsif end_time.blank?
+      self.end_time = nil
     end
   end
 
   def validate_time_range
+    # 部分入力エラーがある場合はスキップ
+    return if @start_time_partial.present? || @end_time_partial.present?
+
     # 開始時間があるのに終了時間がない場合
     if start_time.present? && end_time.blank?
       errors.add(:end_time, "を入力してください")
