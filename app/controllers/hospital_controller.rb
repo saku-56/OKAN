@@ -31,6 +31,12 @@ class HospitalController < ApplicationController
     end
   end
 
+  def destroy
+    @hospital = current_user.hospitals.find_by(uuid: params[:id])
+    @hospital.destroy
+    redirect_to hospital_index_path, notice: "病院情報を削除しました。"
+  end
+
   private
 
   def hospital_params
