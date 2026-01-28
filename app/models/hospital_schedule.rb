@@ -32,8 +32,6 @@ class HospitalSchedule < ApplicationRecord
   end
 
   def validate_time_range
-    # 部分入力エラーがある場合はスキップ
-    return if @start_time_partial.present? || @end_time_partial.present?
 
     # 開始時間があるのに終了時間がない場合
     if start_time.present? && end_time.blank?
@@ -49,7 +47,7 @@ class HospitalSchedule < ApplicationRecord
 
     # 両方入力されている場合は、開始時間 < 終了時間をチェック
     if start_time.present? && end_time.present? && start_time > end_time
-      errors.add(:end_time, "は開始時間より後に設定してください")
+      errors.add(:end_time, "は開始時間より遅い時刻に設定してください")
     end
   end
 end
