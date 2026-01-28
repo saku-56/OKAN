@@ -1,0 +1,44 @@
+<div class="bg-white rounded-lg shadow-sm p-3">
+  <h2 class="text-sm font-bold text-gray-800 mb-2">診療時間</h2>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-xs border-collapse">
+      <thead>
+        <tr>
+          <th class="border px-2 py-1 bg-gray-50"></th>
+          <% HospitalSchedule.day_of_weeks.keys.each do |day| %>
+            <th class="border px-2 py-1 bg-gray-50 text-center">
+              <%= HospitalSchedule.day_of_weeks_i18n[day.to_sym] %>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- 午前 -->
+        <tr>
+          <td class="border px-2 py-1 text-center font-semibold bg-gray-50">
+            午前
+          </td>
+          <% HospitalSchedule.day_of_weeks.keys.each do |day| %>
+            <td class="border px-2 py-1 text-center">
+              <%= time_range(@hospital, day, :morning) %>
+            </td>
+          <% end %>
+        </tr>
+
+        <!-- 午後 -->
+        <tr>
+          <td class="border px-2 py-1 text-center font-semibold bg-gray-50">
+            午後
+          </td>
+          <% HospitalSchedule.day_of_weeks.keys.each do |day| %>
+            <td class="border px-2 py-1 text-center">
+              <%= time_range(@hospital, day, :afternoon) %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

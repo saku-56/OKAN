@@ -1,15 +1,24 @@
 ja:
   activerecord:
+    models:
+      hospital: 病院
+      hospital_schedule: 診療スケジュール
     attributes:
       user:
-        name: "名前"
-        email: "メールアドレス"
-        password_confirmation: "パスワード確認"
+        name: 名前
+        email: メールアドレス
+        password_confirmation: パスワード確認
       medicine:
-        name: "薬名"
+        name: 薬名
       user_medicine:
-        dosage_per_time: "1回の服薬量"
-        prescribed_amount: "処方量"
+        dosage_per_time: 1回の服薬量
+        prescribed_amount: 処方量
+      hospital:
+        name: 病院名
+        description: メモ
+      hospital_schedules:
+        start_time: 開始時間
+        end_time: 終了時間
     errors:
       models:
         medicine:
@@ -40,3 +49,17 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "&hellip;"
+  enums:
+    hospital_schedule:
+      day_of_week:
+        monday: "月"
+        tuesday: "火"
+        wednesday: "水"
+        thursday: "木"
+        friday: "金"
+        saturday: "土"
+        sunday: "日"
+        holiday: "祝"
+      period:
+        morning: "午前"
+        afternoon: "午後"
