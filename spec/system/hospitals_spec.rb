@@ -115,5 +115,34 @@ RSpec.describe 'Hospitals', type: :system do
         expect(Hospital.count).to eq 0
       end
     end
+
+    describe '病院の詳細表示' do
+      let!(:hospital) { create(:hospital, user: user) }
+
+      # 複数の診療時間を作成
+      let!(:monday_morning) { create(:hospital_schedule, :monday, :morning, start_time: '09:00', end_time: '12:00', hospital: hospital) }
+      let!(:monday_afternoon) { create(:hospital_schedule, :monday, :afternoon, start_time: '14:00', end_time: '18:00', hospital: hospital) }
+      let!(:tuesday_morning) { create(:hospital_schedule, :tuesday, :morning, start_time: '10:00', end_time: '13:00', hospital: hospital) }
+      # 休診の例(時間がnil)
+      let!(:wednesday_morning) { create(:hospital_schedule, :wednesday, :morning, start_time: nil, end_time: nil, hospital: hospital) }
+
+      before do
+        visit hospital_path(hospital)
+      end
+
+      it '登録した全ての項目が表示されること' do
+        expect(page).to have_content(hospital.name)
+        expect(page).to have_content(hospital.description)
+        expect(page).to have_content('月')
+        expect(page).to have_content('9:00 - 12:00')
+        expect(page).to have_content('14:00 - 18:00')
+        expect(page).to have_content('火')
+        expect(page).to have_content('10:00 - 13:00')
+      end
+
+      it '休診日は適切に表示されること' do
+        expect(page).to have_content('ー')
+      end
+    end
   end
 end
