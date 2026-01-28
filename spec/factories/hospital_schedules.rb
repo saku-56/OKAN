@@ -3,8 +3,8 @@ FactoryBot.define do
     association :hospital
     day_of_week { :monday }
     period { :morning }
-    start_time { '09:00' }
-    end_time { '12:00' }
+    start_time { "09:00" }
+    end_time { "12:00" }
 
     # 休診のパターン
     trait :closed do
@@ -15,15 +15,15 @@ FactoryBot.define do
     # 午前のパターン
     trait :morning do
       period { :morning }
-      start_time { '09:00' }
-      end_time { '12:00' }
+      start_time { "09:00" }
+      end_time { "12:00" }
     end
 
     # 午後のパターン
     trait :afternoon do
       period { :afternoon }
-      start_time { '14:00' }
-      end_time { '18:00' }
+      start_time { "14:00" }
+      end_time { "18:00" }
     end
 
     # 各曜日のtrait
