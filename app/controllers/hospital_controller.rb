@@ -4,7 +4,7 @@ class HospitalController < ApplicationController
   end
 
   def show
-    @hospital = Hospital.includes(:hospital_schedules).find(params[:id])
+    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
   end
 
   def new
