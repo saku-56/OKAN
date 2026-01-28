@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :hospital do
     association :user
-    name { '病院A' }
-    description { '30分前から受付開始' }
+    sequence(:name) { |n| "病院#{n}" }
+    sequence(:description) { |n| "メモ#{n}" }
     uuid { SecureRandom.uuid }
   end
 end
