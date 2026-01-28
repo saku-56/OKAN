@@ -68,4 +68,36 @@ RSpec.describe User, type: :model do
       expect(user.uuid).to be_present
     end
   end
+
+  describe 'アソシエーション' do
+    it 'user_medicinesと関連していること' do
+      association = described_class.reflect_on_association(:user_medicines)
+      expect(association.macro).to eq :has_many
+    end
+
+    it 'user_medicinesがdependent: :destroyであること' do
+      association = described_class.reflect_on_association(:user_medicines)
+      expect(association.options[:dependent]).to eq :destroy
+    end
+
+    it 'medicinesと関連していること' do
+      association = described_class.reflect_on_association(:medicines)
+      expect(association.macro).to eq :has_many
+    end
+
+    it 'medicinesがdependent: :destroyであること' do
+      association = described_class.reflect_on_association(:medicines)
+      expect(association.options[:dependent]).to eq :destroy
+    end
+
+    it 'hospitalsと関連していること' do
+      association = described_class.reflect_on_association(:hospitals)
+      expect(association.macro).to eq :has_many
+    end
+
+    it 'hospitalsがdependent: :destroyであること' do
+      association = described_class.reflect_on_association(:hospitals)
+      expect(association.options[:dependent]).to eq :destroy
+    end
+  end
 end
