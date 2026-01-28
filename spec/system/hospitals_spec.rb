@@ -168,5 +168,21 @@ RSpec.describe "Hospitals", type: :system do
         end
       end
     end
+
+    describe "病院情報の削除" do
+      let!(:hospital) { create(:hospital, user: user) }
+      let!(:hospital_schedule) { create(:hospital_schedule, hospital: hospital) }
+
+      before do
+        visit hospital_path(hospital)
+      end
+
+      it "病院情報が削除できること" do
+        expect(page).to have_link "削除"
+        page.accept_confirm { click_link "削除" }
+        expect(page).to have_content("病院情報を削除しました。"), "フラッシュメッセージが表示されていません"
+        expect(current_path).to eq hospital_index_path
+      end
+    end
   end
 end
