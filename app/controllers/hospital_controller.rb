@@ -4,7 +4,7 @@ class HospitalController < ApplicationController
   end
 
   def show
-    @hospital = Hospital.includes(:hospital_schedules).find(params[:id])
+    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
   end
 
   def new
@@ -29,6 +29,12 @@ class HospitalController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @hospital = current_user.hospitals.find_by(uuid: params[:id])
+    @hospital.destroy
+    redirect_to hospital_index_path, notice: "病院情報を削除しました。"
   end
 
   private
