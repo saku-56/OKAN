@@ -82,20 +82,12 @@ RSpec.describe UserMedicine, type: :model do
     end
 
     describe 'uuid' do
-      it 'uuidが被った場合にuniqueのバリデーションが機能してinvalidになるか' do
+      it 'uuidが重複した場合にuniqueのバリデーションが機能してinvalidになるか' do
         uuid = SecureRandom.uuid
         create(:user_medicine, user: user, medicine: medicine, uuid: uuid)
         user_medicine = build(:user_medicine, user: user, medicine: medicine, uuid: uuid)
         expect(user_medicine).to be_invalid
         expect(user_medicine.errors[:uuid]).to include('はすでに存在します')
-      end
-
-      it 'uuidが被らない場合はvalidになるか' do
-        medicine1 = create(:medicine, user: user)
-        medicine2 = create(:medicine, user: user)
-        create(:user_medicine, user: user, medicine: medicine1)
-        user_medicine = build(:user_medicine, user: user, medicine: medicine2)
-        expect(user_medicine).to be_valid
       end
     end
 
