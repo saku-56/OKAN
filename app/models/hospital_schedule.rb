@@ -32,7 +32,6 @@ class HospitalSchedule < ApplicationRecord
   end
 
   def validate_time_range
-
     # 開始時間があるのに終了時間がない場合
     if start_time.present? && end_time.blank?
       errors.add(:end_time, "を入力してください")
