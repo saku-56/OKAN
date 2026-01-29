@@ -43,6 +43,7 @@
           <div class="mb-3">
             <div class="text-xs text-gray-600 mb-1">午前</div>
             <%= f.fields_for :hospital_schedules, morning do |sf| %>
+              <%= sf.hidden_field :id if sf.object.persisted? %>
               <%= sf.hidden_field :day_of_week %>
               <%= sf.hidden_field :period %>
               <div class="flex items-center gap-1 text-xs">
@@ -69,6 +70,7 @@
           <div>
             <div class="text-xs text-gray-600 mb-1">午後</div>
             <%= f.fields_for :hospital_schedules, afternoon do |sf| %>
+              <%= sf.hidden_field :id if sf.object.persisted? %>
               <%= sf.hidden_field :day_of_week %>
               <%= sf.hidden_field :period %>
               <div class="flex items-center gap-1 text-xs">
