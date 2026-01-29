@@ -4,9 +4,9 @@ module HospitalHelper
       s.day_of_week == day.to_s && s.period == period.to_s
     end
 
-    return "—" unless schedule&.start_time && schedule&.end_time
+    return "ー" unless schedule&.start_time && schedule&.end_time
 
-    "#{schedule.start_time.strftime('%-H:%M')}–#{schedule.end_time.strftime('%-H:%M')}"
+    "#{schedule.start_time.strftime('%-H:%M')} - #{schedule.end_time.strftime('%-H:%M')}"
   end
 
   def time_options
