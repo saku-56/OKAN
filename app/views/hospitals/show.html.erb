@@ -15,9 +15,9 @@
         </div>
 
         <div class="flex gap-4 mt-10">
-          <%= link_to "編集", "path", class: "btn btn-acsent flex-1" %>
+          <%= link_to "編集", edit_hospital_path(@hospital), class: "btn btn-acsent flex-1" %>
           <%= link_to "削除", hospital_path(@hospital), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?" }, class: "btn btn-error flex-1" %>
-          <%= link_to "戻る", hospital_index_path, class: "btn btn-neutral flex-1" %>
+          <%= link_to "戻る", hospitals_path, class: "btn btn-neutral flex-1" %>
         </div>
       </div>
 

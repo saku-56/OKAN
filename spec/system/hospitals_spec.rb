@@ -6,7 +6,7 @@ RSpec.describe "Hospitals", type: :system do
   describe "ログイン前" do
     context "病院情報一覧ページへのアクセス" do
       it "ログインページにリダイレクトされる" do
-        visit hospital_index_path
+        visit hospitals_path
         expect(page).to have_content "ログインしてください"
         expect(current_path).to eq new_user_session_path
       end
@@ -21,7 +21,7 @@ RSpec.describe "Hospitals", type: :system do
     describe "病院の一覧表示" do
       context "病院が登録されていない場合" do
         it "登録した病院が存在しない場合、メッセージが表示されること" do
-          visit hospital_index_path
+          visit hospitals_path
           expect(page).to have_content "現在、病院情報はありません"
         end
       end
@@ -30,7 +30,7 @@ RSpec.describe "Hospitals", type: :system do
         let!(:hospital) { create(:hospital, user: user) }
 
         it "登録した病院の一覧が表示されること" do
-          visit hospital_index_path
+          visit hospitals_path
 
           expect(page).to have_content(hospital.name)
         end
@@ -181,7 +181,7 @@ RSpec.describe "Hospitals", type: :system do
         expect(page).to have_link "削除"
         page.accept_confirm { click_link "削除" }
         expect(page).to have_content("病院情報を削除しました。"), "フラッシュメッセージが表示されていません"
-        expect(current_path).to eq hospital_index_path
+        expect(current_path).to eq hospitals_path
       end
     end
   end
