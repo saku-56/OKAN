@@ -38,7 +38,7 @@ class HospitalsController < ApplicationController
   def update
     @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
     if @hospital.update(hospital_params)
-      redirect_to hospital_path(@hospital), notice: "病院情報を更新しました。"
+      redirect_to @hospital, notice: "病院情報を更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end

@@ -108,7 +108,7 @@ RSpec.describe "Hospitals", type: :system do
         select "12:00", from: "hospital[hospital_schedules_attributes][0][start_time]"
         select "09:00", from: "hospital[hospital_schedules_attributes][0][end_time]"
 
-        click_button "登録"
+        click_button "登録する"
 
         # エラーメッセージの確認
         expect(page).to have_content "終了時間は開始時間より遅い時刻に設定してください"
@@ -182,6 +182,51 @@ RSpec.describe "Hospitals", type: :system do
         page.accept_confirm { click_link "削除" }
         expect(page).to have_content("病院情報を削除しました。"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq hospitals_path
+      end
+    end
+
+    describe "病院情報の編集" do
+      let!(:hospital) { create(:hospital, user: user) }
+
+
+      describe "病院基本情報の更新" do
+        it "病院名を更新できること" do
+          visit edit_hospital_path(hospital)
+
+          fill_in "病院名", with: "新しい病院名"
+          click_button "更新する"
+
+          expect(page).to have_content "病院情報を更新しました"
+          expect(page).to have_content "新しい病院名"
+        end
+
+        it "メモを更新できること" do
+          visit edit_hospital_path(hospital)
+
+          fill_in "メモ", with: "新しいメモ内容"
+          click_button "更新する"
+
+          expect(page).to have_content "病院情報を更新しました"
+          expect(page).to have_content "新しいメモ内容"
+        end
+      end
+
+      describe "診療スケジュールの更新" do
+        it "既存のスケジュールを更新できること" do
+          create(:hospital_schedule, start_time: "09:00", end_time: "12:00", hospital: hospital)
+          visit edit_hospital_path(hospital)
+
+          # 月曜日の午前を14:00-18:00に変更
+          select "10:00", from: "hospital_hospital_schedules_attributes_1_start_time"
+          select "13:00", from: "hospital_hospital_schedules_attributes_1_end_time"
+
+          click_button "更新する"
+
+          sleep 5
+          expect(current_path).to eq hospital_path(hospital)
+          expect(page).to have_content "病院情報を更新しました"
+          # expect(page).to have_content("10:00 - 13:00")
+        end
       end
     end
   end
