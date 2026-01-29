@@ -1,4 +1,4 @@
-class HospitalController < ApplicationController
+class HospitalsController < ApplicationController
   def index
     @hospital = current_user.hospitals
   end
@@ -25,16 +25,29 @@ class HospitalController < ApplicationController
     @hospital = current_user.hospitals.build(hospital_params)
 
     if @hospital.save
-      redirect_to hospital_index_path, notice: "病院を登録しました"
+      redirect_to hospitals_path, notice: "病院を登録しました"
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
+  end
+
+  def update
+    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
+    if @hospital.update(hospital_params)
+      redirect_to hospital_path(@hospital), notice: "病院情報を更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @hospital = current_user.hospitals.find_by(uuid: params[:id])
     @hospital.destroy
-    redirect_to hospital_index_path, notice: "病院情報を削除しました。"
+    redirect_to hospitals_path, notice: "病院情報を削除しました。"
   end
 
   private

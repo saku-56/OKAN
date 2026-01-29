@@ -44,8 +44,8 @@ class HospitalSchedule < ApplicationRecord
       return
     end
 
-    # 両方入力されている場合は、開始時間 < 終了時間をチェック
-    if start_time.present? && end_time.present? && start_time > end_time
+    # 両方入力されている場合は、開始時間 <= 終了時間をチェック
+    if start_time.present? && end_time.present? && start_time >= end_time
       errors.add(:end_time, "は開始時間より遅い時刻に設定してください")
     end
   end
