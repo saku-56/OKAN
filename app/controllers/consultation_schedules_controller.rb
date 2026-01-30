@@ -10,6 +10,7 @@ class ConsultationSchedulesController < ApplicationController
         redirect_to hospital_path(@hospital), notice: "診察予定を登録しました"
     else
         @next_visit = @consultation_schedule
+        flash.now[:danger] = "通院予定日登録に失敗しました。"
         render "hospitals/show", status: :unprocessable_entity
     end
   end
