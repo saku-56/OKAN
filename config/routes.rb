@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :hospitals, only: %i[index show new create edit update destroy]
+  resources :hospitals, only: %i[index show new create edit update destroy] do
+    resources :consultation_schedules, only: %i[create]
+  end
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
