@@ -7,7 +7,7 @@ class ConsultationSchedulesController < ApplicationController
     @consultation_schedule.hospital_id = @hospital.id
 
     if @consultation_schedule.save
-        redirect_to hospital_path(@hospital), notice: "診察予定日を登録しました。"
+        redirect_to hospital_path(@hospital), notice: "通院予定日を登録しました。"
     else
         @next_visit = @consultation_schedule
         flash.now[:danger] = "通院予定日登録に失敗しました。"
