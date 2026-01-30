@@ -1,4 +1,4 @@
-class ConsultaionSchedule < ApplicationRecord
+class ConsultationSchedule < ApplicationRecord
   belongs_to :user
   belongs_to :hospital
 
