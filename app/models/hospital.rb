@@ -1,6 +1,7 @@
 class Hospital < ApplicationRecord
   belongs_to :user
   has_many :hospital_schedules, dependent: :destroy
+  has_many :consultation_schedules, dependent: :destroy
 
   accepts_nested_attributes_for :hospital_schedules, allow_destroy: true
 
