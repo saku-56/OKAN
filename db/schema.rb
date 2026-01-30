@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_26_022204) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_30_011325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "consultation_schedules", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "hospital_id", null: false
+    t.date "visit_date", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hospital_id"], name: "index_consultation_schedules_on_hospital_id"
+    t.index ["user_id"], name: "index_consultation_schedules_on_user_id"
+  end
 
   create_table "hospital_schedules", force: :cascade do |t|
     t.integer "day_of_week", null: false
@@ -79,6 +90,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_26_022204) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
+  add_foreign_key "consultation_schedules", "hospitals"
+  add_foreign_key "consultation_schedules", "users"
   add_foreign_key "hospital_schedules", "hospitals"
   add_foreign_key "hospitals", "users"
   add_foreign_key "medicines", "users"
