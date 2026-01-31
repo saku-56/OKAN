@@ -65,3 +65,7 @@ ja:
       period:
         morning: "午前"
         afternoon: "午後"
+  helpers:
+    submit:
+      create: 登録
+      update: 変更
