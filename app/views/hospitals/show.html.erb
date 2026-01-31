@@ -24,12 +24,13 @@
       <div class="bg-white rounded-lg shadow p-6 mb-16">
         <div class="bg-white rounded-lg shadow-sm p-3 mt-4 mb-4">
           <h2 class="text-sm font-bold text-gray-800 mb-2">次回通院予定日</h2>
-          <%= form_with model: [@hospital, @next_visit || @hospital.consultation_schedules.build],
+          <% next_visit = @hospital.consultation_schedules.upcoming.first %>
+          <%= form_with model: next_visit || @hospital.consultation_schedules.build,
               url: hospital_consultation_schedules_path(@hospital),
               method: :post do |f| %>
 
           <%= render 'shared/error_messages', object: f.object %>
-          
+
          <div class="flex gap-4">
             <%= f.date_field :visit_date,
             min: Date.current,
