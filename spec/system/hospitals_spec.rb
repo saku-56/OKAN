@@ -108,7 +108,7 @@ RSpec.describe "Hospitals", type: :system do
         select "12:00", from: "hospital[hospital_schedules_attributes][0][start_time]"
         select "09:00", from: "hospital[hospital_schedules_attributes][0][end_time]"
 
-        click_button "登録する"
+        click_button "登録"
 
         # エラーメッセージの確認
         expect(page).to have_content "終了時間は開始時間より遅い時刻に設定してください"
@@ -194,7 +194,7 @@ RSpec.describe "Hospitals", type: :system do
           visit edit_hospital_path(hospital)
 
           fill_in "病院名", with: "新しい病院名"
-          click_button "更新する"
+          click_button "変更"
 
           expect(page).to have_content "病院情報を更新しました"
           expect(page).to have_content "新しい病院名"
@@ -204,7 +204,7 @@ RSpec.describe "Hospitals", type: :system do
           visit edit_hospital_path(hospital)
 
           fill_in "メモ", with: "新しいメモ内容"
-          click_button "更新する"
+          click_button "変更"
 
           expect(page).to have_content "病院情報を更新しました"
           expect(page).to have_content "新しいメモ内容"
@@ -220,7 +220,7 @@ RSpec.describe "Hospitals", type: :system do
           select "10:00", from: "hospital_hospital_schedules_attributes_1_start_time"
           select "13:00", from: "hospital_hospital_schedules_attributes_1_end_time"
 
-          click_button "更新する"
+          click_button "変更"
 
           sleep 5
           expect(current_path).to eq hospital_path(hospital)
