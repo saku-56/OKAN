@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :hospitals, only: %i[index show new create edit update destroy] do
-    resources :consultation_schedules, only: %i[create]
+    resources :consultation_schedules, only: %i[create update]
   end
 
   devise_for :users, controllers: {
