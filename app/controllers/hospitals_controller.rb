@@ -5,7 +5,7 @@ class HospitalsController < ApplicationController
 
   def show
     @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
-    @next_visit = @hospital.consultation_schedules.order(visit_date: :asc).first
+    @next_visit = @hospital.consultation_schedules.upcoming.first
   end
 
   def new
