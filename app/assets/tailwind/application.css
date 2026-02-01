@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../stylesheets/fontawesome/all.css";
 @plugin "daisyui";
 @plugin "daisyui/theme" {
   name: "mytheme";

@@ -5,9 +5,11 @@
     "esbuild": "^0.27.0"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.woff2=file --loader:.woff=file --loader:.ttf=file --loader:.eot=file --loader:.css=css",
+    "postinstall": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/assets/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.20",
     "daisyui": "^5.5.5"
