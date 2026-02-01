@@ -31,7 +31,10 @@
               <%= f.date_field :visit_date,
                                min: Date.current,
                                class: "border border-gray-300 rounded px-3 py-2" %>
-              <%= f.submit nil, class: "btn btn-primary w-12" %>
+              <%= f.submit nil, class: "btn btn-primary" %>
+              <% if consultation_schedule.persisted? && consultation_schedule.visit_date.present? %>
+              <%= link_to "削除", hospital_consultation_schedule_path(@hospital, consultation_schedule), data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?" }, class: "btn btn-error flex-1 ml-10" %>
+              <% end %>
           <% end %>
         </div>
      </div>
