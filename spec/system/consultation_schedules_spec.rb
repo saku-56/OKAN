@@ -17,18 +17,6 @@ RSpec.describe "ConsultationSchedules", type: :system do
       end
     end
 
-    # context 'ステータスがcanceledの場合' do
-    #   before do
-    #     create(:consultation_schedule, user: user, hospital: hospital, status: :canceled, visit_date: 3.days.from_now)
-    #   end
-
-    #   it 'フォームが空欄で表示される' do
-    #     visit hospital_path(hospital)
-
-    #     expect(page).to have_field('consultation_schedule[visit_date]', with: '')
-    #   end
-    # end
-
     context "通院予定がある場合（statusがscheduledでvisit_dateが未来）" do
       let(:future_date) { 5.days.from_now.to_date }
 
@@ -41,6 +29,27 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
         expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s)
       end
+    end
+
+    # バッチ処理の失敗などでcompletedに更新されなかった場合を想定
+    context "statusがscheduledだがvisit_dateが過去の場合" do
+    let(:past_date) { 3.days.ago.to_date }
+
+    before do
+      # バリデーションをスキップして過去日付のデータを作成
+      consultation_schedule = build(:consultation_schedule,
+        user: user,
+        hospital: hospital,
+        status: :scheduled,
+        visit_date: past_date
+      )
+      consultation_schedule.save(validate: false)
+    end
+
+    it "フォームが空欄で表示される" do
+      visit hospital_path(hospital)
+
+      expect(page).to have_field("consultation_schedule[visit_date]", with: "")
     end
   end
 
@@ -56,6 +65,17 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
         expect(page).to have_content "通院予定日を登録しました。"
         expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s)
+      end
+    end
+      context "入力が不正な場合" do
+        it "エラーメッセージが表示される" do
+          visit hospital_path(hospital)
+
+          fill_in "consultation_schedule[visit_date]", with: ""
+          click_button "登録"
+
+          expect(page).to have_content "通院予定日登録に失敗しました。"
+        end
       end
     end
   end
@@ -77,6 +97,17 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
         expect(page).to have_content "通院予定日を変更しました。"
         expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s)
+      end
+    end
+
+    context "入力が不正な場合" do
+      it "エラーメッセージが表示される" do
+        visit hospital_path(hospital)
+
+        fill_in "consultation_schedule[visit_date]", with: ""
+        click_button "変更"
+
+        expect(page).to have_content "通院予定日変更に失敗しました。"
       end
     end
   end
