@@ -98,7 +98,7 @@ RSpec.describe UserMedicine, type: :model do
         expect(user_medicine.errors[:date_of_prescription]).to be_present
       end
 
-      it "date_of_prescriptionが未来日の場合にカスタムバリデーションが機能してinvalidになるか" do
+      it "date_of_prescriptionが未来の場合にカスタムバリデーションが機能してinvalidになるか" do
         user_medicine = build(:user_medicine, user: user, date_of_prescription: Date.tomorrow)
         expect(user_medicine).to be_invalid
         expect(user_medicine.errors[:date_of_prescription]).to be_present
