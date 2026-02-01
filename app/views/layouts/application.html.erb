@@ -14,8 +14,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module", defer: true %>
   </head>
 
   <body class="bg-base-100 min-h-screen font-mplus">
@@ -34,7 +33,7 @@
         <!-- フラッシュメッセージ -->
         <%= render 'shared/flash_message' %>
         <!-- 各ページの内容 -->
-       
+
           <%= yield %>
         </main>
       </div>
