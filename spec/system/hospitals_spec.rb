@@ -184,7 +184,7 @@ RSpec.describe "Hospitals", type: :system do
           find('.delete-icon').click
         end
 
-        expect(page).to have_content("病院情報を削除しました。"), "フラッシュメッセージが表示されていません"
+        expect(page).to have_content("病院情報を削除しました"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq hospitals_path
       end
     end

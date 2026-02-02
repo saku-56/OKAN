@@ -64,7 +64,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
           fill_in "consultation_schedule[visit_date]", with: visit_date
         end
 
-        expect(page).to have_content "通院予定日を登録しました。"
+        expect(page).to have_content "通院予定日を登録しました"
         expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s)
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
           fill_in "consultation_schedule[visit_date]", with: new_date
         end
 
-        expect(page).to have_content "通院予定日を変更しました。"
+        expect(page).to have_content "通院予定日を変更しました"
         expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s)
       end
     end
@@ -106,7 +106,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
         find('[data-testid="delete-schedule-icon"]').click
       end
 
-      expect(page).to have_content("通院予定を削除しました。")
+      expect(page).to have_content("通院予定を削除しました")
     end
   end
 end
