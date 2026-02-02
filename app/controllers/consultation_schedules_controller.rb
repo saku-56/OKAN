@@ -8,28 +8,26 @@ class ConsultationSchedulesController < ApplicationController
     @consultation_schedule.hospital_id = @hospital.id
 
     if @consultation_schedule.save
-        redirect_to hospital_path(@hospital), notice: "通院予定日を登録しました。"
+      redirect_to hospital_path(@hospital), notice: "通院予定日を登録しました"
     else
-        @next_visit = @consultation_schedule
-        flash.now[:danger] = "通院予定日登録に失敗しました。"
-        render "hospitals/show", status: :unprocessable_entity
+      @next_visit = @consultation_schedule
+      render "hospitals/show", status: :unprocessable_entity
     end
   end
 
   def update
     if @consultation_schedule.update(consultation_schedule_params)
-      redirect_to hospital_path(@hospital), notice: "通院予定日を変更しました。"
+      redirect_to hospital_path(@hospital), notice: "通院予定日を変更しました"
     else
       # @consultation_scheduleにエラー情報を含むオブジェクトごとビューの@next_visitに渡す
       @next_visit = @consultation_schedule
-      flash.now[:danger] = "通院予定日変更に失敗しました。"
       render "hospitals/show", status: :unprocessable_entity
     end
   end
 
   def destroy
     @consultation_schedule.destroy
-    redirect_to hospital_path(@hospital), notice: "通院予定を削除しました。"
+    redirect_to hospital_path(@hospital), notice: "通院予定を削除しました"
   end
 
   private

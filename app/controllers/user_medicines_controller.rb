@@ -8,10 +8,10 @@ class UserMedicinesController < ApplicationController
 
     # 自分が過去に入力した薬名のみを取得
     suggestions = current_user.medicines
-                               .where("name LIKE ?", "#{query}%")
-                               .distinct
-                               .pluck(:name)
-                               .first(10)
+      .where("name LIKE ?", "#{query}%")
+      .distinct
+      .pluck(:name)
+      .first(10)
     # 配列をJSON形式に変換してブラウザに返す
     render json: suggestions
   end
@@ -69,7 +69,7 @@ class UserMedicinesController < ApplicationController
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
 
     if @user_medicine.increment_stock
-      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回分増やしました。"
+      redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回分増やしました"
     else
       render :forgot_index, status: :unprocessable_entity
     end
@@ -78,7 +78,7 @@ class UserMedicinesController < ApplicationController
   def destroy
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
     @user_medicine.destroy
-    redirect_to user_medicines_path, notice: "薬を削除しました。"
+    redirect_to user_medicines_path, notice: "薬を削除しました"
   end
 
   private
