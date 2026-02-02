@@ -35,6 +35,7 @@
             <div class="flex items-center">
               <%= f.text_field :prescribed_amount,
                   type: "number",
+                  value: "",
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
@@ -49,7 +50,7 @@
           </div>
 
           <div class="flex gap-4">
-            <%= f.submit "在庫を追加", class: "btn btn-primary flex-1" %>
+            <%= f.submit "在庫を追加する", class: "btn btn-primary flex-1" %>
             <%= link_to "戻る", user_medicine_path(@user_medicine), class: "btn btn-neutral flex-1" %>
           </div>
         <% end %>
