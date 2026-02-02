@@ -10,5 +10,5 @@ application.register("autocomplete", AutocompleteController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import AutoSubmitController from "./auto_submit_controller"
-application.register("auto-submit", AutoSubmitController)
+import ScheduleController from "./schedule_controller"
+application.register("schedule", ScheduleController)

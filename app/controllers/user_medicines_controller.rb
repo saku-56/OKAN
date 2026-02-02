@@ -61,6 +61,7 @@ class UserMedicinesController < ApplicationController
       @user_medicine.save
       redirect_to user_medicines_path, notice: "薬を追加しました"
     else
+      @stock_form = @user_medicine
       render :add_stock, status: :unprocessable_entity
     end
   end
