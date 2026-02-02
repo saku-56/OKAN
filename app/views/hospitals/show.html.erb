@@ -54,7 +54,7 @@
             <% if consultation_schedule.persisted? && consultation_schedule.visit_date.present? %>
               <!-- 削除ボタンのみ表示 -->
               <%= link_to hospital_consultation_schedule_path(@hospital, consultation_schedule),
-                          data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?" },
+                          data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?", testid: "delete-schedule-icon"},
                           class: "delete-icon",
                           title: "削除" do %>
                 <i class="fa-solid fa-trash fa-lg"></i>

@@ -38,11 +38,10 @@ RSpec.describe "ConsultationSchedules", type: :system do
       before do
         # バリデーションをスキップして過去日付のデータを作成
         consultation_schedule = build(:consultation_schedule,
-          user: user,
-          hospital: hospital,
-          status: :scheduled,
-          visit_date: past_date
-        )
+                                      user: user,
+                                      hospital: hospital,
+                                      status: :scheduled,
+                                      visit_date: past_date)
         consultation_schedule.save(validate: false)
       end
 
@@ -53,7 +52,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       end
     end
   end
-  
+
   describe "通院予定の作成" do
     let(:visit_date) { 7.days.from_now.to_date }
 
@@ -90,6 +89,24 @@ RSpec.describe "ConsultationSchedules", type: :system do
         expect(page).to have_content "通院予定日を変更しました。"
         expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s)
       end
+    end
+  end
+
+  describe "通院予定の削除" do
+    let!(:hospital) { create(:hospital, user: user) }
+    let!(:consultation_schedule) { create(:consultation_schedule, hospital: hospital, user: user) }
+
+    before do
+      visit hospital_path(hospital)
+      page.driver.browser.manage.window.resize_to(1200, 1000)
+    end
+
+    it "通院予定が削除できること" do
+      page.accept_confirm do
+        find('[data-testid="delete-schedule-icon"]').click
+      end
+
+      expect(page).to have_content("通院予定を削除しました。")
     end
   end
 end
