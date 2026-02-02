@@ -3,8 +3,22 @@
   <div class="medicines-section max-w-4xl mx-auto mb-8">
     <div class="w-full">
       <div class="bg-white rounded-lg shadow p-6 mb-6">
-        <h1 class="text-2xl md:text-3xl font-bold mb-4"><%= @hospital.name %></h1>
 
+      <!-- 編集、削除アイコン -->
+      <div class="flex justify-end gap-2 mb-2">
+        <%= link_to edit_hospital_path(@hospital),
+                    class: "w-10 h-10 flex items-center justify-center rounded-full hover:bg-blue-50 hover:text-blue-600 transition-colors",
+                    title: "編集" do %>
+          <i class="fa-solid fa-pencil fa-lg"></i>
+        <% end %>
+        <%= link_to hospital_path(@hospital),
+                    data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?" },
+                    class: "w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-50 hover:text-red-600 transition-colors",
+                    title: "削除" do %>
+          <i class="fa-solid fa-trash fa-lg"></i>
+        <% end %>
+      </div>
+        <h1 class="text-2xl md:text-3xl font-bold mb-4"><%= @hospital.name %></h1>
         <%= render "hospitals/schedule_table", hospital: @hospital %>
 
         <div class="bg-white rounded-lg shadow-sm p-3 mt-4 mb-4">
@@ -13,44 +27,42 @@
             <%= @hospital.description %>
           </p>
         </div>
-
-        <div class="flex gap-4 mt-10">
-          <%= link_to "編集", edit_hospital_path(@hospital), class: "btn btn-acsent flex-1" %>
-          <%= link_to "削除", hospital_path(@hospital), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?" }, class: "btn btn-error flex-1" %>
-          <%= link_to "戻る", hospitals_path, class: "btn btn-neutral flex-1" %>
+        <div class="mt-10 flex justify-end">
+          <%= link_to "戻る", hospitals_path, class: "btn btn-neutral" %>
         </div>
       </div>
 
       <div class="bg-white rounded-lg shadow-sm p-3 mt-4 mb-4">
-  <h2 class="text-sm font-bold text-gray-800 mb-2">次回通院予定日</h2>
-  <% consultation_schedule = @next_visit || @hospital.consultation_schedules.build %>
-  <%= form_with model: [@hospital, consultation_schedule],
-                id: "consultation-schedule-form",
-                data: {
-                  controller: "auto-submit",
-                  auto_submit_is_new_value: consultation_schedule.new_record?
-                } do |f| %>
-    <%= render "shared/error_messages", object: f.object %>
-    <div class="flex items-center gap-4">
-      <%= f.date_field :visit_date,
-                       min: Date.current,
-                       data: {
-                         action: "focus->auto-submit#savePreviousValue change->auto-submit#submit",
-                         auto_submit_target: "dateField"
-                       },
-                       class: "border border-gray-300 rounded px-3 py-2 flex-1" %>
+        <h2 class="text-sm font-bold text-gray-800 mb-2">次回通院予定日</h2>
+        <% consultation_schedule = @next_visit || @hospital.consultation_schedules.build %>
+        <%= form_with model: [@hospital, consultation_schedule],
+                      id: "consultation-schedule-form",
+                      data: {
+                        controller: "auto-submit",
+                        auto_submit_is_new_value: consultation_schedule.new_record?,
+                      } do |f| %>
+          <%= render "shared/error_messages", object: f.object %>
+          <div class="flex items-center gap-4">
+            <%= f.date_field :visit_date,
+                             min: Date.current,
+                             data: {
+                               action: "focus->auto-submit#savePreviousValue change->auto-submit#submit",
+                               auto_submit_target: "dateField",
+                             },
+                             class: "border border-gray-300 rounded px-3 py-2 flex-1" %>
 
-      <% if consultation_schedule.persisted? && consultation_schedule.visit_date.present? %>
-        <!-- 削除ボタンのみ表示 -->
-        <%= link_to hospital_consultation_schedule_path(@hospital, consultation_schedule),
-                    data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?" },
-                    class: "text-blue-400 hover:text-blue-600 transition-colors" do %>
-          <i class="fa-solid fa-trash fa-lg"></i>
+            <% if consultation_schedule.persisted? && consultation_schedule.visit_date.present? %>
+              <!-- 削除ボタンのみ表示 -->
+              <%= link_to hospital_consultation_schedule_path(@hospital, consultation_schedule),
+                          data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?" },
+                          class: "w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-50 hover:text-red-600 transition-colors",
+                          title: "削除" do %>
+                <i class="fa-solid fa-trash fa-lg"></i>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+      </div>
     </div>
   </div>
 </div>
