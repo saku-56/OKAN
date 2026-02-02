@@ -45,3 +45,12 @@
   --noise: 0;
   }
 
+  @layer components {
+  .delete-icon {
+    @apply rounded-full hover:bg-red-50 hover:text-red-600 transition-colors;
+  }
+
+  .edit-icon {
+    @apply rounded-full hover:bg-blue-50 hover:text-blue-600 transition-colors;
+  }
+  }

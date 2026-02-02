@@ -5,7 +5,7 @@
         <!-- 削除アイコン -->
         <div class="flex justify-end">
         <%= link_to user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "薬を削除しますか?" },
-                      class: "w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-50 hover:text-red-600 transition-colors",
+                      class: "delete-icon",
                       title: "削除" do %>
             <i class="fa-solid fa-trash fa-lg"></i>
           <% end %>
