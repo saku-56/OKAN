@@ -149,8 +149,11 @@ RSpec.describe "UserMedicines", type: :system do
       end
 
       it "薬が削除できること" do
-        expect(page).to have_link "削除"
-        page.accept_confirm { click_link "削除" }
+        expect(page).to have_css('.delete-icon')
+
+        page.accept_confirm do
+          find('.delete-icon').click
+        end
         expect(page).to have_content("薬を削除しました。"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq user_medicines_path
       end

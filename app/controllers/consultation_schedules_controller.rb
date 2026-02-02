@@ -1,6 +1,6 @@
 class ConsultationSchedulesController < ApplicationController
-  before_action :set_hospital, only: %i[create update]
-  before_action :set_consultation_schedule, only: %i[update]
+  before_action :set_hospital, only: %i[create update destroy]
+  before_action :set_consultation_schedule, only: %i[update destroy]
 
   def create
     @consultation_schedule = current_user.consultation_schedules.build(consultation_schedule_params)
@@ -25,6 +25,11 @@ class ConsultationSchedulesController < ApplicationController
       flash.now[:danger] = "通院予定日変更に失敗しました。"
       render "hospitals/show", status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @consultation_schedule.destroy
+    redirect_to hospital_path(@hospital), notice: "通院予定を削除しました。"
   end
 
   private
