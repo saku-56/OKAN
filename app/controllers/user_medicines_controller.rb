@@ -38,6 +38,10 @@ class UserMedicinesController < ApplicationController
 
   def add_stock
     @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
+    # 在庫追加フォーム用の一時インスタンス
+    @stock_form = @user_medicine.dup
+    @stock_form.prescribed_amount = nil
+    @stock_form.date_of_prescription = nil
   end
 
   def update_stock

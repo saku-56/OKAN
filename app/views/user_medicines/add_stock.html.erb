@@ -4,7 +4,7 @@
       <h1 class="font-bold text-4xl text-center mb-6">在庫追加</h1>
 
       <div class="bg-white rounded-lg shadow p-6">
-        <%= form_with(model: @user_medicine,
+        <%= form_with(model: @stock_form,
                       url: update_stock_user_medicine_path(@user_medicine),
                       method: :patch) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
@@ -35,7 +35,6 @@
             <div class="flex items-center">
               <%= f.text_field :prescribed_amount,
                   type: "number",
-                  value: "",
                   class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
               <span class="ml-2 text-gray-700">錠</span>
             </div>
@@ -44,7 +43,6 @@
           <div class="mb-4">
             <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
             <%= f.date_field :date_of_prescription,
-                value: Date.today,
                 max: Date.today,
                 class: "w-full border border-gray-300 rounded px-3 py-2" %>
           </div>
