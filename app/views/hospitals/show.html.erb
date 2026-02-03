@@ -38,15 +38,9 @@
                     id: "consultation-schedule-form",
                     data: { controller: "schedule" } do |f| %>
         <%= render "shared/error_messages", object: f.object %>
-         <!-- エラーメッセージ表示エリア（追加） -->
-          <div data-schedule-target="errorMessage"
-              class="hidden mt-3 p-3 bg-red-100 flex items-center gap-2">
-            <span></span>
-          </div>
 
         <div class="flex items-center gap-4">
           <%= f.date_field :visit_date,
-                          min: Date.current,
                           disabled: true,
                           data: {
                             schedule_target: "dateField",

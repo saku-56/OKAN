@@ -11,6 +11,7 @@ class ConsultationSchedulesController < ApplicationController
       redirect_to hospital_path(@hospital), notice: "通院予定日を登録しました"
     else
       @next_visit = @consultation_schedule
+      flash.now[:alert] = "通院予定日の登録に失敗しました"
       render "hospitals/show", status: :unprocessable_entity
     end
   end
@@ -21,6 +22,7 @@ class ConsultationSchedulesController < ApplicationController
     else
       # @consultation_scheduleにエラー情報を含むオブジェクトごとビューの@next_visitに渡す
       @next_visit = @consultation_schedule
+      flash.now[:alert] = "通院予定日の登録に失敗しました"
       render "hospitals/show", status: :unprocessable_entity
     end
   end
