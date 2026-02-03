@@ -32,14 +32,14 @@
         </div>
 
         <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">処方量</label>
+          <label class="block text-sm font-bold mb-2">前回の処方量</label>
           <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
             <%= @user_medicine.prescribed_amount %> 錠
           </div>
         </div>
 
         <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">最新の処方日</label>
+          <label class="block text-sm font-bold mb-2">前回の処方日</label>
           <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
             <%= @user_medicine.date_of_prescription %>
           </div>
@@ -64,7 +64,10 @@
             <% end %>
           </div>
           <div class="mt-10 flex justify-end">
-            <%= link_to "戻る", user_medicines_path, class: "btn btn-neutral" %>
+            <%= link_to "戻る", :back, class: "btn btn-neutral" %>
+          </div>
+          <div class="mt-10 flex justify-end">
+            <%= link_to "薬一覧", user_medicines_path, class: "btn btn-neutral" %>
           </div>
         </div>
        </div>

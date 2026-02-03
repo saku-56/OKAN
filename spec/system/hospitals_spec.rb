@@ -178,20 +178,19 @@ RSpec.describe "Hospitals", type: :system do
       end
 
       it "病院情報が削除できること" do
-        expect(page).to have_css('.delete-icon')
+        expect(page).to have_css(".delete-icon")
 
         page.accept_confirm do
-          find('.delete-icon').click
+          find(".delete-icon").click
         end
 
-        expect(page).to have_content("病院情報を削除しました。"), "フラッシュメッセージが表示されていません"
+        expect(page).to have_content("病院情報を削除しました"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq hospitals_path
       end
     end
 
     describe "病院情報の編集" do
       let!(:hospital) { create(:hospital, user: user) }
-
 
       describe "病院基本情報の更新" do
         it "病院名を更新できること" do
@@ -217,10 +216,10 @@ RSpec.describe "Hospitals", type: :system do
 
       describe "診療スケジュールの更新" do
         it "既存のスケジュールを更新できること" do
-          create(:hospital_schedule, start_time: "09:00", end_time: "12:00", hospital: hospital)
+          create(:hospital_schedule, start_time: "11:00", end_time: "12:00", hospital: hospital)
           visit edit_hospital_path(hospital)
 
-          # 月曜日の午前を14:00-18:00に変更
+          # 月曜日の午前を10:00-13:00に変更
           select "10:00", from: "hospital_hospital_schedules_attributes_1_start_time"
           select "13:00", from: "hospital_hospital_schedules_attributes_1_end_time"
 

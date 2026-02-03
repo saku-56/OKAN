@@ -1,5 +1,5 @@
 <%= form_with model: hospital do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
+<%= render "shared/error_messages", object: f.object %>
 
 <div class="bg-white rounded-lg shadow p-6 mb-3">
 
@@ -21,17 +21,15 @@
     <h2 class="text-lg font-bold mb-4">診療時間</h2>
 
     <div class="space-y-4">
-      <%
-        # 曜日順にソート
-        schedules_by_day = @hospital.hospital_schedules
-                                    .sort_by { |s| [s.day_of_week.to_i, s.period.to_i] }
-                                    .group_by(&:day_of_week)
-      %>
+      <% # 曜日順にソート
+         schedules_by_day = @hospital.hospital_schedules
+                                     .sort_by { |s| [s.day_of_week.to_i, s.period.to_i] }
+                                     .group_by(&:day_of_week) %>
 
       <% HospitalSchedule.day_of_weeks.keys.each do |day| %>
         <% schedules = schedules_by_day[day] || [] %>
-        <% morning = schedules.find { |s| s.period == 'morning' } %>
-        <% afternoon = schedules.find { |s| s.period == 'afternoon' } %>
+        <% morning = schedules.find { |s| s.period == "morning" } %>
+        <% afternoon = schedules.find { |s| s.period == "afternoon" } %>
 
         <div class="border border-gray-300 rounded-lg p-3 bg-white">
           <!-- 曜日 -->
@@ -49,17 +47,17 @@
               <div class="flex items-center gap-1 text-xs">
                 <!-- 午前開始時間 -->
                <%= sf.select :start_time,
-                      options_for_select(time_options, sf.object.start_time&.strftime('%H:%M')),
-                      { include_blank: true },
-                      class: 'w-24 border border-gray-300 rounded px-2 py-1' %>
+                             options_for_select(morning_time_options, sf.object.start_time&.strftime("%H:%M")),
+                             { include_blank: true },
+                             class: "w-24 border #{sf.object.errors[:start_time].any? ? "border-red-500" : "border-gray-300"} rounded px-2 py-1" %>
 
                 <span class="text-gray-500">〜</span>
 
                 <!-- 午前終了時間 -->
                 <%= sf.select :end_time,
-                        options_for_select(time_options, sf.object.end_time&.strftime('%H:%M')),
-                        { include_blank: true },
-                        class: 'w-24 border border-gray-300 rounded px-2 py-1' %>
+                              options_for_select(morning_time_options, sf.object.end_time&.strftime("%H:%M")),
+                              { include_blank: true },
+                              class: "w-24 border #{sf.object.errors[:end_time].any? ? "border-red-500" : "border-gray-300"} rounded px-2 py-1" %>
 
                 <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
               </div>
@@ -76,15 +74,18 @@
               <div class="flex items-center gap-1 text-xs">
                 <!-- 午後開始時間 -->
                 <%= sf.select :start_time,
-                      options_for_select(time_options, sf.object.start_time&.strftime('%H:%M')),
-                      { include_blank: true },
-                      class: 'w-24 border border-gray-300 rounded px-2 py-1' %>
+                              options_for_select(afternoon_time_options, sf.object.start_time&.strftime("%H:%M")),
+                              { include_blank: true },
+                              class: "w-24 border #{sf.object.errors[:start_time].any? ? "border-red-500" : "border-gray-300"} rounded px-2 py-1" %>
+
                 <span class="text-gray-500">〜</span>
-                <!-- 午前終了時間 -->
+
+                <!-- 午後終了時間 -->
                 <%= sf.select :end_time,
-                      options_for_select(time_options, sf.object.end_time&.strftime('%H:%M')),
-                      { include_blank: true },
-                      class: 'w-24 border border-gray-300 rounded px-2 py-1' %>
+                              options_for_select(afternoon_time_options, sf.object.end_time&.strftime("%H:%M")),
+                              { include_blank: true },
+                              class: "w-24 border #{sf.object.errors[:end_time].any? ? "border-red-500" : "border-gray-300"} rounded px-2 py-1" %>
+
                 <span class="text-gray-400 ml-1">(休診の場合は空欄)</span>
               </div>
             <% end %>

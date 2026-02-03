@@ -6,6 +6,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
   before do
     sign_in user
+     page.driver.browser.manage.window.resize_to(1200, 1000)
   end
 
   describe "通院予定の表示" do
@@ -13,7 +14,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームが空欄で表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: "")
+        expect(page).to have_field("consultation_schedule[visit_date]", with: "", disabled: true)
       end
     end
 
@@ -27,7 +28,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームに通院予定日が表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s)
+        expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s, disabled: true)
       end
     end
 
@@ -48,7 +49,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームが空欄で表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: "")
+        expect(page).to have_field("consultation_schedule[visit_date]", with: "", disabled: true)
       end
     end
   end
@@ -60,12 +61,15 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "通院予定日を登録できる" do
         visit hospital_path(hospital)
 
-        page.accept_confirm do
-          fill_in "consultation_schedule[visit_date]", with: visit_date
-        end
+        # 編集アイコンをクリック
+        find('[data-schedule-target="editBtn"]').click
+        fill_in "consultation_schedule[visit_date]", with: visit_date
 
-        expect(page).to have_content "通院予定日を登録しました。"
-        expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s)
+        # 保存ボタンをクリック
+        find('[data-schedule-target="saveBtn"]').click
+
+        expect(page).to have_content "通院予定日を登録しました"
+        expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s, disabled: true)
       end
     end
   end
@@ -82,12 +86,14 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "通院予定日を更新できる" do
         visit hospital_path(hospital)
 
-        page.accept_confirm do
-          fill_in "consultation_schedule[visit_date]", with: new_date
-        end
+        find('[data-schedule-target="editBtn"]').click
+        fill_in "consultation_schedule[visit_date]", with: new_date
 
-        expect(page).to have_content "通院予定日を変更しました。"
-        expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s)
+        # 保存ボタンをクリック
+        find('[data-schedule-target="saveBtn"]').click
+
+        expect(page).to have_content "通院予定日を変更しました"
+        expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s, disabled: true)
       end
     end
   end
@@ -98,7 +104,6 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
     before do
       visit hospital_path(hospital)
-      page.driver.browser.manage.window.resize_to(1200, 1000)
     end
 
     it "通院予定が削除できること" do
@@ -106,7 +111,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
         find('[data-testid="delete-schedule-icon"]').click
       end
 
-      expect(page).to have_content("通院予定を削除しました。")
+      expect(page).to have_content("通院予定を削除しました")
     end
   end
 end

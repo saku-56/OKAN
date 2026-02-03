@@ -70,7 +70,7 @@ RSpec.describe "UserMedicines", type: :system do
           visit add_stock_user_medicine_path(user_medicine)
           fill_in "処方量", with: "30"
           fill_in "処方日", with: Date.current
-          click_button "在庫を追加"
+          click_button "在庫を追加する"
           expect(page).to have_content "薬を追加しました"
           expect(current_path).to eq user_medicines_path
         end
@@ -154,7 +154,7 @@ RSpec.describe "UserMedicines", type: :system do
         page.accept_confirm do
           find('.delete-icon').click
         end
-        expect(page).to have_content("薬を削除しました。"), "フラッシュメッセージが表示されていません"
+        expect(page).to have_content("薬を削除しました"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq user_medicines_path
       end
     end

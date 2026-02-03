@@ -9,9 +9,20 @@ module HospitalHelper
     "#{schedule.start_time.strftime('%-H:%M')} - #{schedule.end_time.strftime('%-H:%M')}"
   end
 
-  def time_options
+  def morning_time_options
     times = []
     (6..23).each do |hour|
+      [ 0, 15, 30, 45 ].each do |minute|
+        time_str = format("%02d:%02d", hour, minute)
+        times << [ time_str, time_str ]
+      end
+    end
+    times
+  end
+
+  def afternoon_time_options
+    times = []
+    (10..23).each do |hour|
       [ 0, 15, 30, 45 ].each do |minute|
         time_str = format("%02d:%02d", hour, minute)
         times << [ time_str, time_str ]
