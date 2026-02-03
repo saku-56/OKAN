@@ -5,12 +5,12 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :email, "メールアドレス", class: "label-text mb-1" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
       </div>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :password, "パスワード", class: "label-text mb-1" %>
         <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white" %>
       </div>

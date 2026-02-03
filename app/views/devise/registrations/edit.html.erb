@@ -3,7 +3,7 @@
     <h2 class="text-center text-2xl font-bold text-primary mb-6">アカウント設定</h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :name, class: "label-text mb-1" %>
         <%= f.text_field :name, class: "input input-bordered bg-white" %>
         <% if resource.errors[:name].any? %>
@@ -13,7 +13,7 @@
         <% end %>
       </div>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :email, class: "label-text mb-1" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
         <% if resource.errors[:email].any? %>
@@ -27,7 +27,7 @@
        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :password, class: "label-text mb-1" %>
         <% if @minimum_password_length %>
           <span class="text-xs mb-1">(<%= @minimum_password_length %> 文字以上)</span>
@@ -40,7 +40,7 @@
         <% end %>
       </div>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered bg-white" %>
         <% if resource.errors[:password_confirmation].any? %>
@@ -50,7 +50,7 @@
         <% end %>
       </div>
 
-      <div class="form-control mb-4">
+      <div class="mb-4">
         <%= "本人確認のため、現在のパスワードを入力してください。" %><br>
         <%= f.label :current_password, class: "label-text mb-1" %>
         <%= f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered bg-white" %>
