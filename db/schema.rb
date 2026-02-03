@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_30_011325) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_03_084928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_30_011325) do
     t.bigint "user_id", null: false
     t.bigint "hospital_id", null: false
     t.date "visit_date", null: false
-    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hospital_id"], name: "index_consultation_schedules_on_hospital_id"

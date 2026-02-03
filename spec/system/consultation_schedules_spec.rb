@@ -18,38 +18,17 @@ RSpec.describe "ConsultationSchedules", type: :system do
       end
     end
 
-    context "通院予定がある場合（statusがscheduledでvisit_dateが未来）" do
+    context "通院予定がある場合" do
       let(:future_date) { 5.days.from_now.to_date }
 
       before do
-        create(:consultation_schedule, user: user, hospital: hospital, status: :scheduled, visit_date: future_date)
+        create(:consultation_schedule, user: user, hospital: hospital, visit_date: future_date)
       end
 
       it "フォームに通院予定日が表示される" do
         visit hospital_path(hospital)
 
         expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s, disabled: true)
-      end
-    end
-
-    # バッチ処理の失敗などでcompletedに更新されなかった場合を想定
-    context "statusがscheduledだがvisit_dateが過去の場合" do
-      let(:past_date) { 3.days.ago.to_date }
-
-      before do
-        # バリデーションをスキップして過去日付のデータを作成
-        consultation_schedule = build(:consultation_schedule,
-                                      user: user,
-                                      hospital: hospital,
-                                      status: :scheduled,
-                                      visit_date: past_date)
-        consultation_schedule.save(validate: false)
-      end
-
-      it "フォームが空欄で表示される" do
-        visit hospital_path(hospital)
-
-        expect(page).to have_field("consultation_schedule[visit_date]", with: "", disabled: true)
       end
     end
   end
@@ -79,7 +58,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
     let(:new_date) { 10.days.from_now.to_date }
 
     before do
-      create(:consultation_schedule, user: user, hospital: hospital, status: :scheduled, visit_date: initial_date)
+      create(:consultation_schedule, user: user, hospital: hospital, visit_date: initial_date)
     end
 
     context "正常な入力の場合" do
