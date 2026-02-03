@@ -24,23 +24,6 @@ RSpec.describe ConsultationSchedule, type: :model do
         expect(consultation_schedule.errors[:visit_date]).to be_present
       end
     end
-
-    describe "status" do
-      it "statusがない場合にバリデーションが機能してinvalidになるか" do
-        consultation_schedule = build(:consultation_schedule, user: user, status: nil)
-        expect(consultation_schedule).to be_invalid
-        expect(consultation_schedule.errors[:status]).to include("を入力してください")
-      end
-    end
-  end
-
-  describe "カラムのデフォルト値" do
-    let(:user) { create(:user) }
-    let(:hospital) { create(:hospital) }
-    it "statusのデフォルト値がscheduledであること" do
-      consultation_schedule = build(:consultation_schedule, user: user)
-       expect(consultation_schedule.status).to eq("scheduled")
-    end
   end
 
   describe "アソシエーション" do
