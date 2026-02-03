@@ -42,6 +42,7 @@
         <div class="flex items-center gap-4">
           <%= f.date_field :visit_date,
                           min: Date.current,
+                          disabled: true,
                           data: {
                             schedule_target: "dateField",
                             action: "change->schedule#dateChanged",

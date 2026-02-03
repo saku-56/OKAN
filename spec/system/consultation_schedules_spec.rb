@@ -14,7 +14,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームが空欄で表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: "")
+        expect(page).to have_field("consultation_schedule[visit_date]", with: "", disabled: true)
       end
     end
 
@@ -28,7 +28,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームに通院予定日が表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s)
+        expect(page).to have_field("consultation_schedule[visit_date]", with: future_date.to_s, disabled: true)
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
       it "フォームが空欄で表示される" do
         visit hospital_path(hospital)
 
-        expect(page).to have_field("consultation_schedule[visit_date]", with: "")
+        expect(page).to have_field("consultation_schedule[visit_date]", with: "", disabled: true)
       end
     end
   end
@@ -69,7 +69,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
         find('[data-schedule-target="saveBtn"]').click
 
         expect(page).to have_content "通院予定日を登録しました"
-        expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s)
+        expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s, disabled: true)
       end
     end
   end
@@ -93,7 +93,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
         find('[data-schedule-target="saveBtn"]').click
 
         expect(page).to have_content "通院予定日を変更しました"
-        expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s)
+        expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s, disabled: true)
       end
     end
   end
