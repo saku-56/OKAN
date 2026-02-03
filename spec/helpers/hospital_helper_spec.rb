@@ -29,8 +29,8 @@ RSpec.describe HospitalHelper, type: :helper do
   end
 
   describe "#time_options" do
-    it "正しい時間選択肢が生成されること" do
-      options = helper.time_options
+    it "午前の正しい時間選択肢が生成されること" do
+      options = helper.morning_time_options
 
       # 6時から23時45分まで、15分刻みで選択肢が72個
       expect(options.length).to eq 72
@@ -47,8 +47,26 @@ RSpec.describe HospitalHelper, type: :helper do
       expect(options).to include([ "18:15", "18:15" ])
     end
 
+    it "午後の正しい時間選択肢が生成されること" do
+      options = helper.afternoon_time_options
+
+      # 10時から23時45分まで、15分刻みで選択肢が72個
+      expect(options.length).to eq 56
+
+      # 最初の要素を確認
+      expect(options.first).to eq [ "10:00", "10:00" ]
+
+      # 最後の要素を確認
+      expect(options.last).to eq [ "23:45", "23:45" ]
+
+      # 特定の時間が含まれているか確認
+      expect(options).to include([ "10:00", "10:00" ])
+      expect(options).to include([ "12:30", "12:30" ])
+      expect(options).to include([ "18:15", "18:15" ])
+    end
+
     it "15分刻みで生成されること" do
-      options = helper.time_options
+      options = helper.morning_time_options
 
       expect(options).to include([ "09:00", "09:00" ])
       expect(options).to include([ "09:15", "09:15" ])
@@ -57,11 +75,12 @@ RSpec.describe HospitalHelper, type: :helper do
     end
 
     it "存在しない時間が含まれていないこと" do
-      options = helper.time_options
+      options = helper.afternoon_time_options
 
       expect(options).not_to include([ "05:00", "05:00" ])
+      expect(options).not_to include([ "09:00", "09:00" ])
       expect(options).not_to include([ "24:00", "24:00" ])
-      expect(options).not_to include([ "09:10", "09:10" ])
+      expect(options).not_to include([ "10:10", "10:10" ])
     end
   end
 end
