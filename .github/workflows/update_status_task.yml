@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - feature/change_status # 現在の作業ブランチ
-      - main  # main ブランチでも動作確認
+      - main 
 
 jobs:
   run-task:
