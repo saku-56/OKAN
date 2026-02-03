@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # 手動実行も可能にする
   # push:
   #   branches:
-  #     - bugfix/cron_for_render  # 現在の作業ブランチ
+  #     - feature/change_status # 現在の作業ブランチ
   #     - main  # main ブランチでも動作確認
 
 jobs:
@@ -24,10 +24,17 @@ jobs:
           ruby-version: 3.3.10
           bundler-cache: true
 
-      - name: Run Run medicine reduce stock task
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Run medicine reduce stock task
         env:
           RAILS_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          bundle exec rails medicine_stock:reduce_medicine_stock
+          bundle exec rake medicine_stock:reduce_medicine_stock
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "Medicine stock reduction task failed. Please check the logs."

@@ -6,4 +6,5 @@ set :environment, rails_env
 set :output, "#{Rails.root}/log/cron.log"
 every 1.day, at: "0:00 am" do
   rake "medicine_stock:reduce_medicine_stock"
+  rake "consultation_schedule:update_status"
 end
