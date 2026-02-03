@@ -32,19 +32,19 @@
 
           <div class="mb-4">
             <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mb-2" %>
-            <div class="flex items-center">
+            <div class="flex items-center gap-2">
               <%= f.text_field :prescribed_amount,
+              placeholder: "追加する数量を入力",
                   type: "number",
-                  class: "flex-1 border border-gray-300 rounded px-3 py-2" %>
-              <span class="ml-2 text-gray-700">錠</span>
+                  class: "border border-gray-300 rounded px-3 py-2" %>
+              <span class="text-gray-700 whitespace-nowrap">錠</span>
             </div>
           </div>
 
           <div class="mb-4">
             <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
             <%= f.date_field :date_of_prescription,
-                max: Date.today,
-                class: "w-full border border-gray-300 rounded px-3 py-2" %>
+                class: "border border-gray-300 rounded px-3 py-2" %>
           </div>
 
           <div class="flex gap-4">
