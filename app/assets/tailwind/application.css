@@ -53,4 +53,8 @@
   .edit-icon {
     @apply rounded-full hover:bg-blue-50 hover:text-blue-600 transition-colors;
   }
+
+  .cancel-icon {
+    @apply rounded-full hover:bg-gray-50 hover:text-gray-600 transition-colors;
+  }
   }

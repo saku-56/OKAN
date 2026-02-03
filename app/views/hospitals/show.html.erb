@@ -38,6 +38,11 @@
                     id: "consultation-schedule-form",
                     data: { controller: "schedule" } do |f| %>
         <%= render "shared/error_messages", object: f.object %>
+         <!-- エラーメッセージ表示エリア（追加） -->
+          <div data-schedule-target="errorMessage"
+              class="hidden mt-3 p-3 bg-red-100 flex items-center gap-2">
+            <span></span>
+          </div>
 
         <div class="flex items-center gap-4">
           <%= f.date_field :visit_date,
@@ -65,6 +70,15 @@
                   class="hidden btn btn-secondary"
                   title="保存">
             保存
+          </button>
+
+          <!-- キャンセルボタン（初期状態は非表示） -->
+          <button type="button"
+                  data-action="click->schedule#cancel"
+                  data-schedule-target="cancelBtn"
+                  class="hidden cancel-icon"
+                  title="キャンセル">
+            <i class="fa-solid fa-xmark fa-lg"></i>
           </button>
 
           <!-- 削除アイコン -->
