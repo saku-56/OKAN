@@ -1,75 +1,21 @@
+<!-- 服薬中の薬一覧 -->
 <div class="container mx-auto px-4">
-  <!-- 服薬中の薬一覧 -->
-  <div class="medicines-section max-w-4xl mx-auto mb-8">
-    <!-- 今日の日付を表示 -->
-    <h2 class="text-2xl font-bold text-center mb-6">
-      <%= l(Date.today, format: :long) %>
-    </h2>
-
-    <% if @medicines_with_stock.any? %>
-      <table class="table w-full bg-white shadow-md rounded-lg overflow-hidden">
-        <tbody>
-          <% @medicines_with_stock.each do |user_medicine| %>
-            <tr class="border-b">
-              <% if user_medicine.current_stock > 10 %>
-                <td class="px-6 py-4">
-                  <%= link_to user_medicine.medicine.name, user_medicine_path(user_medicine) %>
-                </td>
-                <td class="px-6 py-4 text-right">残り<%= user_medicine.current_stock %>錠</td>
-              <% else %>
-                <td class="px-6 py-4 text-error">
-                  <%= link_to user_medicine.medicine.name, user_medicine_path(user_medicine) %>
-                </td>
-                <td class="px-6 py-4 text-right text-error">残り<%= user_medicine.current_stock %>錠</td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p class="text-center text-gray-500 py-8">服薬中の薬はありません。</p>
-    <% end %>
-  </div>
+  <%= render "medicines_list", medicines_with_stock: @medicines_with_stock %>
 </div>
-
+<!-- カレンダー表示 -->
 <div class="container mx-auto mb-10">
-  <!-- カレンダー表示 -->
-  <div class="calendar-section max-w-4xl mx-auto mb-8">
-    <%= month_calendar do |date| %>
-      <%= link_to date.day,
-                  home_path(date: date),
-                  data: { turbo_frame: "stock_modal" } %>
-
-      <!-- カレンダー上の残り10錠表示 -->
-      <% @medicines_with_stock.each do |medicine| %>
-        <% display_stock = medicine.display_stock_on(date) %>
-        <% if display_stock.present? %>
-          <span class="block text-xs text-error leading-tight">
-            <%= medicine.medicine.name %><%= display_stock %>錠
-          </span>
-        <% end %>
-      <% end %>
-
-      <!-- 通院予定の表示（グループ化版） -->
-      <% schedules = @consultation_schedules_by_date[date] || [] %>
-      <% schedules.each do |schedule| %>
-        <span class="block text-xs text-blue-600 leading-tight">
-          <%= schedule.hospital.name %>通院予定
-        </span>
-      <% end %>
-    <% end %>
-  </div>
+  <%= render "calendar", medicines_with_stock: @medicines_with_stock, consultation_schedules_by_date: @consultation_schedules_by_date %>
 </div>
 
-  <div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
-    <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
-    <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
-  </div>
-
-  <!-- モーダル枠 -->
-  <turbo-frame id="stock_modal">
-    <% if params[:date].present? %>
-      <%= render "stock_modal" %>
-    <% end %>
-  </turbo-frame>
+<div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
+  <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
+  <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
 </div>
+
+<!-- モーダル枠 -->
+<turbo-frame id="stock_modal">
+  <% if params[:date].present? %>
+    <%= render "stock_modal" %>
+  <% end %>
+</turbo-frame>
+
