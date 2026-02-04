@@ -14,12 +14,12 @@
       <% end %>
     <% end %>
 
-    <!-- 通院予定の表示（グループ化版） -->
+    <!-- 通院予定の表示 -->
     <% schedules = consultation_schedules_by_date[date] || [] %>
     <% schedules.each do |schedule| %>
-      <span class="block text-xs text-blue-600 leading-tight">
+      <%= link_to hospital_path(schedule.hospital), class: "block text-xs text-blue-600 leading-tight hover:underline" do %>
         <%= schedule.hospital.name %>通院予定
-      </span>
+      <% end%>
     <% end %>
   <% end %>
 </div>
