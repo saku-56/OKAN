@@ -1,10 +1,4 @@
 <div class="simple-calendar max-w-4xl mx-auto">
-  <!-- ヘッダー部分（前月・次月ボタン） -->
-  <div class="calendar-heading flex justify-center items-center mb-6 px-4 gap-8">
-    <%= link_to t('simple_calendar.previous'), calendar.url_for_previous_view %>
-    <%= l(calendar.start_date, format: "%B") %>
-    <%= link_to t('simple_calendar.next'), calendar.url_for_next_view %>
-  </div>
 
   <!-- カレンダー本体 -->
   <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
