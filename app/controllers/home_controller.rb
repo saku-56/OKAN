@@ -12,9 +12,9 @@ class HomeController < ApplicationController
 
     @start_date = if requested_date < min_date
                     min_date
-                  elsif requested_date > max_date
+    elsif requested_date > max_date
                     max_date
-                  else
+    else
                     requested_date.beginning_of_month
     end
 
