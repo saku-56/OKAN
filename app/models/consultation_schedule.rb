@@ -16,7 +16,7 @@ class ConsultationSchedule < ApplicationRecord
     if visit_date < Date.current
       errors.add(:visit_date, "は今日以降の日付を選択してください")
     elsif visit_date > Date.current + 6.months
-      errors.add(:visit_date, "は半年以内の日付を選択してください")
+      errors.add(:visit_date, "は6ヶ月以内の日付を選択してください")
     end
   end
 end

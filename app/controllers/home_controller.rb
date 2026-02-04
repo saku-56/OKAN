@@ -18,7 +18,7 @@ class HomeController < ApplicationController
                     requested_date.beginning_of_month
     end
 
-    # 来月の頭にある予定を今月に表示する用
+    # 来月の1週目にある予定を今月に表示する用
     calendar_start = @start_date.beginning_of_week
     calendar_end = @start_date.end_of_month.end_of_week
 
