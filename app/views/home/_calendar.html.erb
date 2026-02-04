@@ -1,0 +1,55 @@
+<div class="calendar-section max-w-4xl mx-auto mb-8">
+  <!-- ★独自のナビゲーションを追加 -->
+  <div class="flex justify-between items-center mb-4">
+    <% prev_month = @start_date - 1.month %>
+    <% min_date = Date.current.beginning_of_month - 1.month %>
+
+    <% if prev_month >= min_date %>
+      <%= link_to "← 前月", home_path(start_date: prev_month), class: "btn btn-sm" %>
+    <% else %>
+      <button
+        class="btn btn-sm opacity-50 cursor-not-allowed"
+        onclick="alert('1ヶ月以上前は表示できません'); return false;">
+        ← 前月
+      </button>
+    <% end %>
+
+    <span class="font-bold text-lg"><%= @start_date.strftime('%Y年%m月') %></span>
+
+    <% next_month = @start_date + 1.month %>
+    <% max_date = Date.current.beginning_of_month + 6.months %>
+
+    <% if next_month <= max_date %>
+      <%= link_to "次月 →", home_path(start_date: next_month), class: "btn btn-sm", data: { turbo: false } %>
+    <% else %>
+      <button
+        class="btn btn-sm opacity-50 cursor-not-allowed"
+        onclick="alert('6ヶ月先以降は表示できません'); return false;">
+        次月 →
+      </button>
+    <% end %>
+  </div>
+
+  <%= month_calendar(start_date: @start_date) do |date| %>
+    <%= link_to date.day, home_path(date: date), data: { turbo_frame: "stock_modal" } %>
+
+    <!-- 薬の残り錠数表示 -->
+    <% medicines_with_stock.each do |medicine| %>
+      <% display_stock = medicine.display_stock_on(date) %>
+      <% if display_stock.present? %>
+        <span class="block text-xs text-error leading-tight">
+          <%= medicine.medicine.name %><%= display_stock %>錠
+        </span>
+      <% end %>
+    <% end %>
+
+    <!-- 通院予定の表示 -->
+    <% schedules = consultation_schedules_by_date[date] || [] %>
+    <% schedules.each do |schedule| %>
+      <%= link_to hospital_path(schedule.hospital),
+                  class: "block text-xs text-blue-600 leading-tight hover:underline" do %>
+        <%= schedule.hospital.name %>通院予定
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
