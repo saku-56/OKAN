@@ -11,7 +11,7 @@
         <tbody>
           <% @medicines_with_stock.each do |user_medicine| %>
             <tr class="border-b">
-              <% if user_medicine.current_stock > 10%>
+              <% if user_medicine.current_stock > 10 %>
                 <td class="px-6 py-4">
                   <%= link_to user_medicine.medicine.name, user_medicine_path(user_medicine) %>
                 </td>
@@ -21,7 +21,7 @@
                   <%= link_to user_medicine.medicine.name, user_medicine_path(user_medicine) %>
                 </td>
                 <td class="px-6 py-4 text-right text-error">残り<%= user_medicine.current_stock %>錠</td>
-              <%end%>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -37,8 +37,8 @@
   <div class="calendar-section max-w-4xl mx-auto mb-8">
     <%= month_calendar do |date| %>
       <%= link_to date.day,
-        home_path(date: date),
-        data: { turbo_frame: "stock_modal" } %>
+                  home_path(date: date),
+                  data: { turbo_frame: "stock_modal" } %>
 
       <!-- カレンダー上の残り10錠表示 -->
       <% @medicines_with_stock.each do |medicine| %>
@@ -49,10 +49,17 @@
           </span>
         <% end %>
       <% end %>
+
+      <!-- 通院予定の表示（グループ化版） -->
+      <% schedules = @consultation_schedules_by_date[date] || [] %>
+      <% schedules.each do |schedule| %>
+        <span class="block text-xs text-blue-600 leading-tight">
+          <%= schedule.hospital.name %>通院予定
+        </span>
+      <% end %>
     <% end %>
   </div>
 </div>
-
 
   <div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
     <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
