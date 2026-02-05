@@ -94,7 +94,7 @@ RSpec.describe "カレンダー表示", type: :system do
       end
 
       context "1ヶ月以上前に遷移しようとする場合" do
-        it "「1ヶ月以上前は表示できません」のメッセージが表示される" do
+        it "ブラウザのアラートが表示される" do
           # まず1ヶ月前に遷移
           click_link "前月"
 
