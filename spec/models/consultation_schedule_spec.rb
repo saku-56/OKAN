@@ -23,6 +23,12 @@ RSpec.describe ConsultationSchedule, type: :model do
         expect(consultation_schedule).to be_invalid
         expect(consultation_schedule.errors[:visit_date]).to be_present
       end
+
+      it "visit_dateが6ヶ月先以降の場合にカスタムバリデーションが機能してinvalidになるか" do
+        consultation_schedule = build(:consultation_schedule, user: user, visit_date: 7.months.from_now.to_date)
+        expect(consultation_schedule).to be_invalid
+        expect(consultation_schedule.errors[:visit_date]).to be_present
+      end
     end
   end
 
