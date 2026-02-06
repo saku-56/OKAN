@@ -2,6 +2,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :verify_authenticity_token, only: :google_oauth2
 
   def google_oauth2
+    callback_for(:google_oauth2)
+  end
+
+  def line
+    callback_for(:line)
+  end
+
+  private
+
+  def callback_for(provider)
     provider = "google"
     # Googleから返ってきた情報を取得
     @user = User.from_omniauth(request.env["omniauth.auth"])
