@@ -304,6 +304,10 @@ Devise.setup do |config|
       name: :google_oauth2
   end
 
+    config.omniauth :line,
+      Rails.application.credentials.dig(:line, :channel_id),
+      Rails.application.credentials.dig(:line, :channel_secret),
+
   # ==> Hotwire/Turbo configuration
   # When using Devise with Hotwire/Turbo, the http status for error responses
   # and some redirects must match the following. The default in Devise for existing
