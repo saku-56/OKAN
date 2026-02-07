@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [ :google_oauth2 ]
-
+         :omniauthable, omniauth_providers: %i[line google_oauth2]
   validates :name, presence: true, length: { maximum: 20 }
   validates :uuid, uniqueness: true
 
@@ -20,9 +19,10 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
-      user.email = auth.info.email
+      user.email = auth.info.email || "#{auth.uid}@line.example.com"
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
+      user.line_user_id = auth.uid if auth.provider == "line"
     end
   end
 end

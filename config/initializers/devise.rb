@@ -302,6 +302,10 @@ Devise.setup do |config|
       Rails.application.credentials.dig(:google, :google_client_secret),
       scope: "email,profile,openid",
       name: :google_oauth2
+
+    config.omniauth :line,
+      Rails.application.credentials.dig(:line, :channel_id),
+      Rails.application.credentials.dig(:line, :channel_secret)
   end
 
   # ==> Hotwire/Turbo configuration
