@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../stylesheets/fontawesome/all.css";
 @plugin "daisyui";
+
+/* DaisyUI のテーマカスタマイズ */
 @plugin "daisyui/theme" {
   name: "mytheme";
   default: true; /* set as default */
@@ -43,9 +45,9 @@
   /* effects */
   --depth: 1;
   --noise: 0;
-  }
+}
 
-  @layer components {
+@layer components {
   .delete-icon {
     @apply rounded-full hover:bg-red-50 hover:text-red-600 transition-colors;
   }
@@ -57,4 +59,4 @@
   .cancel-icon {
     @apply rounded-full hover:bg-gray-50 hover:text-gray-600 transition-colors;
   }
-  }
+}
