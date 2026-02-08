@@ -8,7 +8,7 @@ namespace :medicine_stock do
 
     UserMedicine.has_stock.find_each do |user_medicine|
       before_stock = user_medicine.current_stock
-      new_stock = user_medicine.current_stock - user_medicine.dosage_per_time
+      new_stock = user_medicine.current_stock - user_medicine.daily_dosage
 
       if user_medicine.update(current_stock: [ new_stock, 0 ].max)
         success_count += 1
