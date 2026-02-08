@@ -62,13 +62,13 @@ RSpec.describe "カレンダー表示", type: :system do
 
     context "カレンダー上の表示" do
       before do
-        create(:user_medicine, medicine: medicine2, prescribed_amount: 12, date_of_prescription: Date.yesterday, dosage_per_time: 1, current_stock: 11, user: user)
+        create(:user_medicine, medicine: medicine2, prescribed_amount: 2, date_of_prescription: Date.yesterday, dosage_per_time: 1, times_per_day: 1, current_stock: 1, user: user)
         create(:consultation_schedule, user: user, hospital: hospital, visit_date: Date.current)
         page.driver.browser.manage.window.resize_to(1200, 1000)
         visit home_path
       end
-      it "残り10錠の表示がある" do
-        expect(page).to have_content("テスト薬B10錠")
+      it "在庫切れ表示がある" do
+        expect(page).to have_content("テスト薬B 在庫切れ予定")
       end
 
       it "通院予定の表示がある" do
