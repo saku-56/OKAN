@@ -5,8 +5,8 @@
         <!-- 削除アイコン -->
         <div class="flex justify-end">
         <%= link_to user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "薬を削除しますか?" },
-                      class: "delete-icon",
-                      title: "削除" do %>
+                                                        class: "delete-icon",
+                                                        title: "削除" do %>
             <i class="fa-solid fa-trash fa-lg"></i>
           <% end %>
         </div>
@@ -23,6 +23,7 @@
             <%= @user_medicine.dosage_per_time %> 錠
           </div>
         </div>
+
         <div class="mb-4">
           <label class="block text-sm font-bold mb-2">1日の服薬回数</label>
           <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
@@ -54,19 +55,19 @@
         <div class="space-y-4">
           <div class="flex gap-10">
             <%= button_to "在庫を追加",
-                add_stock_user_medicine_path(@user_medicine),
-                method: :get,
-                form: { class: "flex-1" },
-                class: "btn btn-primary w-full" %>
+                          add_stock_user_medicine_path(@user_medicine),
+                          method: :get,
+                          form: { class: "flex-1" },
+                          class: "btn btn-primary w-full" %>
             <% if @user_medicine.has_stock? %>
               <%= button_to "飲み忘れ",
-                  increment_stock_user_medicine_path(@user_medicine),
-                  method: :patch,
-                  data: {
-                    turbo_confirm: "#{@user_medicine.medicine.name}は現在残り#{@user_medicine.current_stock}錠です。1回分増やしますか？"
-                  },
-                  form: { class: "flex-1" },
-                  class: "btn btn-secondary w-full" %>
+                            increment_stock_user_medicine_path(@user_medicine),
+                            method: :patch,
+                            data: {
+                              turbo_confirm: "#{@user_medicine.medicine.name}は現在残り#{@user_medicine.current_stock}錠です。1回分増やしますか？",
+                            },
+                            form: { class: "flex-1" },
+                            class: "btn btn-secondary w-full" %>
             <% end %>
           </div>
           <div class="mt-10 flex justify-end">
