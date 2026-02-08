@@ -65,7 +65,7 @@ RSpec.describe "UserMedicines", type: :system do
 
     describe "薬の在庫追加" do
       let!(:medicine) { create(:medicine) }
-      let!(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 5, dosage_per_time: 1) }
+      let!(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 5) }
       context "フォームの入力値が正常" do
         it "薬の在庫追加が成功する" do
           visit add_stock_user_medicine_path(user_medicine)
@@ -100,14 +100,14 @@ RSpec.describe "UserMedicines", type: :system do
       end
       context "飲み忘れボタンの表示" do
         context "在庫がある場合" do
-          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10, dosage_per_time: 2) }
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10) }
           it "飲み忘れボタンが表示される" do
             expect(page).to have_button("飲み忘れ"), "在庫がある場合、飲み忘れボタンが表示されていません"
           end
         end
 
         context "在庫がない場合" do
-          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0, dosage_per_time: 2) }
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0) }
           it "飲み忘れボタンが表示されない" do
             expect(page).not_to have_button("飲み忘れ"), "在庫がない場合、飲み忘れボタンが表示されています"
           end
