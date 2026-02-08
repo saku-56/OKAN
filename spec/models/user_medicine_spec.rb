@@ -50,6 +50,37 @@ RSpec.describe UserMedicine, type: :model do
       end
     end
 
+    describe "times_per_day" do
+      it "times_per_dayがない場合にバリデーションが機能してinvalidになるか" do
+        user_medicine = build(:user_medicine, user: user, times_per_day: nil)
+        expect(user_medicine).to be_invalid
+        expect(user_medicine.errors[:times_per_day]).to include("を入力してください")
+      end
+
+      it "times_per_dayが整数でない場合にバリデーションが機能してinvalidになるか" do
+        user_medicine = build(:user_medicine, user: user, times_per_day: 1.5)
+        expect(user_medicine).to be_invalid
+        expect(user_medicine.errors[:times_per_day]).to include("は整数で入力してください")
+      end
+
+      it "times_per_dayが0の場合にバリデーションが機能してinvalidになるか" do
+        user_medicine = build(:user_medicine, user: user, times_per_day: 0)
+        expect(user_medicine).to be_invalid
+        expect(user_medicine.errors[:times_per_day]).to include("は1以上の値にしてください")
+      end
+
+      it "times_per_dayが負の数の場合にバリデーションが機能してinvalidになるか" do
+        user_medicine = build(:user_medicine, user: user, times_per_day: -1)
+        expect(user_medicine).to be_invalid
+        expect(user_medicine.errors[:times_per_day]).to include("は1以上の値にしてください")
+      end
+
+      it "times_per_dayが1の場合にvalidになるか" do
+        user_medicine = build(:user_medicine, user: user, times_per_day: 1)
+        expect(user_medicine).to be_valid
+      end
+    end
+
     describe "prescribed_amount" do
       it "prescribed_amountがない場合にバリデーションが機能してinvalidになるか" do
         user_medicine = build(:user_medicine, user: user, prescribed_amount: nil)
@@ -114,6 +145,13 @@ RSpec.describe UserMedicine, type: :model do
         expect(user_medicine).to be_valid
       end
     end
+    
+    describe "uuid" do
+      it "uuidが自動生成されること" do
+        user_medicine = create(:user_medicine, user: user, medicine: medicine)
+        expect(user_medicine.uuid).to be_present
+      end
+    end
   end
 
   describe "カラムのデフォルト値" do
@@ -125,9 +163,9 @@ RSpec.describe UserMedicine, type: :model do
       expect(user_medicine.current_stock).to eq(0)
     end
 
-    it "uuidが自動生成されること" do
-      user_medicine = create(:user_medicine, user: user, medicine: medicine)
-      expect(user_medicine.uuid).to be_present
+    it "times_per_timeのデフォルト値が1であること" do
+      user_medicine = UserMedicine.new(user: user)
+      expect(user_medicine.times_per_day).to eq(1)
     end
   end
 
