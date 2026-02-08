@@ -9,6 +9,7 @@ RSpec.describe UserMedicineForm, type: :model do
         user: user,
         medicine_name: "新しい薬",
         dosage_per_time: 1,
+        times_per_day: 2,
         prescribed_amount: 30,
         date_of_prescription: Date.current,
       )
@@ -20,6 +21,7 @@ RSpec.describe UserMedicineForm, type: :model do
         user: user,
         medicine_name: nil,
         dosage_per_time: 1,
+        times_per_day: 2,
         prescribed_amount: 30,
         date_of_prescription: Date.current,
       )
@@ -35,6 +37,7 @@ RSpec.describe UserMedicineForm, type: :model do
           user: user,
           medicine_name: "新しい薬",
           dosage_per_time: 1,
+          times_per_day: 2,
           prescribed_amount: 30,
           date_of_prescription: Date.current,
         )
@@ -50,6 +53,7 @@ RSpec.describe UserMedicineForm, type: :model do
           user: user,
           medicine_name: "既存の薬",
           dosage_per_time: 1,
+          times_per_day: 2,
           prescribed_amount: 30,
           date_of_prescription: Date.current,
         )
