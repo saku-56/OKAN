@@ -4,11 +4,13 @@ class UserMedicineForm
 
   attribute :medicine_name, :string
   attribute :dosage_per_time, :integer
+  attribute :times_per_day, :integer
   attribute :prescribed_amount, :integer
   attribute :date_of_prescription, :date
 
   validates :medicine_name, presence: true, length: { maximum: 20 }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
+  validates :times_per_day, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 4 }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   validates :date_of_prescription, presence: true
   validate :date_of_prescription_cannot_be_in_future
@@ -30,8 +32,9 @@ class UserMedicineForm
       user_medicine = @user.user_medicines.build(
         medicine: medicine,
         dosage_per_time: dosage_per_time,
+        times_per_day: times_per_day,
         prescribed_amount: prescribed_amount,
-        date_of_prescription: date_of_prescription
+        date_of_prescription: date_of_prescription,
       )
 
       user_medicine.current_stock = user_medicine.initial_stock_on_create

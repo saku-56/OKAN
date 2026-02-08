@@ -36,6 +36,16 @@
           </div>
 
           <div class="mb-4">
+            <%= f.label :times_per_day, "1日の服薬回数", class: "block text-sm font-bold mb-2" %>
+            <div class="flex items-center gap-2">
+              <%= f.number_field :times_per_day,
+                                 max: 4,
+                                 class: "border border-gray-300 rounded px-3 py-2" %>
+              <span class="text-gray-700 whitespace-nowrap">回</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
             <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mt-2" %>
               <div class="flex items-center gap-2">
               <%= f.number_field :prescribed_amount,
