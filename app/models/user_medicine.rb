@@ -20,31 +20,36 @@ class UserMedicine < ApplicationRecord
     current_stock > 0
   end
 
+  # 在庫切れ予定日を計算するメソッド
+  def stock_out_date
+    return nil if daily_dosage <= 0 || current_stock <= 0
+
+    days_until_stock_out = (current_stock / daily_dosage.to_f).floor
+    Date.current + days_until_stock_out.days
+  end
+
   # カレンダーの日付を押した時の予想在庫数計算
   def stock_on(date)
     days_diff = (date - Date.current).to_i
-    estimated = current_stock - days_diff * dosage_per_time
+    estimated = current_stock - days_diff * daily_dosage
     # 在庫量がマイナス表示されないようにする
     [ estimated, 0 ].max
   end
 
+  # カレンダーに表示する情報を返すメソッド
   def display_stock_on(date)
-    stock = self.stock_on(date)
-
     # 過去は表示しない
     return nil if date < Date.current
 
-    # 今日
-    if date == Date.current && stock.between?(1, 9)
-      return stock
+    stock_out = stock_out_date
+    return nil if stock_out.nil?
+
+    # 在庫切れ予定日の場合に表示
+    if date == stock_out
+      return "在庫切れ予定"
     end
 
-    # 未来
-    if date >= Date.current
-      if stock == 10
-        10
-      end
-    end
+    nil
   end
 
   # 初回登録時、処方日と登録日が異なる場合の在庫量の計算
