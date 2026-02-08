@@ -122,3 +122,17 @@ jobs:
           path: tmp/capybara
           if-no-files-found: ignore
           retention-days: 7 # 保存期間を7日間に設定
+          
+  # デプロイ（mainブランチへのpush時のみ、かつ全てのCIが成功した場合のみ実行）
+  deploy:
+    needs: [scan_ruby, lint, test] # この3つのジョブが全て成功した場合のみ実行
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' # mainへのpushの場合のみ
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+      - name: Notify deployment started
+        run: echo "✅ Deployment to Render has been triggered successfully!"

@@ -12,6 +12,7 @@ ja:
         name: 薬名
       user_medicine:
         dosage_per_time: 1回の服薬量
+        times_per_day: 1日の服薬回数
         prescribed_amount: 処方量
         date_of_prescription: 処方日
       hospital:
@@ -35,6 +36,7 @@ ja:
       user_medicine_form:
         medicine_name: 薬名
         dosage_per_time: 1回の服用量
+        times_per_day: 1日の服薬回数
         prescribed_amount: 処方量
         date_of_prescription: 処方日
   date:

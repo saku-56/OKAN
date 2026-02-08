@@ -5,11 +5,12 @@ class UserMedicine < ApplicationRecord
 
   validates :medicine_id, uniqueness: { scope: :user_id }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
+  validates :times_per_day, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 4 }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   # validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
   validates :date_of_prescription, presence: true
-  validate :date_of_prescription_cannot_be_in_future
   validates :uuid, uniqueness: true
+  validate :date_of_prescription_cannot_be_in_future
 
   # 複数のレコードを絞り込む
   scope :has_stock, -> { where("current_stock > ?", 0) }
@@ -46,13 +47,12 @@ class UserMedicine < ApplicationRecord
     end
   end
 
-
   # 初回登録時、処方日と登録日が異なる場合の在庫量の計算
   def initial_stock_on_create
     return prescribed_amount if date_of_prescription == Date.current
 
     days_passed = (Date.current - date_of_prescription).to_i
-    consumed = days_passed * dosage_per_time
+    consumed = days_passed * daily_dosage
     [ prescribed_amount - consumed, 0 ].max
   end
 
@@ -60,9 +60,13 @@ class UserMedicine < ApplicationRecord
     uuid
   end
 
-
   def increment_stock
     update!(current_stock: current_stock + dosage_per_time)
+  end
+
+  # 1日の服薬量
+  def daily_dosage
+    dosage_per_time * times_per_day
   end
 
   private

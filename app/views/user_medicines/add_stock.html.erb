@@ -7,7 +7,7 @@
         <%= form_with(model: @stock_form,
                       url: update_stock_user_medicine_path(@user_medicine),
                       method: :patch) do |f| %>
-          <%= render 'shared/error_messages', object: f.object %>
+          <%= render "shared/error_messages", object: f.object %>
 
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2">薬名</label>
@@ -24,6 +24,13 @@
           </div>
 
           <div class="mb-4">
+            <label class="block text-sm font-bold mb-2">1日の服薬回数</label>
+            <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
+              <%= @user_medicine.times_per_day %> 回
+            </div>
+          </div>
+
+          <div class="mb-4">
             <label class="block text-sm font-bold mb-2">現在の在庫</label>
             <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
               <%= @user_medicine.current_stock %> 錠
@@ -34,9 +41,9 @@
             <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mb-2" %>
             <div class="flex items-center gap-2">
               <%= f.text_field :prescribed_amount,
-              placeholder: "追加する数量を入力",
-                  type: "number",
-                  class: "border border-gray-300 rounded px-3 py-2" %>
+                               placeholder: "追加する数量を入力",
+                               type: "number",
+                               class: "border border-gray-300 rounded px-3 py-2" %>
               <span class="text-gray-700 whitespace-nowrap">錠</span>
             </div>
           </div>
@@ -44,7 +51,7 @@
           <div class="mb-4">
             <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
             <%= f.date_field :date_of_prescription,
-                class: "border border-gray-300 rounded px-3 py-2" %>
+                             class: "border border-gray-300 rounded px-3 py-2" %>
           </div>
 
           <div class="flex gap-4">

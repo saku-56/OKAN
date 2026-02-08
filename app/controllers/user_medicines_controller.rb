@@ -92,6 +92,7 @@ class UserMedicinesController < ApplicationController
     params.require(:user_medicine_form).permit(
       :medicine_name,
       :dosage_per_time,
+      :times_per_day,
       :prescribed_amount,
       :date_of_prescription
     )

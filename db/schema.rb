@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_07_014439) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_08_033939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_07_014439) do
     t.integer "dosage_per_time", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.bigint "medicine_id", null: false
+    t.integer "times_per_day", default: 1, null: false
     t.index ["medicine_id"], name: "index_user_medicines_on_medicine_id"
     t.index ["user_id", "medicine_id"], name: "index_user_medicines_on_user_id_and_medicine_id", unique: true
     t.index ["user_id"], name: "index_user_medicines_on_user_id"

@@ -52,6 +52,7 @@ RSpec.describe "UserMedicines", type: :system do
           visit new_user_medicine_path
           fill_in "薬名", with: "新しい薬"
           fill_in "1回の服薬量", with: "1"
+          fill_in "1日の服薬回数", with: "2"
           fill_in "処方量", with: "30"
           fill_in "処方日", with: Date.current
           click_button "薬を追加"
@@ -64,7 +65,7 @@ RSpec.describe "UserMedicines", type: :system do
 
     describe "薬の在庫追加" do
       let!(:medicine) { create(:medicine) }
-      let!(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 5, dosage_per_time: 1) }
+      let!(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 5) }
       context "フォームの入力値が正常" do
         it "薬の在庫追加が成功する" do
           visit add_stock_user_medicine_path(user_medicine)
@@ -87,6 +88,7 @@ RSpec.describe "UserMedicines", type: :system do
       it "登録した全ての項目が表示されること" do
         expect(page).to have_content(user_medicine.medicine.name)
         expect(page).to have_content(user_medicine.dosage_per_time)
+        expect(page).to have_content(user_medicine.times_per_day)
         expect(page).to have_content(user_medicine.prescribed_amount)
         expect(page).to have_content(user_medicine.date_of_prescription)
       end
@@ -98,14 +100,14 @@ RSpec.describe "UserMedicines", type: :system do
       end
       context "飲み忘れボタンの表示" do
         context "在庫がある場合" do
-          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10, dosage_per_time: 2) }
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10) }
           it "飲み忘れボタンが表示される" do
             expect(page).to have_button("飲み忘れ"), "在庫がある場合、飲み忘れボタンが表示されていません"
           end
         end
 
         context "在庫がない場合" do
-          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0, dosage_per_time: 2) }
+          let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0) }
           it "飲み忘れボタンが表示されない" do
             expect(page).not_to have_button("飲み忘れ"), "在庫がない場合、飲み忘れボタンが表示されています"
           end
@@ -149,10 +151,10 @@ RSpec.describe "UserMedicines", type: :system do
       end
 
       it "薬が削除できること" do
-        expect(page).to have_css('.delete-icon')
+        expect(page).to have_css(".delete-icon")
 
         page.accept_confirm do
-          find('.delete-icon').click
+          find(".delete-icon").click
         end
         expect(page).to have_content("薬を削除しました"), "フラッシュメッセージが表示されていません"
         expect(current_path).to eq user_medicines_path
