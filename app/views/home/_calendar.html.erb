@@ -14,7 +14,7 @@
       </button>
     <% end %>
 
-    <span class="font-bold text-lg"><%= @start_date.strftime('%Y年%m月') %></span>
+    <span class="font-bold text-lg"><%= @start_date.strftime("%Y年%m月") %></span>
 
     <% next_month = @start_date + 1.month %>
     <% max_date = Date.current.beginning_of_month + 6.months %>
@@ -33,12 +33,12 @@
   <%= month_calendar(start_date: @start_date) do |date| %>
     <%= link_to date.day, home_path(date: date), data: { turbo_frame: "stock_modal" } %>
 
-    <!-- 薬の残り錠数表示 -->
+    <!-- 薬の在庫切れ予定日表示 -->
     <% medicines_with_stock.each do |medicine| %>
-      <% display_stock = medicine.display_stock_on(date) %>
-      <% if display_stock.present? %>
+      <% display_message = medicine.display_stock_on(date) %>
+      <% if display_message.present? %>
         <span class="block text-xs text-error leading-tight">
-          <%= medicine.medicine.name %><%= display_stock %>錠
+          <%= medicine.medicine.name %> <%= display_message %>
         </span>
       <% end %>
     <% end %>
