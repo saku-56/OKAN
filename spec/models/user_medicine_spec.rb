@@ -145,7 +145,7 @@ RSpec.describe UserMedicine, type: :model do
         expect(user_medicine).to be_valid
       end
     end
-    
+
     describe "uuid" do
       it "uuidが自動生成されること" do
         user_medicine = create(:user_medicine, user: user, medicine: medicine)
