@@ -62,9 +62,13 @@ class UserMedicine < ApplicationRecord
     uuid
   end
 
-
   def increment_stock
     update!(current_stock: current_stock + dosage_per_time)
+  end
+
+  # 1日の服薬量
+  def daily_dosage
+    dosage_per_time * times_per_day
   end
 
   private
