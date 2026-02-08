@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_08_033939) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_08_232711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_08_033939) do
     t.index ["user_id"], name: "index_medicines_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "notification_type", null: false
+    t.boolean "enabled", default: false, null: false
+    t.integer "days_before", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "notification_type"], name: "index_notifications_on_user_id_and_notification_type", unique: true
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "user_medicines", force: :cascade do |t|
     t.integer "prescribed_amount", null: false
     t.integer "current_stock", default: 0, null: false
@@ -97,6 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_08_033939) do
   add_foreign_key "hospital_schedules", "hospitals"
   add_foreign_key "hospitals", "users"
   add_foreign_key "medicines", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "user_medicines", "medicines"
   add_foreign_key "user_medicines", "users"
 end
