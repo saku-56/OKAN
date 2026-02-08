@@ -9,6 +9,6 @@ class CreateNotifications < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :notifications, [:user_id, :notification_type], unique: true
+    add_index :notifications, [ :user_id, :notification_type ], unique: true
   end
 end

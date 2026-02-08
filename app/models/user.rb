@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :medicines, dependent: :destroy
   has_many :hospitals, dependent: :destroy
   has_many :consultation_schedules, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   # URLでuuidを使用するための設定
   def to_param
