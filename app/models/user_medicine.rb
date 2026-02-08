@@ -52,7 +52,7 @@ class UserMedicine < ApplicationRecord
     return prescribed_amount if date_of_prescription == Date.current
 
     days_passed = (Date.current - date_of_prescription).to_i
-    consumed = days_passed * dosage_per_time
+    consumed = days_passed * daily_dosage
     [ prescribed_amount - consumed, 0 ].max
   end
 
