@@ -5,12 +5,11 @@ class UserMedicine < ApplicationRecord
 
   validates :medicine_id, uniqueness: { scope: :user_id }
   validates :dosage_per_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
+  validates :times_per_day, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 4 }
   validates :prescribed_amount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, allow_blank: true }
   # validates :current_stock, numericality: { greater_than_or_equal_to: 0 }
   validates :date_of_prescription, presence: true
   validates :uuid, uniqueness: true
-  validates :times_per_day, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 4 }
-
   validate :date_of_prescription_cannot_be_in_future
 
   # 複数のレコードを絞り込む
@@ -47,7 +46,6 @@ class UserMedicine < ApplicationRecord
       end
     end
   end
-
 
   # 初回登録時、処方日と登録日が異なる場合の在庫量の計算
   def initial_stock_on_create
