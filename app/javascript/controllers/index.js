@@ -10,5 +10,8 @@ application.register("autocomplete", AutocompleteController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import NotificationToggleController from "./notification_toggle_controller"
+application.register("notification-toggle", NotificationToggleController)
+
 import ScheduleController from "./schedule_controller"
 application.register("schedule", ScheduleController)
