@@ -100,4 +100,14 @@ RSpec.describe User, type: :model do
       expect(association.options[:dependent]).to eq :destroy
     end
   end
+
+  describe "calback" do
+    it "ユーザー作成時にNotificationsが自動作成されること" do
+      user = create(:user)
+      user.reload
+
+      expect(user.notifications).to be_present
+      expect(Notification.count).to eq(2)
+    end
+  end
 end
