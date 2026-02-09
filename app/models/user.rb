@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :medicines, dependent: :destroy
   has_many :hospitals, dependent: :destroy
   has_many :consultation_schedules, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+
+  # ユーザー作成後に通知設定を自動作成
+  after_create :create_default_notifications
 
   # URLでuuidを使用するための設定
   def to_param
@@ -24,5 +28,23 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.line_user_id = auth.uid if auth.provider == "line"
     end
+  end
+
+  private
+
+  def create_default_notifications
+    # 薬の在庫通知を作成
+    notifications.create!(
+      notification_type: "medicine_stock",
+      enabled: false,
+      days_before: 5
+    )
+
+    # 通院予定通知を作成
+    notifications.create!(
+      notification_type: "consultation_reminder",
+      enabled: false,
+      days_before: 1
+    )
   end
 end
