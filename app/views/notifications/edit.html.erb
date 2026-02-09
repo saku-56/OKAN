@@ -1,0 +1,90 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class=" max-w-4xl mx-auto mb-4 text-center">通知設定</h1>
+
+  <%= form_tag notifications_path, method: :patch, class: "space-y-6" do %>
+
+    <!-- 薬の在庫通知 -->
+    <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+        <span>💊</span>
+        <span>薬の在庫通知</span>
+      </h2>
+
+      <!-- 通知有効化チェックボックス -->
+      <div class="form-control mb-4">
+        <label class="label cursor-pointer justify-start gap-3">
+          <%= check_box_tag "medicine_notification[enabled]", "1", @medicine_notification&.enabled, class: "checkbox checkbox-primary" %>
+          <span class="label-text text-lg">通知を有効にする</span>
+        </label>
+      </div>
+
+      <!-- 通知日数入力 -->
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text text-sm text-gray-600">何日前に通知するかを設定してください</span>
+        </label>
+        <div class="flex items-center gap-2">
+        <span class="text-gray-700 whitespace-nowrap">在庫切れの</span>
+            <%= number_field_tag "medicine_notification[days_before]",
+                                @medicine_notification&.days_before,
+                                class: "input input-bordered w-full #{"input-error" if @medicine_notification&.errors&.include?(:days_before)}",
+                                min: 1,
+                                placeholder: "例: 7" %>
+            <span class="text-gray-700 whitespace-nowrap">日前に通知する</span>
+        </div>
+        <% if @medicine_notification&.errors&.include?(:days_before) %>
+          <label class="label">
+            <span class="label-text-alt text-error">
+              <%= @medicine_notification.errors[:days_before].join(", ") %>
+            </span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 通院予定日通知 -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+        <span>🏥</span>
+        <span>通院予定日通知</span>
+      </h2>
+
+      <!-- 通知有効化チェックボックス -->
+      <div class="form-control mb-4">
+        <label class="label cursor-pointer justify-start gap-3">
+          <%= check_box_tag "consultation_notification[enabled]", "1", @consultation_notification&.enabled, class: "checkbox checkbox-primary" %>
+          <span class="label-text text-lg">通知を有効にする</span>
+        </label>
+      </div>
+
+      <!-- 通知日数入力 -->
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text text-sm text-gray-600">何日前に通知するかを設定してください</span>
+        </label>
+         <div class="flex items-center gap-2">
+        <span class="text-gray-700 whitespace-nowrap">通院予定日の</span>
+        <%= number_field_tag "consultation_notification[days_before]",
+                             @consultation_notification&.days_before,
+                             class: "input input-bordered w-full #{"input-error" if @consultation_notification&.errors&.include?(:days_before)}",
+                             min: 1,
+                             placeholder: "例: 3" %>
+        <span class="text-gray-700 whitespace-nowrap">日前に通知する</span>
+        </div>
+        <% if @consultation_notification&.errors&.include?(:days_before) %>
+          <label class="label">
+            <span class="label-text-alt text-error">
+              <%= @consultation_notification.errors[:days_before].join(", ") %>
+            </span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 更新ボタン -->
+    <div class="flex justify-center pt-4">
+      <%= submit_tag "設定", class: "btn btn-primary btn-wide" %>
+    </div>
+
+  <% end %>
+</div>
