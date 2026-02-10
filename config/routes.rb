@@ -15,6 +15,14 @@ Rails.application.routes.draw do
     resources :consultation_schedules, only: %i[create update destroy]
   end
 
+
+  resource :mypage, only: [ :show ]
+  # 通知設定の編集画面
+  resource :notifications, only: [ :edit ]
+
+  # 個別の通知設定の更新
+  resources :notifications, only: [ :update ]
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"

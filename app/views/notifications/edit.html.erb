@@ -1,0 +1,92 @@
+<div class="container max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">通知設定</h1>
+
+  <!-- 薬の在庫通知 -->
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <%= form_with model: @medicine_notification, url: notification_path(@medicine_notification), method: :patch, class: "space-y-4" do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+        <span>薬の在庫通知</span>
+      </h2>
+
+      <!-- 通知有効化チェックボックス -->
+      <div data-controller="notification-toggle">
+        <div class="form-control">
+          <label class="label cursor-pointer justify-start gap-2">
+            <%= f.check_box :notification_enabled,
+                            class: "checkbox checkbox-primary",
+                            data: {
+                              notification_toggle_target: "checkbox",
+                              action: "change->notification-toggle#toggleFields",
+                            } %>
+            <span class="label-text">通知を有効にする</span>
+          </label>
+        </div>
+
+        <div class="form-control transition-all duration-300 ease-in-out"
+             data-notification-toggle-target="container">
+          <div class="flex items-center gap-1 sm:gap-2">
+            <span class="whitespace-nowrap">在庫切れの</span>
+            <%= f.select :days_before,
+                         days_before_options,
+                         {},
+                         class: "select select-bordered w-auto transition-all duration-300",
+                         data: { notification_toggle_target: "selectBox" } %>
+            <span class="whitespace-nowrap">に通知</span>
+          </div>
+        </div>
+      </div> <!-- ← ここが不足していました! -->
+
+      <!-- 保存ボタン -->
+      <div class="flex justify-end pt-2">
+        <%= f.submit "保存", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 通院予定日通知 -->
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <%= form_with model: @consultation_notification, url: notification_path(@consultation_notification), method: :patch, class: "space-y-4" do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+        <span>通院予定日通知</span>
+      </h2>
+
+      <!-- 通知有効化チェックボックス -->
+      <div data-controller="notification-toggle">
+        <div class="form-control">
+          <label class="label cursor-pointer justify-start gap-2">
+            <%= f.check_box :notification_enabled,
+                            class: "checkbox checkbox-primary",
+                            data: {
+                              notification_toggle_target: "checkbox",
+                              action: "change->notification-toggle#toggleFields",
+                            } %>
+            <span class="label-text">通知を有効にする</span>
+          </label>
+        </div>
+
+        <!-- 通知日数入力 -->
+        <div class="form-control transition-all duration-300 ease-in-out"
+             data-notification-toggle-target="container">
+          <div class="flex items-center gap-1 sm:gap-2">
+            <span class="whitespace-nowrap">通院予定日の</span>
+            <%= f.select :days_before,
+                         days_before_options,
+                         {},
+                         class: "select select-bordered w-auto transition-all duration-300",
+                         data: { notification_toggle_target: "selectBox" } %>
+            <span class="whitespace-nowrap">に通知</span>
+          </div>
+        </div>
+      </div> <!-- ← ここが不足していました! -->
+
+      <!-- 保存ボタン -->
+      <div class="flex justify-end pt-2">
+        <%= f.submit "保存", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

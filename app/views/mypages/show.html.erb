@@ -1,0 +1,25 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold">マイページ</h1>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <!-- 名前 -->
+      <div class="border-b pb-3 mb-6">
+        <p class="text-sm text-gray-600 mb-1">名前</p>
+        <p class="text-base"><%= current_user.name %></p>
+      </div>
+
+      <!-- ボタン -->
+      <div class="flex gap-10 mt-6">
+        <%= link_to edit_user_registration_path, class: "btn btn-primary flex-1 text-center" do %>
+          <span class="inline-block mr-2">プロフィール編集</span>
+        <% end %>
+
+        <%= link_to edit_notifications_path, class: "btn btn-secondary flex-1 text-center" do %>
+          <span class="inline-block mr-2">LINE通知設定</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
