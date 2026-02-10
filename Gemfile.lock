@@ -166,6 +166,9 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.5)
+    line-bot-api (2.5.0)
+      base64 (~> 0.2)
+      multipart-post (~> 2.4)
     lint_roller (1.1.0)
     logger (1.7.0)
     loofah (2.24.1)
@@ -185,6 +188,7 @@ GEM
     msgpack (1.8.0)
     multi_xml (0.8.1)
       bigdecimal (>= 3.1, < 5)
+    multipart-post (2.4.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
     net-imap (0.5.12)
@@ -466,6 +470,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kaminari (= 1.2.2)
+  line-bot-api (= 2.5.0)
   omniauth-google-oauth2 (= 1.2.1)
   omniauth-line (= 0.1.0)
   omniauth-rails_csrf_protection (= 2.0.1)
