@@ -13,7 +13,7 @@ class ConsultationNotificationService
 
   # 通知を送る
   def self.notify_consultation_schedules(user)
-    user.consultation_schedules.each do |consultaiton_schedule|
+    user.consultation_schedules.each do |consultation_schedule|
       next unless should_notify?(consultation_schedule)
 
       send_line_notification(consultation_schedule)
