@@ -11,4 +11,3 @@ end
 every 1.day, at: "9:00" do
   rake "medicine_notification:send_notification"
 end
-
