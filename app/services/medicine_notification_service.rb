@@ -48,7 +48,8 @@ class MedicineNotificationService
     message = Line::Bot::V2::MessagingApi::TextMessage.new(
       type: "text",
       text: "【お薬の在庫通知】\n" \
-            "#{medicine_name}の在庫があと#{days}日分となりました。",
+            "#{medicine_name}の在庫があと#{days}日分やで〜。】\n"
+            "忘れんうちに薬もらいに行きやぁ〜。",
     )
 
     # プッシュメッセージリクエストを作成
