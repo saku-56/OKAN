@@ -1,12 +1,6 @@
 require "line/bot"
 
 class MedicineNotificationService
-  def self.client
-    @client ||= Line::Bot::V2::MessagingApi::ApiClient.new(
-      channel_access_token: Rails.application.credentials.dig(:line, :messaging_channel_access_token),
-    )
-  end
-
   # LINE通知を送るユーザー
   def self.notify_users
     User.joins(:notifications)
@@ -63,7 +57,7 @@ class MedicineNotificationService
       messages: [ message ],
     )
     begin
-      response = client.push_message(push_message_request: push_request)
+      response = LINE_BOT_CLIENT.push_message(push_message_request: push_request)
       true
     rescue => e
       false
