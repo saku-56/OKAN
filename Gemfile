@@ -71,4 +71,5 @@ gem "whenever", "1.1.1", require: false
 gem "omniauth-google-oauth2", "1.2.1"
 gem "omniauth-line", "0.1.0"
 gem "omniauth-rails_csrf_protection", "2.0.1"
+gem "line-bot-api", "2.5.0"
 gem "enum_help", "~> 0.0.19"

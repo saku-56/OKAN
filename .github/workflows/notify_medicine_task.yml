@@ -1,14 +1,14 @@
-name: Consume Medicine Task
+name: Notify Medicine Task
 
 on:
   schedule:
-    # 毎日 UTC 15:00 = 日本時間 0:00 に実行
-    - cron: '0 15 * * *'
+    # 9:00に実行
+    - cron: '0 0 * * *'
   workflow_dispatch: # 手動実行も可能にする
-  # push:
-  #   branches:
-  #     - feature/change_status # 現在の作業ブランチ
-  #     - main  # main ブランチでも動作確認
+  push:
+    branches:
+      - feature/medicine_stock_rake # 現在の作業ブランチ
+      - main  # main ブランチでも動作確認
 
 jobs:
   run-task:
@@ -27,14 +27,14 @@ jobs:
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
-      - name: Run medicine reduce stock task
+      - name: Run notify medicine stock task
         env:
           RAILS_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          bundle exec rake medicine_stock:reduce_medicine_stock
+          bundle exec rake medicine_notification:send_notification
 
       - name: Notify on failure
         if: failure()
-        run: echo "Consume Medicine Task failed. Please check the logs."
+        run: echo "Notify Medicine Task failed. Please check the logs."
