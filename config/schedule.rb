@@ -7,3 +7,8 @@ set :output, "#{Rails.root}/log/cron.log"
 every 1.day, at: "0:00 am" do
   rake "medicine_stock:reduce_medicine_stock"
 end
+
+every 1.day, at: "9:00" do
+  rake "medicine_notification:send_notification"
+end
+
