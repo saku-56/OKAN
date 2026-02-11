@@ -1,0 +1,40 @@
+name: Notify Medicine Task
+
+on:
+  schedule:
+    # 9:00に実行
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動実行も可能にする
+  push:
+    branches:
+      - feature/consultation_reminderrake # 現在の作業ブランチ
+      - main  # main ブランチでも動作確認
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.10
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Run notify consultation reminder task
+        env:
+          RAILS_ENV: production
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rake consultation_notification:send_notification
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "Notify Consultation Task failed. Please check the logs."

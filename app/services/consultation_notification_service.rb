@@ -52,7 +52,7 @@ class ConsultationNotificationService
     # プッシュメッセージリクエストを作成
     push_request = Line::Bot::V2::MessagingApi::PushMessageRequest.new(
       to: line_user_id,
-      messages: [message],
+      messages: [ message ],
     )
     begin
       response = LINE_BOT_CLIENT.push_message(push_message_request: push_request)
