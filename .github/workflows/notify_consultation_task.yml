@@ -1,4 +1,4 @@
-name: Notify Medicine Task
+name: Notify Cocsultation Task
 
 on:
   schedule:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch: # 手動実行も可能にする
   push:
     branches:
-      - feature/consultation_reminderrake # 現在の作業ブランチ
-      - main  # main ブランチでも動作確認
+      # - feature/consultation_reminderrake # 現在の作業ブランチ
+      # - main  # main ブランチでも動作確認
 
 jobs:
   run-task:
