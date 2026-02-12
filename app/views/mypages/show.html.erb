@@ -16,8 +16,15 @@
           <span class="inline-block mr-2">プロフィール編集</span>
         <% end %>
 
-        <%= link_to edit_notifications_path, class: "btn btn-secondary flex-1 text-center" do %>
-          <span class="inline-block mr-2">LINE通知設定</span>
+       <!-- LINE通知ボタン　-->
+        <% if current_user.line_user_id.present? %>
+          <%= link_to edit_notifications_path, class: "btn btn-secondary flex-1 text-center" do %>
+            <span class="inline-block mr-2">LINE通知設定</span>
+          <% end %>
+        <% else %>
+          <%= link_to line_connections_required_path, class: "btn btn-secondary flex-1 text-center" do %>
+            <span class="inline-block mr-2">LINE通知設定</span>
+          <% end %>
         <% end %>
       </div>
     </div>

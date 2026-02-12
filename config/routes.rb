@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :consultation_schedules, only: %i[create update destroy]
   end
 
-
   resource :mypage, only: [ :show ]
   # 通知設定の編集画面
   resource :notifications, only: [ :edit ]
@@ -24,12 +23,11 @@ Rails.application.routes.draw do
   resources :notifications, only: [ :update ]
 
   devise_for :users, controllers: {
-    registrations: "users/registrations",
-    omniauth_callbacks: "users/omniauth_callbacks"
-  }
+                       registrations: "users/registrations",
+                       omniauth_callbacks: "users/omniauth_callbacks"
+                     }
 
   get "up" => "rails/health#show", as: :rails_health_check
-
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
@@ -37,4 +35,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "static_pages#top"
   get "home", to: "home#index"
+  get "line_connections/required", to: "line_connections#required"
 end

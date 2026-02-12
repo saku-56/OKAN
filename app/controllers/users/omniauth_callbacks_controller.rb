@@ -8,11 +8,44 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def line
-    callback_for(:line)
+    auth = request.env["omniauth.auth"]
+
+    # ここで auth が nil でないことを確認
+    if auth.nil?
+      redirect_to root_path, alert: "LINE認証情報の取得に失敗しました"
+      return
+    end
+
+    if user_signed_in?
+      handle_line_connection(auth)
+    else
+      callback_for(:line)
+    end
   end
 
   private
 
+  # LINE以外でログインしたユーザーのLINE連携処理
+  def handle_line_connection(auth)
+    line_user_id = auth["uid"]
+
+    # 既に他のユーザーが使用していないかチェック
+    existing_user = User.find_by(line_user_id: line_user_id)
+
+    if existing_user && existing_user.id != current_user.id
+      redirect_to mypage_path, alert: "このLINEアカウントは既に他のユーザーに連携されています"
+      return
+    end
+
+    # line_user_idのみを保存
+    if current_user.update(line_user_id: line_user_id)
+      redirect_to edit_notifications_path, notice: "LINE連携が完了しました"
+    else
+      redirect_to mypage_path, alert: "LINE連携に失敗しました"
+    end
+  end
+
+  # LINEログインの処理
   def callback_for(provider)
     # GoogleやLINEから返ってきた情報を取得
     @user = User.from_omniauth(request.env["omniauth.auth"])

@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: [ :update ]
+  before_action :set_notification, only: %i[update ]
+  before_action :require_line_connection, only: %i[edit update]
 
   def edit
     @medicine_notification = current_user.notifications.find_by(notification_type: "medicine_stock")
@@ -34,5 +35,11 @@ class NotificationsController < ApplicationController
 
   def notification_params
     params.require(:notification).permit(:enabled, :days_before)
+  end
+
+  def require_line_connection
+    unless current_user.line_user_id.present?
+      redirect_to line_login_required_path, alert: "LINE通知を利用するにはLINE連携が必要です"
+    end
   end
 end
