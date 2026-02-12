@@ -36,4 +36,10 @@ class NotificationsController < ApplicationController
   def notification_params
     params.require(:notification).permit(:enabled, :days_before)
   end
+
+  def require_line_connection
+    unless current_user.line_user_id.present?
+      redirect_to line_login_required_path, alert: "LINE通知を利用するにはLINE連携が必要です"
+    end
+  end
 end
