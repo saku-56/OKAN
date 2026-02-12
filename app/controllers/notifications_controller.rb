@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: [ :update ]
+  before_action :set_notification, only: %i[update ]
+  before_action :require_line_connection, only: %i[edit update]
 
   def edit
     @medicine_notification = current_user.notifications.find_by(notification_type: "medicine_stock")
