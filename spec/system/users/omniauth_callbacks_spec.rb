@@ -11,7 +11,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
 
   describe "LINEログイン機能" do
     context "新規ユーザーの場合" do
-      it "LINEでログインボタンから新規登録できる" do
+      it "LINEで新規登録できる" do
         line_mock
 
         visit new_user_registration_path
@@ -23,10 +23,10 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       end
     end
 
-    context "既存のLINEユーザーの場合" do
+    context "新規登録済みのLINEユーザーの場合" do
       let!(:user) { create(:user, :line_login) }
 
-      it "既存アカウントでログインできる" do
+      it "登録済みのアカウントでログインできる" do
         line_mock
 
         visit new_user_session_path
@@ -58,7 +58,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       sign_in user
     end
 
-    context "メール登録済みユーザーがLINE連携する場合" do
+    context "LINEログイン以外でログインしたユーザーがLINE連携する場合" do
       it "LINE連携が成功する" do
         line_mock
 
@@ -89,7 +89,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
 
   describe "Googleログイン機能" do
     context "新規ユーザーの場合" do
-      it "Googleでログインボタンから新規登録できる" do
+      it "Googleで新規登録できる" do
         line_mock
 
         visit new_user_registration_path
@@ -100,10 +100,10 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       end
     end
 
-    context "既存のGoogleユーザーの場合" do
+    context "登録済みのGoogleユーザーの場合" do
       let!(:user) { create(:user, :line_login) }
 
-      it "既存アカウントでログインできる" do
+      it "登録済みのアカウントでログインできる" do
         line_mock
 
         visit new_user_session_path
