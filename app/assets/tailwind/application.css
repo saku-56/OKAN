@@ -9,7 +9,7 @@
   prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
   color-scheme: light;
 
-  --color-base-100: #F9E9D8; /* ページ背景 */
+  --color-base-100: #FCF7F0; /* ページ背景 */
   --color-base-200: #FDEDE9;  /* カード・フォーム */
   --color-base-300: #E0D8CF; /* 枠線、区切り */
   --color-base-content: #3D3A38;
