@@ -23,6 +23,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  # 認証失敗時
+  def failure
+    provider = request.env["omniauth.error.strategy"]&.name || "unknown"
+    redirect_to root_path, alert: "#{provider_name(provider)}認証に失敗しました"
+  end
+
   private
 
   # LINE以外でログインしたユーザーのLINE連携処理
@@ -57,11 +63,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.#{provider}_data"] = request.env["omniauth.auth"].except(:extra)
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
-  end
-
-  # 認証失敗時
-  def failure
-    provider = request.env["omniauth.error.strategy"]&.name || "unknown"
-    redirect_to root_path, alert: "#{provider_name(provider)}認証に失敗しました"
   end
 end
