@@ -18,18 +18,16 @@ module OmniauthMocks
   end
 
   # Googleのモック
-  def google_mock
+  def google_mock(uid: "67890")
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: "google_oauth2",
-      uid: "67890",
+      uid: uid,
       info: {
         name: "Google テストユーザー",
-        email: "test@example.com",
-        image: "https://example.com/google_avatar.jpg"
+        email: "test@example.com"
       },
       credentials: {
-        token: "mock_google_token",
-        expires_at: Time.now + 1.week
+        token: "mock_google_token"
       }
     })
   end
