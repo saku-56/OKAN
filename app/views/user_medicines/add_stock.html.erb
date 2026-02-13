@@ -1,9 +1,33 @@
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 mb-16">
   <div class="medicines-section max-w-4xl mx-auto mb-8">
     <div class="w-full">
-      <h1 class="font-bold text-4xl text-center mb-6">在庫追加</h1>
 
-      <div class="bg-white rounded-lg shadow p-6">
+    <!-- 薬一覧へのボタン-->
+     <div class="flex mt-2 mb-2">
+        <%= link_to user_medicine_path(@user_medicine), class: "link link-primary hover:link-hover" do %>
+          <i class="fa-solid fa-arrow-left fa-sm"></i>
+          <span class="ml-2">戻る</span>
+        <% end %>
+      </div>
+
+      <!-- タイトルと説明文 -->
+      <div class="text-center">
+        <h1 class="text-3xl text-center mb-2 mt-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+          <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i>在庫追加
+        </h1>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto mb-2">
+          <p class="text-blue-800 text-sm mb-2">
+            <i class="fa-solid fa-circle-info mr-2"></i>
+            <strong>処方された薬の数量を入力しましょう</strong>
+          </p>
+          <p class="text-blue-700 text-sm">
+            今回処方された数量を入力すると、現在の在庫に自動で追加されます
+          </p>
+        </div>
+      </div>
+
+     <!-- 在庫追加フォーム -->
+      <div class="bg-white rounded-lg shadow p-6 mb-8">
         <%= form_with(model: @stock_form,
                       url: update_stock_user_medicine_path(@user_medicine),
                       method: :patch) do |f| %>
@@ -54,9 +78,9 @@
                              class: "border border-gray-300 rounded px-3 py-2" %>
           </div>
 
-          <div class="flex gap-4">
-            <%= f.submit "在庫を追加する", class: "btn btn-primary flex-1" %>
-            <%= link_to "戻る", user_medicine_path(@user_medicine), class: "btn btn-neutral flex-1" %>
+          <!-- 保存ボタン -->
+          <div class="flex justify-center">
+            <%= f.submit "保存する", class: "btn btn-primary px-8" %>
           </div>
         <% end %>
       </div>
