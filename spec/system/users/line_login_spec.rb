@@ -1,6 +1,14 @@
 require "rails_helper"
 
-RSpec.describe "LINEログイン", type: :system do
+RSpec.describe 'Users::OmniauthCallbacks', type: :system do
+  before do
+    OmniAuth.config.test_mode = true
+  end
+
+  after do
+    OmniAuth.config.test_mode = false
+  end
+
   describe 'LINEログイン機能' do
     context '新規ユーザーの場合' do
       it 'LINEでログインボタンから新規登録できる' do
@@ -75,6 +83,47 @@ RSpec.describe "LINEログイン", type: :system do
         expect(page).to have_content 'このLINEアカウントは既に他のユーザーに連携されています'
         expect(current_path).to eq mypage_path
         expect(user.reload.line_user_id).to be_nil
+      end
+    end
+  end
+
+  describe 'Googleログイン機能' do
+    context '新規ユーザーの場合' do
+      it 'Googleでログインボタンから新規登録できる' do
+        line_mock
+
+        visit new_user_registration_path
+        click_button 'Googleログイン'
+
+        expect(page).to have_content 'Google アカウントでログインしました'
+        expect(current_path).to eq home_path
+      end
+    end
+
+    context '既存のGoogleユーザーの場合' do
+      let!(:user) { create(:user, :line_login) }
+
+      it '既存アカウントでログインできる' do
+        line_mock
+
+        visit new_user_session_path
+
+        click_button 'Googleログイン'
+
+        expect(page).to have_content 'Google アカウントでログインしました'
+        expect(current_path).to eq home_path
+      end
+    end
+
+    context 'Google認証に失敗した場合' do
+      it 'エラーメッセージが表示される' do
+        google_mock_failure
+
+        visit new_user_registration_path
+        click_button 'Googleログイン'
+
+        expect(page).to have_content 'Google認証に失敗しました'
+        expect(current_path).to eq root_path
       end
     end
   end
