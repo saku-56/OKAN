@@ -32,6 +32,7 @@ class UserMedicinesController < ApplicationController
     if @form.save
       redirect_to user_medicines_path, notice: "薬を登録しました"
     else
+      flash.now[:alert] = "お薬の登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
