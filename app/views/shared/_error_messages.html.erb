@@ -1,8 +1,11 @@
 <% if object.errors.any? %>
-  <div class="error-messages alert alert-danger">
-    <ul class="mb-0">
+  <div class="bg-red-200 border-2 border-red-300 rounded-lg p-4 mb-4">
+    <h3 class="text-red-700 font-bold text-lg mb-3 flex items-center">
+      ⚠️ 入力内容に誤りがあります
+    </h3>
+    <ul class="list-disc list-inside space-y-1">
       <% object.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="text-red-600"><%= message %></li>
       <% end %>
     </ul>
   </div>

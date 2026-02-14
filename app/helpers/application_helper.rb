@@ -7,4 +7,14 @@ module ApplicationHelper
     else "bg-blue-200 text-blue-800"
     end
   end
+
+  # 入力フォーム
+  def form_field_class(object, field_name)
+    base_class = "border rounded px-3 py-2 w-full"
+    if object.errors[field_name].any?
+      "#{base_class} border-red-500 border-2 bg-red-50"
+    else
+      "#{base_class} border-gray-300"
+    end
+  end
 end
