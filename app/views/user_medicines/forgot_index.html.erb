@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4 py-8">
   <h1 class="font-bold text-4xl text-center mb-6">飲み忘れ</h1>
   <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
-    <%if @medicines_with_stock.any? %>
+    <% if @medicines_with_stock.any? %>
       <% @medicines_with_stock.each do |user_medicine| %>
         <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
           <div class="flex-1">
@@ -10,13 +10,9 @@
             </div>
             <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
           </div>
-            <%= button_to "飲み忘れ",
-                increment_stock_user_medicine_path(user_medicine),
-                method: :patch,
-                data: {
-                  turbo_confirm: "#{user_medicine.medicine.name}は現在残り#{user_medicine.current_stock}錠です。1回分増やしますか？"
-                },
-                class: "btn btn-secondary" %>
+          <label for="forgot-modal-<%= user_medicine.id %>" class="btn btn-secondary">
+            飲み忘れ
+          </label>
         </div>
       <% end %>
     <% else %>
@@ -24,3 +20,32 @@
     <% end %>
   </div>
 </div>
+
+<!-- モーダルの中身 -->
+<% if @medicines_with_stock.any? %>
+  <% @medicines_with_stock.each do |user_medicine| %>
+    <input type="checkbox" id="forgot-modal-<%= user_medicine.id %>" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">飲み忘れの確認</h3>
+        <p class="py-4">
+          <%= user_medicine.medicine.name %>は現在残り<%= user_medicine.current_stock %>錠です。<br>
+          1回分増やしますか?
+        </p>
+        <div class="modal-action">
+          <!-- キャンセルボタン -->
+          <label for="forgot-modal-<%= user_medicine.id %>" class="btn">
+            キャンセル
+          </label>
+
+          <!-- 実行ボタン -->
+          <%= button_to "OK",
+              increment_stock_user_medicine_path(user_medicine),
+              method: :patch,
+              class: "btn btn-primary",
+              form: { onsubmit: "document.getElementById('forgot-modal-#{user_medicine.id}').checked = false;" } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
