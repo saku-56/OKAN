@@ -60,7 +60,7 @@
               <%= f.text_field :prescribed_amount,
                                placeholder: "追加する数量を入力",
                                type: "number",
-                               class: "border border-gray-300 rounded px-3 py-2" %>
+                               class: form_field_class(f.object, :prescribed_amount) %>
               <span class="text-gray-700 whitespace-nowrap">錠</span>
             </div>
           </div>
@@ -68,7 +68,7 @@
           <div class="mb-4">
             <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
             <%= f.date_field :date_of_prescription,
-                             class: "border border-gray-300 rounded px-3 py-2" %>
+                             class: form_field_class(f.object, :date_of_prescription) %>
           </div>
 
           <!-- 保存ボタン -->
