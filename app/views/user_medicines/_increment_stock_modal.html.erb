@@ -1,0 +1,23 @@
+<input type="checkbox" id="confirm-modal-<%= user_medicine.id %>" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">飲み忘れの確認</h3>
+    <p class="py-4">
+      <%= user_medicine.medicine.name %> は現在残り <%= user_medicine.current_stock %> 錠です。<br>
+      1回分増やしますか?
+    </p>
+    <div class="modal-action">
+      <label for="confirm-modal-<%= user_medicine.id %>" class="btn">
+        キャンセル
+      </label>
+      <%= button_to "OK",
+                    increment_stock_user_medicine_path(user_medicine),
+                    method: :patch,
+                    form: { class: "inline" },
+                    class: "btn btn-primary" %>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button type="button">close</button>
+  </form>
+</div>

@@ -71,7 +71,7 @@ RSpec.describe "UserMedicines", type: :system do
           visit add_stock_user_medicine_path(user_medicine)
           fill_in "処方量", with: "30"
           fill_in "処方日", with: Date.current
-          click_button "在庫を追加する"
+          click_button "保存する"
           expect(page).to have_content "薬を追加しました"
           expect(current_path).to eq user_medicines_path
         end
@@ -102,7 +102,7 @@ RSpec.describe "UserMedicines", type: :system do
         context "在庫がある場合" do
           let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10) }
           it "飲み忘れボタンが表示される" do
-            expect(page).to have_button("飲み忘れ"), "在庫がある場合、飲み忘れボタンが表示されていません"
+            expect(page).to have_css("label.btn.btn-secondary", text: "飲み忘れ"), "在庫がある場合、飲み忘れボタンが表示されていません"
           end
         end
 
@@ -121,9 +121,8 @@ RSpec.describe "UserMedicines", type: :system do
         end
 
         it "確認ダイアログが表示され、はいを押すと在庫量が1回の服薬量分増える" do
-          accept_confirm do
-            click_button "飲み忘れ"
-          end
+          find("label.btn.btn-secondary", text: "飲み忘れ").click
+          click_button "OK"
 
           expect(page).to have_content("在庫を1回分増やしました"), "フラッシュメッセージが表示されていません"
           expect(page).to have_content("現在の在庫")
@@ -132,9 +131,8 @@ RSpec.describe "UserMedicines", type: :system do
         end
 
         it "確認ダイアログでいいえを押すと在庫量が変わらない" do
-          dismiss_confirm do
-            click_button "飲み忘れ"
-          end
+          find("label.btn.btn-secondary", text: "飲み忘れ").click
+          find("label.btn", text: "キャンセル").click
 
           expect(page).to have_content("現在の在庫")
           expect(page).to have_content("10 錠"), "在庫量の表示が変わってしまっています（期待値: 10 錠）"

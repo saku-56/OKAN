@@ -1,5 +1,7 @@
-<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>">
-    <%= message %>
-  </div>
-<% end %>
+<div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+  <% flash.each do |message_type, message| %>
+    <div class="<%= flash_background_color(message_type) %> px-6 py-4 rounded-lg shadow-lg mb-4 flash-message text-center" data-controller="flash">
+      <%= message %>
+    </div>
+  <% end %>
+</div>

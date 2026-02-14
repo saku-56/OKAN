@@ -225,7 +225,7 @@ RSpec.describe "Hospitals", type: :system do
 
           click_button "変更"
 
-          sleep 5
+          sleep 3
           expect(current_path).to eq hospital_path(hospital)
           expect(page).to have_content "病院情報を更新しました"
           # expect(page).to have_content("10:00 - 13:00")

@@ -6,6 +6,8 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.woff2=file --loader:.woff=file --loader:.ttf=file --loader:.eot=file --loader:.css=css",
+    "build:css": "tailwindcss -i ./app/assets/tailwind/application.css -o ./app/assets/builds/tailwind.css",
+    "build:css:watch": "tailwindcss -i ./app/assets/tailwind/application.css -o ./app/assets/builds/tailwind.css --watch",
     "postinstall": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/assets/"
   },
   "dependencies": {
