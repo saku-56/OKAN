@@ -11,10 +11,13 @@
               </div>
               <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
             </div>
-            <label for="forgot-modal-<%= user_medicine.id %>" class="btn btn-secondary">
+            <label for="confirm-modal-<%= user_medicine.id %>" class="btn btn-secondary">
               飲み忘れ
             </label>
           </div>
+
+          <!-- モーダルの中身 -->
+          <%= render "increment_stock_modal", user_medicine: user_medicine %>
         <% end %>
       <% else %>
         <p class="text-center py-8">現在、薬はありません</p>
@@ -22,32 +25,3 @@
     </div>
   </div>
 </div>
-
-<!-- モーダルの中身 -->
-<% if @medicines_with_stock.any? %>
-  <% @medicines_with_stock.each do |user_medicine| %>
-    <input type="checkbox" id="forgot-modal-<%= user_medicine.id %>" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg">飲み忘れの確認</h3>
-        <p class="py-4">
-          <%= user_medicine.medicine.name %>は現在残り<%= user_medicine.current_stock %>錠です。<br>
-          1回分増やしますか?
-        </p>
-        <div class="modal-action">
-          <!-- キャンセルボタン -->
-          <label for="forgot-modal-<%= user_medicine.id %>" class="btn">
-            キャンセル
-          </label>
-
-          <!-- 実行ボタン -->
-          <%= button_to "OK",
-                        increment_stock_user_medicine_path(user_medicine),
-                        method: :patch,
-                        class: "btn btn-primary",
-                        form: { onsubmit: "document.getElementById('forgot-modal-#{user_medicine.id}').checked = false;" } %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
