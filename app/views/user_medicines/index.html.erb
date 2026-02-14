@@ -2,8 +2,10 @@
   <h1 class="text-3xl text-center mb-6 mt-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
     <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i>お薬リスト
   </h1>
+
+  <!-- 薬一覧 -->
   <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
-    <%if @user_medicine.any? %>
+    <% if @user_medicine.any? %>
       <% @user_medicine.each do |user_medicine| %>
         <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
           <div class="flex-1">
@@ -23,8 +25,9 @@
     <% end %>
    </div>
 
-  <div class="actions text-center">
-    <%= link_to new_user_medicine_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] max-w-xs" do%>
+    <!-- 新しいお薬登録ボタン -->
+    <div class="actions text-center">
+    <%= link_to new_user_medicine_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] max-w-xs hover:bg-red-100 transition-colors duration-300" do %>
       <i class="fa-solid fa-plus fa-sm" style="color: rgba(255, 136, 59, 1.00);"></i>
       新しいお薬を登録する
     <% end %>
