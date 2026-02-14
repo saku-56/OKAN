@@ -8,9 +8,19 @@ module ApplicationHelper
     end
   end
 
-  # 入力フォーム
+  # 入力フォーム(エラー箇所のフォームは赤になる)
   def form_field_class(object, field_name)
     base_class = "border rounded px-3 py-2 w-full"
+    if object.errors[field_name].any?
+      "#{base_class} border-red-500 border-2 bg-red-50"
+    else
+      "#{base_class} border-gray-300"
+    end
+  end
+
+  # date用の入力フォーム
+  def date_form_field_class(object, field_name)
+    base_class = "border rounded px-3 py-2"
     if object.errors[field_name].any?
       "#{base_class} border-red-500 border-2 bg-red-50"
     else
