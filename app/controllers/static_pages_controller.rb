@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[top]
+  skip_before_action :authenticate_user!, only: %i[top terms_of_service]
 
   def top
     if user_signed_in?
