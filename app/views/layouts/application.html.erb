@@ -41,13 +41,8 @@
         <!-- フッター -->
         <%= render 'shared/footer' %>
       </div>
-
-      <!-- ドロワーメニューの出し分け -->
-      <% if user_signed_in? %>
-        <%= render 'shared/drawer_menu' %>
-      <% else %>
-        <%= render 'shared/before_login_drawer_menu' %>
-      <% end %>
+      <!-- ドロワーメニュー -->
+      <%= render 'shared/drawer_menu' %>
     </div>
 
     <!-- ナビゲーションバー -->
