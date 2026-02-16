@@ -193,10 +193,11 @@
     </ol>
   </div>
 
-  <div class="mt-4 mb-2 text-center">
-    <%= link_to home_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
+  <!-- 戻るボタン -->
+  <div class="mt-2 mb-2 text-center">
+    <%= button_tag type: "button", onclick: "history.back()", class: "text-gray-800 hover:text-red-500 items-center gap-2 transition-colors duration-200 bg-transparent border-0 cursor-pointer" do %>
       <i class="fa-solid fa-arrow-left fa-sm"></i>
-      <span>ホームに戻る</span>
+      <span>戻る</span>
     <% end %>
   </div>
 </div>
