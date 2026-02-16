@@ -1,89 +1,83 @@
-<div class="container mx-auto px-4 mb-16">
-  <div class="medicines-section max-w-2xl mx-auto mb-8">
-    <div class="w-full">
+<div class="medicines-section max-w-2xl mx-auto mb-8">
+  <!-- 薬一覧へのボタン-->
+  <div class="flex mt-2 mb-2">
+    <%= link_to user_medicines_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
+      <span>薬一覧へ</span>
+    <% end %>
+  </div>
 
-    <!-- 薬一覧へのボタン-->
-     <div class="flex mt-2 mb-2">
-       <%= link_to user_medicines_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
-        <i class="fa-solid fa-arrow-left fa-sm"></i>
-        <span>薬一覧へ</span>
-      <% end %>
+  <h1 class="text-3xl text-center mb-4" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i>お薬登録
+  </h1>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <%= form_with model: @form, url: user_medicines_path do |f| %>
+      <%= render "shared/error_messages", object: @form %>
+
+      <div class="mb-4" data-controller="autocomplete">
+        <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
+        <div class="relative w-full">
+          <!-- input ターゲット -->
+          <%= f.text_field :medicine_name,
+                           class: form_field_class(f.object, :medicine_name),
+                           autocomplete: "off",
+                           data: {
+                             autocomplete_target: "input",
+                             action: "input->autocomplete#search",
+                           } %>
+          <!-- results ターゲット -->
+          <div data-autocomplete-target="results"
+               class="absolute z-10 w-full bg-white border border-gray-300 rounded mt-1">
+          </div>
+        </div>
       </div>
 
-      <h1 class="text-3xl text-center mb-4" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
-        <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i>お薬登録
-      </h1>
-
-      <div class="bg-white rounded-lg shadow p-6">
-        <%= form_with model: @form, url: user_medicines_path do |f| %>
-          <%= render "shared/error_messages", object: @form %>
-
-          <div class="mb-4" data-controller="autocomplete">
-            <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
-            <div class="relative w-full">
-            <!-- input ターゲット -->
-              <%= f.text_field :medicine_name,
-                               class: form_field_class(f.object, :medicine_name),
-                               autocomplete: "off",
-                               data: {
-                                 autocomplete_target: "input",
-                                 action: "input->autocomplete#search",
-                               } %>
-              <!-- results ターゲット -->
-              <div data-autocomplete-target="results"
-                  class="absolute z-10 w-full bg-white border border-gray-300 rounded mt-1">
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :dosage_per_time, "1回の服薬量", class: "block text-sm font-bold mb-2" %>
-            <div class="flex items-center gap-2">
-              <%= f.number_field :dosage_per_time,
-                                min: 1,
-                                class: form_field_class(f.object, :dosage_per_time) %>
-              <span class="text-gray-700 whitespace-nowrap">錠</span>
-            </div>
-            <% if f.object.errors[:dosage_per_time].any? %>
-              <p class="text-red-600 text-sm mt-1">
-              </p>
-            <% end %>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :times_per_day, "1日の服薬回数", class: "block text-sm font-bold mb-2" %>
-            <div class="flex items-center gap-2">
-              <%= f.number_field :times_per_day,
-                                 max: 4,
-                                 class: form_field_class(f.object, :times_per_day) %>
-              <span class="text-gray-700 whitespace-nowrap">回</span>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mt-2" %>
-              <div class="flex items-center gap-2">
-              <%= f.number_field :prescribed_amount,
-                                 placeholder: "追加する数量を入力",
-                                 min: 1,
-                                 class: form_field_class(f.object, :prescribed_amount) %>
-              <span class="text-gray-700 whitespace-nowrap">錠</span>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
-            <%= f.date_field :date_of_prescription,
-                             value: Date.today,
-                             class: date_form_field_class(f.object, :date_of_prescription) %>
-          </div>
-
-          <!-- 薬を追加ボタン -->
-          <div class="actions text-center">
-            <%= f.submit "薬を追加", class: "btn btn-primary" %>
-          </div>
+      <div class="mb-4">
+        <%= f.label :dosage_per_time, "1回の服薬量", class: "block text-sm font-bold mb-2" %>
+        <div class="flex items-center gap-2">
+          <%= f.number_field :dosage_per_time,
+                             min: 1,
+                             class: form_field_class(f.object, :dosage_per_time) %>
+          <span class="text-gray-700 whitespace-nowrap">錠</span>
+        </div>
+        <% if f.object.errors[:dosage_per_time].any? %>
+          <p class="text-red-600 text-sm mt-1"></p>
         <% end %>
       </div>
-    </div>
+
+      <div class="mb-4">
+        <%= f.label :times_per_day, "1日の服薬回数", class: "block text-sm font-bold mb-2" %>
+        <div class="flex items-center gap-2">
+          <%= f.number_field :times_per_day,
+                             max: 4,
+                             class: form_field_class(f.object, :times_per_day) %>
+          <span class="text-gray-700 whitespace-nowrap">回</span>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :prescribed_amount, "処方量", class: "block text-sm font-bold mt-2" %>
+        <div class="flex items-center gap-2">
+          <%= f.number_field :prescribed_amount,
+                             placeholder: "追加する数量を入力",
+                             min: 1,
+                             class: form_field_class(f.object, :prescribed_amount) %>
+          <span class="text-gray-700 whitespace-nowrap">錠</span>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :date_of_prescription, "処方日", class: "block text-sm font-bold mb-2" %>
+        <%= f.date_field :date_of_prescription,
+                         value: Date.today,
+                         class: date_form_field_class(f.object, :date_of_prescription) %>
+      </div>
+
+      <!-- 薬を追加ボタン -->
+      <div class="actions text-center">
+        <%= f.submit "薬を追加", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
 </div>
