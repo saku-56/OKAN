@@ -1,10 +1,11 @@
 class HospitalsController < ApplicationController
+  before_action :set_hospital, only: %i[show edit update]
+
   def index
     @hospital = current_user.hospitals
   end
 
   def show
-    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
     @next_visit = @hospital.consultation_schedules.upcoming.first
   end
 
@@ -33,11 +34,9 @@ class HospitalsController < ApplicationController
   end
 
   def edit
-    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
   end
 
   def update
-    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
     if @hospital.update(hospital_params)
       redirect_to @hospital, notice: "病院情報を更新しました"
     else
@@ -65,5 +64,9 @@ class HospitalsController < ApplicationController
         :end_time
       ],
     )
+  end
+
+  def set_hospital
+    @hospital = current_user.hospitals.includes(:hospital_schedules).find_by(uuid: params[:id])
   end
 end
