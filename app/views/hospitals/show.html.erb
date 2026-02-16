@@ -1,6 +1,4 @@
-
-<div class="container mx-auto px-4 mb-16">
-  <div class="medicines-section max-w-4xl mx-auto mb-8">
+<div class="medicines-section max-w-4xl mx-auto mb-8">
     <div class="w-full">
       <div class="bg-white rounded-lg shadow p-6 mb-6">
 
@@ -41,13 +39,13 @@
 
         <div class="flex items-center gap-4">
           <%= f.date_field :visit_date,
-                          disabled: true,
-                          max: Date.current + 6.months,
-                          data: {
-                            schedule_target: "dateField",
-                            action: "change->schedule#dateChanged",
-                          },
-                          class: "border border-gray-300 rounded px-3 py-2 flex-1" %>
+                           disabled: true,
+                           max: Date.current + 6.months,
+                           data: {
+                             schedule_target: "dateField",
+                             action: "change->schedule#dateChanged",
+                           },
+                           class: "border border-gray-300 rounded px-3 py-2 flex-1" %>
 
           <!-- 編集アイコン -->
           <button type="button"
@@ -79,7 +77,7 @@
           <!-- 削除アイコン -->
           <% if consultation_schedule.persisted? && consultation_schedule.visit_date.present? %>
             <%= link_to hospital_consultation_schedule_path(@hospital, consultation_schedule),
-                        data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?", testid: "delete-schedule-icon"},
+                        data: { turbo_method: :delete, turbo_confirm: "通院予定を本当に削除しますか?", testid: "delete-schedule-icon" },
                         class: "delete-icon",
                         title: "削除" do %>
               <i class="fa-solid fa-trash fa-lg"></i>
@@ -88,5 +86,4 @@
         </div>
       <% end %>
     </div>
-  </div>
 </div>
