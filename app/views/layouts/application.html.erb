@@ -19,13 +19,13 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module"%>
   </head>
 
-  <body class="bg-base-100 min-h-screen font-mplus">
+  <body class="bg-base-100 min-h-screen font-mplus pb-10">
     <!-- ドロワー全体を囲む -->
     <div class="drawer">
       <!-- チェックボックス（非表示） -->
       <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
       <!-- メインコンテンツエリア -->
-      <div class="drawer-content">
+      <div class="drawer-content flex flex-col min-h-screen">
         <!-- ヘッダーの出し分け -->
         <% if user_signed_in? %>
           <%= render 'shared/header' %>
@@ -34,19 +34,27 @@
         <% end %>
         <!-- フラッシュメッセージ -->
         <%= render 'shared/flash_message' %>
-        <!-- 各ページの内容 -->
+        <!-- メインコンテンツ -->
+        <main class="flex-grow container mx-auto px-4 py-8">
           <%= yield %>
         </main>
+        <!-- フッター -->
+        <%= render 'shared/footer' %>
       </div>
+
       <!-- ドロワーメニューの出し分け -->
       <% if user_signed_in? %>
         <%= render 'shared/drawer_menu' %>
       <% else %>
         <%= render 'shared/before_login_drawer_menu' %>
       <% end %>
+      <!-- ドロワーメニュー -->
+      <%= render 'shared/drawer_menu' %>
     </div>
+
+    <!-- ナビゲーションバー -->
     <% if user_signed_in? %>
-      <%= render 'shared/footer' %>
+      <%= render 'shared/bottom_navigation' %>
     <% end %>
-</body>
+  </body>
 </html>

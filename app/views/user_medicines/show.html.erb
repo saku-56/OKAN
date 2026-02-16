@@ -1,87 +1,79 @@
-<div class="container mx-auto px-4 mb-16">
-  <div class="medicines-section max-w-2xl mx-auto mb-8">
-    <div class="w-full">
+<div class="medicines-section max-w-2xl mx-auto mb-8">
+  <!-- 薬一覧へのボタン-->
+  <div class="flex mt-2 mb-2">
+    <%= link_to user_medicines_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
+      <span>薬一覧へ</span>
+    <% end %>
+  </div>
 
-    <!-- 薬一覧へのボタン-->
-     <div class="flex mt-2 mb-2">
-       <%= link_to user_medicines_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
-        <i class="fa-solid fa-arrow-left fa-sm"></i>
-        <span>薬一覧へ</span>
+  <!-- タイトル -->
+  <h1 class="text-3xl text-center mb-6 mt-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i><%= @user_medicine.medicine.name %></h1>
+
+    <div class="bg-white rounded-lg shadow p-6">
+    <!-- 削除アイコン -->
+    <div class="flex justify-end">
+      <%= link_to user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "薬を削除しますか?" },
+                                                      class: "delete-icon",
+                                                      title: "削除" do %>
+        <i class="fa-solid fa-trash fa-lg"></i>
       <% end %>
+    </div>
+
+    <!-- 薬の詳細 -->
+    <div class="mb-4">
+      <div class="block text-sm font-bold mb-2">1回の服薬量</div>
+      <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
+        <%= @user_medicine.dosage_per_time %> 錠
       </div>
+    </div>
 
-      <!-- タイトル -->
-      <h1 class="text-3xl text-center mb-6 mt-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
-        <i class="fa-solid fa-pills" style="color: rgba(255, 136, 59, 1.00);"></i><%= @user_medicine.medicine.name %>
-      </h1>
+    <div class="mb-4">
+      <div class="block text-sm font-bold mb-2">1日の服薬回数</div>
+      <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
+        <%= @user_medicine.times_per_day %> 回
+      </div>
+    </div>
 
-      <div class="bg-white rounded-lg shadow p-6">
-        <!-- 削除アイコン -->
-        <div class="flex justify-end">
-        <%= link_to user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "薬を削除しますか?" },
-                                                        class: "delete-icon",
-                                                        title: "削除" do %>
-            <i class="fa-solid fa-trash fa-lg"></i>
-          <% end %>
-        </div>
+    <div class="mb-4">
+      <div class="block text-sm font-bold mb-2">現在の在庫</div>
+      <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+        <%= @user_medicine.current_stock %> 錠
+      </div>
+    </div>
 
-        <!-- 薬の詳細 -->
-        <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">1回の服薬量</label>
-          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
-            <%= @user_medicine.dosage_per_time %> 錠
+    <div class="mb-4">
+      <div class="block text-sm font-bold mb-2">前回の処方量</div>
+      <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+        <%= @user_medicine.prescribed_amount %> 錠
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <div class="block text-sm font-bold mb-2">前回の処方日</div>
+      <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
+        <%= @user_medicine.date_of_prescription %>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="flex gap-10">
+        <%= button_to "在庫を追加",
+                      add_stock_user_medicine_path(@user_medicine),
+                      method: :get,
+                      form: { class: "flex-1" },
+                      class: "btn btn-primary w-full" %>
+        <% if @user_medicine.has_stock? %>
+          <div class="flex-1">
+            <label for="confirm-modal-<%= @user_medicine.id %>" class="btn btn-secondary w-full cursor-pointer">
+              飲み忘れ
+            </label>
           </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">1日の服薬回数</label>
-          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700">
-            <%= @user_medicine.times_per_day %> 回
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">現在の在庫</label>
-          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
-            <%= @user_medicine.current_stock %> 錠
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">前回の処方量</label>
-          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
-            <%= @user_medicine.prescribed_amount %> 錠
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">前回の処方日</label>
-          <div class="bg-gray-100 border border-gray-300 rounded px-3 py-2 text-gray-700 ">
-            <%= @user_medicine.date_of_prescription %>
-          </div>
-        </div>
-
-        <div class="space-y-4">
-          <div class="flex gap-10">
-            <%= button_to "在庫を追加",
-                          add_stock_user_medicine_path(@user_medicine),
-                          method: :get,
-                          form: { class: "flex-1" },
-                          class: "btn btn-primary w-full" %>
-            <% if @user_medicine.has_stock? %>
-              <div class="flex-1">
-                <label for="confirm-modal-<%= @user_medicine.id %>" class="btn btn-secondary w-full cursor-pointer">
-                  飲み忘れ
-                </label>
-              </div>
-            <% end %>
-          </div>
-        </div>
-       </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-
 <!-- モーダルの中身 -->
 <%= render "increment_stock_modal", user_medicine: @user_medicine %>

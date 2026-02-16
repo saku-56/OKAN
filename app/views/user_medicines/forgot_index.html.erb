@@ -1,27 +1,27 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="medicines-section max-w-2xl mx-auto mb-8">
-    <h1 class="font-bold text-4xl text-center mb-6">飲み忘れ</h1>
-    <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
-      <% if @medicines_with_stock.any? %>
-        <% @medicines_with_stock.each do |user_medicine| %>
-          <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-semibold text-lg"><%= user_medicine.medicine.name %></h3>
-              </div>
-              <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
+<div class="medicines-section max-w-2xl mx-auto mb-8">
+  <h1 class="font-bold text-4xl text-center mb-6">飲み忘れ</h1>
+  <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
+    <% if @medicines_with_stock.any? %>
+      <% @medicines_with_stock.each do |user_medicine| %>
+        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4" >
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold text-lg">
+                <%= user_medicine.medicine.name %>
+              </h3>
             </div>
-            <label for="confirm-modal-<%= user_medicine.id %>" class="btn btn-secondary">
-              飲み忘れ
-            </label>
+            <p class="text-gray-600">残り<%= user_medicine.current_stock %>錠</p>
           </div>
+          <label for="confirm-modal-<%= user_medicine.id %>" class="btn btn-secondary" >
+            飲み忘れ
+          </label>
+        </div>
 
-          <!-- モーダルの中身 -->
-          <%= render "increment_stock_modal", user_medicine: user_medicine %>
-        <% end %>
-      <% else %>
-        <p class="text-center py-8">現在、薬はありません</p>
+        <!-- モーダルの中身 -->
+        <%= render "increment_stock_modal", user_medicine: user_medicine %>
       <% end %>
-    </div>
+    <% else %>
+      <p class="text-center py-8">現在、薬はありません</p>
+    <% end %>
   </div>
 </div>
