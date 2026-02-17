@@ -2,7 +2,7 @@ class UserMedicinesController < ApplicationController
   before_action :set_user_medicine, only: %i[show add_stock update_stock increment_stock destroy]
 
   def index
-    @user_medicine = current_user.user_medicines.includes(:medicine)
+    @user_medicine = current_user.user_medicines.includes(:medicine).order(created_at: :desc)
   end
 
   def autocomplete
@@ -66,7 +66,7 @@ class UserMedicinesController < ApplicationController
   end
 
   def forgot_index
-    @medicines_with_stock = current_user.user_medicines.includes(:medicine).has_stock
+    @medicines_with_stock = current_user.user_medicines.includes(:medicine).has_stock.order(created_at: :desc)
   end
 
   def increment_stock

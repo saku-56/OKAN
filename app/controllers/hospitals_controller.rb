@@ -2,7 +2,7 @@ class HospitalsController < ApplicationController
   before_action :set_hospital, only: %i[show edit update]
 
   def index
-    @hospital = current_user.hospitals
+    @hospital = current_user.hospitals.order(created_at: :desc)
   end
 
   def show
