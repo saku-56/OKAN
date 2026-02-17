@@ -1,7 +1,10 @@
-<div class="container mx-auto px-4 mb-20">
-  <h1 class="font-bold text-4xl text-center mb-6">病院一覧</h1>
+<div class="max-w-2xl mx-auto mb-8">
+  <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <%= render "shared/icon_hospital" %>
+    <span>病院情報一覧</span>
+  </h1>
   <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
-    <%if @hospital.any? %>
+    <% if @hospital.any? %>
       <% @hospital.each do |hospital| %>
         <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
           <div class="flex items-center gap-2">
@@ -13,9 +16,13 @@
     <% else %>
       <p class="text-center py-8">現在、病院情報はありません</p>
     <% end %>
-   </div>
+  </div>
 
+  <!-- 新しい病院登録ボタン -->
   <div class="actions text-center">
-    <%= link_to "新規登録", new_hospital_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs" %>
+    <%= link_to new_hospital_path, class: "btn bg-white text-[#E56A54] border border-[#E56A54] w-full max-w-xs hover:bg-red-100 transition-colors duration-300" do %>
+      <i class="fa-solid fa-plus fa-sm" style="color: rgba(255, 136, 59, 1)"></i>
+      新しい病院を登録する
+    <% end %>
   </div>
 </div>

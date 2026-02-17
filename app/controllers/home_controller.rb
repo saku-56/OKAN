@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @medicines_with_stock = current_user.user_medicines.has_stock.order(created_at: :asc)
+    @medicines_with_stock = current_user.user_medicines.includes(:medicine).has_stock.order(created_at: :desc)
     @date = params[:date]&.to_date
 
     # URLで直接日付を指定された時用

@@ -1,6 +1,8 @@
 class UserMedicinesController < ApplicationController
+  before_action :set_user_medicine, only: %i[show add_stock update_stock increment_stock destroy]
+
   def index
-    @user_medicine = current_user.user_medicines
+    @user_medicine = current_user.user_medicines.includes(:medicine).order(created_at: :desc)
   end
 
   def autocomplete
@@ -17,7 +19,6 @@ class UserMedicinesController < ApplicationController
   end
 
   def show
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
   end
 
   def new
@@ -38,7 +39,6 @@ class UserMedicinesController < ApplicationController
   end
 
   def add_stock
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
     # 在庫追加フォーム用の一時インスタンス
     @stock_form = @user_medicine.dup
     @stock_form.prescribed_amount = nil
@@ -46,8 +46,6 @@ class UserMedicinesController < ApplicationController
   end
 
   def update_stock
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
-
     # 元の在庫量を保存
     original_stock = @user_medicine.current_stock
 
@@ -68,12 +66,10 @@ class UserMedicinesController < ApplicationController
   end
 
   def forgot_index
-    @medicines_with_stock = current_user.user_medicines.has_stock
+    @medicines_with_stock = current_user.user_medicines.includes(:medicine).has_stock.order(created_at: :desc)
   end
 
   def increment_stock
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
-
     if @user_medicine.increment_stock
       redirect_to user_medicine_path(@user_medicine), notice: "在庫を1回分増やしました"
     else
@@ -82,7 +78,6 @@ class UserMedicinesController < ApplicationController
   end
 
   def destroy
-    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
     @user_medicine.destroy
     redirect_to user_medicines_path, notice: "薬を削除しました"
   end
@@ -104,5 +99,9 @@ class UserMedicinesController < ApplicationController
       :prescribed_amount,
       :date_of_prescription
     )
+  end
+
+  def set_user_medicine
+    @user_medicine = current_user.user_medicines.find_by(uuid: params[:id])
   end
 end

@@ -54,6 +54,7 @@ group :development do
   gem "pry-rails"
   gem "pry-byebug"
   gem "htmlbeautifier"
+  gem "bullet", "8.1.0"
 end
 
 group :test do
