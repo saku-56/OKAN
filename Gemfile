@@ -68,7 +68,7 @@ gem "devise", "4.9.4"
 gem "devise-i18n", "~> 1.15"
 gem "simple_calendar",  "3.1.0"
 gem "kaminari",  "1.2.2"
-gem "whenever", "1.1.1", require: false
+gem "whenever", "1.1.2", require: false
 gem "omniauth-google-oauth2", "1.2.1"
 gem "omniauth-line", "0.1.0"
 gem "omniauth-rails_csrf_protection", "2.0.1"
