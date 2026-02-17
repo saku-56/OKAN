@@ -1,0 +1,9 @@
+# Prettierで整形しないファイル・ディレクトリ
+*.rb
+*.erb
+vendor/
+node_modules/
+public/
+tmp/
+log/
+db/schema.rb
