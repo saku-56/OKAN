@@ -19,7 +19,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module"%>
   </head>
 
-  <body class="bg-base-100 min-h-screen font-mplus pb-10">
+  <body class="bg-base-100 min-h-screen font-mplus <%= 'pb-10' if user_signed_in? %>">
     <!-- ドロワー全体を囲む -->
     <div class="drawer">
       <!-- チェックボックス（非表示） -->
