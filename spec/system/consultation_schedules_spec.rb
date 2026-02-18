@@ -6,7 +6,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
 
   before do
     sign_in user
-     page.driver.browser.manage.window.resize_to(1200, 1000)
+    page.driver.browser.manage.window.resize_to(1200, 1000)
   end
 
   describe "通院予定の表示" do

@@ -7,7 +7,7 @@ class MedicineNotificationService
         .includes(:user_medicines, :notifications)
         .merge(Notification.active.medicine_stock)
         .find_each do |user|
-      notify_user_medicines(user)
+          notify_user_medicines(user)
     end
   end
 

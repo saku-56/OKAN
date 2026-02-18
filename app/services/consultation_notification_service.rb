@@ -7,7 +7,7 @@ class ConsultationNotificationService
         .includes(:consultation_schedules, :notifications)
         .merge(Notification.active.consultation_reminder)
         .find_each do |user|
-      notify_consultation_schedules(user)
+          notify_consultation_schedules(user)
     end
   end
 
