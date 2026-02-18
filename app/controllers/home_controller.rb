@@ -11,11 +11,11 @@ class HomeController < ApplicationController
     max_date = Date.current.beginning_of_month + 6.months
 
     @start_date = if requested_date < min_date
-                    min_date
+      min_date
     elsif requested_date > max_date
-                    max_date
+      max_date
     else
-                    requested_date.beginning_of_month
+      requested_date.beginning_of_month
     end
 
     # 来月の1週目にある予定を今月に表示する用

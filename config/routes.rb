@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "static_pages#top"
   get "terms_of_service", to: "static_pages#terms_of_service"
+  get "privacy", to: "static_pages#privacy"
   get "home", to: "home#index"
   get "line_connections", to: "line_connections#required"
 end
