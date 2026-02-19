@@ -1,4 +1,7 @@
 class Hospital < ApplicationRecord
+  # 暗号化
+  encrypts :name
+
   belongs_to :user
   has_many :hospital_schedules, dependent: :destroy
   has_many :consultation_schedules, dependent: :destroy

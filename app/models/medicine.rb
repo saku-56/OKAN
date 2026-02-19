@@ -1,4 +1,7 @@
 class Medicine < ApplicationRecord
+  # 暗号化
+  encrypts :name
+
   belongs_to :user
   # Medicineは一つのUserMedicineを持つ
   has_one :user_medicine, dependent: :destroy
