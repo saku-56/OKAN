@@ -29,7 +29,7 @@ RSpec.describe "ヘッダー", type: :system do
         expect(page).to have_link "使い方"
         expect(page).to have_link "利用規約"
         expect(page).to have_link "プライバシーポリシー"
-        expect(page).to have_link "お問合せ"
+        expect(page).to have_link "お問い合わせ"
         expect(page).to have_link "ログアウト"
       end
 
