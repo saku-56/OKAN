@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "ヘッダーとフッターのナビゲーション", type: :system do
+RSpec.describe "ヘッダー", type: :system do
   let(:user) { create(:user) }
 
   before do
@@ -49,6 +49,11 @@ RSpec.describe "ヘッダーとフッターのナビゲーション", type: :sys
         expect(page).to have_current_path(edit_user_registration_path)
       end
 
+      # it "使い方リンクをクリックすると使い方ページに遷移すること" do
+      #   click_on "使い方"
+      #   expect(page).to have_current_path(_path)
+      # end
+
       it "利用規約リンクをクリックすると利用規約ページに遷移すること" do
         within(".drawer-side") do
           click_on "利用規約"
@@ -62,6 +67,11 @@ RSpec.describe "ヘッダーとフッターのナビゲーション", type: :sys
         end
         expect(page).to have_current_path(privacy_path)
       end
+
+      # it "お問い合わせリンクをクリックするとお問い合わせページに遷移すること" do
+      #   click_on "お問い合わせ"
+      #   expect(page).to have_current_path(_path)
+      # end
 
       it "ログアウトリンクをクリックするとログアウトできること" do
         # 確認ダイアログを自動的に承認する
