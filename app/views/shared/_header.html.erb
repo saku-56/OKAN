@@ -1,5 +1,11 @@
-<header class="navbar bg-base-200 px-4">
-  <!-- Hamburger -->
+<header class="navbar bg-primary text-primary-content px-4">
+  <!-- ロゴとタイトル -->
+  <%= link_to home_path, class: "flex items-center gap-2" do %>
+    <%= image_tag "favicon/favicon.ico", alt: "OKAN Logo", class: "w-8 h-8" %>
+    <span class="text-lg font-bold tracking-wider hover:opacity-80">OKAN</span>
+  <% end %>
+  <div class="flex-1"></div>
+  <!-- ハンバーガーメニュー -->
   <label for="drawer-menu" class="btn btn-ghost btn-sm drawer-button">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -7,9 +13,4 @@
         d="M4.5 6.75h15M4.5 12h15m-15 5.25h15" />
     </svg>
   </label>
-
-  <!-- Center Title -->
-  <div class="mx-auto text-center">
-    <span class="text-lg font-bold tracking-wider">OKAN</span>
-  </div>
 </header>
