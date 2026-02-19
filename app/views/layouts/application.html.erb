@@ -3,7 +3,7 @@
   <head>
     <title><%= content_for(:title) || "Okan" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,7 +12,6 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -21,7 +20,7 @@
 
   <body class="bg-base-100 min-h-screen font-mplus <%= 'pb-10' if user_signed_in? %>">
     <!-- ドロワー全体を囲む -->
-    <div class="drawer">
+    <div class="drawer drawer-end">
       <!-- チェックボックス（非表示） -->
       <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
       <!-- メインコンテンツエリア -->
