@@ -23,6 +23,20 @@ RSpec.describe Hospital, type: :model do
       expect(hospital).to be_invalid
       expect(hospital.errors[:name]).to include("は20文字以内で入力してください")
     end
+
+    it "同じユーザーが同じnameを登録するとバリデーションが機能してinvalidになるか" do
+      create(:hospital, user: user, name: "病院A")
+      hospital = build(:hospital, user: user, name: "病院A")
+      expect(hospital).to be_invalid
+      expect(hospital.errors[:name]).to include("はすでに存在します")
+    end
+
+    it "異なるユーザーなら同じnameでも登録できるか" do
+      user2 = create(:user)
+      create(:hospital, user: user, name: "病院A")
+      hospital = build(:hospital, user: user2, name: "病院A")
+      expect(hospital).to be_valid
+    end
   end
 
   describe "description" do
