@@ -6,7 +6,7 @@
 @plugin "daisyui/theme" {
   name: "mytheme";
   default: true; /* set as default */
-  prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
+  prefersdark: true; /* システム設定がダークモードでもライトモードで表示する */
   color-scheme: light;
 
   --color-base-100: #FCF7F0; /* ページ背景 */
