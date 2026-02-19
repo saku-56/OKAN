@@ -1,6 +1,6 @@
 class Medicine < ApplicationRecord
   # 暗号化
-  encrypts :name
+  encrypts :name, deterministic: true
 
   belongs_to :user
   # Medicineは一つのUserMedicineを持つ
