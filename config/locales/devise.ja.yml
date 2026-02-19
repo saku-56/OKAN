@@ -41,12 +41,10 @@ ja:
       update_needs_confirmation: 'アカウント情報を変更しました。変更されたメールアドレスの本人確認のため、本人確認用メールより確認処理をおこなってください。'
       updated: 'アカウント情報を変更しました。'
       new:
-        name: "名前"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
       edit:
-        name: "名前"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"

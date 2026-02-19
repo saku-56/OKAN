@@ -4,16 +4,6 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
       <div class="mb-4">
-        <%= f.label :name, class: "label-text mb-1" %>
-        <%= f.text_field :name, class: "input input-bordered bg-white" %>
-        <% if resource.errors[:name].any? %>
-          <% resource.errors[:name]&.full_messages do |message| %>
-            <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".name") %><%= message %></p>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="mb-4">
         <%= f.label :email, class: "label-text mb-1" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
         <% if resource.errors[:email].any? %>

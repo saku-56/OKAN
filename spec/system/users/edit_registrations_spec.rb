@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "UserEditRegistrations", type: :system do
-  let(:user) { create(:user, name: "元の名前", email: "original@example.com", password: "password") }
+  let(:user) { create(:user, email: "original@example.com", password: "password") }
 
   before do
     login_as(user)
@@ -13,15 +13,6 @@ RSpec.describe "UserEditRegistrations", type: :system do
     end
 
     context "正常系" do
-      it "名前が変更できる" do
-        fill_in "名前", with: "新しい名前"
-        fill_in "現在のパスワード", with: "password"
-        click_button "変更する"
-
-        expect(page).to have_content("アカウント情報を変更しました。")
-        expect(page).to have_field("名前", with: "新しい名前")
-      end
-
       it "メールアドレスが変更できる" do
         fill_in "メールアドレス", with: "new@example.com"
         fill_in "現在のパスワード", with: "password"
