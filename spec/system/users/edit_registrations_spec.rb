@@ -44,7 +44,7 @@ RSpec.describe "UserEditRegistrations", type: :system do
 
     context "異常系" do
       it "現在のパスワードを入力しないと変更できない" do
-        fill_in "名前", with: "新しい名前"
+        fill_in "メールアドレス", with: "new@example.com"
         fill_in "現在のパスワード", with: ""
         click_button "変更する"
 
@@ -52,7 +52,7 @@ RSpec.describe "UserEditRegistrations", type: :system do
       end
 
       it "現在のパスワードが間違っていると変更できない" do
-        fill_in "名前", with: "新しい名前"
+        fill_in "メールアドレス", with: "new@example.com"
         fill_in "現在のパスワード", with: "wrongpassword"
         click_button "変更する"
 
