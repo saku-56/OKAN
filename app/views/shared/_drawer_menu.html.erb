@@ -9,11 +9,12 @@
       <li><%= link_to "LINE通知設定", line_connections_path %></li>
     <% end %>
     <li><%= link_to "アカウント", edit_user_registration_path %></li>
-    <li><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, confirm: "ログアウトしますか？", turbo_confirm: "ログアウトしますか？" } %></li>
     <li class="border-t border-base-500 my-4"></li>
     <!-- 規約・お問合せ -->
+    <li><%= link_to "使い方", "_path" %></li>
     <li><%= link_to "利用規約", terms_of_service_path %></li>
     <li><%= link_to "プライバシーポリシー", privacy_path %></li>
     <li><%= link_to "お問合せ", "contact_path" %></li>
+    <li><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, confirm: "ログアウトしますか？", turbo_confirm: "ログアウトしますか？" } %></li>
   </ul>
 </div>
