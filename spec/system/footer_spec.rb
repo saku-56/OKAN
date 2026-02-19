@@ -33,11 +33,13 @@ RSpec.describe "フッター", type: :system do
       expect(page).to have_current_path(privacy_path)
     end
 
-    # it "お問い合わせリンクをクリックするとお問い合わせページに遷移すること" do
-    #   within("footer") do
-    #     click_on "お問い合わせ"
-    #   end
-    #   expect(page).to have_current_path(contact_path)
-    # end
+    it "お問い合わせリンクをクリックするとお問い合わせページに遷移すること" do
+      within("footer") do
+        expect(page).to have_link(
+        "お問い合わせ",
+        href: "https://docs.google.com/forms/d/e/1FAIpQLSfDG16MSVZUjgetz9KKfY7MROubS1F45IzY4MUAFmP2WE5WNA/viewform?usp=header"
+        )
+      end
+    end
   end
 end
