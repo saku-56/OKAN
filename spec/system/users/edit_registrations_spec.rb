@@ -97,7 +97,9 @@ RSpec.describe "UserEditRegistrations", type: :system do
       visit new_user_session_path
       fill_in "メールアドレス", with: deleted_email
       fill_in "パスワード", with: deleted_password
-      click_on "ログイン"
+      within(".card") do
+        click_on "ログイン"
+      end
 
       expect(page).to have_content("メールアドレス もしくはパスワードが不正です。")
       expect(current_path).to eq new_user_session_path

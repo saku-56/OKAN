@@ -26,8 +26,10 @@ RSpec.describe "UserSessions", type: :system do
       it "ログアウト処理が成功する" do
         visit edit_user_registration_path
 
-        accept_confirm do
-          click_link "ログアウト"
+        within(".card") do
+          accept_confirm do
+            click_link "ログアウト"
+          end
         end
 
         expect(page).to have_content("ログアウトしました")
