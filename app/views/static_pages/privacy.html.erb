@@ -57,11 +57,7 @@
       この場合、必ず、運転免許証のご提示等当社が指定する方法により、ご本人からのご請求であることの確認をさせていただきます。なお、情報の開示請求については、開示の有無に関わらず、ご申請時に一件あたり1,000円の事務手数料を申し受けます。
     </p>
   </div>
+  
   <!-- 戻るボタン -->
-  <div class="mt-2 mb-2 text-center">
-    <%= button_tag type: "button", onclick: "history.back()", class: "text-gray-800 hover:text-red-500 items-center gap-2 transition-colors duration-200 bg-transparent border-0 cursor-pointer" do %>
-      <i class="fa-solid fa-arrow-left fa-sm"></i>
-      <span>戻る</span>
-    <% end %>
-  </div>
+  <%= back_link %>
 </div>

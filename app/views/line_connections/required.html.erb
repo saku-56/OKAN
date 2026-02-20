@@ -1,11 +1,7 @@
 <div class="max-w-2xl mx-auto mb-8">
   <!-- 戻るボタン -->
-  <div class="mt-2 mb-2">
-    <%= button_tag type: "button", onclick: "history.back()", class: "text-gray-800 hover:text-red-500 items-center gap-2 transition-colors duration-200 bg-transparent border-0 cursor-pointer" do %>
-      <i class="fa-solid fa-arrow-left fa-sm"></i>
-      <span>戻る</span>
-    <% end %>
-  </div>
+  <%= back_link %>
+  
   <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 text-center">
     <h2 class="text-2xl font-bold mb-4">LINE通知設定</h2>
 
