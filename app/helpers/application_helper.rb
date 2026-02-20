@@ -10,11 +10,11 @@ module ApplicationHelper
 
   # 入力フォーム(エラー箇所のフォームは赤になる)
   def form_field_class(object, field_name)
-    base_class = "input input-bordered bg-white w-full"
+    base_class = "input input-bordered w-full"
     if object.errors[field_name].any?
-      "#{base_class} input-error"
+      "#{base_class} input-error bg-red-100"
     else
-      base_class
+      "#{base_class} bg-white"
     end
   end
 
