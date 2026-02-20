@@ -1,6 +1,7 @@
 <div class="drawer-side">
   <label for="drawer-menu" class="drawer-overlay"></label>
   <ul class="menu p-4 w-80 bg-base-100">
+    <li><%= link_to "ホーム", home_path %></li>
     <li><%= link_to "薬一覧", user_medicines_path %></li>
     <li><%= link_to "病院一覧", hospitals_path %></li>
     <% if current_user.line_user_id.present? %>
