@@ -3,7 +3,7 @@
     <span>新規登録</span>
   </h1>
 
-  <div class="bg-white rounded-lg shadow p-6">
+  <div class="bg-base-200 rounded-lg shadow p-6">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "shared/error_messages", object: f.object %>
 
@@ -37,7 +37,9 @@
       </p>
 
       <!-- 登録ボタン -->
-      <%= f.submit "登録する", class: "btn btn-primary w-full mb-6" %>
+      <div class="actions text-center">
+        <%= f.submit "登録する", class: "btn btn-primary w-60 mb-6" %>
+      </div>
     <% end %>
 
     <div class="flex items-center gap-4 opacity-70 mb-6">
@@ -73,9 +75,8 @@
         LINEでログイン
       <% end %>
     </div>
-    <p class="text-center text-xs text-base-content/70">
-      すでにアカウントをお持ちですか？
-      <%= link_to "ログイン", new_user_session_path, class: "link link-primary" %>
+    <p class="text-center text-base-content/70">
+        <%= link_to "ログインはこちら", new_user_session_path, class: "link link-primary" %>
     </p>
   </div>
 </div>

@@ -3,7 +3,7 @@
     <span>ログイン</span>
   </h1>
 
-  <div class="bg-white rounded-lg shadow p-6">
+  <div class="bg-base-200 rounded-lg shadow p-6">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
       <!-- メールアドレス -->
@@ -13,12 +13,14 @@
       </div>
 
        <!-- パスワード -->
-      <div class="mb-4">
+      <div class="mb-10">
         <%= f.label :password, class: "label-text mb-1 block" %>
         <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white w-full" %>
       </div>
 
-      <%= f.submit "ログイン", class: "btn btn-primary w-full mb-6" %>
+      <div class="actions text-center">
+        <%= f.submit "ログイン", class: "btn btn-primary w-60 mb-6" %>
+      </div>
     <% end %>
 
     <div class="flex items-center gap-4 opacity-70 mb-6">
@@ -56,9 +58,8 @@
       <% end %>
     </div>
 
-    <p class="text-center text-xs text-base-content/70">
+    <p class="text-center text-base-content/70">
         <%= link_to "新規登録はこちら", new_user_registration_path, class: "link link-primary" %>
-      </p>
-
+    </p>
   </div>
 </div>
