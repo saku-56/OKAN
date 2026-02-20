@@ -1,40 +1,33 @@
-<div class="flex items-center justify-center bg-base-100">
-  <div class="card w-11/12 max-w-sm bg-base-200 shadow-lg rounded-xl p-6">
-    <h2 class="text-center text-2xl font-bold text-primary mb-6">新規登録</h2>
+<div class="max-w-2xl mx-auto mb-8">
+  <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <span>新規登録</span>
+  </h1>
 
+  <div class="bg-white rounded-lg shadow p-6">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
 
+      <!-- メールアドレス -->
       <div class="mb-4">
-        <%= f.label :email, class: "label-text mb-1" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
-        <% if resource.errors[:email].any? %>
-          <% resource.errors[:email]&.each do |message| %>
-            <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".email") %><%= message %></p>
-          <% end %>
-        <% end %>
+        <%= f.label :email, class: "label-text mb-1 block" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: form_field_class(resource, :email) %>
       </div>
 
+      <!-- パスワード -->
       <div class="mb-4">
-        <%= f.label :password, class: "label-text mb-1" %>
-        <% if @minimum_password_length %>
-          <span class="text-xs mb-1">(<%= @minimum_password_length %> 文字以上)</span>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white" %>
-        <% if resource.errors[:password].any? %>
-          <% resource.errors[:password]&.each do |message| %>
-            <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".password") %><%= message %></p>
+        <div class="mb-1">
+          <%= f.label :password, class: "label-text" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs ml-1">(<%= @minimum_password_length %> 文字以上)</span>
           <% end %>
-        <% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: form_field_class(resource, :password) %>
       </div>
 
+      <!-- パスワード確認 -->
       <div class="mb-6">
-        <%= f.label :password_confirmation, class: "label-text mb-1" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered bg-white" %>
-        <% if resource.errors[:password_confirmation].any? %>
-          <% resource.errors[:password_confirmation]&.each do |message| %>
-            <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".password_confirmation") %><%= message %></p>
-          <% end %>
-        <% end %>
+        <%= f.label :password_confirmation, class: "label-text mb-1 block" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: form_field_class(resource, :password_confirmation) %>
       </div>
 
       <!-- 利用規約とプライバシーポリシーのリンク -->
@@ -43,9 +36,9 @@
         に同意のうえ、ご登録をお願いします
       </p>
 
+      <!-- 登録ボタン -->
       <%= f.submit "登録する", class: "btn btn-primary w-full mb-6" %>
     <% end %>
-
 
     <div class="flex items-center gap-4 opacity-70 mb-6">
       <div class="flex-1 h-px bg-base-300"></div>
@@ -53,11 +46,12 @@
       <div class="flex-1 h-px bg-base-300"></div>
     </div>
 
+    <!-- Googleログイン -->
     <div class= "mb-6">
       <%= button_to user_google_oauth2_omniauth_authorize_path,
-                    method: :post,
-                    data: { turbo: false },
-                    class: "btn w-full bg-white text-center text-black border-[#e5e5e5] mb-6" do %>
+                      method: :post,
+                      data: { turbo: false },
+                      class: "btn w-full bg-white text-center text-black border-[#e5e5e5] mb-6" do %>
         <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <g>
             <path d="m0 0H512V512H0" fill="#fff"></path>
@@ -70,19 +64,18 @@
         Googleログイン
       <% end %>
 
+      <!-- LINEログイン -->
       <%= button_to user_line_omniauth_authorize_path,
-                    method: :post,
-                    data: { turbo: false },
-                    class: "btn w-full bg-line border-line text-white" do %>
-          <svg aria-label="Line logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill-rule="evenodd" stroke-linejoin="round" fill="white"><path fill-rule="nonzero" d="M12.91 6.57c.232 0 .42.19.42.42 0 .23-.188.42-.42.42h-1.17v.75h1.17a.42.42 0 1 1 0 .84h-1.59a.42.42 0 0 1-.418-.42V5.4c0-.23.188-.42.42-.42h1.59a.42.42 0 0 1-.002.84h-1.17v.75h1.17zm-2.57 2.01a.421.421 0 0 1-.757.251l-1.63-2.217V8.58a.42.42 0 0 1-.42.42.42.42 0 0 1-.418-.42V5.4a.418.418 0 0 1 .755-.249L9.5 7.366V5.4c0-.23.188-.42.42-.42.23 0 .42.19.42.42v3.18zm-3.828 0c0 .23-.188.42-.42.42a.42.42 0 0 1-.418-.42V5.4c0-.23.188-.42.42-.42.23 0 .418.19.418.42v3.18zM4.868 9h-1.59c-.23 0-.42-.19-.42-.42V5.4c0-.23.19-.42.42-.42.232 0 .42.19.42.42v2.76h1.17a.42.42 0 1 1 0 .84M16 6.87C16 3.29 12.41.376 8 .376S0 3.29 0 6.87c0 3.208 2.846 5.896 6.69 6.405.26.056.615.172.705.394.08.2.053.518.026.722 0 0-.092.565-.113.685-.035.203-.16.79.693.432.854-.36 4.607-2.714 6.285-4.646C15.445 9.594 16 8.302 16 6.87"></path></g></svg>
-          LINEでログイン
-        <% end %>
+                      method: :post,
+                      data: { turbo: false },
+                      class: "btn w-full bg-line border-line text-white" do %>
+        <svg aria-label="Line logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill-rule="evenodd" stroke-linejoin="round" fill="white"><path fill-rule="nonzero" d="M12.91 6.57c.232 0 .42.19.42.42 0 .23-.188.42-.42.42h-1.17v.75h1.17a.42.42 0 1 1 0 .84h-1.59a.42.42 0 0 1-.418-.42V5.4c0-.23.188-.42.42-.42h1.59a.42.42 0 0 1-.002.84h-1.17v.75h1.17zm-2.57 2.01a.421.421 0 0 1-.757.251l-1.63-2.217V8.58a.42.42 0 0 1-.42.42.42.42 0 0 1-.418-.42V5.4a.418.418 0 0 1 .755-.249L9.5 7.366V5.4c0-.23.188-.42.42-.42.23 0 .42.19.42.42v3.18zm-3.828 0c0 .23-.188.42-.42.42a.42.42 0 0 1-.418-.42V5.4c0-.23.188-.42.42-.42.23 0 .418.19.418.42v3.18zM4.868 9h-1.59c-.23 0-.42-.19-.42-.42V5.4c0-.23.19-.42.42-.42.232 0 .42.19.42.42v2.76h1.17a.42.42 0 1 1 0 .84M16 6.87C16 3.29 12.41.376 8 .376S0 3.29 0 6.87c0 3.208 2.846 5.896 6.69 6.405.26.056.615.172.705.394.08.2.053.518.026.722 0 0-.092.565-.113.685-.035.203-.16.79.693.432.854-.36 4.607-2.714 6.285-4.646C15.445 9.594 16 8.302 16 6.87"></path></g></svg>
+        LINEでログイン
+      <% end %>
     </div>
-
     <p class="text-center text-xs text-base-content/70">
-        すでにアカウントをお持ちですか？
-        <%= link_to "ログイン", new_user_session_path, class: "link link-primary" %>
-      </p>
-
+      すでにアカウントをお持ちですか？
+      <%= link_to "ログイン", new_user_session_path, class: "link link-primary" %>
+    </p>
   </div>
 </div>

@@ -1,11 +1,13 @@
-<div class="flex items-center justify-center bg-base-100 mb-20">
-  <div class="card w-11/12 max-w-sm bg-base-200 shadow-lg rounded-xl p-6">
-    <h2 class="text-center text-2xl font-bold text-primary mb-6">アカウント設定</h2>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
+<div class="max-w-2xl mx-auto mb-8">
+  <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <span>アカウント設定</span>
+  </h1>
+  <div class="bg-white rounded-lg shadow p-6">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <!-- メールアドレス -->
       <div class="mb-4">
-        <%= f.label :email, class: "label-text mb-1" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
+        <%= f.label :email, class: "label-text mb-1 block" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: form_field_class(resource, :email) %>
         <% if resource.errors[:email].any? %>
           <% resource.errors[:email]&.each do |message| %>
             <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".email") %><%= message %></p>
@@ -14,15 +16,18 @@
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <div class="mb-4">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
+      <!-- パスワード -->
       <div class="mb-4">
-        <%= f.label :password, class: "label-text mb-1" %>
-        <% if @minimum_password_length %>
-          <span class="text-xs mb-1">(<%= @minimum_password_length %> 文字以上)</span>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white" %>
+        <div class="mb-1">
+          <%= f.label :password, class: "label-text" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs ml-1">(<%= @minimum_password_length %> 文字以上)</span>
+          <% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: form_field_class(resource, :password) %>
         <% if resource.errors[:password].any? %>
           <% resource.errors[:password]&.each do |message| %>
             <p class="text-red-600 text-xs mt-1 ml-1"><%= t("devise.registrations.new.password") %><%= message %></p>
@@ -30,9 +35,10 @@
         <% end %>
       </div>
 
+      <!-- パスワード確認 -->
       <div class="mb-4">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered bg-white" %>
+        <%= f.label :password_confirmation, class: "label-text mb-1 block" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: form_field_class(resource, :password_confirmation) %>
         <% if resource.errors[:password_confirmation].any? %>
           <% resource.errors[:password_confirmation]&.each do |message| %>
             <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".password_confirmation") %><%= message %></p>
@@ -40,10 +46,11 @@
         <% end %>
       </div>
 
+      <!-- 現在のパスワード -->
       <div class="mb-4">
-        <%= "本人確認のため、現在のパスワードを入力してください。" %><br>
-        <%= f.label :current_password, class: "label-text mb-1" %>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered bg-white" %>
+        <p class="text-sm mb-2">本人確認のため、現在のパスワードを入力してください。</p>
+        <%= f.label :current_password, class: "label-text mb-1 block" %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: form_field_class(resource, :current_password) %>
         <% if resource.errors[:current_password].any? %>
           <% resource.errors[:current_password]&.each do |message| %>
             <p class="text-red-600 text-xs mt-1 ml-1"><%= t(".current_password") %><%= message %></p>
@@ -51,20 +58,17 @@
         <% end %>
       </div>
 
-      <div class="flex gap-4 mt-5">
-        <%= f.submit "変更する", class: "btn btn-secondary flex-1" %>
-        <%= link_to "戻る", home_path, class: "btn btn-neutral flex-1" %>
+      <div class="actions text-center mt-5">
+        <%= f.submit "変更する", class: "btn btn-secondary" %>
       </div>
     <% end %>
+  </div>
 
-    <div class="text-center">
-      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, confirm: t(".logout_confirmation"), turbo_confirm: t(".logout_confirmation") }, class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] w-full max-w-xs mt-10" %>
-    </div>
+  <div class="text-center">
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, confirm: t(".logout_confirmation"), turbo_confirm: t(".logout_confirmation") }, class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] w-full max-w-xs mt-10" %>
+  </div>
 
-    <div class="text-center">
-      <%= link_to "アカウント削除", registration_path(resource_name), data: { turbo_method: :delete, confirm: t(".cancel_confirmation"), turbo_confirm: t(".cancel_confirmation") }, class: "btn btn-error text-black mt-8 mb-8" %>
-    </div>
+  <div class="text-center">
+    <%= link_to "アカウント削除", registration_path(resource_name), data: { turbo_method: :delete, confirm: t(".cancel_confirmation"), turbo_confirm: t(".cancel_confirmation") }, class: "btn btn-error text-black mt-8 mb-8" %>
   </div>
 </div>
-
-
