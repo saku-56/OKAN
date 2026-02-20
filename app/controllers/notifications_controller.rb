@@ -2,6 +2,10 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[update ]
   before_action :require_line_connection, only: %i[edit update]
 
+  # LINE連携が必要なことを伝えるページを表示
+  def required
+  end
+
   def edit
     @medicine_notification = current_user.notifications.find_by(notification_type: "medicine_stock")
     @consultation_notification = current_user.notifications.find_by(notification_type: "consultation_reminder")

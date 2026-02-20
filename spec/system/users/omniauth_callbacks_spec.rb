@@ -62,7 +62,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       it "LINE連携が成功する" do
         line_mock
 
-        visit line_connections_path
+        visit notifications_path
         click_button "LINEと連携する"
 
         expect(page).to have_content "LINE連携が完了しました"
@@ -77,7 +77,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       it "エラーメッセージが表示される" do
         line_mock
 
-        visit line_connections_path
+        visit notifications_path
         click_button "LINEと連携する"
 
         expect(page).to have_content "このLINEアカウントは既に他のユーザーに連携されています"

@@ -103,7 +103,7 @@ RSpec.describe "ヘッダー", type: :system do
 
         it "LINE連携ページに遷移すること" do
           click_on "LINE通知設定"
-          expect(page).to have_current_path(line_connections_path)
+          expect(page).to have_current_path(notifications_path)
         end
       end
     end
