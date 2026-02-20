@@ -1,26 +1,22 @@
-<div class="flex items-center justify-center">
-  <div class="card w-11/12 max-w-sm shadow-lg rounded-xl p-6">
-    <h2 class="text-center text-2xl font-bold text-primary mb-6">ログイン</h2>
+<div class="max-w-2xl mx-auto mb-8">
+  <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
+    <span>ログイン</span>
+  </h1>
 
+  <div class="bg-white rounded-lg shadow p-6">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
+      <!-- メールアドレス -->
       <div class="mb-4">
-        <%= f.label :email, "メールアドレス", class: "label-text mb-1" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white" %>
+        <%= f.label :email, class: "label-text mb-1 block" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered bg-white w-full" %>
       </div>
 
+       <!-- パスワード -->
       <div class="mb-4">
-        <%= f.label :password, "パスワード", class: "label-text mb-1" %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white" %>
+        <%= f.label :password, class: "label-text mb-1 block" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered bg-white w-full" %>
       </div>
-
-      <% if devise_mapping.rememberable? %>
-        <div class="field mb-4">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
 
       <%= f.submit "ログイン", class: "btn btn-primary w-full mb-6" %>
     <% end %>
@@ -31,6 +27,7 @@
       <div class="flex-1 h-px bg-base-300"></div>
     </div>
 
+    <!-- Googleログイン -->
     <div class= "mb-6">
       <%= button_to user_google_oauth2_omniauth_authorize_path,
                     method: :post,
@@ -48,6 +45,7 @@
         Googleログイン
       <% end %>
 
+      <!-- LINEログイン -->
       <%= button_to user_line_omniauth_authorize_path,
                     method: :post,
                     data: { turbo: false },
