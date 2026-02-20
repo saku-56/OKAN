@@ -58,7 +58,7 @@ class MedicineNotificationService
       messages: [ message ],
     )
     begin
-      response = LINE_BOT_CLIENT.push_message(push_message_request: push_request)
+      LINE_BOT_CLIENT.push_message(push_message_request: push_request)
       true
     rescue => e
       false
