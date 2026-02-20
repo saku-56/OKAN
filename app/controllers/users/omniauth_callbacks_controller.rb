@@ -39,7 +39,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     existing_user = User.find_by(line_user_id: line_user_id)
 
     if existing_user && existing_user.id != current_user.id
-      redirect_to mypage_path, alert: "このLINEアカウントは既に他のユーザーに連携されています"
+      redirect_to root_path, alert: "このLINEアカウントは既に他のユーザーに連携されています"
       return
     end
 
@@ -47,7 +47,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if current_user.update(line_user_id: line_user_id)
       redirect_to edit_notifications_path, notice: "LINE連携が完了しました"
     else
-      redirect_to mypage_path, alert: "LINE連携に失敗しました"
+      redirect_to root_path, alert: "LINE連携に失敗しました"
     end
   end
 
