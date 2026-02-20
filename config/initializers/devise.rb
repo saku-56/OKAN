@@ -299,8 +299,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
     Rails.application.credentials.dig(:google, :google_client_id),
     Rails.application.credentials.dig(:google, :google_client_secret),
-    scope: "email,profile,openid",
-    name: :google_oauth2
+    scope: "email,profile,openid"
 
   config.omniauth :line,
     Rails.application.credentials.dig(:line, :channel_id),

@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line google_oauth2]
-  validates :name, presence: true, length: { maximum: 20 }
   validates :uuid, uniqueness: true
 
   has_many :user_medicines, dependent: :destroy
@@ -25,7 +24,6 @@ class User < ApplicationRecord
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email || "#{auth.uid}@line.example.com"
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name
       user.line_user_id = auth.uid if auth.provider == "line"
     end
   end
