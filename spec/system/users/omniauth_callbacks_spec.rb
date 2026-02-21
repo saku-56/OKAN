@@ -81,7 +81,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
         click_button "LINEと連携する"
 
         expect(page).to have_content "このLINEアカウントは既に他のユーザーに連携されています"
-        expect(current_path).to eq mypage_path
+        expect(current_path).to eq root_path
         expect(user.reload.line_user_id).to be_nil
       end
     end

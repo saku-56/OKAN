@@ -88,7 +88,7 @@ RSpec.describe "UserEditRegistrations", type: :system do
       visit new_user_session_path
       fill_in "メールアドレス", with: deleted_email
       fill_in "パスワード", with: deleted_password
-      within(".card") do
+      within(".login-section") do
         click_on "ログイン"
       end
 
