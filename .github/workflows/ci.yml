@@ -117,11 +117,6 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:schema:load
 
-      - name: Set credentials
-        run: |
-          echo "${{ secrets.RAILS_TEST_KEY }}" > config/credentials/test.key
-          echo "${{ secrets.RAILS_TEST_ENC }}" > config/credentials/test.yml.enc
-
       - name: Debug-credentials
         run: |
           echo "RAILS_ENV: $RAILS_ENV"
