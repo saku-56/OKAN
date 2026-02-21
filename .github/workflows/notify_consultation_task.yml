@@ -1,4 +1,4 @@
-name: Notify Cocsultation Task
+name: Notify Consultation Task
 
 on:
   schedule:
