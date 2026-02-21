@@ -93,7 +93,9 @@ RSpec.describe "ヘッダー", type: :system do
         let(:user) { create(:user, :with_line) }
 
         it "LINE通知設定編集ページに遷移すること" do
-          click_on "LINE通知設定"
+          within(".drawer-side") do
+            click_on "LINE通知設定"
+          end
           expect(page).to have_current_path(edit_notifications_path)
         end
       end
@@ -102,7 +104,9 @@ RSpec.describe "ヘッダー", type: :system do
         let(:user) { create(:user) }
 
         it "LINE連携ページに遷移すること" do
-          click_on "LINE通知設定"
+          within(".drawer-side") do
+            click_on "LINE通知設定"
+          end
           expect(page).to have_current_path(notifications_path)
         end
       end
