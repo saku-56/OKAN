@@ -73,15 +73,15 @@ jobs:
       RAILS_ENV: test # config/environments/test.rbの設定が使われる
       RAILS_TEST_KEY: ${{ secrets.RAILS_TEST_KEY }}
       DATABASE_URL: postgres://postgres:password@localhost:5432/okan_test
-    steps:
-      - name: Place test key
-        run: echo "$RAILS_TEST_KEY" > config/credentials/test.key
-      - name: Place test credentials
-        run: echo "$RAILS_TEST_ENC" > config/credentials/test.yml.enc
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Place test key
+        run: echo "$RAILS_TEST_KEY" > config/credentials/test.key
+      - name: Place test credentials
+        run: echo "$RAILS_TEST_ENC" > config/credentials/test.yml.enc
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
