@@ -77,8 +77,10 @@ RSpec.describe "ヘッダー", type: :system do
       end
 
       it "ログアウトリンクをクリックするとログアウトできること" do
-        accept_confirm do
-          click_on "ログアウト"
+        within(".drawer-side") do
+          accept_confirm do
+            click_on "ログアウト"
+          end
         end
         expect(page).to have_current_path(root_path)
       end
