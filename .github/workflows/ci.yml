@@ -112,6 +112,12 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:schema:load
 
+      - name: Debug credentials
+        run: |
+          echo "RAILS_ENV: $RAILS_ENV"
+          echo "RAILS_TEST_KEY exists: ${{ secrets.RAILS_TEST_KEY != '' }}"
+          bundle exec rails runner "puts Rails.application.credentials.active_record_encryption.inspect"
+
       - name: Run RSpec
         run: bundle exec rspec
 
