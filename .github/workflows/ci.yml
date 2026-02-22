@@ -78,11 +78,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Place test key
-        run: echo "$RAILS_TEST_KEY" > config/credentials/test.key
-      - name: Place test credentials
-        run: echo "$RAILS_TEST_ENC" > config/credentials/test.yml.enc
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -111,17 +106,14 @@ jobs:
       # Tailwind CSSのビルド
       - name: Precompile assets
         run: bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: production
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Set up Database
         run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load
-
-      - name: Debug-credentials
-        run: |
-          echo "RAILS_ENV: $RAILS_ENV"
-          echo "RAILS_TEST_KEY exists: ${{ secrets.RAILS_TEST_KEY != '' }}"
-          bundle exec rails runner "puts Rails.application.credentials.active_record_encryption.inspect"
 
       - name: Run RSpec
         run: bundle exec rspec
