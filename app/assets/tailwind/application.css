@@ -60,3 +60,7 @@
     @apply rounded-full hover:bg-gray-50 hover:text-gray-600 transition-colors;
   }
 }
+
+@theme {
+  --color-line: #03C755;
+}

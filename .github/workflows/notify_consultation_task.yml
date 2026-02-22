@@ -1,12 +1,12 @@
-name: Notify Cocsultation Task
+name: Notify Consultation Task
 
 on:
   schedule:
     # 9:00に実行
     - cron: '0 0 * * *'
   workflow_dispatch: # 手動実行も可能にする
-  push:
-    branches:
+  # push:
+    # branches:
       # - feature/consultation_reminderrake # 現在の作業ブランチ
       # - main  # main ブランチでも動作確認
 

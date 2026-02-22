@@ -1,12 +1,13 @@
 <div class="drawer-side">
   <label for="drawer-menu" class="drawer-overlay"></label>
   <ul class="menu p-4 w-80 bg-base-100">
+    <li><%= link_to "ホーム", home_path %></li>
     <li><%= link_to "薬一覧", user_medicines_path %></li>
     <li><%= link_to "病院一覧", hospitals_path %></li>
     <% if current_user.line_user_id.present? %>
       <li><%= link_to "LINE通知設定", edit_notifications_path %></li>
     <% else %>
-      <li><%= link_to "LINE通知設定", line_connections_path %></li>
+      <li><%= link_to "LINE通知設定", notifications_path %></li>
     <% end %>
     <li><%= link_to "アカウント", edit_user_registration_path %></li>
     <li class="border-t border-base-500 my-4"></li>

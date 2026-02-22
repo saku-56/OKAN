@@ -1,11 +1,6 @@
 <div class="medicines-section max-w-2xl mx-auto mb-8">
   <!-- 薬一覧へのボタン-->
-  <div class="flex mt-2 mb-2">
-    <%= link_to user_medicines_path, class: "text-gray-800 hover:text-red-500 inline-flex items-center gap-2 transition-colors duration-200" do %>
-      <i class="fa-solid fa-arrow-left fa-sm"></i>
-      <span>薬一覧へ</span>
-    <% end %>
-  </div>
+  <%= back_link(user_medicines_path, text: "薬一覧へ") %>
 
   <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
     <%= render "shared/icon_medicine" %>

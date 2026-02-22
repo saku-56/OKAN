@@ -295,16 +295,20 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  if Rails.env.test?
+    config.omniauth :google_oauth2, "test_client_id", "test_client_secret"
+    config.omniauth :line, "test_channel_id", "test_channel_secret"
+    OmniAuth.config.test_mode = true
+  else
+    config.omniauth :google_oauth2,
+      Rails.application.credentials.dig(:google, :google_client_id),
+      Rails.application.credentials.dig(:google, :google_client_secret),
+      scope: "email,profile,openid"
 
-  config.omniauth :google_oauth2,
-    Rails.application.credentials.dig(:google, :google_client_id),
-    Rails.application.credentials.dig(:google, :google_client_secret),
-    scope: "email,profile,openid"
-
-  config.omniauth :line,
-    Rails.application.credentials.dig(:line, :channel_id),
-    Rails.application.credentials.dig(:line, :channel_secret)
-
+    config.omniauth :line,
+      Rails.application.credentials.dig(:line, :channel_id),
+      Rails.application.credentials.dig(:line, :channel_secret)
+  end
   # ==> Hotwire/Turbo configuration
   # When using Devise with Hotwire/Turbo, the http status for error responses
   # and some redirects must match the following. The default in Devise for existing

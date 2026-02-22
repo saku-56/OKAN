@@ -1,4 +1,4 @@
-<div class="modal modal-open">
+<dialog id="stock_modal" class="modal modal-open">
   <div class="modal-box">
     <h3 class="font-bold text-lg">
       <%= @date %> の在庫予定
@@ -18,11 +18,14 @@
         この日は在庫がありません。
       </p>
     <% end %>
-
     <div class="modal-action">
       <%= link_to "閉じる",
             home_path,
             class: "btn" %>
     </div>
   </div>
-</div>
+  <!-- 背景クリックで閉じる -->
+  <form method="dialog" class="modal-backdrop">
+    <%= link_to "", home_path %>
+  </form>
+</dialog>

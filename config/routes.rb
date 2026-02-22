@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :consultation_schedules, only: %i[create update destroy]
   end
 
-  resource :mypage, only: [ :show ]
   # 通知設定の編集画面
   resource :notifications, only: [ :edit ]
 
@@ -37,5 +36,5 @@ Rails.application.routes.draw do
   get "terms_of_service", to: "static_pages#terms_of_service"
   get "privacy", to: "static_pages#privacy"
   get "home", to: "home#index"
-  get "line_connections", to: "line_connections#required"
+  get "notifications", to: "notifications#required"
 end

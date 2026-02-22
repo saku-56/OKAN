@@ -1,18 +1,12 @@
 require "rails_helper"
-
 RSpec.describe "Users::OmniauthCallbacks", type: :system do
-  before do
-    OmniAuth.config.test_mode = true
-  end
-
-  after do
-    OmniAuth.config.test_mode = false
-  end
-
   describe "LINEログイン機能" do
     context "新規ユーザーの場合" do
       it "LINEで新規登録できる" do
         line_mock
+
+        # モック設定後の状態を確認
+        puts "Mock auth after line_mock: #{OmniAuth.config.mock_auth.inspect}"
 
         visit new_user_registration_path
         click_button "LINEでログイン"
@@ -62,7 +56,7 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       it "LINE連携が成功する" do
         line_mock
 
-        visit line_connections_path
+        visit notifications_path
         click_button "LINEと連携する"
 
         expect(page).to have_content "LINE連携が完了しました"
@@ -77,11 +71,11 @@ RSpec.describe "Users::OmniauthCallbacks", type: :system do
       it "エラーメッセージが表示される" do
         line_mock
 
-        visit line_connections_path
+        visit notifications_path
         click_button "LINEと連携する"
 
         expect(page).to have_content "このLINEアカウントは既に他のユーザーに連携されています"
-        expect(current_path).to eq mypage_path
+        expect(current_path).to eq home_path
         expect(user.reload.line_user_id).to be_nil
       end
     end

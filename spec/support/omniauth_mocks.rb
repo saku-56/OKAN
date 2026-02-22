@@ -5,10 +5,7 @@ module OmniauthMocks
       provider: "line",
       uid: uid,
       info: {
-        name: "LINE太郎"
-      },
-      credentials: {
-        token: "mock_token"
+        email: 'test@example.com'
       }
     })
   end
@@ -23,11 +20,7 @@ module OmniauthMocks
       provider: "google_oauth2",
       uid: uid,
       info: {
-        name: "Google テストユーザー",
         email: "test@example.com"
-      },
-      credentials: {
-        token: "mock_google_token"
       }
     })
   end
@@ -35,8 +28,4 @@ module OmniauthMocks
   def google_mock_failure
     OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
   end
-end
-
-RSpec.configure do |config|
-  config.include OmniauthMocks, type: :system
 end
