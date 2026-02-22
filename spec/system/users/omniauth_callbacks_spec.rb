@@ -1,18 +1,12 @@
 require "rails_helper"
-
 RSpec.describe "Users::OmniauthCallbacks", type: :system do
-  before do
-    OmniAuth.config.test_mode = true
-  end
-
-  after do
-    OmniAuth.config.test_mode = false
-  end
-
   describe "LINEログイン機能" do
     context "新規ユーザーの場合" do
       it "LINEで新規登録できる" do
         line_mock
+
+        # モック設定後の状態を確認
+        puts "Mock auth after line_mock: #{OmniAuth.config.mock_auth.inspect}"
 
         visit new_user_registration_path
         click_button "LINEでログイン"
