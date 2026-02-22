@@ -36,7 +36,7 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     if ENV["CI"]
       # GitHub Actions環境
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+      driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
     else
       # ローカルDocker環境
       driven_by :remote_chrome
