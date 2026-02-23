@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+                       registrations: "users/registrations",
+                       omniauth_callbacks: "users/omniauth_callbacks"
+                     }
+  # 薬
   resources :user_medicines, only: %i[index show new create destroy] do
     collection do
       get :autocomplete
@@ -11,6 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # 病院
   resources :hospitals, only: %i[index show new create edit update destroy] do
     resources :consultation_schedules, only: %i[create update destroy]
   end
@@ -21,20 +27,15 @@ Rails.application.routes.draw do
   # 個別の通知設定の更新
   resources :notifications, only: [ :update ]
 
-  devise_for :users, controllers: {
-                       registrations: "users/registrations",
-                       omniauth_callbacks: "users/omniauth_callbacks"
-                     }
+  # PWA
+  get "manifest", to: "pwa#manifest", as: :pwa_manifest, defaults: { format: :json }
+  get "service-worker", to: "pwa#service_worker", as: :pwa_service_worker, defaults: { format: :js }
 
-  get "up" => "rails/health#show", as: :rails_health_check
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  # Defines the root path route ("/")
   root "static_pages#top"
   get "terms_of_service", to: "static_pages#terms_of_service"
   get "privacy", to: "static_pages#privacy"
   get "home", to: "home#index"
   get "notifications", to: "notifications#required"
+
+  get "up" => "rails/health#show", as: :rails_health_check
 end
