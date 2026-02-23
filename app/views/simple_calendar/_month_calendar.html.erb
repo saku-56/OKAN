@@ -1,9 +1,7 @@
-<div class="simple-calendar max-w-4xl mx-auto">
-
+<div class="simple-calendar">
   <!-- カレンダー本体 -->
-  <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+  <table class="table-auto w-full">
     <!-- 曜日ヘッダー -->
-    <table class="table table-striped">
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
@@ -11,7 +9,6 @@
         <% end %>
       </tr>
     </thead>
-
     <!-- カレンダーの日付部分 -->
     <tbody>
       <% date_range.each_slice(7) do |week| %>

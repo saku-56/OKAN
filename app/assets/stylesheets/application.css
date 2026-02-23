@@ -1,16 +1,46 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require simple_calendar
  *= require_tree .
  *= require_self
  */
+
+ .simple-calendar {
+  table {
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-radius: 16px; /* 角を丸くする */
+    overflow: hidden; /* 角の丸みを子要素にも適用 */
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    border: none; /* 外側の枠線を削除 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  th {
+    background-color: #F3F4F6;
+    padding: 6px;
+    border-bottom: 2px solid rgb(221, 221, 221);
+    text-align: left;
+  }
+
+  td {
+    padding: 2px;
+    vertical-align: top;
+    width: 14%;
+  }
+
+  .today {
+    background: #FDEDE9
+  }
+  .prev-month {
+    background: #FFFFFF;
+  }
+  .next-month {
+    background: #FFFFFF;
+  }
+}
