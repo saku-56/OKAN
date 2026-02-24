@@ -9,7 +9,6 @@
       <h3 class="font-bold text-lg mb-4">
         <%= @date.strftime('%Y年%m月%d日') %> の在庫予定
       </h3>
-
       <div class="space-y-1">
         <!-- 各薬の在庫情報 -->
         <% @medicines_with_stock.each do |medicine| %>
@@ -36,6 +35,17 @@
         この日は在庫がありません。
       </p>
     <% end %>
+    <!-- 通院予定の表示 -->
+    <% if @selected_schedules.present? %>
+      <div class="my-4">
+        <h3 class="font-bold text-lg mb-4">通院予定</h3>
+        <% @selected_schedules.each do |schedule| %>
+          <div class="border bg-white hover:bg-gray-50 block p-3 rounded-lg">
+            <%= schedule.hospital.name %> 通院
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <!-- 閉じるボタン -->
     <div class="modal-action">
@@ -44,7 +54,6 @@
             class: "btn" %>
     </div>
   </div>
-
   <!-- 背景クリックで閉じる -->
   <form method="dialog" class="modal-backdrop">
     <%= link_to "", home_path %>
