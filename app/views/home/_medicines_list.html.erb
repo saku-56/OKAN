@@ -1,9 +1,5 @@
-<div class="medicines-section max-w-4xl mx-auto mb-8">
-  <!-- 今日の日付を表示 -->
-  <h2 class="text-2xl font-bold text-center mb-6">
-    <%= l(Date.today, format: :long) %>
-  </h2>
-
+<div class="medicines-section max-w-2xl mx-auto mb-8">
+  <h2 class="text-2xl font-bold text-center mb-6" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">今日の在庫</h2>
   <% if @medicines_with_stock.any? %>
     <table class="table w-full bg-white shadow-md rounded-lg overflow-hidden">
       <tbody>
