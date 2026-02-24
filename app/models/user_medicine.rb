@@ -46,7 +46,7 @@ class UserMedicine < ApplicationRecord
 
     # 在庫切れ予定日の場合に表示
     if date == stock_out
-      return "在庫切れ予定"
+      return "在庫切れ"
     end
 
     nil
