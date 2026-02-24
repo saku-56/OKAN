@@ -60,9 +60,13 @@
   flex: 1;
 }
 
+  .medicine-link:hover {
+  text-decoration: underline;
+  color: red;
+  }
   .hospital-link:hover {
   text-decoration: underline;
-  color: #1D4ED8; /* より濃い青 */
+  color: blue;
   }
   .today {
     background: #FDEDE9

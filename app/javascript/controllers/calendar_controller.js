@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="calendar"
 export default class extends Controller {
-  static targets = ["hospitalLink"]
+  static targets = ["hospitalLink", "medicineLink"]
 
   // 通院予定をクリックしたときの処理
   visitHospital(event) {
@@ -14,6 +14,18 @@ export default class extends Controller {
     if (hospitalPath) {
       // Turboを使って遷移
       Turbo.visit(hospitalPath)
+    }
+  }
+
+  // 在庫切れをクリックしたときの処理
+  visitMedicine(event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const medicinePath = event.currentTarget.dataset.medicinePath
+
+    if (medicinePath) {
+      Turbo.visit(medicinePath)
     }
   }
 }

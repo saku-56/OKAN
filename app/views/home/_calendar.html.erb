@@ -47,13 +47,16 @@
           <% medicines_with_stock.each do |medicine| %>
             <% display_message = medicine.display_stock_on(date) %>
             <% if display_message.present? %>
-              <span class="block text-xs text-error leading-tight mb-1">
-                <%= medicine.medicine.name %> <%= display_message %>
-              </span>
+            <span class="block text-xs text-red-600 leading-tight medicine-link"
+                  data-calendar-target="medicineLink"
+                  data-medicine-path="<%= user_medicine_path(medicine) %>"
+                  data-action="click->calendar#visitMedicine">
+              <%= medicine.medicine.name %><%= display_message %>
+            </span>
             <% end %>
           <% end %>
 
-          <!-- 通院予定の表示（クリック可能） -->
+          <!-- 通院予定の表示 -->
           <% schedules = consultation_schedules_by_date[date] || [] %>
           <% schedules.each do |schedule| %>
             <span class="block text-xs text-blue-600 leading-tight hospital-link"
