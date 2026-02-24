@@ -31,7 +31,7 @@
   </div>
 
   <!-- カレンダー -->
-  <div data-controller="calendar">
+  <div data-controller="calendar", class="-mx-4 md:mx-0">
     <%= month_calendar(start_date: @start_date) do |date| %>
       <%= link_to home_path(date: date),
                   data: { turbo_frame: "stock_modal" },
@@ -47,24 +47,24 @@
           <% medicines_with_stock.each do |medicine| %>
             <% display_message = medicine.display_stock_on(date) %>
             <% if display_message.present? %>
-            <span class="block text-xs text-red-600 leading-tight medicine-link"
-                  data-calendar-target="medicineLink"
-                  data-medicine-path="<%= user_medicine_path(medicine) %>"
-                  data-action="click->calendar#visitMedicine">
-              <%= medicine.medicine.name %><%= display_message %>
-            </span>
+            <div class="mb-1 bg-red-300 rounded text-xs cursor-pointer medicine-link"
+                data-calendar-target="medicineLink"
+                data-medicine-path="<%= user_medicine_path(medicine) %>"
+                data-action="click->calendar#visitMedicine">
+              <%= medicine.medicine.name %>在庫切れ</span>
+            </div>
             <% end %>
           <% end %>
 
           <!-- 通院予定の表示 -->
           <% schedules = consultation_schedules_by_date[date] || [] %>
           <% schedules.each do |schedule| %>
-            <span class="block text-xs text-blue-600 leading-tight hospital-link"
+            <div class="mb-1 bg-blue-300 rounded text-xs cursor-pointer hospital-link"
                   data-calendar-target="hospitalLink"
                   data-hospital-path="<%= hospital_path(schedule.hospital) %>"
                   data-action="click->calendar#visitHospital">
-              <%= schedule.hospital.name %>通院予定
-            </span>
+              <%= schedule.hospital.name %>通院
+            </div>
           <% end %>
         </div>
       <% end %>
