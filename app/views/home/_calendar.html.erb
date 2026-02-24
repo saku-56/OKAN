@@ -31,7 +31,7 @@
   </div>
 
   <!-- カレンダー -->
-  <div data-controller="calendar", class="-mx-4 md:mx-0">
+  <div data-controller="calendar">
     <%= month_calendar(start_date: @start_date) do |date| %>
       <%= link_to home_path(date: date),
                   data: { turbo_frame: "stock_modal" },
