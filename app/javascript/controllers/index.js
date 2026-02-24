@@ -7,6 +7,9 @@ import { application } from "./application"
 import AutocompleteController from "./autocomplete_controller"
 application.register("autocomplete", AutocompleteController)
 
+import CalendarController from "./calendar_controller"
+application.register("calendar", CalendarController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 

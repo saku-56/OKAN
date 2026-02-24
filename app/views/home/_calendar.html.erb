@@ -30,26 +30,41 @@
     <% end %>
   </div>
 
-  <%= month_calendar(start_date: @start_date) do |date| %>
-    <%= link_to date.day, home_path(date: date), data: { turbo_frame: "stock_modal" } %>
+  <!-- カレンダー -->
+  <div data-controller="calendar">
+    <%= month_calendar(start_date: @start_date) do |date| %>
+      <%= link_to home_path(date: date),
+                  data: { turbo_frame: "stock_modal" },
+                  class: "calendar-cell-link" do %>
+        <!-- 日付表示 -->
+        <div class="day-number">
+          <%= date.day %>
+        </div>
 
-    <!-- 薬の在庫切れ予定日表示 -->
-    <% medicines_with_stock.each do |medicine| %>
-      <% display_message = medicine.display_stock_on(date) %>
-      <% if display_message.present? %>
-        <span class="block text-xs text-error leading-tight">
-          <%= medicine.medicine.name %> <%= display_message %>
-        </span>
+        <!-- 予定表示エリア -->
+        <div class="events-container">
+          <!-- 薬の在庫切れ予定表示 -->
+          <% medicines_with_stock.each do |medicine| %>
+            <% display_message = medicine.display_stock_on(date) %>
+            <% if display_message.present? %>
+              <span class="block text-xs text-error leading-tight mb-1">
+                <%= medicine.medicine.name %> <%= display_message %>
+              </span>
+            <% end %>
+          <% end %>
+
+          <!-- 通院予定の表示（クリック可能） -->
+          <% schedules = consultation_schedules_by_date[date] || [] %>
+          <% schedules.each do |schedule| %>
+            <span class="block text-xs text-blue-600 leading-tight hospital-link"
+                  data-calendar-target="hospitalLink"
+                  data-hospital-path="<%= hospital_path(schedule.hospital) %>"
+                  data-action="click->calendar#visitHospital">
+              <%= schedule.hospital.name %>通院予定
+            </span>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
-
-    <!-- 通院予定の表示 -->
-    <% schedules = consultation_schedules_by_date[date] || [] %>
-    <% schedules.each do |schedule| %>
-      <%= link_to hospital_path(schedule.hospital),
-                  class: "block text-xs text-blue-600 leading-tight hover:underline" do %>
-        <%= schedule.hospital.name %>通院予定
-      <% end %>
-    <% end %>
-  <% end %>
+  </div>
 </div>

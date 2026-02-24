@@ -29,11 +29,41 @@
   }
 
   td {
-    padding: 2px;
-    vertical-align: top;
-    width: 14%;
+   vertical-align: top;
+    width: 14.28%;
+    padding: 0;
+    height: 96px;
   }
+   td  a {
+   display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1px;
+    height: 100%;
+    width: 100%;
+    }
 
+  .day-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 予定表示エリア */
+  .events-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  overflow-y: auto;
+  flex: 1;
+}
+
+  .hospital-link:hover {
+  text-decoration: underline;
+  color: #1D4ED8; /* より濃い青 */
+  }
   .today {
     background: #FDEDE9
   }
@@ -42,5 +72,6 @@
   }
   .next-month {
     background: #FFFFFF;
+    color: #e0e3e7;
   }
 }
