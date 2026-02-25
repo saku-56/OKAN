@@ -1,7 +1,7 @@
 <div class="medicines-section max-w-2xl mx-auto mb-8">
   <div class="w-full">
-    <!-- 薬一覧へのボタン-->
-    <%= back_link(user_medicine_path(@user_medicine)) %>
+    <!-- 戻るボタン-->
+    <%= back_link %>
 
     <!-- タイトルと説明文 -->
     <div class="text-center">
@@ -71,5 +71,10 @@
         </div>
       <% end %>
     </div>
+  </div>
+
+  <!-- 薬詳細へボタン -->
+  <div class="actions text-center">
+    <%= link_to "薬詳細へ", user_medicine_path(@user_medicine), class: "btn btn-neutral" %>
   </div>
 </div>

@@ -1,13 +1,13 @@
 <div class="medicines-section max-w-2xl mx-auto mb-8">
-  <!-- 薬一覧へのボタン-->
-  <%= back_link(user_medicines_path, text: "薬一覧へ") %>
+  <!-- 戻るボタン-->
+  <%= back_link %>
 
   <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
     <%= render "shared/icon_medicine" %>
     <span>お薬登録</span>
   </h1>
 
-  <div class="bg-white rounded-lg shadow p-6">
+  <div class="bg-white rounded-lg shadow p-6 mb-6">
     <%= form_with model: @form, url: user_medicines_path do |f| %>
       <%= render "shared/error_messages", object: @form %>
 
@@ -75,5 +75,10 @@
         <%= f.submit "薬を追加", class: "btn btn-primary" %>
       </div>
     <% end %>
+  </div>
+
+    <!-- 薬一覧へボタン -->
+  <div class="actions text-center">
+    <%= link_to "薬一覧へ", user_medicines_path, class: "btn btn-neutral" %>
   </div>
 </div>

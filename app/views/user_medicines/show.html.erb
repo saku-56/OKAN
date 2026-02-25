@@ -1,6 +1,6 @@
 <div class="medicines-section max-w-2xl mx-auto mb-8">
-  <!-- 薬一覧へのボタン-->
-  <%= back_link(user_medicines_path, text: "薬一覧へ", use_history: false) %>
+  <!-- 戻るボタン-->
+  <%= back_link %>
 
   <!-- タイトル -->
   <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
@@ -8,7 +8,7 @@
     <span><%= @user_medicine.medicine.name %></span>
   </h1>
 
-    <div class="bg-white rounded-lg shadow p-6">
+  <div class="bg-white rounded-lg shadow p-6  mb-8">
     <!-- 削除アイコン -->
     <div class="flex justify-end">
       <%= link_to user_medicine_path(@user_medicine), data: { turbo_method: :delete, turbo_confirm: "薬を削除しますか?" },
@@ -70,6 +70,11 @@
         <% end %>
       </div>
     </div>
+  </div>
+
+  <!-- 薬一覧へボタン -->
+  <div class="actions text-center">
+    <%= link_to "薬一覧へ", user_medicines_path, class: "btn btn-neutral" %>
   </div>
 </div>
 <!-- モーダルの中身 -->
