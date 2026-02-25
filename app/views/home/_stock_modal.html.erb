@@ -14,7 +14,8 @@
         <% @medicines_with_stock.each do |medicine| %>
           <% stock = medicine.stock_on(@date) %>
           <%= link_to user_medicine_path(medicine),
-                class: "block p-3 rounded-lg border #{stock_card_classes(stock)}" do %>
+                class: "block p-3 rounded-lg border #{stock_card_classes(stock)}",
+                data: { turbo_frame: "_top" } do %>
             <div class="flex items-start">
               <div class="flex-1">
                 <div class="text-gary-800 font-medium mb-1">
@@ -37,12 +38,13 @@
     <% end %>
     <!-- 通院予定の表示 -->
     <% if @selected_schedules.present? %>
-      <div class="my-4">
-        <h3 class="font-bold text-lg mb-4">通院予定</h3>
+      <div class="mb-4">
+        <h3 class="font-bold text-lg mt-4 mb-2">通院予定</h3>
         <% @selected_schedules.each do |schedule| %>
-          <div class="border bg-white hover:bg-gray-50 block p-3 rounded-lg">
+          <%= link_to hospital_path(schedule.hospital), class: "border bg-white hover:bg-gray-50 block p-3 rounded-lg",
+                                                        data: { turbo_frame: "_top" }  do%>
             <%= schedule.hospital.name %> 通院
-          </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>
