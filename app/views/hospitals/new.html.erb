@@ -1,10 +1,15 @@
 <div class="max-w-2xl mx-auto mb-8">
-  <!-- 病院一覧へのボタン-->
-  <%= back_link(hospitals_path, text: "病院一覧へ") %>
-  
+  <!-- 戻るボタン-->
+  <%= back_link %>
+
   <h1 class="text-3xl mb-4 mt-6 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
     <%= render "shared/icon_hospital" %>
     <span>病院情報登録</span>
   </h1>
   <%= render "form", hospital: @hospital %>
+</div>
+
+<!-- 病院一覧へボタン -->
+<div class="actions text-center">
+  <%= link_to "病院一覧へ", hospitals_path, class: "btn btn-neutral" %>
 </div>

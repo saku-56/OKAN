@@ -24,15 +24,28 @@ RSpec.describe "今日の在庫一覧", type: :system do
     end
 
     context "在庫がある薬とない薬が混在している場合" do
+      let!(:user_medicine) { create(:user_medicine, medicine: medicine1, current_stock: 5, user: user) }
       before do
-        create(:user_medicine, medicine: medicine1, current_stock: 5, user: user)
         create(:user_medicine, medicine: medicine2, current_stock: 0, user: user)
         visit home_path
       end
 
       it "在庫がある薬だけが表示される" do
         expect(page).to have_content("テスト薬A")
-        expect(page).to have_content("残り5錠")
+        expect(page).to have_content("5錠")
+      end
+
+      it "在庫が10錠未満だと残少バッジが表示される" do
+        expect(page).to have_css(".yellow-badge", text: "残少")
+      end
+
+      it "クリックすると詳細ページに遷移する" do
+        within(".medicine-list-section") do
+          click_link "テスト薬A"
+        end
+
+        expect(page).to have_selector(".medicines-section", text: "テスト薬A")
+        expect(current_path).to eq user_medicine_path(user_medicine)
       end
     end
   end

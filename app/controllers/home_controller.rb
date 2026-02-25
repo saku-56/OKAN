@@ -29,5 +29,10 @@ class HomeController < ApplicationController
                                                   .includes(:hospital)
                                                   .where(visit_date: schedule_start..calendar_end)
                                                   .group_by { |schedule| schedule.visit_date.to_date }
+
+    # モーダル表示用（特定の日付の通院予定）
+    if @date
+      @selected_schedules = @consultation_schedules_by_date[@date] || []
+    end
   end
 end

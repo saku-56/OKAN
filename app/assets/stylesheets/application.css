@@ -1,16 +1,111 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require simple_calendar
  *= require_tree .
  *= require_self
  */
+
+ .simple-calendar {
+  table {
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-radius: 16px; /* 角を丸くする */
+    overflow: hidden; /* 角の丸みを子要素にも適用 */
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+    border: none; /* 外側の枠線を削除 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  th { /* 曜日 */
+    background-color: #F3F4F6;
+    padding: 6px;
+    border-bottom: 2px solid rgb(221, 221, 221);
+    text-align: left;
+  }
+
+  td {
+    vertical-align: top;
+    width: 14.28%;
+    padding: 0;
+    height: 96px;
+  }
+
+  td a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1px;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* 日付 */
+  .day-number {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  /* 予定表示エリア */
+  .events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  /* カレンダー上の在庫切れ表示 */
+  .medicine-link:hover {
+    text-decoration: underline;
+    color: red;
+  }
+
+  /* カレンダー上の通院予定表示 */
+  .hospital-link:hover {
+    text-decoration: underline;
+    color: blue;
+  }
+
+  /* 今日のマス */
+  .today {
+    background: #FDEDE9
+  }
+
+  /* 先月のマス */
+  .prev-month {
+    background: #FFFFFF;
+  }
+
+  /* 先月の日付 */
+  .prev-month .day-number{
+    color: #e0e3e7;
+  }
+
+  /* 来月のマス */
+  .next-month{
+    background: #FFFFFF;
+  }
+
+  /* 来月の日付 */
+  .next-month .day-number{
+    color: #e0e3e7;
+  }
+
+  /* 日曜日の列 */
+  .wday-0 {
+    background-color: #F3F4F6;
+  }
+
+  /* 土曜日の列 */
+  .wday-6 {
+    background-color: #F3F4F6;
+  }
+}

@@ -29,16 +29,15 @@ module ApplicationHelper
   end
 
   # 戻るボタン
-  def back_link(fallback_path = root_path, text: "戻る")
+  def back_link(fallback_path = root_path, text: "← 戻る")
     button_tag(
       type: "button",
       onclick: "if (document.referrer)
                   { history.back(); }
                 else
                   { window.location.href ='#{fallback_path}'; }",
-      class: "text-gray-800 hover:text-red-500 items-center gap-2 transition-colors duration-200 bg-transparent border-0 cursor-pointer",
+      class: "btn btn-sm btn-accent items-center cursor-pointer",
     ) do
-      content_tag(:i, "", class: "fa-solid fa-arrow-left fa-sm") +
       content_tag(:span, text)
     end
   end

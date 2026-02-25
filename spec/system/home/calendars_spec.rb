@@ -6,6 +6,7 @@ RSpec.describe "カレンダー表示", type: :system do
     let!(:medicine1) { create(:medicine, name: "テスト薬A", user: user) }
     let!(:medicine2) { create(:medicine, name: "テスト薬B", user: user) }
     let!(:hospital) { create(:hospital, user: user, name: "病院A") }
+    let!(:consultation_schedule) { create(:consultation_schedule, user: user, hospital: hospital, visit_date: Date.current) }
 
     before do
       login_as(user)
@@ -29,33 +30,82 @@ RSpec.describe "カレンダー表示", type: :system do
     end
 
     context "モーダルの挙動" do
-      before do
-        create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user)
-      end
+      let!(:user_medicine) { create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user) }
+
       context "今日の日付をクリックすると" do
         it "今日の在庫が表示される" do
           click_link href: home_path(date: Date.today)
 
-          expect(page).to have_content("#{Date.today} の在庫予定")
-          expect(page).to have_content("テスト薬A：残り1錠")
+          expect(page).to have_content("#{Date.today.strftime("%-m月%-d日")} の在庫予定")
+          expect(page).to have_content("テスト薬A：1錠")
         end
       end
 
       context "過去の日付をクリックすると" do
-        it "今日より前の日付の在庫は表示できません。と表示される" do
+        it "過去の在庫は表示できません。と表示される" do
           click_link href: home_path(date: Date.yesterday)
 
-          expect(page).to have_content("#{Date.yesterday} の在庫予定")
-          expect(page).to have_content("今日より前の日付の在庫は表示できません")
+          expect(page).to have_content("過去の在庫は表示できません")
         end
       end
 
       context "未来の日付をクリックすると" do
-        it "クリックした日の在予想庫が表示される" do
+        it "クリックした日の在庫予想が表示される" do
           click_link href: home_path(date: Date.tomorrow)
 
-          expect(page).to have_content("#{Date.tomorrow} の在庫予定")
-          expect(page).to have_content("テスト薬A：残り0錠")
+          expect(page).to have_content("#{Date.tomorrow.strftime("%-m月%-d日")} の在庫予定")
+          expect(page).to have_content("テスト薬A：0錠")
+        end
+      end
+
+      context "在庫バッジの表示" do
+        it "在庫が10錠未満の場合、残少バッジが表示される" do
+          click_link href: home_path(date: Date.today)
+
+          expect(page).to have_css(".yellow-badge", text: "残少")
+        end
+
+        it "在庫が0錠の場合、在庫切れバッジが表示される" do
+          click_link href: home_path(date: Date.tomorrow)
+
+          expect(page).to have_css(".red-badge", text: "在庫切れ")
+        end
+      end
+
+      context "通院予定の表示" do
+        it "通院予定がモーダルに表示される" do
+          click_link href: home_path(date: Date.today)
+
+          expect(page).to have_content("通院予定")
+          expect(page).to have_content("病院A")
+        end
+      end
+
+      context "リンクの遷移" do
+        it "モーダルの薬名をクリックすると詳細画面に遷移する" do
+          click_link href: home_path(date: Date.today)
+          within(".stock_modal") do
+            click_link "テスト薬A"
+          end
+
+          # モーダルが閉じるのを待つ
+          expect(page).not_to have_selector(".stock_modal", wait: 5)
+
+          expect(current_path).to eq user_medicine_path(user_medicine)
+          expect(page).to have_content("テスト薬A")
+        end
+
+        it "モーダルの病院名をクリックすると詳細画面に遷移する" do
+          click_link href: home_path(date: Date.today)
+          within(".stock_modal") do
+            click_link "病院A"
+          end
+
+          # モーダルが閉じるのを待つ
+          expect(page).not_to have_selector(".stock_modal", wait: 5)
+
+          expect(current_path).to eq hospital_path(hospital)
+          expect(page).to have_content("病院A")
         end
       end
     end
@@ -68,11 +118,11 @@ RSpec.describe "カレンダー表示", type: :system do
         visit home_path
       end
       it "在庫切れ表示がある" do
-        expect(page).to have_content("テスト薬B 在庫切れ予定")
+        expect(page).to have_content("テスト薬B在庫切れ")
       end
 
       it "通院予定の表示がある" do
-        expect(page).to have_content("病院A通院予定")
+        expect(page).to have_content("病院A")
       end
     end
 

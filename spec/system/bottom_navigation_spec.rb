@@ -71,7 +71,7 @@ RSpec.describe "ナビゲーションバー", type: :system do
       end
 
       it "ログアウトをクリックするとログアウトできる" do
-        within(".modal") do
+        within(".mypage_modal") do
           accept_confirm do
             click_on "ログアウト"
           end
@@ -84,7 +84,7 @@ RSpec.describe "ナビゲーションバー", type: :system do
           let(:user) { create(:user, :with_line) }
 
           it "LINE通知設定編集ページに遷移すること" do
-            within(".modal") do
+            within(".mypage_modal") do
               click_on "LINE通知設定"
             end
             expect(page).to have_current_path(edit_notifications_path)
@@ -95,7 +95,7 @@ RSpec.describe "ナビゲーションバー", type: :system do
           let(:user) { create(:user) }
 
           it "LINE連携ページに遷移すること" do
-            within(".modal") do
+            within(".mypage_modal") do
               click_on "LINE通知設定"
             end
             expect(page).to have_current_path(notifications_path)
