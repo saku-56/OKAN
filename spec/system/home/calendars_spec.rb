@@ -72,6 +72,16 @@ RSpec.describe "カレンダー表示", type: :system do
           expect(page).to have_css(".red-badge", text: "在庫切れ")
         end
       end
+
+      context "通院予定の表示" do
+        it "通院予定がモーダルに表示される" do
+          click_link href: home_path(date: Date.today)
+
+          expect(page).to have_content("通院予定")
+          expect(page).to have_content("病院A")
+        end
+      end
+
     end
 
     context "カレンダー上の表示" do
