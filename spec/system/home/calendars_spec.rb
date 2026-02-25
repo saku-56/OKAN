@@ -6,6 +6,7 @@ RSpec.describe "カレンダー表示", type: :system do
     let!(:medicine1) { create(:medicine, name: "テスト薬A", user: user) }
     let!(:medicine2) { create(:medicine, name: "テスト薬B", user: user) }
     let!(:hospital) { create(:hospital, user: user, name: "病院A") }
+    let!(:consultation_schedule) { create(:consultation_schedule, user: user, hospital: hospital, visit_date: Date.current) }
 
     before do
       login_as(user)
@@ -29,15 +30,13 @@ RSpec.describe "カレンダー表示", type: :system do
     end
 
     context "モーダルの挙動" do
-      before do
-        create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user)
-        create(:consultation_schedule, user: user, hospital: hospital, visit_date: Date.current)
-      end
+      let!(:user_medicine) { create(:user_medicine, medicine: medicine1, dosage_per_time: 1, current_stock: 1, user: user) }
+
       context "今日の日付をクリックすると" do
         it "今日の在庫が表示される" do
           click_link href: home_path(date: Date.today)
 
-          expect(page).to have_content("#{Date.today.strftime('%-m月%-d日')} の在庫予定")
+          expect(page).to have_content("#{Date.today.strftime("%-m月%-d日")} の在庫予定")
           expect(page).to have_content("テスト薬A：1錠")
         end
       end
@@ -54,7 +53,7 @@ RSpec.describe "カレンダー表示", type: :system do
         it "クリックした日の在庫予想が表示される" do
           click_link href: home_path(date: Date.tomorrow)
 
-          expect(page).to have_content("#{Date.tomorrow.strftime('%-m月%-d日')} の在庫予定")
+          expect(page).to have_content("#{Date.tomorrow.strftime("%-m月%-d日")} の在庫予定")
           expect(page).to have_content("テスト薬A：0錠")
         end
       end
@@ -82,6 +81,33 @@ RSpec.describe "カレンダー表示", type: :system do
         end
       end
 
+      context "リンクの遷移" do
+        it "モーダルの薬名をクリックすると詳細画面に遷移する" do
+          click_link href: home_path(date: Date.today)
+          within(".stock_modal") do
+            click_link "テスト薬A"
+          end
+
+          # モーダルが閉じるのを待つ
+          expect(page).not_to have_selector(".stock_modal", wait: 5)
+
+          expect(current_path).to eq user_medicine_path(user_medicine)
+          expect(page).to have_content("テスト薬A")
+        end
+
+        it "モーダルの病院名をクリックすると詳細画面に遷移する" do
+          click_link href: home_path(date: Date.today)
+          within(".stock_modal") do
+            click_link "病院A"
+          end
+
+          # モーダルが閉じるのを待つ
+          expect(page).not_to have_selector(".stock_modal", wait: 5)
+
+          expect(current_path).to eq hospital_path(hospital)
+          expect(page).to have_content("病院A")
+        end
+      end
     end
 
     context "カレンダー上の表示" do
