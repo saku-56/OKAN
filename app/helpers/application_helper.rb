@@ -36,7 +36,7 @@ module ApplicationHelper
                   { history.back(); }
                 else
                   { window.location.href ='#{fallback_path}'; }",
-      class: "text-gray-800 hover:text-red-500 items-center gap-2 transition-colors duration-200 bg-transparent border-0 cursor-pointer",
+      class: "btn btn-sm btn-accent items-center cursor-pointer",
     ) do
       content_tag(:i, "", class: "fa-solid fa-arrow-left fa-sm") +
       content_tag(:span, text)
