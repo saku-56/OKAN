@@ -2,7 +2,7 @@
   <div class="modal-box max-w-md">
     <% if @date < Date.current %>
       <p class="text-gray-500">
-        今日より前の日付の在庫は表示できません。
+        過去の在庫は表示できません。
       </p>
     <% elsif @medicines_with_stock.any? %>
       <!-- ヘッダー -->
