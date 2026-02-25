@@ -1,9 +1,8 @@
 <div class="calendar-section max-w-4xl mx-auto mb-8">
-  <!-- 独自のナビゲーションを追加 -->
   <div class="flex justify-between items-center mb-4">
+    <!-- 先月ボタン -->
     <% prev_month = @start_date - 1.month %>
     <% min_date = Date.current.beginning_of_month - 1.month %>
-
     <% if prev_month >= min_date %>
       <%= link_to "← 前月", home_path(start_date: prev_month), class: "btn btn-sm btn-accent text-black" %>
     <% else %>
@@ -13,12 +12,11 @@
         ← 前月
       </button>
     <% end %>
-
+    <!-- 今月の年月の表示 -->
     <span class="font-bold text-lg"><%= @start_date.strftime("%Y年%m月") %></span>
-
+    <!-- 来月ボタン -->
     <% next_month = @start_date + 1.month %>
     <% max_date = Date.current.beginning_of_month + 6.months %>
-
     <% if next_month <= max_date %>
       <%= link_to "次月 →", home_path(start_date: next_month), class: "btn btn-sm btn-accent text-black", data: { turbo: false } %>
     <% else %>
@@ -29,39 +27,34 @@
       </button>
     <% end %>
   </div>
-
   <!-- カレンダー -->
-
-    <%= month_calendar(start_date: @start_date) do |date| %>
-      <%= link_to home_path(date: date),
+  <%= month_calendar(start_date: @start_date) do |date| %>
+    <%= link_to home_path(date: date),
                   data: { turbo_frame: "stock_modal" },
                   class: "calendar-cell-link" do %>
-        <!-- 日付表示 -->
-        <div class="day-number">
-          <%= date.day %>
-        </div>
-
-        <!-- 予定表示エリア -->
-        <div class="events-container">
-          <!-- 薬の在庫切れ予定表示 -->
-          <% medicines_with_stock.each do |medicine| %>
-            <% display_message = medicine.display_stock_on(date) %>
-            <% if display_message.present? %>
+      <!-- 日付表示 -->
+      <div class="day-number">
+        <%= date.day %>
+      </div>
+      <!-- 予定表示エリア -->
+      <div class="events-container">
+        <!-- 薬の在庫切れ予定表示 -->
+        <% medicines_with_stock.each do |medicine| %>
+          <% display_message = medicine.display_stock_on(date) %>
+          <% if display_message.present? %>
             <div class="mb-1 bg-red-300 rounded text-xs font-bold">
               <%= medicine.medicine.name %><%= display_message %>
             </div>
-            <% end %>
           <% end %>
-
-          <!-- 通院予定の表示 -->
-          <% schedules = consultation_schedules_by_date[date] || [] %>
-          <% schedules.each do |schedule| %>
-            <div class="mb-1 bg-blue-300 rounded text-xs font-bold">
-              <%= schedule.hospital.name %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+        <% end %>
+        <!-- 通院予定の表示 -->
+        <% schedules = consultation_schedules_by_date[date] || [] %>
+        <% schedules.each do |schedule| %>
+          <div class="mb-1 bg-blue-300 rounded text-xs font-bold">
+            <%= schedule.hospital.name %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-
+  <% end %>
 </div>

@@ -1,4 +1,5 @@
 module UserMedicinesHelper
+  # モーダルの薬在庫表示デザイン
   def stock_card_classes(stock)
     if stock <= 0
       "border-red-500 bg-red-50 hover:bg-red-100"
@@ -9,6 +10,7 @@ module UserMedicinesHelper
     end
   end
 
+  # 在庫切れ、残少バッジ
   def stock_status_badge(stock)
     if stock <= 0
       content_tag(:span, "在庫切れ", class: "red-badge px-2 py-1 text-xs font-bold text-white bg-red-500 rounded")

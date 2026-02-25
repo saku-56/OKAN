@@ -21,7 +21,7 @@
     border-collapse: collapse;
   }
 
-  th {
+  th { /* 曜日 */
     background-color: #F3F4F6;
     padding: 6px;
     border-bottom: 2px solid rgb(221, 221, 221);
@@ -45,6 +45,7 @@
     width: 100%;
   }
 
+  /* 日付 */
   .day-number {
     font-size: 16px;
     font-weight: 600;
@@ -61,41 +62,50 @@
     flex: 1;
   }
 
+  /* カレンダー上の在庫切れ表示 */
   .medicine-link:hover {
     text-decoration: underline;
     color: red;
   }
+
+  /* カレンダー上の通院予定表示 */
   .hospital-link:hover {
     text-decoration: underline;
     color: blue;
   }
+
+  /* 今日のマス */
   .today {
     background: #FDEDE9
   }
 
-  .wday-0 {
-    background-color: #F3F4F6;
-  }
-  .wday-6 {
-    background-color: #F3F4F6;
-  }
+  /* 先月のマス */
   .prev-month {
     background: #FFFFFF;
   }
 
+  /* 先月の日付 */
   .prev-month .day-number{
     color: #e0e3e7;
   }
+
+  /* 来月のマス */
   .next-month{
     background: #FFFFFF;
   }
+
+  /* 来月の日付 */
+  .next-month .day-number{
+    color: #e0e3e7;
+  }
+
+  /* 日曜日の列 */
   .wday-0 {
     background-color: #F3F4F6;
   }
+
+  /* 土曜日の列 */
   .wday-6 {
     background-color: #F3F4F6;
-  }
-  .next-month .day-number{
-    color: #e0e3e7;
   }
 }

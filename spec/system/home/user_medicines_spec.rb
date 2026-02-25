@@ -35,6 +35,10 @@ RSpec.describe "今日の在庫一覧", type: :system do
         expect(page).to have_content("5錠")
       end
 
+      it "在庫が10錠未満だと残少バッジが表示される" do
+        expect(page).to have_css(".yellow-badge", text: "残少")
+      end
+
       it "クリックすると詳細ページに遷移する" do
         within(".medicine-list-section") do
           click_link "テスト薬A"

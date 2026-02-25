@@ -1,17 +1,17 @@
 <!-- 服薬中の薬一覧 -->
 <div class="-mx-4 md:mx-0">
-<div class="container mx-auto px-4">
-  <%= render "medicines_list", medicines_with_stock: @medicines_with_stock %>
-</div>
-<!-- カレンダー表示 -->
-<div class="container mx-auto mb-10">
-  <%= render "calendar", medicines_with_stock: @medicines_with_stock, consultation_schedules_by_date: @consultation_schedules_by_date %>
-</div>
-
-<div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
-  <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
-  <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
-</div>
+  <div class="container mx-auto px-4">
+    <%= render "medicines_list", medicines_with_stock: @medicines_with_stock %>
+  </div>
+  <!-- カレンダー表示 -->
+  <div class="container mx-auto mb-10">
+    <%= render "calendar", medicines_with_stock: @medicines_with_stock, consultation_schedules_by_date: @consultation_schedules_by_date %>
+  </div>
+  <!-- ボタン -->
+  <div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
+    <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
+    <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
+  </div>
 </div>
 <!-- モーダル枠 -->
 <turbo-frame id="stock_modal">
@@ -19,4 +19,3 @@
     <%= render "stock_modal" %>
   <% end %>
 </turbo-frame>
-
