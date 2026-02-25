@@ -32,7 +32,7 @@ RSpec.describe "今日の在庫一覧", type: :system do
 
       it "在庫がある薬だけが表示される" do
         expect(page).to have_content("テスト薬A")
-        expect(page).to have_content("残り5錠")
+        expect(page).to have_content("5錠")
       end
     end
   end

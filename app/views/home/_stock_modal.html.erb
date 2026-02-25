@@ -19,8 +19,7 @@
             <div class="flex items-start">
               <div class="flex-1">
                 <div class="text-gary-800 font-medium mb-1">
-                  <%= medicine.medicine.name %>
-                  : <%= medicine.stock_on(@date) %>錠
+                  <%= medicine.medicine.name %>：<%= medicine.stock_on(@date) %>錠
                   <%= stock_status_badge(stock) %>
                 </div>
               </div>
