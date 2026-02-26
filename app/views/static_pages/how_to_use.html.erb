@@ -1,0 +1,42 @@
+<section id="medicine" class="mb-12">
+  <h2 class="text-2xl font-bold mb-4 border-b-2 border-primary pb-2">💊 お薬の登録</h2>
+  <div class="space-y-6">
+    <!-- 1. 基本的な登録方法 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3">1. 病院でお薬をもらったら薬名、1回の服薬量、1日の服薬回数、処方量、処方日を登録</h3>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <%= image_tag 'how_to_use/medicine_registration.png', alt: 'お薬登録画面', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+        <p class="mt-2 text-sm text-gray-600">↑ 登録フォームに必要な情報を入力してください</p>
+      </div>
+    </div>
+    <!-- 2. 在庫確認 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3">2. ホーム画面で今日の在庫を確認できる</h3>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <%= image_tag 'how_to_use/today_stock.png', alt: 'ホーム画面の在庫表示', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+      </div>
+    </div>
+    <!-- 注意事項 -->
+    <div class="bg-warning p-4">
+      <p class="text-sm">
+        <span class="font-bold">※注意：</span>今日の在庫に表示される薬は今日服薬する分を含みます。1日の服薬量をその日の夜12時にまとめて減らします。
+      </p>
+    </div>
+    <!-- 3. 飲み忘れ -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3">3. 飲み忘れに気づいたら飲み忘れボタンをクリックするだけで在庫を調整できる</h3>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <%= image_tag 'how_to_use/increment_stock.png', alt: '飲み忘れボタンの説明', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+        <p class="mt-2 text-sm text-gray-600">↑ 「飲み忘れ」ボタンをクリックすると1回の服薬分が元に戻されて在庫が調整されます。</p>
+      </div>
+    </div>
+    <!-- 4. 在庫追加 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3">4. 同じ薬を処方されたら在庫追加画面から簡単に在庫を増やせる</h3>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <%= image_tag 'how_to_use/add_stock.png', alt: '在庫追加の説明', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+        <p class="mt-2 text-sm text-gray-600">↑ 在庫追加画面から処方量と処方日を入力するだけで在庫量が再計算されます。</p>
+      </div>
+    </div>
+  </div>
+</section>
