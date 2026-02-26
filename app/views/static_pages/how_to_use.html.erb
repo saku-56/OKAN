@@ -1,14 +1,15 @@
 <div class="max-w-4xl mx-auto py-8 px-4">
-  <h1 class="text-3xl font-bold mb-8">OKANの使い方</h1>
+  <h1 class="text-3xl font-bold mb-8 text-center">OKANの使い方</h1>
   <!-- アコーディオン -->
   <div class="space-y-4">
     <!-- お薬の登録 -->
     <div class="collapse collapse-arrow bg-base-200">
       <input type="checkbox" id="medicine-accordion" />
       <label for="medicine-accordion" class="collapse-title text-xl font-bold cursor-pointer">
-        <h3 class="text-2xl mb-4 mt-6 flex items-center justify-center gap-2"></h3>
-        <%= render "shared/icon_medicine" %>
-        <span>お薬リスト</span>
+        <h3 class="mb-2 mt-2 flex items-center gap-2">
+          <%= render "shared/icon_medicine" %>
+          <span>お薬登録</span>
+        </h3>
       </label>
       <div class="collapse-content">
         <!-- 1. 基本的な登録方法 -->
@@ -53,7 +54,10 @@
       <div class="collapse collapse-arrow bg-base-200">
         <input type="checkbox" id="hospital-accordion" />
         <label for="hospital-accordion" class="collapse-title text-xl font-bold cursor-pointer">
-          🏥 病院の登録
+          <h3 class="mb-2 mt-2 flex items-center gap-2">
+            <%= render "shared/icon_hospital" %>
+            <span>病院登録</span>
+          </h3>
         </label>
         <div class="collapse-content">
           <div class="space-y-6">
@@ -112,7 +116,7 @@
       <div class="collapse collapse-arrow bg-base-200">
         <input type="checkbox" id="calendar-accordion" />
         <label for="calendar-accordion" class="collapse-title text-xl font-bold cursor-pointer">
-          📅 カレンダーの見方
+          📅  カレンダーの見方
         </label>
         <div class="collapse-content">
           <div class="space-y-6">
@@ -145,7 +149,7 @@
         <div class="collapse collapse-arrow bg-base-200">
           <input type="checkbox" id="line-accordion" />
           <label for="line-accordion" class="collapse-title text-xl font-bold cursor-pointer">
-            🔔 LINE通知
+            🔔  LINE通知
           </label>
           <div class="collapse-content">
             <!-- LINE通知の内容（省略） -->
@@ -172,26 +176,26 @@
               </div>
             </div>
             <div>
-              <h3 class="text-lg font-semibold mt-8"></h3>3. 通院予定通知を設定できる
-                <div class="bg-white p-4 rounded-lg">
-                  <%= image_tag 'how_to_use/calendar.png',
+              <h3 class="text-lg font-semibold mt-8"></h3>
+              3. 通院予定通知を設定できる
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/calendar.png',
                     alt: '通院予定通知設定画面',
                     class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
-                  <p class="mt-2 text-sm text-gray-600 text-center">
-                    ↑ 通院予定日の前日や当日に通知を受け取る設定ができます
-                  </p>
-                </div>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 通院予定日の前日や当日に通知を受け取る設定ができます
+                </p>
               </div>
-              <div>
-                <h3 class="text-lg font-semibold mt-8">4. 設定した日に通知が届く</h3>
-                <div class="bg-white p-4 rounded-lg">
-                  <%= image_tag 'how_to_use/calendar.png',
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mt-8">4. 設定した日に通知が届く</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/calendar.png',
                     alt: 'LINE通知の例',
                     class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
-                  <p class="mt-2 text-sm text-gray-600 text-center">
-                    ↑ 設定した日時にLINEで通知が届きます
-                  </p>
-                </div>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 設定した日時にLINEで通知が届きます
+                </p>
               </div>
             </div>
           </div>
@@ -199,3 +203,4 @@
       </div>
     </div>
   </div>
+</div>
