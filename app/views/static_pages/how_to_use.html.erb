@@ -1,4 +1,7 @@
-<div class="max-w-4xl mx-auto py-8 px-4">
+<div class="max-w-4xl mx-auto sm:px-4">
+  <!-- 戻るボタン-->
+  <%= back_link %>
+
   <h1 class="text-3xl font-bold mb-8 text-center">OKANの使い方</h1>
   <!-- アコーディオン -->
   <div class="space-y-4">
@@ -63,7 +66,7 @@
           <div class="space-y-6">
             <!-- 1. 病院情報の登録 -->
             <div>
-              <h3 class="text-lg font-semibold mt-8">1. よく行く病院の名前とメモ、診察時間を登録</h3>
+              <h3 class="text-lg font-semibold mt-8">1. 病院の名前とメモ、診察時間を登録</h3>
               <div class="bg-white p-4 rounded-lg">
                 <%= image_tag 'how_to_use/hospital_registration.png',
                   alt: '病院登録画面',
@@ -87,7 +90,7 @@
             </div>
             <!-- 3. 通院予定の登録 -->
             <div>
-              <h3 class="text-lg font-semibold mt-8">3. 通院予定を登録</h3>
+              <h3 class="text-lg font-semibold mt-8">3. 通院予定を登録できる</h3>
               <div class="bg-white p-4 rounded-lg">
                 <%= image_tag 'how_to_use/consultation_schedule.png',
                   alt: '通院予定登録画面',
@@ -122,7 +125,7 @@
           <div class="space-y-6">
             <!-- カレンダー上に在庫がなくなり日が確認できる-->
             <div>
-              <h3 class="text-lg font-semibold mt-8">1. カレンダーで在庫がなくなる日を確認できる</h3>
+              <h3 class="text-lg font-semibold mt-8">1. カレンダーで在庫がなくなる日と通院予定日を確認できる</h3>
               <div class="bg-white p-4 rounded-lg">
                 <%= image_tag 'how_to_use/calendar.png',
                 alt: 'カレンダーで在庫切れ日を確認',
@@ -165,36 +168,13 @@
               </div>
             </div>
             <div>
-              <h3 class="text-lg font-semibold mt-8">2. 薬の在庫通知を設定できる</h3>
+              <h3 class="text-lg font-semibold mt-8">2. 薬の在庫通知、通院予定通知を設定できる</h3>
               <div class="bg-white p-4 rounded-lg">
-                <%= image_tag 'how_to_use/calendar.png',
+                <%= image_tag 'how_to_use/edit_notification.png',
                   alt: '在庫通知設定画面',
                   class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
                 <p class="mt-2 text-sm text-gray-600 text-center">
-                  ↑ 薬の在庫が少なくなったタイミングで通知を受け取る設定ができます
-                </p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold mt-8"></h3>
-              3. 通院予定通知を設定できる
-              <div class="bg-white p-4 rounded-lg">
-                <%= image_tag 'how_to_use/calendar.png',
-                    alt: '通院予定通知設定画面',
-                    class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
-                <p class="mt-2 text-sm text-gray-600 text-center">
-                  ↑ 通院予定日の前日や当日に通知を受け取る設定ができます
-                </p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold mt-8">4. 設定した日に通知が届く</h3>
-              <div class="bg-white p-4 rounded-lg">
-                <%= image_tag 'how_to_use/calendar.png',
-                    alt: 'LINE通知の例',
-                    class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
-                <p class="mt-2 text-sm text-gray-600 text-center">
-                  ↑ 設定した日時にLINEで通知が届きます
+                  ↑ 設定したタイミングで通知を受け取る設定ができます
                 </p>
               </div>
             </div>
