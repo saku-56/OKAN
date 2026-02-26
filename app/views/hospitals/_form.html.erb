@@ -25,9 +25,9 @@
           <% schedules = schedules_by_day[day] || [] %>
           <% morning = schedules.find { |s| s.period == "morning" } %>
           <% afternoon = schedules.find { |s| s.period == "afternoon" } %>
-          <div class="border border-gray-300 rounded-lg p-3">
+          <div class="border border-gray-300 rounded-lg p-3 md:flex flex-row">
             <!-- 曜日 -->
-            <div class="font-bold text-gray-800 mb-2">
+            <div class="font-bold text-gray-800 mb-2 md:mr-4">
               <%= HospitalSchedule.day_of_weeks_i18n[day.to_sym] %>
             </div>
             <!-- 午前 -->
@@ -35,8 +35,8 @@
               <%= sf.hidden_field :id if sf.object.persisted? %>
               <%= sf.hidden_field :day_of_week %>
               <%= sf.hidden_field :period %>
-              <div class="mb-3 flex items-center gap-2 text-xs">
-                <span class="text-xs text-gray-600 w-8">午前</span>
+              <div class="mb-3 flex items-center gap-2 text-xs md:flex-1 mt-3">
+                <span class="text-xs text-gray-600">午前</span>
                 <%= sf.select :start_time,
                               options_for_select(morning_time_options, sf.object.start_time&.strftime("%H:%M")),
                               { include_blank: true },
@@ -53,8 +53,8 @@
               <%= sf.hidden_field :id if sf.object.persisted? %>
               <%= sf.hidden_field :day_of_week %>
               <%= sf.hidden_field :period %>
-              <div class="mb-3 flex items-center gap-2 text-xs">
-                <span class="text-xs text-gray-600 w-8">午後</span>
+              <div class="mb-3 flex items-center gap-2 text-xs md:flex-1 mt-3">
+                <span class="text-xs text-gray-600">午後</span>
                 <%= sf.select :start_time,
                                 options_for_select(afternoon_time_options, sf.object.start_time&.strftime("%H:%M")),
                                 { include_blank: true },
