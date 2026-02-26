@@ -20,32 +20,29 @@
   </div>
 
   <!-- OKANの特徴 -->
-  <section class="mb-5 mt-5 pt-5">
+  <section class="my-5 py-10">
   <h3 class="text-center text-2xl font-bold mb-4 text-[#7A4B3A]">OKANの特徴</h3>
-
   <div class="flex flex-col md:flex-row gap-4">
     <div class="flex-1 flex">
       <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
         <h5 class="font-bold mb-3">📱飲むだけで自動管理</h5>
-        <p class="text-gray-600 text-sm mb-0">
+        <p class="text-gray-600 text-sm text-left mb-0">
           服薬記録は不要！毎日の服薬を前提に在庫が自動で減るから、いちいち記録をつける手間がありません
         </p>
       </div>
     </div>
-
     <div class="flex-1 flex">
       <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
         <h5 class="font-bold mb-3">📅在庫切れを先読み</h5>
-        <p class="text-gray-600 text-sm mb-0">
+        <p class="text-gray-600 text-sm text-left mb-0">
           カレンダーで「いつ薬がなくなるか」が一目瞭然。日付をタップすれば、その日の予想在庫もすぐ確認できます
         </p>
       </div>
     </div>
-
     <div class="flex-1 flex">
       <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
         <h5 class="font-bold mb-3">💬おかんからLINE通知</h5>
-        <p class="text-gray-600 text-sm mb-0">
+        <p class="text-gray-600 text-sm text-left mb-0">
           大阪弁のおかんから薬の在庫が減った時と通院予定が近づいた時に通知が届きます
         </p>
       </div>
@@ -54,37 +51,34 @@
 </section>
 
   <!-- こんな悩みありませんか？ -->
-  <section class="mb-5 pt-5">
-    <div class="card border-0 shadow-sm" style="background-color: #FFFBF0;">
-      <div class="card-body p-4 p-md-5">
-        <h3 class="text-center fw-bold mb-4" style="color: #E56A54;">こんな悩みありませんか？</h3>
-
-        <ul class="list-unstyled mb-4">
-          <li class="mb-3 d-flex align-items-start">
-            <span class="me-3" style="color: #E56A54; font-size: 1.5rem;">✓</span>
-            <span>毎日薬を飲むのに、いちいちアプリで記録するのが面倒</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="me-3" style="color: #E56A54; font-size: 1.5rem;">✓</span>
-            <span>気づいたら薬が切れていて、慌てて病院に行くことがある</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="me-3" style="color: #E56A54; font-size: 1.5rem;">✓</span>
-            <span>通院日をうっかり忘れてしまう</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="me-3" style="color: #E56A54; font-size: 1.5rem;">✓</span>
-            <span>複数の病院に通っていて、診察券や診察時間の管理が大変</span>
-          </li>
-        </ul>
-
-        <div class="text-center mt-4">
-          <p class="fs-5 fw-bold" style="color: #E56A54;">→ OKANなら、そんな悩みをまとめて解決できます！</p>
-        </div>
+ <section class="my-5 py-10">
+  <h3 class="text-2xl font-bold mb-6 text-[#7A4B3A]">こんなお悩みありませんか？</h3>
+  <div class="bg-[#FFFBF0] border-0 shadow-sm py-8">
+    <div class="p-4 mx-10">
+      <ul class="mb-4">
+        <li class="mb-3 flex items-start">
+          <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+          <span class="flex-1 text-left">毎日薬を飲むのに、いちいちアプリで記録するのが面倒</span>
+        </li>
+        <li class="mb-3 flex items-start">
+          <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+          <span class="flex-1 text-left">気づいたら薬が切れていて、慌てて病院に行くことがある</span>
+        </li>
+        <li class="mb-3 flex items-start">
+          <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+          <span class="flex-1 text-left">通院日をうっかり忘れてしまう</span>
+        </li>
+        <li class="mb-3 flex items-start">
+          <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+          <span class="flex-1 text-left">複数の病院に通っていて、診察券や診察時間の管理が大変</span>
+        </li>
+      </ul>
+      <div class="mt-6">
+        <p class="text-lg font-bold text-primary">→ OKANなら、そんな悩みをまとめて解決できます！</p>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
   <!-- 使い方 -->
   <section class="mb-5 pt-5">
     <h3 class="text-center fw-bold mb-5" style="color: #E56A54;">使い方</h3>
@@ -182,24 +176,6 @@
 </div>
 <style>
   /* カードのホバーエフェクト */
-  .card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(229, 106, 84, 0.15) !important;
-  }
-
-  /* ボタンのホバーエフェクト */
-  .btn {
-    transition: all 0.2s ease;
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  }
 
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
