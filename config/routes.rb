@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "terms_of_service", to: "static_pages#terms_of_service"
   get "privacy", to: "static_pages#privacy"
   get "home", to: "home#index"
+  get "how_to_use", to: "static_pages#how_to_use"
   get "notifications", to: "notifications#required"
 
   get "up" => "rails/health#show", as: :rails_health_check

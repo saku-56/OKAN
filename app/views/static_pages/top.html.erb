@@ -1,41 +1,88 @@
-<div class="drawer">
-  <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-
-    <!-- Body -->
-
-    <h1>手元の薬の在庫を管理できるお薬管理アプリです</h1>
-
-    <h3>アプリの説明
-    <br>
-    .
-    <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-     <br>
-    .
-    <br>
-    .
-    </h3>
-    <main class="flex flex-col items-center justify-center mt-40 px-6 space-y-5">
+<div class="max-w-4xl mx-auto">
+  <div class="flex flex-col items-center justify-center py-10 text-center">
+    <!-- タイトル -->
+    <h1 class="text-2xl sm:text-3xl font-semibold tracking-wide text-[#7A4B3A] mb-2">
+      おくすりかんりアプリ
+    </h1>
+    <h2 class="text-5xl sm:text-6xl font-bold tracking-wider text-primary mb-4">
+      OKAN
+    </h2>
+    <p class="text-base sm:text-lg text-[#7A4B3A] font-medium">
+      OKANがあなたのお薬を見守ります
+    </p>
+    <!-- ボタンエリア -->
+    <div class="flex items-center justify-center my-10 px-6 gap-4">
       <%= link_to "新規登録", new_user_registration_path,
-          class: "btn btn-primary w-full max-w-xs" %>
+          class: "btn btn-primary font-bold" %>
       <%= link_to "ログイン", new_user_session_path,
-          class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF] w-full max-w-xs" %>
-      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
-    </main>
+          class: "btn bg-white text-[#E56A54] border border-[#E56A54] hover:bg-[#FFE4DF]" %>
+    </div>
+    <!-- OKANの特徴 -->
+    <section class="my-5 py-5">
+      <h3 class="text-center text-2xl font-bold mb-4 text-[#7A4B3A]">OKANの特徴</h3>
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 flex">
+          <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
+            <h5 class="font-bold mb-3">📱飲むだけで自動管理</h5>
+            <p class="text-gray-600 text-sm text-left mb-0">
+              服薬記録は不要！毎日の服薬を前提に在庫が自動で減るから、いちいち記録をつける手間がありません
+            </p>
+          </div>
+        </div>
+        <div class="flex-1 flex">
+          <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
+            <h5 class="font-bold mb-3">📅在庫切れを先読み</h5>
+            <p class="text-gray-600 text-sm text-left mb-0">
+              カレンダーで「いつ薬がなくなるか」が一目瞭然。日付をタップすれば、その日の予想在庫もすぐ確認できます
+            </p>
+          </div>
+        </div>
+        <div class="flex-1 flex">
+          <div class="bg-base-200 border-0 rounded-lg shadow-sm text-center p-8 w-full">
+            <h5 class="font-bold mb-3">💬おかんからLINE通知</h5>
+            <p class="text-gray-600 text-sm text-left mb-0">
+              大阪弁のおかんから薬の在庫が減った時と通院予定が近づいた時に通知が届きます
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- こんな悩みありませんか？ -->
+    <section class="my-5 py-5">
+      <h3 class="text-2xl font-bold mb-6 text-[#7A4B3A]">こんなお悩みありませんか？</h3>
+      <div class="bg-[#FFFBF0] border-0 shadow-sm py-8">
+        <div class="p-4 mx-10">
+          <ul class="mb-4">
+            <li class="mb-3 flex items-start">
+              <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+              <span class="flex-1 text-left">毎日薬を飲むのに、いちいちアプリで記録するのが面倒</span>
+            </li>
+            <li class="mb-3 flex items-start">
+              <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+              <span class="flex-1 text-left">気づいたら薬が切れていて、慌てて病院に行くことがある</span>
+            </li>
+            <li class="mb-3 flex items-start">
+              <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+              <span class="flex-1 text-left">通院日をうっかり忘れてしまう</span>
+            </li>
+            <li class="mb-3 flex items-start">
+              <span class="mr-3 text-primary text-2xl flex-shrink-0">✓</span>
+              <span class="flex-1 text-left">複数の病院に通っていて、診察券や診察時間の管理が大変</span>
+            </li>
+          </ul>
+          <div class="mt-6">
+            <p class="text-lg font-bold text-primary">→ OKANなら、そんな悩みをまとめて解決できます！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 使い方 -->
+    <%= link_to "詳しい使い方はこちら", how_to_use_path, class: "btn btn-secondary" %>
+    <!-- 新規登録して始める -->
+    <div class="text-center mt-5 pt-5 pb-5">
+      <p class="text-base sm:text-lg text-[#7A4B3A] font-medium">さあ、OKANと一緒にお薬管理を始めましょう！</p>
+      <%= link_to "新規登録して始める", new_user_registration_path,
+            class: "btn btn-lg shadow-sm mt-3", style: "background-color: #E56A54; border: none; color: white; padding: 0.75rem 3rem;" %>
+    </div>
   </div>
 </div>

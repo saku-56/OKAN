@@ -1,0 +1,186 @@
+<div class="max-w-4xl mx-auto sm:px-4">
+  <!-- 戻るボタン-->
+  <%= back_link %>
+
+  <h1 class="text-3xl font-bold mb-8 text-center">OKANの使い方</h1>
+  <!-- アコーディオン -->
+  <div class="space-y-4">
+    <!-- お薬の登録 -->
+    <div class="collapse collapse-arrow bg-base-200">
+      <input type="checkbox" id="medicine-accordion" />
+      <label for="medicine-accordion" class="collapse-title text-xl font-bold cursor-pointer">
+        <h3 class="mb-2 mt-2 flex items-center gap-2">
+          <%= render "shared/icon_medicine" %>
+          <span>お薬登録</span>
+        </h3>
+      </label>
+      <div class="collapse-content">
+        <!-- 1. 基本的な登録方法 -->
+        <div>
+          <h3 class="text-lg font-semibold mt-8">1. 病院でお薬をもらったら薬名、1回の服薬量、1日の服薬回数、処方量、処方日を登録</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <%= image_tag 'how_to_use/medicine_registration.png', alt: 'お薬登録画面', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+            <p class="mt-2 text-sm text-gray-600">↑ 登録フォームに必要な情報を入力してください</p>
+          </div>
+        </div>
+        <!-- 2. 在庫確認 -->
+        <div>
+          <h3 class="text-xl font-semibold mt-8">2. ホーム画面で今日の在庫を確認できる</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <%= image_tag 'how_to_use/today_stock.png', alt: 'ホーム画面の在庫表示', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+          </div>
+        </div>
+        <!-- 注意事項 -->
+        <div class="bg-warning p-4">
+          <p class="text-sm">
+            <span class="font-bold">※注意：</span>今日の在庫に表示される薬は今日服薬する分を含みます。1日の服薬量をその日の夜12時にまとめて減らします。
+          </p>
+        </div>
+        <!-- 3. 飲み忘れ -->
+        <div>
+          <h3 class="text-xl font-semibold mt-8">3. 飲み忘れに気づいたら飲み忘れボタンをクリックするだけで在庫を調整できる</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <%= image_tag 'how_to_use/increment_stock.png', alt: '飲み忘れボタンの説明', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+            <p class="mt-2 text-sm text-gray-600">↑ 「飲み忘れ」ボタンをクリックすると1回の服薬分が元に戻されて在庫が調整されます。</p>
+          </div>
+        </div>
+        <!-- 4. 在庫追加 -->
+        <div>
+          <h3 class="text-xl font-semibold mt-8">4. 同じ薬を処方されたら在庫追加画面から簡単に在庫を増やせる</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <%= image_tag 'how_to_use/add_stock.png', alt: '在庫追加の説明', class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+            <p class="mt-2 text-sm text-gray-600">↑ 在庫追加画面から処方量と処方日を入力するだけで在庫量が再計算されます。</p>
+          </div>
+        </div>
+      </div>
+      <!-- 病院の登録 -->
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" id="hospital-accordion" />
+        <label for="hospital-accordion" class="collapse-title text-xl font-bold cursor-pointer">
+          <h3 class="mb-2 mt-2 flex items-center gap-2">
+            <%= render "shared/icon_hospital" %>
+            <span>病院登録</span>
+          </h3>
+        </label>
+        <div class="collapse-content">
+          <div class="space-y-6">
+            <!-- 1. 病院情報の登録 -->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">1. 病院の名前とメモ、診察時間を登録</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/hospital_registration.png',
+                  alt: '病院登録画面',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 病院名、メモ、診察時間を入力して登録してください
+                </p>
+              </div>
+            </div>
+            <!-- 2. 病院詳細で確認 -->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">2. 病院詳細から診療時間をすぐに確認できる</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/hospital_schedule.png',
+                  alt: '病院詳細画面',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 登録した病院の診療時間をいつでも確認できます
+                </p>
+              </div>
+            </div>
+            <!-- 3. 通院予定の登録 -->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">3. 通院予定を登録できる</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/consultation_schedule.png',
+                  alt: '通院予定登録画面',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 通院予定日を登録しておくと便利です
+                </p>
+              </div>
+            </div>
+            <!-- 4. カレンダー表示 -->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">4. カレンダーに通院予定日が表示される</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/add_stock.png',
+                  alt: 'カレンダーに表示された通院予定',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ カレンダーで通院予定日を一目で確認できます
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- カレンダーの見方 -->
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" id="calendar-accordion" />
+        <label for="calendar-accordion" class="collapse-title text-xl font-bold cursor-pointer">
+          📅  カレンダーの見方
+        </label>
+        <div class="collapse-content">
+          <div class="space-y-6">
+            <!-- カレンダー上に在庫がなくなり日が確認できる-->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">1. カレンダーで在庫がなくなる日と通院予定日を確認できる</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/calendar.png',
+                alt: 'カレンダーで在庫切れ日を確認',
+                class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ カレンダーで在庫がなくなる日を事前に確認できます、カレンダーで通院予定日を一目で確認できます
+                </p>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mt-8">2. 日付を押すとその日の予想在庫が確認できる</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/medicine_stock.png',
+                alt: '日付ごとの予想在庫表示',
+                class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ カレンダーの日付をクリックすると、その日の予想在庫数を確認できます
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- LINE通知 -->
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="checkbox" id="line-accordion" />
+          <label for="line-accordion" class="collapse-title text-xl font-bold cursor-pointer">
+            🔔  LINE通知
+          </label>
+          <div class="collapse-content">
+            <!-- LINE通知の内容（省略） -->
+            <div>
+              <h3 class="text-lg font-semibold mt-8">1. LINE連携する（LINEログインの場合は不要）</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/require_notification.png',
+                  alt: 'LINE連携設定画面',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 設定画面からLINEアカウントと連携できます（LINEログインで登録した方は設定不要です）
+                </p>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mt-8">2. 薬の在庫通知、通院予定通知を設定できる</h3>
+              <div class="bg-white p-4 rounded-lg">
+                <%= image_tag 'how_to_use/edit_notification.png',
+                  alt: '在庫通知設定画面',
+                  class: 'w-full max-w-2xl mx-auto shadow-md rounded' %>
+                <p class="mt-2 text-sm text-gray-600 text-center">
+                  ↑ 設定したタイミングで通知を受け取る設定ができます
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
