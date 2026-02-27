@@ -500,7 +500,7 @@ DEPENDENCIES
   omniauth-google-oauth2 (= 1.2.1)
   omniauth-line (= 0.1.0)
   omniauth-rails_csrf_protection (= 2.0.1)
-  pg (~> 1.1)
+  pg (~> 1.6)
   pry-byebug
   pry-rails
   puma (>= 5.0)
