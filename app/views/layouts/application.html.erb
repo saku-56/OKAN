@@ -26,6 +26,7 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module"%>
+    <%= display_meta_tags(default_meta_tags) %>
   </head>
 
   <body class="bg-base-100 min-h-screen font-mplus <%= 'pb-10' if user_signed_in? %>">
