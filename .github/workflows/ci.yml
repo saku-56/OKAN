@@ -107,6 +107,16 @@ jobs:
             libpq-dev \
             libvips
 
+      - name: Check RAILS_MASTER_KEY
+        run: |
+          if [ -z "$RAILS_MASTER_KEY" ]; then
+            echo "RAILS_MASTER_KEY is empty!"
+          else
+            echo "RAILS_MASTER_KEY is set (length: ${#RAILS_MASTER_KEY})"
+          fi
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
       # Tailwind CSSのビルド
       - name: Precompile assets
         run: bundle exec rails assets:precompile

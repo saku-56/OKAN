@@ -55,6 +55,7 @@ group :development do
   gem "pry-byebug"
   gem "htmlbeautifier"
   gem "bullet", "8.1.0"
+  gem "letter_opener_web", "~> 3.0"
 end
 
 group :test do
