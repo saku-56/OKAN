@@ -8,19 +8,17 @@
       <%= render "shared/error_messages", object: f.object %>
 
       <!-- メールアドレス -->
-      <div class="mb-4">
+      <div class="mb-6">
         <%= f.label :email, class: "label-text mb-1 block" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: form_field_class(resource, :email) %>
       </div>
 
       <!-- パスワード -->
-      <div class="mb-4">
-        <div class="mb-1">
-          <%= f.label :password, class: "label-text" %>
-          <% if @minimum_password_length %>
-            <span class="text-xs ml-1">(<%= @minimum_password_length %> 文字以上)</span>
-          <% end %>
-        </div>
+      <div class="mb-6">
+        <%= f.label :password, class: "label-text" %>
+        <% if @minimum_password_length %>
+          <span class="text-xs ml-1">(<%= @minimum_password_length %> 文字以上)</span>
+        <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: form_field_class(resource, :password) %>
       </div>
 
