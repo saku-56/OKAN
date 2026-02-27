@@ -41,4 +41,24 @@ module ApplicationHelper
       content_tag(:span, text)
     end
   end
+
+  def default_meta_tags
+    {
+      title: "お薬管理アプリOKAN",
+      description: "手元にある薬の在庫をカレンダーですぐに確認できるアプリです。毎日の服薬記録をつける必要はなく、自動で計算します。",
+      keywords: [ "薬", "病院", "服薬管理", "カレンダー" ],
+      og: {
+        site_name: :site,
+        title: :title,
+        description: :description,
+        type: "website",
+        url: "https://okan-8iqv.onrender.com",
+        image: image_url("OKAN_ogp.png"),
+        locale: "ja-JP"
+      },
+      twitter: {
+        card: "summary_large_image"
+      }
+    }
+  end
 end
