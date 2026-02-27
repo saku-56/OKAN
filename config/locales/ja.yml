@@ -9,6 +9,7 @@ ja:
         email: メールアドレス
         password_confirmation: パスワード確認
         reset_password_token: パスワード
+        remember_me: ログイン状態を保持する
       medicine:
         name: 薬名
       user_medicine:
