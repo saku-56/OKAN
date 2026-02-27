@@ -112,7 +112,6 @@ jobs:
         run: bundle exec rails assets:precompile
         env:
           RAILS_ENV: production
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Set up Database
         run: |
