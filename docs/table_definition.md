@@ -75,7 +75,7 @@
 | user_id | integer | NO | - | - | ユーザーID |
 | medicine_id | string | NO | - | - | 薬ID |
 | dosage_per_time | integer | NO | - | - | 1回あたりの服用量 |
-| times_per_day | integer | NO | - | - | 1日あたりの服用回数 |
+| times_per_day | integer | NO | 1 | - | 1日あたりの服用回数 |
 | prescribed_amount | integer | NO | - | - | 処方された総量 |
 | current_stock | integer | NO | - | - | 現在の在庫量 |
 | date_of_prescription | date | NO | - | - | 処方日 |
@@ -177,3 +177,29 @@
 
 ## Notifications テーブル
 
+### 概要
+ユーザーの通知設定を管理するテーブル
+
+### カラム定義
+| カラム名 | 型 | NULL | デフォルト | 制約 | 説明 |
+|---------|-----|------|-----------|------|------|
+| id | integer | NO | - | PRIMARY KEY | 通知ID |
+| user_id | integer | NO | - | - | ユーザーID |
+| notification_type | string | NO | - | - | 通知タイプ(medicine_stock, consultation_reminder) |
+| enable | boolean | NO | false | - | 通知の有効/無効 |
+| days_before | integer | NO | 1 | - | 何日前に通知するか |
+| created_at | timestamp | NO | - | - | 作成日時 |
+| updated_at | timestamp | NO | - | - | 更新日時 |
+
+### インデックス
+| カラム | タイプ | 説明 |
+|--------|--------|------|
+| user_id, notification_type | UNIQUE | 同一ユーザーが同じ通知タイプを重複して登録できないように複合ユニーク制約を設定 |
+
+### リレーション
+- belongs_to :user
+
+### 補足
+- notification_type は文字列の enum で管理されます
+- 各ユーザーは通知タイプごとに1つの設定のみ保持できます
+- days_before で通知のタイミングを設定できます
