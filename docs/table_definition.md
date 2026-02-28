@@ -155,3 +155,25 @@
 ---
 
 ## ConsultationSchedules テーブル
+
+### 概要
+ユーザーの通院予定を管理するテーブル
+
+### カラム定義
+| カラム名 | 型 | NULL | デフォルト | 制約 | 説明 |
+|---------|-----|------|-----------|------|------|
+| id | integer | NO | - | PRIMARY KEY | 通院予定ID |
+| user_id | integer | NO | - | - | ユーザーID |
+| hospital_id | string | NO | - | - | 病院ID |
+| visit_date | date | NO | - | - | 通院予定日 |
+| created_at | timestamp | NO | - | - | 作成日時 |
+| updated_at | timestamp | NO | - | - | 更新日時 |
+
+### リレーション
+- belongs_to :user
+- belongs_to :hospital
+
+---
+
+## Notifications テーブル
+
