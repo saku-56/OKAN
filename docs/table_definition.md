@@ -129,3 +129,29 @@
 ---
 
 ## HospitalSchedules テーブル
+
+### 概要
+病院の診療時間を管理するテーブル
+
+### カラム定義
+| カラム名 | 型 | NULL | デフォルト | 制約 | 説明 |
+|---------|-----|------|-----------|------|------|
+| id | integer | NO | - | PRIMARY KEY | 診療時間ID |
+| hospital_id | integer | NO | - | - | 病院ID |
+| day_of_week | integer | NO | - | - | 曜日（0=月, 1=火, 2=水, 3=木, 4=金, 5=土, 6=日, 7=祝） |
+| period | integer | NO | - | - | 時間帯（0=午前, 1=午後） |
+| start_time | time | YES | - | - | 診療開始時刻 |
+| end_time | time | YES | - | - | 診療終了時刻 |
+| created_at | timestamp | NO | - | - | 作成日時 |
+| updated_at | timestamp | NO | - | - | 更新日時 |
+
+### リレーション
+- belongs_to :hospital
+
+### 補足
+- day_of_week と period は enum で管理されます
+- 病院ごとに曜日と時間帯を組み合わせて診療時間を設定できます
+
+---
+
+## ConsultationSchedules テーブル
