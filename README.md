@@ -99,7 +99,7 @@ Figma：https://www.figma.com/design/TKYTGl8lAQCmwPjlHiZIoV/%E9%80%9A%E9%99%A2%E
 ### ER図
 ![ER図](docs/db_okan.png)
 
-詳細なテーブル定義は [こちら](docs/table_definitions.md) をご覧ください。
+詳細なテーブル定義は [こちら](docs/table_definition.md) をご覧ください。
 
 ## 機能設計の方針
 
