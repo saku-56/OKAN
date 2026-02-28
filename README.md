@@ -1,8 +1,19 @@
+# OKAN(お薬管理アプリ)
+
 ## サービス概要
 
 定期通院が必要な方の「薬切れによる急な通院」を防ぐアプリです。
 薬残数を管理し、最適な通院タイミングをカレンダーで可視化します。
 計画的な通院により、仕事への影響を最小限に抑えます。
+
+<img src="docs/github_visual.png" width="700" alt="OKAN OGP">
+
+## アプリURL
+https://okusurikanri-okan.com
+　
+#### お試しユーザーアカウント
+- メール: okan-otameshi@sample.com
+- パスワード: otameshi
 
 ## このサービスへの思い・作りたい理由
 
@@ -31,9 +42,6 @@
 **計画的な通院スケジューリング：**
 薬切れ予定日と各病院の診療時間・休診日を照らし合わせ、最適な通院日を事前に計画できます。
 薬が少なくなったタイミングで通知が届くため、余裕を持って通院予約を取ることができます。
-
-## ユーザーの獲得について
-SNSでの宣伝や、友人知人に紹介して使ってもらいます。また、薬剤師として働いている母の薬局で宣伝してみようと思います。
 
 ## サービスの差別化ポイント・推しポイント
 
@@ -64,7 +72,7 @@ SNSでの宣伝や、友人知人に紹介して使ってもらいます。ま�
 - 薬切れ前の予防的な通院計画
 - フルタイム勤務者のスケジュールとの連携を考慮
 
-## 機能候補
+## 機能一覧
 
 MVPリリース時に作っていたいもの
 - ユーザー登録
@@ -82,15 +90,20 @@ MVPリリース時に作っていたいもの
 - 次回通院予定日の登録・表示
 - Google Calender API
 
-## 使用する技術スタック
 
-- 使用するフレームワーク：Ruby on Rails
-- データベース: PostgreSQLなど
-- デプロイ先: Render、Neon
-- 使用予定のライブラリ
-  - Devise
-  - simple_calendar
-  - line-bot-api
+## 使用技術
+| 項目 | 技術 |
+| --- | --- |
+| バックエンド | Ruby 3.3.10 / Ruby on Rails 7.2.3 |
+| フロントエンド |  TailwindCSS / daisyUI /Hotwire（Turbo, Stimulus） |
+| データベース | PostgreSQL |
+| 認証 | Devise / OmniAuth（Google, LINE） |
+| タスク管理 | Whenever / GitHub Actions（cron） |
+| 外部API | LINE Messaging API |
+| 開発環境 | Docker |
+| 本番環境 | Render / neon(db) |
+| その他 | rubocop / RSpec / FactoryBot|
+
 
 
 ### 画面遷移図
@@ -113,4 +126,4 @@ Figma：https://www.figma.com/design/TKYTGl8lAQCmwPjlHiZIoV/%E9%80%9A%E9%99%A2%E
 
 
 **代替手段：**
-- 入力ミスがあった場合は、削除後に再登録をしてもらう
+- 入力ミスがあった場合は、削除後に再登録をしてもらいます。
