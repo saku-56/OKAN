@@ -99,3 +99,33 @@
 
 ## Hospitals テーブル
 
+### 概要
+ユーザーが登録する病院情報を保存するテーブル
+
+### カラム定義
+| カラム名 | 型 | NULL | デフォルト | 制約 | 説明 |
+|---------|-----|------|-----------|------|------|
+| id | integer | NO | - | PRIMARY KEY | 病院ID |
+| user_id | integer | NO | - | - | ユーザーID |
+| name | string | NO | - | - | 病院名 |
+| description | text | YES | - | - | メモ |
+| uuid | uuid | NO | - | UNIQUE | UUID |
+| created_at | timestamp | NO | - | - | 作成日時 |
+| updated_at | timestamp | NO | - | - | 更新日時 |
+
+### インデックス
+| カラム | タイプ | 説明 |
+|--------|--------|------|
+| user_id, name | UNIQUE | 同一ユーザーが同じ名前の病院を重複登録できないように複合ユニーク制約を設定 |
+
+### リレーション
+- belongs_to :user
+- has_many :hospital_schedules
+- has_many :consultation_schedules
+
+### 補足
+- uuidはURLにidの代わりに表示するために使用
+
+---
+
+## HospitalSchedules テーブル
