@@ -36,7 +36,7 @@ RSpec.describe "カレンダー表示", type: :system do
         it "今日の在庫が表示される" do
           click_link href: home_path(date: Date.today)
 
-          expect(page).to have_content("#{Date.today.strftime("%-m月%-d日")} の在庫予定")
+          expect(page).to have_content("#{Date.today.strftime("%m月%d日")} の在庫予定")
           expect(page).to have_content("テスト薬A：1錠")
         end
       end
@@ -53,7 +53,7 @@ RSpec.describe "カレンダー表示", type: :system do
         it "クリックした日の在庫予想が表示される" do
           click_link href: home_path(date: Date.tomorrow)
 
-          expect(page).to have_content("#{Date.tomorrow.strftime("%-m月%-d日")} の在庫予定")
+          expect(page).to have_content("#{Date.tomorrow.strftime("%m月%d日")} の在庫予定")
           expect(page).to have_content("テスト薬A：0錠")
         end
       end
