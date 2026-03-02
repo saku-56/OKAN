@@ -91,13 +91,13 @@ https://okusurikanri-okan.com
 | 項目 | 技術 |
 | --- | --- |
 | バックエンド | Ruby 3.3.10 / Ruby on Rails 7.2.3 |
-| フロントエンド |  TailwindCSS / daisyUI /Hotwire（Turbo, Stimulus） |
+| フロントエンド |  TailwindCSS / daisyUI / Hotwire（Turbo, Stimulus） |
 | データベース | PostgreSQL |
 | 認証 | Devise / OmniAuth（Google, LINE） |
-| タスク管理 | Whenever / GitHub Actions（cron） |
+| タスク管理 | Whenever / GitHub Actions |
 | 外部API | LINE Messaging API |
 | 開発環境 | Docker |
-| 本番環境 | Render / neon(db) |
+| 本番環境 | Render / neon(DB) |
 | その他 | rubocop / RSpec / FactoryBot|
 
 ## サービスの差別化ポイント・推しポイント
