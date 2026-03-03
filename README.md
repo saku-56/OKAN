@@ -91,13 +91,13 @@ https://okusurikanri-okan.com
 | 項目 | 技術 |
 | --- | --- |
 | バックエンド | Ruby 3.3.10 / Ruby on Rails 7.2.3 |
-| フロントエンド |  TailwindCSS / daisyUI /Hotwire（Turbo, Stimulus） |
+| フロントエンド |  TailwindCSS / daisyUI / Hotwire（Turbo, Stimulus） |
 | データベース | PostgreSQL |
 | 認証 | Devise / OmniAuth（Google, LINE） |
-| タスク管理 | Whenever / GitHub Actions（cron） |
+| タスク管理 | Whenever / GitHub Actions |
 | 外部API | LINE Messaging API |
 | 開発環境 | Docker |
-| 本番環境 | Render / neon(db) |
+| 本番環境 | Render / neon(DB) |
 | その他 | rubocop / RSpec / FactoryBot|
 
 ## サービスの差別化ポイント・推しポイント
@@ -133,7 +133,7 @@ https://okusurikanri-okan.com
 Figma：https://www.figma.com/design/TKYTGl8lAQCmwPjlHiZIoV/%E9%80%9A%E9%99%A2%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E3%80%80%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=oTOPyTQU20oXrSg8-0
 
 ### ER図
-![ER図](docs/db_okan.png)
+![ER図](docs/images/db_okan.png)
 
 詳細なテーブル定義は [こちら](docs/table_definition.md) をご覧ください。
 
