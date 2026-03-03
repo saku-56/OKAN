@@ -6,7 +6,7 @@
   <div class="bg-white max-w-4xl mx-auto rounded-lg shadow mb-6">
     <% if @hospital.any? %>
       <% @hospital.each do |hospital| %>
-        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4">
+        <div class="flex items-center justify-between p-4 border-b mb-4">
           <div class="flex items-center gap-2">
             <h3 class="font-semibold text-lg"><%= hospital.name %></h3>
           </div>
