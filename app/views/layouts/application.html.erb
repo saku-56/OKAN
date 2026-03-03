@@ -39,6 +39,19 @@
   </head>
 
   <body class="bg-base-100 min-h-screen font-mplus <%= 'pb-10' if user_signed_in? %>">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered:', registration);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
     <!-- ドロワー全体を囲む -->
     <div class="drawer drawer-end">
       <!-- チェックボックス（非表示） -->
