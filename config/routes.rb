@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   # 薬
   resources :user_medicines, only: %i[index show new create destroy] do
     collection do
-      get :autocomplete
       get :forgot_index
     end
     member do
