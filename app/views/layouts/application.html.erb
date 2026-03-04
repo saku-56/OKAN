@@ -10,6 +10,19 @@
 
       gtag('config', 'G-BHGLSED3KN');
     </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered:', registration);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
     <title><%= content_for(:title) || "Okan" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -39,19 +52,6 @@
   </head>
 
   <body class="bg-base-100 min-h-screen font-mplus <%= 'pb-10' if user_signed_in? %>">
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js')
-            .then((registration) => {
-              console.log('Service Worker registered:', registration);
-            })
-            .catch((error) => {
-              console.log('Service Worker registration failed:', error);
-            });
-        });
-      }
-    </script>
     <!-- ドロワー全体を囲む -->
     <div class="drawer drawer-end">
       <!-- チェックボックス（非表示） -->
