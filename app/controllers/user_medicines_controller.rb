@@ -5,19 +5,6 @@ class UserMedicinesController < ApplicationController
     @user_medicine = current_user.user_medicines.includes(:medicine).order(created_at: :desc)
   end
 
-  def autocomplete
-    query = params[:query]
-
-    # 自分が過去に入力した薬名のみを取得
-    suggestions = current_user.medicines
-      .where("name LIKE ?", "#{query}%")
-      .distinct
-      .pluck(:name)
-      .first(10)
-    # 配列をJSON形式に変換してブラウザに返す
-    render json: suggestions
-  end
-
   def show
   end
 

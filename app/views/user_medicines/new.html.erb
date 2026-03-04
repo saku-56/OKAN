@@ -11,21 +11,11 @@
     <%= form_with model: @form, url: user_medicines_path do |f| %>
       <%= render "shared/error_messages", object: @form %>
 
-      <div class="mb-4" data-controller="autocomplete">
+      <div class="mb-4">
         <%= f.label :medicine_name, "薬名", class: "block text-sm font-bold mb-2" %>
         <div class="relative w-full">
-          <!-- input ターゲット -->
           <%= f.text_field :medicine_name,
-                           class: form_field_class(f.object, :medicine_name),
-                           autocomplete: "off",
-                           data: {
-                             autocomplete_target: "input",
-                             action: "input->autocomplete#search",
-                           } %>
-          <!-- results ターゲット -->
-          <div data-autocomplete-target="results"
-               class="absolute z-10 w-full bg-white border border-gray-300 rounded mt-1">
-          </div>
+                           class: form_field_class(f.object, :medicine_name) %>
         </div>
       </div>
 
@@ -37,9 +27,6 @@
                              class: form_field_class(f.object, :dosage_per_time) %>
           <span class="text-gray-700 whitespace-nowrap">錠</span>
         </div>
-        <% if f.object.errors[:dosage_per_time].any? %>
-          <p class="text-red-600 text-sm mt-1"></p>
-        <% end %>
       </div>
 
       <div class="mb-4">
