@@ -1,12 +1,22 @@
 <div class="medicines-section max-w-2xl mx-auto mb-8">
+  <!-- タイトルと説明文 -->
   <h1 class="text-3xl mb-4 flex items-center justify-center gap-2" style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 500;">
     <%= render "shared/icon_medicine" %>
-    <span>飲み忘れ登録</span>
+    <span>飲み忘れた薬の修正</span>
   </h1>
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto mb-2">
+    <p class="text-blue-800 text-sm mb-2">
+      <i class="fa-solid fa-circle-info mr-2"></i>
+      <strong>飲み忘れていた薬の「飲み忘れ」ボタンを押してください</strong>
+    </p>
+    <p class="text-blue-700 text-sm">
+       実際には飲んでいなかった薬を選択すると、1回分の服薬量が戻り、手元の在庫数とアプリの在庫数を合わせることができます。
+    </p>
+  </div>
   <div class="bg-white mx-auto rounded-lg shadow mb-6">
     <% if @medicines_with_stock.any? %>
       <% @medicines_with_stock.each do |user_medicine| %>
-        <div class="flex items-center justify-between p-4 border-b hover:bg-gray-50 mb-4" >
+        <div class="flex items-center justify-between p-4 border-b mb-4" >
           <div class="flex-1">
             <div class="flex items-center gap-2">
               <h3 class="font-semibold text-lg">
