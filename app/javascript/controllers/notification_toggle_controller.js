@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="notification-toggle"
 export default class extends Controller {
   static targets = ["checkbox", "selectBox", "container"]
 
