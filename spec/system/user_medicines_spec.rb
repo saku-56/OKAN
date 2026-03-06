@@ -97,19 +97,20 @@ RSpec.describe "UserMedicines", type: :system do
     describe "薬の飲み忘れ調整機能" do
       before do
         visit user_medicine_path(user_medicine)
+        page.driver.browser.manage.window.resize_to(1200, 1000)
       end
       context "飲み忘れボタンの表示" do
         context "在庫がある場合" do
           let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 10) }
-          it "飲み忘れボタンが表示される" do
-            expect(page).to have_css("label.btn.btn-secondary", text: "飲み忘れ"), "在庫がある場合、飲み忘れボタンが表示されていません"
+          it "「飲み忘れに気づいたときはこちら」が表示される" do
+            expect(page).to have_content("飲み忘れに気づいたときはこちら")
           end
         end
 
         context "在庫がない場合" do
           let(:user_medicine) { create(:user_medicine, user: user, medicine: medicine, current_stock: 0) }
           it "飲み忘れボタンが表示されない" do
-            expect(page).not_to have_button("飲み忘れ"), "在庫がない場合、飲み忘れボタンが表示されています"
+            expect(page).not_to have_content("飲み忘れに気づいたときはこちら"), "在庫がない場合、飲み忘れに気づいたときはこちらが表示されています"
           end
         end
       end
@@ -121,7 +122,8 @@ RSpec.describe "UserMedicines", type: :system do
         end
 
         it "確認ダイアログが表示され、はいを押すと在庫量が1回の服薬量分増える" do
-          find("label.btn.btn-secondary", text: "飲み忘れ").click
+          label = find("label[for='confirm-modal-#{user_medicine.id}']", text: '飲み忘れに気づいたとき')
+          label.click
           click_button "OK"
 
           expect(page).to have_content("在庫を1回分増やしました"), "フラッシュメッセージが表示されていません"
@@ -131,7 +133,8 @@ RSpec.describe "UserMedicines", type: :system do
         end
 
         it "確認ダイアログでいいえを押すと在庫量が変わらない" do
-          find("label.btn.btn-secondary", text: "飲み忘れ").click
+          label = find("label[for='confirm-modal-#{user_medicine.id}']", text: '飲み忘れに気づいたとき')
+          label.click
           find("label.btn", text: "キャンセル").click
 
           expect(page).to have_content("現在の在庫")
