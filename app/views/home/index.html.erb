@@ -7,12 +7,21 @@
   <div class="container mx-auto mb-10">
     <%= render "calendar", medicines_with_stock: @medicines_with_stock, consultation_schedules_by_date: @consultation_schedules_by_date %>
   </div>
-  <!-- ボタン -->
-  <div class="flex max-w-4xl mx-auto gap-4 px-4 mb-20">
-    <%= link_to "薬の追加", user_medicines_path, class: "btn btn-primary flex-1" %>
-    <%= link_to "飲み忘れ", forgot_index_user_medicines_path, class: "btn btn-secondary flex-1" %>
+
+
+  <div class="max-w-4xl mx-auto px-4 mb-20">
+
+  <!-- メイン -->
+  <div class="actions text-center">
+    <%=link_to user_medicines_path, class: "btn btn-primary items-center justify-center gap-2 py-3 mb-10" do %>
+      <i class="fa-solid fa-plus"></i>
+      <span class="font-bold">薬を追加する</span>
+     <% end %>
+    <%= link_to forgot_index_user_medicines_path, class: "block text-center text-gray-500 hover:underline hover:text-gray-700" do %>
+      <span class="font-bold">飲み忘れに気づいたときはこちら</span>
+    <% end %>
   </div>
-</div>
+
 <!-- モーダル枠 -->
 <turbo-frame id="stock_modal">
   <% if params[:date].present? %>
