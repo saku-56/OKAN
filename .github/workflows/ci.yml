@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code # GitHubリポジトリのコードを仮想マシン上にコピー（クローン）する
-        uses: actions/checkout@v4 #「GitHubが提供する「コードをチェックアウトする処理」のバージョン4を使う
+        uses: actions/checkout@v6 #「GitHubが提供する「コードをチェックアウトする処理」のバージョン4を使う
 
       - name: Set up Ruby # 仮想マシンにRuby環境をインストール(Gemのインストールやbundlerの準備を行う)
         uses: ruby/setup-ruby@v1 # Ruby公式が提供するRubyセットアップアクション
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -75,7 +75,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Place test key
         run: echo "$RAILS_TEST_KEY" > config/credentials/test.key
@@ -120,7 +120,7 @@ jobs:
         run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4 # ファイルをGitHub Actions上に保存
+        uses: actions/upload-artifact@v6 # ファイルをGitHub Actions上に保存
         if: failure()
         with:
           name: screenshots
