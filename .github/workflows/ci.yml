@@ -109,7 +109,6 @@ jobs:
 
       # Tailwind CSSのビルド
       - name: Precompile assets
-        if: github.actor != 'dependabot[bot]'
         run: bundle exec rails assets:precompile
 
       - name: Set up Database
