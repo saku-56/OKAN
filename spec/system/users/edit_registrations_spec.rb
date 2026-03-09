@@ -2,33 +2,49 @@ require "rails_helper"
 
 RSpec.describe "UserEditRegistrations", type: :system do
   let(:user) { create(:user, email: "original@example.com", password: "password") }
+  let(:google_user) { create(:user, :google_login) }
+  let(:line_user) { create(:user, :line_login) }
 
-  before do
-    login_as(user)
-  end
-
-  describe "ユーザー情報編集" do
-    before do
-      visit edit_user_registration_path
-    end
-
+  describe "ユーザー編集画面の出し分け" do
     context "通常ログインユーザーの場合" do
+      before do
+        login_as(user)
+        visit edit_user_registration_path
+      end
+
       it "メールアドレス・パスワード編集セクションが表示されること" do
         expect(page).to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
       end
     end
 
     context "Googleログインユーザーの場合" do
+      before do
+        login_as(google_user)
+         visit edit_user_registration_path
+      end
+
       it "メールアドレス・パスワード編集セクションが表示されないこと" do
         expect(page).not_to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
       end
     end
 
     context "LINEログインユーザーの場合" do
+      before do
+        login_as(line_user)
+        visit edit_user_registration_path
+      end
+
       it "メールアドレス・パスワード編集セクションが表示されないこと" do
         expect(page).not_to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
       end
     end
+  end
+
+  describe "ユーザー情報編集" do
+    before do
+      login_as(user)
+      visit edit_user_registration_path
+  end
 
     context "正常系" do
       it "メールアドレスが変更できる" do
@@ -81,6 +97,7 @@ RSpec.describe "UserEditRegistrations", type: :system do
 
   describe "アカウント削除" do
     before do
+      login_as(user)
       visit edit_user_registration_path
     end
 
