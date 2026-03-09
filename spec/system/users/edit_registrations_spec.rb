@@ -20,7 +20,7 @@ RSpec.describe "UserEditRegistrations", type: :system do
     context "Googleログインユーザーの場合" do
       before do
         login_as(google_user)
-         visit edit_user_registration_path
+        visit edit_user_registration_path
       end
 
       it "メールアドレス・パスワード編集セクションが表示されないこと" do
@@ -42,8 +42,8 @@ RSpec.describe "UserEditRegistrations", type: :system do
 
   describe "ユーザー情報編集" do
     before do
-      login_as(user)
-      visit edit_user_registration_path
+    login_as(user)
+    visit edit_user_registration_path
   end
 
     context "正常系" do
