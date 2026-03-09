@@ -10,8 +10,14 @@ FactoryBot.define do
 
     # LINEでログインしたユーザー
     trait :line_login do
+      provider { "line" }
       sequence(:line_user_id) { |n| "line_uid_#{n}" }
       email { "#{line_user_id}@line.example.com" }
+    end
+
+    trait :google_login do
+      provider { "google_oauth2" }
+      sequence(:email) { |n| "user_#{n}@gmail.con" }
     end
   end
 end
