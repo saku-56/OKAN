@@ -28,6 +28,11 @@ class User < ApplicationRecord
     end
   end
 
+  # 通常のログインの場合
+  def email_authentication?
+    provider.nil?
+  end
+
   private
 
   def create_default_notifications
