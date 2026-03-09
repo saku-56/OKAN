@@ -12,6 +12,24 @@ RSpec.describe "UserEditRegistrations", type: :system do
       visit edit_user_registration_path
     end
 
+    context "通常ログインユーザーの場合" do
+      it "メールアドレス・パスワード編集セクションが表示されること" do
+        expect(page).to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
+      end
+    end
+
+    context "Googleログインユーザーの場合" do
+      it "メールアドレス・パスワード編集セクションが表示されないこと" do
+        expect(page).not_to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
+      end
+    end
+
+    context "LINEログインユーザーの場合" do
+      it "メールアドレス・パスワード編集セクションが表示されないこと" do
+        expect(page).not_to have_selector(".bg-base-200.rounded-lg.shadow.p-6")
+      end
+    end
+
     context "正常系" do
       it "メールアドレスが変更できる" do
         fill_in "メールアドレス", with: "new@example.com"
