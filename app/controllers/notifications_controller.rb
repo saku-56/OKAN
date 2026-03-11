@@ -43,7 +43,7 @@ class NotificationsController < ApplicationController
 
   def require_line_connection
     unless current_user.line_user_id.present?
-      redirect_to line_login_required_path, alert: "LINE通知を利用するにはLINE連携が必要です"
+      redirect_to notifications_path
     end
   end
 end
