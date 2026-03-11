@@ -36,7 +36,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
   describe "通院予定の作成" do
     let(:visit_date) { 7.days.from_now.to_date }
 
-    context "正常な入力の場合" do
+    context "正常系" do
       it "通院予定日を登録できる" do
         visit hospital_path(hospital)
 
@@ -51,6 +51,7 @@ RSpec.describe "ConsultationSchedules", type: :system do
         expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s, disabled: true)
       end
     end
+
     context "異常系" do
       it "過去の日付では登録できない" do
         visit hospital_path(hospital)
@@ -73,18 +74,27 @@ RSpec.describe "ConsultationSchedules", type: :system do
       create(:consultation_schedule, user: user, hospital: hospital, visit_date: initial_date)
     end
 
-    context "正常な入力の場合" do
+    context "正常系" do
       it "通院予定日を更新できる" do
         visit hospital_path(hospital)
 
         find('[data-schedule-target="editBtn"]').click
         fill_in "consultation_schedule[visit_date]", with: new_date
 
-        # 保存ボタンをクリック
+        find('[data-schedule-target="saveBtn"]').click
+      end
+    end
+
+    context "異常系" do
+      it "通院予定日を過去の日付で登録できない" do
+        visit hospital_path(hospital)
+
+        find('[data-schedule-target="editBtn"]').click
+        fill_in "consultation_schedule[visit_date]", with: Date.yesterday
+
         find('[data-schedule-target="saveBtn"]').click
 
-        expect(page).to have_content "通院予定日を変更しました"
-        expect(page).to have_field("consultation_schedule[visit_date]", with: new_date.to_s, disabled: true)
+        expect(page).to have_content "通院予定日の登録に失敗しました"
       end
     end
   end
