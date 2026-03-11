@@ -51,6 +51,18 @@ RSpec.describe "ConsultationSchedules", type: :system do
         expect(page).to have_field("consultation_schedule[visit_date]", with: visit_date.to_s, disabled: true)
       end
     end
+    context "異常系" do
+      it "過去の日付では登録できない" do
+        visit hospital_path(hospital)
+
+        find('[data-schedule-target="editBtn"]').click
+        fill_in "consultation_schedule[visit_date]", with: Date.yesterday
+
+        find('[data-schedule-target="saveBtn"]').click
+
+        expect(page).to have_content "通院予定日の登録に失敗しました"
+      end
+    end
   end
 
   describe "通院予定の変更" do
