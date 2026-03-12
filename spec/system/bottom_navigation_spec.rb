@@ -89,6 +89,17 @@ RSpec.describe "ナビゲーションバー", type: :system do
             end
             expect(page).to have_current_path(edit_notifications_path)
           end
+
+          it "LINE通知設定を編集できること" do
+            visit edit_notifications_path
+
+            within(".medicine-section") do
+              check "通知を有効にする"
+              click_on "保存"
+            end
+            expect(page).to have_current_path(home_path)
+            expect(page).to have_content("通知設定を更新しました")
+          end
         end
 
         context "LINE未連携の場合" do
