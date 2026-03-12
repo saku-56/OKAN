@@ -9,10 +9,6 @@ class NotificationsController < ApplicationController
   def edit
     @medicine_notification = current_user.notifications.find_by(notification_type: "medicine_stock")
     @consultation_notification = current_user.notifications.find_by(notification_type: "consultation_reminder")
-
-    if @medicine_notification.nil? || @consultation_notification.nil?
-      redirect_to home_path, alert: "通知設定が見つかりませんでした"
-    end
   end
 
   def update
