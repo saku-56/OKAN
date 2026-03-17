@@ -66,7 +66,7 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.4"
-gem "devise", "~> 5.0.1"
+gem "devise", "~> 5.0.3"
 gem "devise-i18n", "~> 1.15"
 gem "simple_calendar",  "3.1.0"
 gem "whenever", "1.1.2", require: false
