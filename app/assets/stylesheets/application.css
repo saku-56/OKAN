@@ -108,4 +108,10 @@
   .wday-6 {
     background-color: #F3F4F6;
   }
+
+  /* 今日が土日の場合はピンクを優先 */
+  .today.wday-0,
+  .today.wday-6 {
+    background-color: #FDEDE9;
+  }
 }
