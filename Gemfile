@@ -54,7 +54,7 @@ group :development do
   gem "pry-rails"
   gem "pry-byebug"
   gem "htmlbeautifier"
-  gem "bullet", "8.1.0"
+  gem "bullet", "8.1.1"
   gem "letter_opener_web", "~> 3.0"
 end
 
